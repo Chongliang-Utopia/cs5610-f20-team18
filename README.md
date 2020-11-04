@@ -1,3 +1,8 @@
+
+Group project for cs5610 - fall 2020.
+
+Project Description Link: https://docs.google.com/document/d/1DDd_elB_XRsoXN0toipmMMG1DV59GXbOo446jZuFBmA
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
