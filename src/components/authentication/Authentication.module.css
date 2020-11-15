@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;900&display=swap");
+
+.Authentication {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    height: 100vh;
+    padding-bottom: 100px;
+    text-align: center;
+}
+
+.Authentication h1{
+    font-family: 'Source Serif Pro', serif;
+    font-weight: 900;
+    font-size: 3rem;
+}
+
+.Authentication .titleDiv {
+    width: 100%;
+    max-width: 430px;
+    padding: 15px;
+    margin: auto;
+}
+
+.Authentication .content {
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
+.Authentication .closeButton {
+    position: fixed;
+    right: 5%;
+    top:5%
+}
+
+.Authentication .line {
+    text-align: center;
+    margin: 30px auto 40px;
+    height: 13px;
+    border-bottom: 1px solid;
+    border-color: grey
+}
+
+.Authentication .label {
+    color: grey;
+    margin-bottom:0
+}
+
+.Authentication .inputDiv {
+    text-align: left;
+}
+
+.Authentication .inputForm {
+    border: none;
+    border-bottom: 1px solid grey;
+    border-radius: 0;
+    padding: 0;
+}
+
+.Authentication .inputForm:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+}
+
+.Authentication .forgotPassword {
+    text-align: left;
+    margin-bottom: -40px;
+    margin-top:50px
+}

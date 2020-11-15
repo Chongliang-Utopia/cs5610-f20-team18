@@ -5,13 +5,20 @@ import GoogleBookClient from "./components/googleBookClient"
 import BookDetail from "./components/bookDetail"
 import reportWebVitals from './reportWebVitals';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import "../node_modules/font-awesome/css/font-awesome.min.css";
 import { BrowserRouter, Route } from "react-router-dom";
+import SignUp from "./components/authentication/SignUp";
+import LogIn from "./components/authentication/LogIn";
+import CreatePassword from "./components/authentication/CreatePassword";
 
 ReactDOM.render(
     <BrowserRouter>
         <div>
             <Route exact path="/"  component={GoogleBookClient}/>
             <Route exact path="/books/:bookId"  component={BookDetail}/>
+            <Route exact path="/login" component={LogIn}/>
+            <Route exact path="/signup" component={SignUp}/>
+            <Route exact path="/createpassword" component={CreatePassword}/>
         </div>
     </BrowserRouter>
   ,
