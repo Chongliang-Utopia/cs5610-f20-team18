@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;900&display=swap");
+
+.LendingSummary {
+    padding: 10%;
+}
+
+.LendingSummary h1{
+    font-family: 'Source Serif Pro', serif;
+    font-weight: 400;
+}
+
+@media (max-width: 500px) {
+    .LendingSummary h1 {
+        font-size: 2rem;
+    }
+}
+
+.LendingSummary .line {
+    text-align: center;
+    margin: 30px auto 40px;
+    height: 13px;
+    border-bottom: 1px solid;
+    border-bottom-style: dashed;
+    border-color: red
+}
+
+.LendingSummary .heading{
+    text-align: center;
+}
+
+.LendingSummary .condtionLabel {
+    margin-top: 10px;
+    margin-bottom: 0;
+    color: #3c3c3c;
+}

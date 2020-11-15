@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import GoogleBookClient from "./components/googleBookClient"
-import BookDetail from "./components/bookDetail"
+import BookDetail from "./components/bookDetail/BookDetail"
 import reportWebVitals from './reportWebVitals';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import "../node_modules/font-awesome/css/font-awesome.min.css";
