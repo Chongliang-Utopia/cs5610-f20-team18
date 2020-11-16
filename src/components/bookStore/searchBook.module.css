@@ -1,0 +1,9 @@
+.SearchBook {
+}
+.SearchBook .searchBookResult{
+    padding: 0px;
+    background-color: #ebebeb;
+    width: 150px;
+    height: 150px;
+    /*margin: 10px;*/
+}

@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom";
-
+import ImageCard from "../UI/imageCard/ImageCard";
+import classes from "./searchBook.module.css"
 
 class SearchBook extends React.Component {
 
@@ -26,7 +27,6 @@ class SearchBook extends React.Component {
     render() {
         return (
             <div>
-                <h2>Search Books</h2>
                 <div className="input-group">
                     <input value={this.state.keyword}
                            onChange={this.handleChange}
@@ -40,17 +40,21 @@ class SearchBook extends React.Component {
                         </button>
                     </div>
                 </div>
-                <h2>Results</h2>
-                <ul className="list-group">
+                <div className={`${classes.SearchBook} row`}>
                     {
                         this.state.books.map(book =>
-                        <li className="list-group-item" key={book.id}>
-                            <Link to={`/books/${book.id}`}>
-                                {book.volumeInfo.title}
-                            </Link>
-                        </li>)
+                        <div className={`col-3`}>
+                            <div className={classes.searchBookResult}
+                              >
+                                <ImageCard
+                                    className={classes.searchBookResult}
+                                    src={book.volumeInfo.imageLinks.thumbnail}/>
+                                    {/*<h1>Book</h1>*/}
+                            </div>
+                        </div>
+                        )
                     }
-                </ul>
+                </div>
             </div>
 
     )
