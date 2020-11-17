@@ -3,7 +3,26 @@
 .SearchBook .searchBookResult{
     padding: 0px;
     background-color: #ebebeb;
-    width: 150px;
-    height: 150px;
-    /*margin: 10px;*/
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.SearchBook .detailButton {
+    background-color: steelblue;
+    border: steelblue;
+    color: white;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+.SearchBook .bookTitle {
+    /*height: 50px;*/
+    text-align: center;
+    margin-top: 10px;
+}
+.SearchBook h4 {
+    text-align: center;
+    margin-left: 50px;
+    margin-top: 10px;
+}
+.SearchBook .searchBar {
+    margin-bottom: 20px;
 }
