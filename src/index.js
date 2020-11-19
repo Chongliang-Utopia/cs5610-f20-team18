@@ -21,6 +21,7 @@ ReactDOM.render(
             <Route exact path="/signup" component={SignUp}/>
             <Route exact path="/createpassword" component={CreatePassword}/>
             <Route exact path="/users/:userId/profile" component={UserProfile}/>
+            <Route exact path="/users/:userId/profile/:section" component={UserProfile}/>
         </div>
     </BrowserRouter>
   ,
