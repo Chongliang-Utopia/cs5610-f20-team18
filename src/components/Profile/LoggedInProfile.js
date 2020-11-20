@@ -1,13 +1,15 @@
 import React from "react";
 import './Profile.css'
 import AccountSettingComponent from "./Components/AccountSettingComponent";
-import BookPostingsComponent from "./Components/BookPostingsComponent";
+import LendingComponent from "./Components/LendingComponent";
 import {Link} from "react-router-dom";
-import ProfileLandingPage from "./Components/ProfileLandingPage";
+import ProfileLandingPageComponent from "./Components/ProfileLandingPageComponent";
 import FollowingComponent from "./Components/FollowingComponent";
-import RequestManageComponent from "./Components/RequestManageComponent";
+import BorrowingComponent from "./Components/BorrowingComponent";
+import {AiFillStar, AiOutlineStar} from "react-icons/all";
+import Rating from "react-rating";
 
-const LoggedInProfile = ({section, userId, bookPostings, requests}) => {
+const LoggedInProfile = ({section, userId, bookPostings, requests, userRating, reviews}) => {
     return (
         <div className="container">
             <div className="add-top-margin add-15-padding font-size-25-italic">
@@ -17,6 +19,9 @@ const LoggedInProfile = ({section, userId, bookPostings, requests}) => {
                 <span className="add-left-margin">
                     <img className="image" src="https://is2-ssl.mzstatic.com/image/thumb/Podcasts124/v4/54/b0/5d/54b05d73-57bf-6e94-d06f-dfc2ceb4f771/mza_1054230007255374421.jpg/1200x1200bb.jpg"/>
                 </span>
+                <Rating className="add-15-padding" initialRating={userRating} readonly
+                        emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
+                        fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
             </div>
             <br/>
             <div className="row">
@@ -26,13 +31,13 @@ const LoggedInProfile = ({section, userId, bookPostings, requests}) => {
                             Profile Home
                         </Link>
                         <Link to ={`/users/${userId}/profile/settings`} className="nav-link">
-                            Account Setting
+                            Account Settings
                         </Link>
-                        <Link to ={`/users/${userId}/profile/postings`} className="nav-link">
-                            Manage Postings
+                        <Link to ={`/users/${userId}/profile/lendings`} className="nav-link">
+                            My Lendings
                         </Link>
-                        <Link to ={`/users/${userId}/profile/requests`} className="nav-link">
-                            Manage Requests
+                        <Link to ={`/users/${userId}/profile/borrowings`} className="nav-link">
+                            My borrowings
                         </Link>
                         <Link to ={`/users/${userId}/profile/followings`} className="nav-link">
                             My followings
@@ -42,21 +47,25 @@ const LoggedInProfile = ({section, userId, bookPostings, requests}) => {
                 <div className="col-8">
                     {
                         typeof section === 'undefined' &&
-                            <ProfileLandingPage/>
+                            <ProfileLandingPageComponent
+                                reviews={reviews}
+                                userId={userId}
+                            />
                     }
                     {
                         section === "settings" &&
                             <AccountSettingComponent/>
                     }
                     {
-                        section === "postings" &&
-                            <BookPostingsComponent
-                                bookPostings={bookPostings}/>
-
+                        section === "lendings" &&
+                            <LendingComponent
+                                bookPostings={bookPostings}
+                                requests={requests}
+                            />
                     }
                     {
-                        section === "requests" &&
-                            <RequestManageComponent requests={requests}/>
+                        section === "borrowings" &&
+                            <BorrowingComponent requests={requests}/>
                     }
                     {
                         section === "followings" &&

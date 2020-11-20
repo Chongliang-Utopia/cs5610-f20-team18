@@ -5,7 +5,7 @@ import UnloggedInProfile from "./UnLoggedInProfile";
 class UserProfile extends React.Component {
     state = {
         userId: '',
-        authenticated: false,
+        authenticated: true,
         section: "",
         // TODO: query bookItem to retrieve books this person owns
         bookPostings:
@@ -25,12 +25,14 @@ class UserProfile extends React.Component {
             {
                 userName: "ILoveBooks1989",
                 userRating: 5,
-                location: "San Jose"
+                location: "San Jose",
+                bookTitle:"harry potter"
             },
             {
                 userName: "bayAreaReader",
                 userRating: 3,
-                location: "San Francisco"
+                location: "San Francisco",
+                bookTitle: "lord of the rings"
             },
         ],
         reviews: [
@@ -57,7 +59,7 @@ class UserProfile extends React.Component {
         const section = this.props.match.params.section
         this.setState(prevState => ({
             userId: userId,
-            authenticated: false,
+            authenticated: true,
             section: section,
         }))
     }
@@ -69,7 +71,7 @@ class UserProfile extends React.Component {
         if (section !== prevProps.match.params.section || userId !== prevProps.match.params.userId) {
             this.setState(prevState => ({
                 userId: userId,
-                authenticated: false,
+                authenticated: true,
                 section: section
             }))
         }
@@ -82,9 +84,11 @@ class UserProfile extends React.Component {
                     this.state.authenticated &&
                     <LoggedInProfile
                         userId={this.state.userId}
+                        userRating={this.state.userRating}
                         section={this.state.section}
                         bookPostings={this.state.bookPostings}
                         requests={this.state.requests}
+                        reviews={this.state.reviews}
                     />
                 }
 
@@ -92,6 +96,7 @@ class UserProfile extends React.Component {
                     !this.state.authenticated &&
                         <UnloggedInProfile
                             userId={this.state.userId}
+                            userRating={this.state.userRating}
                             bookPostings={this.state.bookPostings}
                             reviews={this.state.reviews}
                         />
