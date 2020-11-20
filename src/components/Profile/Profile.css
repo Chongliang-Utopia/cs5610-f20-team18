@@ -64,3 +64,9 @@
     background-color: cornflowerblue;
 }
 
+@media (max-width: 500px) {
+    .hideAtSm{
+        display: none;
+    }
+}
+

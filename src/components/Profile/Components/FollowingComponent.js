@@ -15,12 +15,16 @@ const FollowingComponent = () =>
             <ListGroup.Item>
                 <Image width={40}
                        height={32}
-                       src="https://banner2.cleanpng.com/20171215/92c/hedgehog-png-5a3484489a2ad5.0068272815133911766315.jpg" roundedCircle
+                       src="https://banner2.cleanpng.com/20171215/92c/hedgehog-png-5a3484489a2ad5.0068272815133911766315.jpg"
+                       roundedCircle
+                       className="hideAtSm"
                 />
                 <Link to={`/users/Constanziato/profile`} className="add-15-padding">Constanziato</Link>
-                <Rating className="add-15-padding" initialRating={3} readonly
-                        emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
-                        fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
+                <span className="hideAtSm">
+                    <Rating className="add-15-padding" initialRating={3} readonly
+                            emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
+                            fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
+                </span>
                 <Button size="sm" className="pull-right">Following</Button>
             </ListGroup.Item>
             <ListGroup.Item>
