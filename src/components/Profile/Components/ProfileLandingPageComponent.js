@@ -30,9 +30,10 @@ const ProfileLandingPageComponent = ({reviews, userId}) =>
             </Card>
             <Card style={{ width: '10rem' }} className="center-text" bg={"light"}>
                 <Card.Body>
-                    <Card.Title>Pending Lending requests</Card.Title>
+                    <Card.Title>Following</Card.Title>
                     <Card.Text>
-                        <Link to={`/users/${userId}/profile/lendings`}>6</Link>
+                        <br/>
+                        <Link to={`/users/${userId}/profile/followings`}>250</Link>
                     </Card.Text>
                 </Card.Body>
             </Card>
@@ -50,13 +51,13 @@ const ProfileLandingPageComponent = ({reviews, userId}) =>
             </Card>
             <Card style={{ width: '10rem' }} className="center-text" bg={"light"}>
                 <Card.Body>
-                    <Card.Title>Following</Card.Title>
+                    <Card.Title>Pending Lending requests</Card.Title>
                     <Card.Text>
-                        <br/>
-                        <Link to={`/users/${userId}/profile/followings`}>250</Link>
+                        <Link to={`/users/${userId}/profile/lendings`}>6</Link>
                     </Card.Text>
                 </Card.Body>
             </Card>
+
             <Card style={{ width: '10rem' }} className="center-text" bg={"light"}>
                 <Card.Body>
                     <Card.Title>Follower</Card.Title>
