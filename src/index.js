@@ -10,6 +10,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import SignUp from "./components/authentication/SignUp";
 import LogIn from "./components/authentication/LogIn";
 import CreatePassword from "./components/authentication/CreatePassword";
+import BookStore from "./components/bookStore/bookStore";
 
 ReactDOM.render(
     <BrowserRouter>
@@ -19,6 +20,7 @@ ReactDOM.render(
             <Route exact path="/login" component={LogIn}/>
             <Route exact path="/signup" component={SignUp}/>
             <Route exact path="/createpassword" component={CreatePassword}/>
+            <Route exact path="/bookstore" component={BookStore}/>
         </div>
     </BrowserRouter>
   ,
