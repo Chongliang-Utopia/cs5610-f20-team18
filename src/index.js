@@ -11,6 +11,7 @@ import HomePage from "./components/HomePage";
 import SignUp from "./components/authentication/SignUp";
 import LogIn from "./components/authentication/LogIn";
 import CreatePassword from "./components/authentication/CreatePassword";
+import UserProfile from "./components/Profile/UserProfile";
 import BookStore from "./components/bookStore/bookStore";
 
 ReactDOM.render(
@@ -22,6 +23,8 @@ ReactDOM.render(
             <Route exact path="/login" component={LogIn}/>
             <Route exact path="/signup" component={SignUp}/>
             <Route exact path="/createpassword" component={CreatePassword}/>
+            <Route exact path="/users/:userId/profile" component={UserProfile}/>
+            <Route exact path="/users/:userId/profile/:section" component={UserProfile}/>
             <Route exact path="/bookstore" component={BookStore}/>
         </div>
     </BrowserRouter>
