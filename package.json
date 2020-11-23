@@ -10,7 +10,6 @@
     "bootstrap": "^4.5.3",
     "date-fns": "^2.16.1",
     "font-awesome": "^4.7.0",
-    "install": "^0.13.0",
     "moment": "^2.29.1",
     "react": "^16.14.0",
     "react-bootstrap": "^1.4.0",

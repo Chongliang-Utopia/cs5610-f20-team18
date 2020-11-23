@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchBook from "./searchBook";
+import SearchBook from "./bookStore/searchBook";
 class googleBookClient extends React.Component {
     render() {
         return (

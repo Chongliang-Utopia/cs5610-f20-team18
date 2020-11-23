@@ -4,24 +4,28 @@ import './index.css';
 import GoogleBookClient from "./components/googleBookClient"
 import BookDetail from "./components/bookDetail/BookDetail"
 import reportWebVitals from './reportWebVitals';
-import '../node_modules/bootstrap/dist/css/bootstrap.css';
-import "../node_modules/font-awesome/css/font-awesome.min.css";
+import 'bootstrap/dist/css/bootstrap.css';
+import "font-awesome/css/font-awesome.min.css";
 import { BrowserRouter, Route } from "react-router-dom";
+import HomePage from "./components/HomePage";
 import SignUp from "./components/authentication/SignUp";
 import LogIn from "./components/authentication/LogIn";
 import CreatePassword from "./components/authentication/CreatePassword";
 import UserProfile from "./components/Profile/UserProfile";
+import BookStore from "./components/bookStore/bookStore";
 
 ReactDOM.render(
     <BrowserRouter>
         <div>
-            <Route exact path="/"  component={GoogleBookClient}/>
+            <Route exact path="/" component={HomePage}/>
+            <Route exact path="/search"  component={GoogleBookClient}/>
             <Route exact path="/books/:bookId"  component={BookDetail}/>
             <Route exact path="/login" component={LogIn}/>
             <Route exact path="/signup" component={SignUp}/>
             <Route exact path="/createpassword" component={CreatePassword}/>
             <Route exact path="/users/:userId/profile" component={UserProfile}/>
             <Route exact path="/users/:userId/profile/:section" component={UserProfile}/>
+            <Route exact path="/bookstore" component={BookStore}/>
         </div>
     </BrowserRouter>
   ,
