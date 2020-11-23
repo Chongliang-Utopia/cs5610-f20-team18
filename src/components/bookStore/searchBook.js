@@ -14,6 +14,11 @@ class SearchBook extends React.Component {
         books: []
     }
 
+    componentDidMount() {
+        let url = `https://www.googleapis.com/books/v1/volumes?q=harry potter`;
+        fetch(url).then(response => response.json()).then(this.renderBooks)
+    }
+
     handleKeywordChange = (event) => {
         this.setState(
             {keyword: event.target.value})
@@ -67,7 +72,7 @@ class SearchBook extends React.Component {
                             onChange={this.handleCriteriaChange}>
                         <option selected>criteria</option>
                         <option value="inauthor">author</option>
-                        <option value="subject">subject</option>
+                        <option value="subject">category</option>
                         <option value="isbn">isbn</option>
                     </select>
 
@@ -76,13 +81,11 @@ class SearchBook extends React.Component {
                 <div className={`row`}>
                     {   this.state.books &&
                         this.state.books.map(book =>
-                        <div className={`col-xl-3 col-lg-4 col-md-4 col-sm-12 col-xm-12`}>
-                            <div>
+                        <div className="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-xm-12">
+                            <div className={`${classes.imageCard}`}>
                                 <ImageCard
                                     src={book.volumeInfo.imageLinks.thumbnail}/>
-                            </div>
-                            <div className={classes.bookTitle}>
-                                <div>
+                                <div className={classes.bookTitle}>
                                     {
                                         book.volumeInfo.title.length > 15 && book.volumeInfo.title.substring(0, 15)
                                     }
@@ -92,17 +95,17 @@ class SearchBook extends React.Component {
                                     {
                                         book.volumeInfo.title.length <= 15 && book.volumeInfo.title
                                     }
-                                </div>
-
                                 <Rating initialRating={book.volumeInfo.averageRating} readonly
                                         emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                         fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
+                               </div>
+                            </div>
+                            <div className={classes.hide}>
                                 <Link to={`/books/${book.id}`}
                                       className={`btn btn-primary btn-block ${classes.detailButton}`}>
                                     View More...
                                 </Link>
                             </div>
-
                         </div>)
                     }
                     {

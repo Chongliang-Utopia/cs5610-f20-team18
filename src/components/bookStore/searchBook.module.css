@@ -2,19 +2,18 @@
 }
 .SearchBook .searchBookResult{
     padding: 0px;
-    background-color: #ebebeb;
+    background-color: #0e345a;
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.SearchBook .detailButton {
-    background-color: steelblue;
+.SearchBook .hide .detailButton{
+    background-color: #0e345a;
     border: steelblue;
     color: white;
     margin-bottom: 20px;
     margin-top: 10px;
 }
 .SearchBook .bookTitle {
-    /*height: 50px;*/
     text-align: center;
     margin-top: 10px;
 }
@@ -26,3 +25,23 @@
 .SearchBook .searchBar {
     margin-bottom: 20px;
 }
+
+.SearchBook .imageCard:hover + .hide {
+    opacity: 100;
+}
+.SearchBook .hide {
+    opacity: 0;
+}
+.SearchBook .hide:hover {
+    opacity: 100;
+}
+
+
+
+
+
+
+
+
+
+
