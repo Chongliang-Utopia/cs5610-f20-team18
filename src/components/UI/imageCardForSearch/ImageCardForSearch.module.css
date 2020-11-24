@@ -1,4 +1,4 @@
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 575px) {
     .ImageCard {
         padding: 10%;
         background-color: #ebebeb;
@@ -7,7 +7,7 @@
     }
 }
 
-@media screen and (min-width: 800px){
+@media screen and (min-width: 575px){
     .ImageCard {
         padding: 10%;
         background-color: #ebebeb;

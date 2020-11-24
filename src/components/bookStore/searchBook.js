@@ -81,7 +81,7 @@ class SearchBook extends React.Component {
                 <div className={`row`}>
                     {   this.state.books &&
                         this.state.books.map(book =>
-                        <div className="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-xm-12 mb-5">
+                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xm-12 mb-5">
                             <Link
                                 to={`/books/${book.id}`}
                                 className={`${classes.imageCard}`}>
