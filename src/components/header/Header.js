@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import { HashLink} from 'react-router-hash-link';
 import Logo from "../logo/Logo";
 import classes from "./Header.module.css"
 import SearchBar from "../UI/searchBar/SearchBar";
@@ -24,7 +25,7 @@ const Header = () =>
                         <Link className="nav-link" to="/">Home</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/">About</Link>
+                        <HashLink className="nav-link" to="/#about">About</HashLink>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="/bookstore">Bookstore</Link>

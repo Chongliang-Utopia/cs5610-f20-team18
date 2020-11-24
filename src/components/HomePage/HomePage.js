@@ -1,6 +1,8 @@
 import React from "react";
 import classes from "./HomePage.module.css"
+import home from "../../assets/images/home.webp"
 import {Container, Row, Col, Button, Carousel, Card} from 'react-bootstrap'
+import AboutSection from "../aboutSection/AboutSection";
 
 const bestsellerBooksLists = [
     [
@@ -52,13 +54,12 @@ const HomePage = () => (
                 }
             </Carousel>
 
-            <div className="text-center my-5 text-white">
+            <div className={classes.recommendBook}>
                 <hr/>
                 <h5>This Month's</h5>
                 <h1>RECOMMENDED BOOKS</h1>
                 <hr/>
             </div>
-
             <Carousel indicators={false} interval={10000}>
                 {
                     bestsellerBooksLists.map((booksList, booksListIndex) => (
@@ -79,13 +80,7 @@ const HomePage = () => (
                 }
             </Carousel>
         </div>
-
-        <div className="text-center my-5" style={{color: "#0e345a"}}>
-            <h1>THERE'S NO</h1>
-            <h1>SUCH THING AS TOO</h1>
-            <h1>MANY BOOKS</h1>
-            <Button variant="outline-primary" className="mt-4">Read Our Story</Button>
-        </div>
+        <AboutSection />
     </Container>
 
 )

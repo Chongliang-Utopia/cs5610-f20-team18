@@ -27,9 +27,9 @@ const Footer = () =>
                     </Form>
                 </Col>
             </Row>
-            <Row class="mt-5 text-center">
+            <div className="mt-5 text-muted text-center">
                 © {new Date().getFullYear()} BayBookClub
-            </Row>
+            </div>
         </Container>
     </footer>
 

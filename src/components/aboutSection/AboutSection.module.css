@@ -1,0 +1,53 @@
+.AboutSection {
+    margin-top: 100px;
+    text-align: center;
+    margin-bottom: 100px;
+    padding: 30px;
+}
+
+.AboutSection .imgDiv {
+    width: 100%;
+    height: auto;
+
+}
+
+.AboutSection .bookImg {
+    width: 70%;
+    max-width: 550px;
+    margin-right: 30%;
+    height: 500px;
+    border: #0e345a 10px solid;
+    background-image: url("https://littlefreelibrary.org/wp-content/uploads/2018/07/action-book-club-come-together-collage-e1532988182927.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 1;
+}
+
+
+.AboutSection .aboutParagraph {
+    width: 70%;
+    margin-left: 30%;
+    line-height: 3;
+    text-align: left;
+    word-spacing: 5px;
+    vertical-align: center;
+
+    padding-bottom: 20%;
+}
+
+@media (max-width: 767px) {
+    .AboutSection .bookImg {
+        width: 100%;
+        margin-right: 0;
+        padding-top: 0;
+    }
+
+    .AboutSection .aboutParagraph {
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+    }
+
+
+}
