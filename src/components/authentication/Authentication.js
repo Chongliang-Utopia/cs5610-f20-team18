@@ -52,7 +52,7 @@ const Authentication = ({title, link, message, url}) => {
 
     return (
         <div className={classes.Authentication}>
-            <a className={classes.closeButton}><GrClose size="20px"/></a>
+            <Link to="/" className={classes.closeButton}><GrClose size="20px"/></Link>
             <div className={classes.titleDiv}>
                 <h1>{title}</h1>
                 <div className="mt-3 mb-5">

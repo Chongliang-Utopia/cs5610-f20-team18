@@ -16,7 +16,6 @@
     }
 }
 
-
 .ImageCard img{
     width:70%;
     left: 15%;
@@ -26,5 +25,13 @@
     position:relative;
     display:inline-block;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    transform: scale(1.03);
+    opacity: 0.9;
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+.ImageCard img:hover{
+    transform: scale(1.10);
+    opacity: 1;
 }
 
