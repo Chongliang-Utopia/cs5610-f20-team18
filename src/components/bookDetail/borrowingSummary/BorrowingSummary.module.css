@@ -14,7 +14,8 @@
     height: 13px;
     border-bottom: 1px solid;
     border-bottom-style: dashed;
-    border-color: red
+    border-color: red;
+    overflow: visible;
 }
 
 .BorrowingSummary .heading{

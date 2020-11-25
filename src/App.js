@@ -11,6 +11,7 @@ import CreatePassword from "./components/authentication/CreatePassword";
 import UserProfile from "./components/Profile/UserProfile";
 import BookStore from "./components/bookStore/bookStore";
 import Footer from "./components/footer/Footer";
+import Admin from "./components/admin/Admin";
 
 class App extends Component {
 
@@ -29,6 +30,7 @@ class App extends Component {
                         <Route exact path="/users/:userId/profile" component={UserProfile}/>
                         <Route exact path="/users/:userId/profile/:section" component={UserProfile}/>
                         <Route exact path="/bookstore" component={BookStore}/>
+                        <Route exact path="/admin" component={Admin}/>
                         <Footer/>
                     </Fragment>
                 </Switch>
