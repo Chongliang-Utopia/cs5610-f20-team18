@@ -26,6 +26,12 @@
     }
 }
 
+@media screen and (max-width: 576px) {
+    .BookStore {
+        width: 90%
+    }
+}
+
 .BookStore .ratingBar {
     margin-bottom: 5px;
 }

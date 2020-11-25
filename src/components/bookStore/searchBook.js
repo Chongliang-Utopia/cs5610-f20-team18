@@ -81,8 +81,10 @@ class SearchBook extends React.Component {
                 <div className={`row`}>
                     {   this.state.books &&
                         this.state.books.map(book =>
-                        <div className="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-xm-12">
-                            <div className={`${classes.imageCard}`}>
+                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xm-12 mb-5">
+                            <Link
+                                to={`/books/${book.id}`}
+                                className={`${classes.imageCard}`}>
                                 <ImageCard
                                     src={book.volumeInfo.imageLinks.thumbnail}/>
                                 <div className={classes.bookTitle}>
@@ -99,13 +101,13 @@ class SearchBook extends React.Component {
                                         emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                         fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                </div>
-                            </div>
-                            <div className={classes.hide}>
-                                <Link to={`/books/${book.id}`}
-                                      className={`btn btn-primary btn-block ${classes.detailButton}`}>
-                                    View More...
-                                </Link>
-                            </div>
+                            </Link>
+                            {/*<div className={classes.hide}>*/}
+                            {/*    <Link to={`/books/${book.id}`}*/}
+                            {/*          className={`btn btn-primary btn-block ${classes.detailButton}`}>*/}
+                            {/*        View More...*/}
+                            {/*    </Link>*/}
+                            {/*</div>*/}
                         </div>)
                     }
                     {

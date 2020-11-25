@@ -39,7 +39,8 @@
     margin: 30px auto 40px;
     height: 13px;
     border-bottom: 1px solid;
-    border-color: grey
+    border-color: grey;
+    overflow: visible;
 }
 
 .Authentication .label {

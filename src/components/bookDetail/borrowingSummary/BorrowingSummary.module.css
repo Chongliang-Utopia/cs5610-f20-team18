@@ -1,12 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;900&display=swap");
-
 .BorrowingSummary {
     padding: 10%;
-}
-
-.BorrowingSummary h1{
-    font-family: 'Source Serif Pro', serif;
-    font-weight: 400;
 }
 
 @media (max-width: 500px) {
@@ -21,7 +14,8 @@
     height: 13px;
     border-bottom: 1px solid;
     border-bottom-style: dashed;
-    border-color: red
+    border-color: red;
+    overflow: visible;
 }
 
 .BorrowingSummary .heading{
