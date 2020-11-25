@@ -10,10 +10,10 @@ class BookStore extends React.Component {
                 <h4>Our</h4>
                 <h1><b>BOOKSTORE</b></h1>
                 <div className="row">
-                    <div className="col-md-3">
+                    <div className="col-md-4 col-lg-3">
                         <FilterPanel/>
                     </div>
-                    <div className="col-md-9">
+                    <div className="col-md-8 col-lg-9">
                         <SearchBook/>
                     </div>
                 </div>

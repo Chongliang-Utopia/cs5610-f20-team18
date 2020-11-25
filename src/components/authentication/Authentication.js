@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, Fragment} from "react";
 import {GrClose} from "react-icons/gr";
 import {FcGoogle} from "react-icons/fc";
 import {Link} from "react-router-dom";
@@ -37,9 +37,16 @@ const Authentication = ({title, link, message, url}) => {
                         <label htmlFor="password" className={classes.label}>Password</label>
                         <input className={"form-control " + classes.inputForm} type="password" id="password"/>
                     </div>
-                    {title === "Log In" && <div className={classes.forgotPassword}>
-                        <Link to="/createpassword">Forgot password?</Link>
-                    </div>}
+                    {title === "Log In" &&
+                    <Fragment>
+                        <div className="input-group">
+                            <input className="mt-1 mr-2" type="checkbox" id="admin" name="admin" value="admin"/>
+                            <label htmlFor="admin" className={classes.label}>Login as Admin</label>
+                        </div>
+                        <div className={classes.forgotPassword}>
+                            <Link to="/createpassword">Forgot password?</Link>
+                        </div>
+                    </Fragment>}
                     <button className="btn btn-primary btn-block mt-5">{title}</button>
                     <div className={classes.line}>
                         <span className="bg-white p-2">or {title} with</span>
@@ -52,14 +59,14 @@ const Authentication = ({title, link, message, url}) => {
 
     return (
         <div className={classes.Authentication}>
-            <a className={classes.closeButton}><GrClose size="20px"/></a>
+            <Link to="/" className={classes.closeButton}><GrClose size="20px"/></Link>
             <div className={classes.titleDiv}>
                 <h1>{title}</h1>
                 <div className="mt-3 mb-5">
                     <span>{message}<Link className="ml-1" to={url}>{link}</Link></span>
                 </div>
                 <div className={classes.content}>
-                    {title !== "Create Password"? renderForm():
+                    {title !== "Create Password" ? renderForm() :
                         <div>
                             <div className={"form-group " + classes.inputDiv}>
                                 <label htmlFor="email" className={classes.label}>Email</label>

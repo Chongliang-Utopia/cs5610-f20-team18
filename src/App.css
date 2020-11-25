@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&family=Open+Sans:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+
+* {
+    overflow-x: hidden;
+}
+
+body{
+    color: #0e345a;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Castoro', serif;
+}
+

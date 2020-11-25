@@ -1,13 +1,15 @@
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 576px) {
     .ImageCard {
         padding: 10%;
         background-color: #ebebeb;
         width: auto;
+        max-width: 250px;
         height: auto;
+        margin: auto;
     }
 }
 
-@media screen and (min-width: 800px){
+@media screen and (min-width: 576px){
     .ImageCard {
         padding: 10%;
         background-color: #ebebeb;
@@ -15,7 +17,6 @@
         height: 200px;
     }
 }
-
 
 .ImageCard img{
     width:70%;
@@ -26,5 +27,13 @@
     position:relative;
     display:inline-block;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    transform: scale(1.03);
+    opacity: 0.9;
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+.ImageCard img:hover{
+    transform: scale(1.10);
+    opacity: 1;
 }
 

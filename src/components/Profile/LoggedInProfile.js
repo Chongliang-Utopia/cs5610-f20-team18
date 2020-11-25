@@ -8,6 +8,7 @@ import FollowingComponent from "./Components/FollowingComponent";
 import BorrowingComponent from "./Components/BorrowingComponent";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import Rating from "react-rating";
+import ProfileHeading from "./profileHeading/ProfileHeading";
 
 const LoggedInProfile = ({section, userId, bookPostings, requests, userRating, reviews}) => {
     return (
@@ -29,6 +30,7 @@ const LoggedInProfile = ({section, userId, bookPostings, requests, userRating, r
                     </div>
                 </div>
             </div>
+            <ProfileHeading />
             <br/>
             <div className="row">
                 <div className="col-4">
