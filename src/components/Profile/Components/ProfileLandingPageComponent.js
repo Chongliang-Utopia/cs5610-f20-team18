@@ -5,7 +5,27 @@ import classes from "../../bookDetail/lenderTable/LenderTable.module.css";
 import {Link} from "react-router-dom";
 import Rating from "react-rating";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
+import {Row, Col, Navbar, Nav, Form, FormControl, Button, Image, Carousel} from 'react-bootstrap'
 
+
+const bestsellerBooksLists = [
+    [
+        "/books/book1.webp",
+        "/books/book2.webp",
+        "/books/book3.webp",
+        "/books/book4.webp",
+        "/books/book5.webp",
+        "/books/book6.webp",
+    ],
+    [
+        "/books/book7.webp",
+        "/books/book8.webp",
+        "/books/book9.webp",
+        "/books/book10.webp",
+        "/books/book11.webp",
+        "/books/book12.webp",
+    ],
+]
 const ProfileLandingPageComponent = ({reviews, userId}) =>
     <div>
         <h2>My activity at a glance</h2>
@@ -105,6 +125,28 @@ const ProfileLandingPageComponent = ({reviews, userId}) =>
             </table>
         </div>
         <h2>My Wishlist</h2>
+
+
+            <Carousel indicators={false}>
+                {
+                    bestsellerBooksLists.map((booksList, booksListIndex) => (
+                        <Carousel.Item key={booksListIndex}>
+                            <Row>
+                                {
+                                    booksList.map((book, bookIndex) => (
+                                        <Col key={bookIndex}>
+                                            <Card border="light" className="rounded-0" style={{width: '10rem'}}>
+                                                <Card.Img variant="top" src={book} />
+                                            </Card>
+                                        </Col>
+                                    ))
+                                }
+                            </Row>
+                        </Carousel.Item>
+                    ))
+                }
+
+            </Carousel>
 
     </div>
 

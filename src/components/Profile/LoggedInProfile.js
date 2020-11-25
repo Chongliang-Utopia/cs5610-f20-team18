@@ -12,16 +12,22 @@ import Rating from "react-rating";
 const LoggedInProfile = ({section, userId, bookPostings, requests, userRating, reviews}) => {
     return (
         <div className="container">
-            <div className="add-top-margin add-15-padding font-size-25-italic">
-                <span>
-                    Welcome back, {userId}!
-                </span>
-                <span className="add-left-margin">
-                    <img className="image" src="https://is2-ssl.mzstatic.com/image/thumb/Podcasts124/v4/54/b0/5d/54b05d73-57bf-6e94-d06f-dfc2ceb4f771/mza_1054230007255374421.jpg/1200x1200bb.jpg"/>
-                </span>
-                <Rating className="add-15-padding" initialRating={userRating} readonly
-                        emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
-                        fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
+            <div className="add-top-margin add-15-padding font-size-25-italic row">
+                <div className="col-1">
+                    <img className="image"
+                         src="https://is2-ssl.mzstatic.com/image/thumb/Podcasts124/v4/54/b0/5d/54b05d73-57bf-6e94-d06f-dfc2ceb4f771/mza_1054230007255374421.jpg/1200x1200bb.jpg"
+                    />
+                </div>
+                <div className="add-left-margin add-15-top-margin col-3">
+                    <span>
+                        Welcome back, {userId}!
+                    </span>
+                    <div>
+                        <Rating initialRating={userRating} readonly
+                                emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
+                                fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
+                    </div>
+                </div>
             </div>
             <br/>
             <div className="row">

@@ -85,7 +85,7 @@ class UnloggedInProfile extends React.Component {
                 <br/>
                 <div className="add-15-padding">
                     <h3>
-                        People who lent from {this.props.userId} says.....
+                        What people says about me...
                     </h3>
                     <div className={classes.LenderTable}>
                         <table className="table table-hover">

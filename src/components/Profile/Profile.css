@@ -23,6 +23,10 @@
     margin-left: 35px;
 }
 
+.add-15-top-margin{
+    margin-top: 15px;
+}
+
 .add-top-margin{
     margin-top: 100px;
 }
@@ -31,8 +35,8 @@
     right: 20px;
 }
 .image{
-    max-width:50px;
-    min-width: 50px;
+    max-width: 100px;
+    min-width: 100px;
     left: 20px;
     /*height: auto;*/
     background-size:cover;
@@ -40,6 +44,7 @@
     /*position:relative;*/
     display:inline;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    border-radius: 70%;
 }
 
 .font-size-25-italic{
@@ -69,4 +74,5 @@
         display: none;
     }
 }
+
 
