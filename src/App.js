@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import './App.css';
+import classes from './App.module.css';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Header from "./components/header/Header";
 import HomePage from "./components/HomePage/HomePage";
@@ -23,7 +23,9 @@ class App extends Component {
                     <Route exact path="/signup" component={SignUp}/>
                     <Route exact path="/createpassword" component={CreatePassword}/>
                     <Fragment>
+                        <div className={classes.App}>
                         <Header/>
+                        <main>
                         <Route exact path="/" component={HomePage}/>
                         <Route exact path="/search" component={GoogleBookClient}/>
                         <Route exact path="/books/:bookId" component={BookDetail}/>
@@ -31,7 +33,9 @@ class App extends Component {
                         <Route exact path="/users/:userId/profile/:section" component={UserProfile}/>
                         <Route exact path="/bookstore" component={BookStore}/>
                         <Route exact path="/admin" component={Admin}/>
+                        </main>
                         <Footer/>
+                        </div>
                     </Fragment>
                 </Switch>
             </BrowserRouter>

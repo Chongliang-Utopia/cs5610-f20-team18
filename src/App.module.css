@@ -9,9 +9,27 @@ body{
     font-family: 'Lato', sans-serif;
     font-weight: 300;
     text-rendering: optimizeLegibility;
+    margin: 0;
+    padding: 0;
 }
 
 h1, h2, h3, h4 {
     font-family: 'Castoro', serif;
 }
+
+footer {
+    background-color: #0e345a;
+    color: white;
+}
+
+.App {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
 
