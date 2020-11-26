@@ -1,0 +1,85 @@
+.BookStoreSearchBar {
+    margin-bottom: 50px;
+}
+
+.BookStoreSearchBar .BookStoreSearchDiv {
+    position: relative;
+    padding: 10px;
+    width: 70%;
+    left: 15%;
+}
+
+@media (max-width: 768px) {
+    .BookStoreSearchBar .BookStoreSearchDiv {
+        width: 100%;
+        left: 0;
+    }
+}
+
+.BookStoreSearchBar .search {
+    margin-top: 3rem;
+    background: white;
+    padding: 3px;
+    width: 100%;
+    border-radius: 10em;
+    border: 1px solid #dfe1e5;
+    transition: box-shadow 300ms ease;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+}
+
+.BookStoreSearchBar .search:hover {
+    box-shadow: 0 0 8px #dae0ec;
+}
+
+.BookStoreSearchBar .searchInput {
+    width: 100%;
+    border-style: none;
+    color: inherit;
+    background-color: transparent;
+    padding-left: 1em;
+    font-size: 1.3em;
+}
+
+.BookStoreSearchBar .searchButton {
+    width: 40px;
+    height: 40px;
+    border: none;
+    color: #dfe1e5;
+    text-align: center;
+    background-color: white;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.BookStoreSearchBar .searchButton:hover {
+    color: #0e345a;
+}
+
+.BookStoreSearchBar .advancedButton {
+    float:right;
+    border: none;
+    background: white;
+    color: grey;
+}
+
+.BookStoreSearchBar .advancedButton:hover {
+    color: #0e345a;
+}
+
+.BookStoreSearchBar .advancedSearchDiv {
+    margin-top: 10px;
+    padding: 5% 5% 8% 5%;
+    border: 1px solid #dfe1e5;
+    border-radius: 1rem;
+}
+
+
+.BookStoreSearchBar input:focus,
+.BookStoreSearchBar button:focus{
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+}

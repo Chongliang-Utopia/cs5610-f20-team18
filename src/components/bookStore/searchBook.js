@@ -4,6 +4,7 @@ import ImageCard from "../UI/imageCardForSearch/ImageCardForSearch";
 import classes from "./searchBook.module.css"
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import Rating from "react-rating";
+import BookStoreSearchBar from "./bookStoreSearchBar/BookStoreSearchBar";
 
 class SearchBook extends React.Component {
 
@@ -50,34 +51,33 @@ class SearchBook extends React.Component {
     render() {
         return (
             <div  className={`${classes.SearchBook}`}>
-                <div className={`input-group ${classes.searchBar}`}>
-                    <input value={this.state.keyword}
-                           onChange={this.handleKeywordChange}
-                           className="form-control"
-                           placeholder="Keyword..."/>
-                    <div className="input-group-append">
-                        <button
-                            onClick={this.searchBook}
-                            className="btn btn-primary">
-                            <i className="fa fa-search"/>
-                        </button>
-                    </div>
-                </div>
-                <div className={`input-group ${classes.searchBar}`}>
-                    <input value={this.state.additionalKeyword}
-                           onChange={this.handleAdditionalKeywordChange}
-                           className="form-control"
-                           placeholder="Additional keyword (optional)..."/>
-                    <select className="custom-select"
-                            onChange={this.handleCriteriaChange}>
-                        <option selected>criteria</option>
-                        <option value="inauthor">author</option>
-                        <option value="subject">category</option>
-                        <option value="isbn">isbn</option>
-                    </select>
-
-                </div>
-
+                {/*<div className={`input-group ${classes.searchBar}`}>*/}
+                {/*    <input value={this.state.keyword}*/}
+                {/*           onChange={this.handleKeywordChange}*/}
+                {/*           className="form-control"*/}
+                {/*           placeholder="Keyword..."/>*/}
+                {/*    <div className="input-group-append">*/}
+                {/*        <button*/}
+                {/*            onClick={this.searchBook}*/}
+                {/*            className="btn btn-primary">*/}
+                {/*            <i className="fa fa-search"/>*/}
+                {/*        </button>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+                {/*<div className={`input-group ${classes.searchBar}`}>*/}
+                {/*    <input value={this.state.additionalKeyword}*/}
+                {/*           onChange={this.handleAdditionalKeywordChange}*/}
+                {/*           className="form-control"*/}
+                {/*           placeholder="Additional keyword (optional)..."/>*/}
+                {/*    <select className="custom-select"*/}
+                {/*            onChange={this.handleCriteriaChange}>*/}
+                {/*        <option selected>criteria</option>*/}
+                {/*        <option value="inauthor">author</option>*/}
+                {/*        <option value="subject">category</option>*/}
+                {/*        <option value="isbn">isbn</option>*/}
+                {/*    </select>*/}
+                {/*</div>*/}
+                <BookStoreSearchBar/>
                 <div className={`row`}>
                     {   this.state.books &&
                         this.state.books.map(book =>
