@@ -2,7 +2,8 @@ header {
     margin-bottom: 30px;
 }
 
-header a{
+header a,
+header .logOutButton{
     color: #0e345a;
     font-weight: 400;
     font-size: 120%;
@@ -10,6 +11,12 @@ header a{
     margin-right: 10px;
     text-align: center;
     padding-top: 5px;
+}
+
+header .logOutButton{
+    background: none;
+    border: none;
+    margin-top: 2px;
 }
 
 header .searchBar {

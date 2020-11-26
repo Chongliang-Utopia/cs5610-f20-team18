@@ -1,25 +1,26 @@
 import React, {Component, Fragment} from 'react';
 import classes from './App.module.css';
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {Router, Route, Switch} from "react-router-dom";
 import Header from "./components/header/Header";
 import HomePage from "./components/HomePage/HomePage";
 import GoogleBookClient from "./components/googleBookClient";
 import BookDetail from "./components/bookDetail/BookDetail";
-import LogIn from "./components/authentication/LogIn";
+import Login from "./components/authentication/Login";
 import SignUp from "./components/authentication/SignUp";
 import CreatePassword from "./components/authentication/CreatePassword";
 import UserProfile from "./components/Profile/UserProfile";
 import BookStore from "./components/bookStore/bookStore";
 import Footer from "./components/footer/Footer";
 import Admin from "./components/admin/Admin";
+import history from "./history";
 
 class App extends Component {
 
     render() {
         return (
-            <BrowserRouter>
+            <Router history={history}>
                 <Switch>
-                    <Route exact path="/login" component={LogIn}/>
+                    <Route exact path="/login" component={Login}/>
                     <Route exact path="/signup" component={SignUp}/>
                     <Route exact path="/createpassword" component={CreatePassword}/>
                     <Fragment>
@@ -38,7 +39,7 @@ class App extends Component {
                         </div>
                     </Fragment>
                 </Switch>
-            </BrowserRouter>
+            </Router>
         );
     }
 }

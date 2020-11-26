@@ -1,11 +1,14 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {HashLink} from 'react-router-hash-link';
+import {BsFillPersonFill} from "react-icons/bs";
+import { connect } from "react-redux";
 import Logo from "../logo/Logo";
 import classes from "./Header.module.css"
 import SearchBar from "../UI/searchBar/SearchBar";
+import {signOut} from "../../actions/authActions";
 
-const Header = () =>
+const Header = ({isSignedIn, authInstance, signOut}) =>
     <header className={classes.Header}>
         <nav className="navbar navbar-expand-lg navbar-light bg-light px-5">
             <Link className="navbar-brand ml-0" to="/">
@@ -32,7 +35,11 @@ const Header = () =>
                         <Link className="nav-link" to="/users/:userId/profile">Profile</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/login">Login</Link>
+                        {   !isSignedIn?
+                            <Link className="nav-link" to="/login"><BsFillPersonFill className="mb-1"/> Login</Link>:
+                            <button  onClick={() => authInstance.signOut().then(signOut())}
+                                className={"nav-link " + classes.logOutButton} ><BsFillPersonFill className="mb-1"/> Log out</button>
+                        }
                     </li>
                 </ul>
                 <div className={"pt-2 " + classes.searchBar}>
@@ -42,4 +49,9 @@ const Header = () =>
         </nav>
     </header>
 
-export default Header;
+const StateToPropertyMapper = (state) => ({
+    isSignedIn: state.auth.isSignedIn,
+    authInstance: state.auth.authInstance
+});
+
+export default connect(StateToPropertyMapper, {signOut})(Header);
