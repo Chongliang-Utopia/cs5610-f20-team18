@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 
 const Footer = () =>
-    <footer  style={{ backgroundColor: "#0e345a", color: "#ffffff" }}>
+    <footer>
         <Container className="px-5 pt-4 pb-5">
             <Row className="justify-content-md-around">
                 <Col sm={6} md={4} className="mt-5">

@@ -6,7 +6,6 @@
 }
 .Logo img {
     position: absolute;
-    top: -95px;
+    top: -80px;
     right: 5px;
-    object-fit: contain;
 }
