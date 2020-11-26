@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&family=Open+Sans:ital,wght@0,300;0,400;1,300;1,400&display=swap');
 
-* {
-    overflow-x: hidden;
-}
-
 body{
     color: #0e345a;
     font-family: 'Lato', sans-serif;
@@ -14,4 +10,25 @@ body{
 h1, h2, h3, h4 {
     font-family: 'Castoro', serif;
 }
+
+footer {
+    background-color: #0e345a;
+    color: white;
+    overflow-x: hidden;
+}
+
+header {
+    overflow: hidden;
+}
+
+.App {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
 

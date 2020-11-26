@@ -1,22 +1,23 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import { HashLink} from 'react-router-hash-link';
+import {HashLink} from 'react-router-hash-link';
+import {BsFillPersonFill} from "react-icons/bs";
+import { connect } from "react-redux";
 import Logo from "../logo/Logo";
 import classes from "./Header.module.css"
 import SearchBar from "../UI/searchBar/SearchBar";
+import {signOut} from "../../actions/authActions";
 
-const Header = () =>
+const Header = ({isSignedIn, authInstance, signOut}) =>
     <header className={classes.Header}>
         <nav className="navbar navbar-expand-lg navbar-light bg-light px-5">
             <Link className="navbar-brand ml-0" to="/">
-                <Link to="/" title="Go To Home Page">
-                    <Logo height="10px"/>
-                </Link>
+                <Logo height="40px"/>
             </Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon" />
+                <span className="navbar-toggler-icon"/>
             </button>
 
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -34,14 +35,23 @@ const Header = () =>
                         <Link className="nav-link" to="/users/:userId/profile">Profile</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/login">Login</Link>
+                        {   !isSignedIn?
+                            <Link className="nav-link" to="/login"><BsFillPersonFill className="mb-1"/> Login</Link>:
+                            <button  onClick={() => authInstance.signOut().then(signOut())}
+                                className={"nav-link " + classes.logOutButton} ><BsFillPersonFill className="mb-1"/> Log out</button>
+                        }
                     </li>
                 </ul>
-                <div className="pt-2">
-                    <SearchBar />
+                <div className={"pt-2 " + classes.searchBar}>
+                    <SearchBar/>
                 </div>
             </div>
         </nav>
     </header>
 
-export default Header;
+const StateToPropertyMapper = (state) => ({
+    isSignedIn: state.auth.isSignedIn,
+    authInstance: state.auth.authInstance
+});
+
+export default connect(StateToPropertyMapper, {signOut})(Header);

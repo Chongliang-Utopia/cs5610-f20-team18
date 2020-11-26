@@ -9,10 +9,10 @@ const AboutSection = () =>
             <h2>Sharing is Caring!</h2>
         </div>
         <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-6 position-relative">
                 <div className={classes.aboutParagraph}>
                     <h4>
-                        To encourage book-sharing culture and stronger connection between local book-lovers, we’re
+                        To encourage book-sharing culture and stronger connections between local book-lovers, we’re
                         inspired to facilitate book lovers to share books within the neighborhoods. We hope to help promote
                         everyone’s reading habits, as well as saving natural resources by recirculating books.
                     </h4>
