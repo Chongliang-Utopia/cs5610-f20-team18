@@ -4,10 +4,7 @@ import ImageCard from "../UI/imageCard/ImageCard";
 import classes from "../bookDetail/lenderTable/LenderTable.module.css";
 import Rating from "react-rating";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
-import {BsFillHeartFill} from "react-icons/bs"
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import {Tooltip} from "react-bootstrap";
-import {SiMinutemailer} from "react-icons/si";
+import ProfileHeading from "./profileHeading/ProfileHeading";
 
 class UnloggedInProfile extends React.Component {
     state = {
@@ -19,57 +16,10 @@ class UnloggedInProfile extends React.Component {
             follow: !this.state.follow
         })
 
-    renderTooltip = (props) =>
-        <Tooltip {...props}>
-            {
-                this.state.follow? "Unfollow ": "Follow"
-            } {this.props.userId}
-        </Tooltip>
-
-    renderMailTooltip = (props) =>
-        <Tooltip {...props}>
-            Contact {this.props.userId}
-        </Tooltip>
-
     render () {
         return (
-            <div className="container">
-                <div className="add-top-margin add-15-padding font-size-25-italic">
-                    <span>
-                        Welcome! This is {this.props.userId}
-                    </span>
-                    <span className="add-left-margin">
-                        <img className="image" src="https://is2-ssl.mzstatic.com/image/thumb/Podcasts124/v4/54/b0/5d/54b05d73-57bf-6e94-d06f-dfc2ceb4f771/mza_1054230007255374421.jpg/1200x1200bb.jpg"/>
-                    </span>
-                    <Rating className="add-15-padding" initialRating={this.props.userRating} readonly
-                            emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
-                            fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
-                </div>
-                <span className="add-15-padding">
-                    <OverlayTrigger
-                        placement="right"
-                        delay={{ show: 250, hide: 400 }}
-                        overlay={this.renderTooltip()}
-                    >
-                        <BsFillHeartFill size={"1.5em"} color={this.state.follow ? "red" : ""} onClick={this.changeFollowing}/>
-                    </OverlayTrigger>
-                    {"  "}
-                    <OverlayTrigger
-                        placement="right"
-                        delay={{ show: 250, hide: 400 }}
-                        overlay={this.renderMailTooltip}
-                    >
-                        <SiMinutemailer size={"1.5em"}/>
-                    </OverlayTrigger>
-
-                </span>
-                <br/>
-                <br/>
-                <h6 className="add-15-padding">
-                    My name is {this.props.userId}. I live in Mountain View. I love books very much. If you are a fellow book lover,
-                    let's share books!!
-                </h6>
-                <br/>
+            <div className="container add-top-margin">
+                <ProfileHeading user={this.props.userId}/>
                 <div className="add-15-padding">
                     <h3>
                         {this.props.userId}'s Postings
@@ -121,7 +71,15 @@ class UnloggedInProfile extends React.Component {
                         </table>
                     </div>
                 </div>
-
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
             </div>
         )
     }

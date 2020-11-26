@@ -28,15 +28,15 @@
 }
 
 .add-top-margin{
-    margin-top: 100px;
+    margin-top: 70px;
 }
 
 .add-right-margin{
     right: 20px;
 }
 .image{
-    max-width: 100px;
-    min-width: 100px;
+    max-width: 150px;
+    min-width: 150px;
     left: 20px;
     /*height: auto;*/
     background-size:cover;

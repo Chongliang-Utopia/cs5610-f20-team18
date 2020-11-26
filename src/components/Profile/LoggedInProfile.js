@@ -8,18 +8,18 @@ import FollowingComponent from "./Components/FollowingComponent";
 import BorrowingComponent from "./Components/BorrowingComponent";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import Rating from "react-rating";
-import ProfileHeading from "./profileHeading/ProfileHeading";
 
 const LoggedInProfile = ({section, userId, bookPostings, requests, userRating, reviews}) => {
     return (
         <div className="container">
             <div className="add-top-margin add-15-padding font-size-25-italic row">
-                <div className="col-1">
+                <div className="col-2">
                     <img className="image"
                          src="https://is2-ssl.mzstatic.com/image/thumb/Podcasts124/v4/54/b0/5d/54b05d73-57bf-6e94-d06f-dfc2ceb4f771/mza_1054230007255374421.jpg/1200x1200bb.jpg"
+                         alt="profile-image"
                     />
                 </div>
-                <div className="add-left-margin add-15-top-margin col-3">
+                <div className="add-left-margin add-15-top-margin col-5">
                     <span>
                         Welcome back, {userId}!
                     </span>
@@ -30,7 +30,6 @@ const LoggedInProfile = ({section, userId, bookPostings, requests, userRating, r
                     </div>
                 </div>
             </div>
-            <ProfileHeading />
             <br/>
             <div className="row">
                 <div className="col-4">
