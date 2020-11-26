@@ -31,6 +31,7 @@
     background-color: white;
     cursor: pointer;
     font-size: 20px;
+    color: grey;
 }
 
 .SearchBar .searchButton:focus {
