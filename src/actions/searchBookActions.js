@@ -9,6 +9,19 @@ export const SET_SEARCH_ISBN = "SET_SEARCH_ISBN"
 export const SET_SEARCH_PUBLISHER = "SET_SEARCH_PUBLISHER"
 export const SET_SEARCH_SUBJECT = "SET_SEARCH_SUBJECT"
 
+export const FILTER_BOOK_BY_RATING = "FILTER_BOOK_BY_RATING"
+export const SORT_BOOK_BY_RATING_HIGH_TO_LOW = "SORT_BOOK_BY_RATING_HIGH_TO_LOW"
+
+export const sortBookHighToLow = (dispatch) => 
+    dispatch({
+        type: SORT_BOOK_BY_RATING_HIGH_TO_LOW
+    })
+
+export const filterBookByRating = (dispatch, minRating) =>
+    dispatch({
+        type: FILTER_BOOK_BY_RATING, minRating: minRating
+    })
+
 export  const setAdvancedSearch = (dispatch, showAdvancedSearch) =>
     dispatch({
         type: SET_ADVANCED_SEARCH, showAdvancedSearch: showAdvancedSearch
