@@ -14,18 +14,19 @@ class SearchBook extends React.Component {
     //     books: []
     // }
 
-    componentDidMount() {
-        this.props.searchBook('Harry potter', '', '', '', '', '')
-    }
+    // componentDidMount() {
+    //     this.props.searchBook('Harry potter', '', '', '', '', '')
+    // }
 
     render() {
         return (
             <div  className={`${classes.SearchBook}`}>
                 <BookStoreSearchBar/>
-                {/*{JSON.stringify(this.props.books)}*/}
                 <div className={`row`}>
                     {   this.props.books &&
-                        this.props.books.map(book =>
+                        this.props.books.filter(book =>
+                            this.props.minRating === 0 ? book :
+                            book.volumeInfo.averageRating >= this.props.minRating).map(book =>
                         <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xm-12 mb-5">
                             <Link
                                 to={`/books/${book.id}`}
@@ -56,7 +57,6 @@ class SearchBook extends React.Component {
                     }
                 </div>
             </div>
-
     )
     }
 }
@@ -64,12 +64,9 @@ class SearchBook extends React.Component {
 
 const stateToPropertyMapper = (state) => ({
     books: state.searchBookReducer.books,
+    minRating: state.searchBookReducer.minRating
 })
-
 const propertyToDispatchMapper = (dispatch) => ({
-    searchBook: (search_default_term, author, title, isbn, publisher, subject) =>
-        searchBook(dispatch, search_default_term, author, title, isbn, publisher, subject)
 })
-// export default SearchBook
 export default connect(stateToPropertyMapper, propertyToDispatchMapper)
 (SearchBook)
