@@ -10,13 +10,6 @@ import {searchBook} from "../../actions/searchBookActions"
 
 class SearchBook extends React.Component {
 
-    // state = {
-    //     books: []
-    // }
-
-    // componentDidMount() {
-    //     this.props.searchBook('Harry potter', '', '', '', '', '')
-    // }
 
     render() {
         return (
@@ -68,5 +61,6 @@ const stateToPropertyMapper = (state) => ({
 })
 const propertyToDispatchMapper = (dispatch) => ({
 })
+
 export default connect(stateToPropertyMapper, propertyToDispatchMapper)
 (SearchBook)
