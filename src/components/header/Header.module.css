@@ -1,0 +1,41 @@
+header {
+    margin-bottom: 30px;
+}
+
+header a,
+header .logOutButton{
+    color: #0e345a;
+    font-weight: 400;
+    font-size: 120%;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+    padding-top: 5px;
+}
+
+header .logOutButton{
+    background: none;
+    border: none;
+    margin-top: 2px;
+}
+
+header .searchBar {
+    width: 25%;
+    max-width: 500px;
+    min-width: 200px;
+}
+
+@media (max-width: 992px) {
+    header .searchBar {
+        width: 60%;
+        max-width: none;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    header .searchBar {
+        width: 100%;
+        max-width: none;
+    }
+}

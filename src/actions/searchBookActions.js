@@ -1,0 +1,58 @@
+import bookService from "../services/bookService";
+
+export const SET_ADVANCED_SEARCH = "SET_ADVANCED_SEARCH"
+export const FETCH_BOOKS = "FETCH_BOOKS"
+export const SET_SEARCH_DEFAULT_TERM = "SET_SEARCH_DEFAULT_TERM"
+export const SET_SEARCH_AUTHOR = "SET_SEARCH_AUTHOR"
+export const SET_SEARCH_TITLE = "SET_SEARCH_TITLE"
+export const SET_SEARCH_ISBN = "SET_SEARCH_ISBN"
+export const SET_SEARCH_PUBLISHER = "SET_SEARCH_PUBLISHER"
+export const SET_SEARCH_SUBJECT = "SET_SEARCH_SUBJECT"
+
+export  const setAdvancedSearch = (dispatch, showAdvancedSearch) =>
+    dispatch({
+        type: SET_ADVANCED_SEARCH, showAdvancedSearch: showAdvancedSearch
+    })
+export const searchBook = (dispatch, default_term, author, title, isbn, publisher, subject) => {
+    let keyword = '';
+    if (default_term.length > 0) keyword += default_term;
+    if (author.length > 0) keyword += '+inauthor:' + author
+    if (title.length > 0) keyword += '+intitle:' + title
+    if (isbn.length > 0) keyword += '+isbn:' + isbn
+    if (publisher.length > 0) keyword += '+inpublisher:' + publisher
+    if (subject.length > 0) keyword += '+subject:' + subject
+    if (keyword.length > 0 && keyword.charAt(0) === '+') {
+        keyword = keyword.substring(1)
+    }
+    bookService.searchBooks(keyword)
+        .then(books => dispatch({
+            type: FETCH_BOOKS, books: books.items ? books.items : []
+        }))
+}
+
+export const setSearchDefaultTerm = (dispatch, search_default_term) =>
+    dispatch({
+        type: SET_SEARCH_DEFAULT_TERM,
+        search_default_term: search_default_term
+    })
+
+export const setSearchAuthor = (dispatch, author) =>
+    dispatch({
+            type: SET_SEARCH_AUTHOR, author: author
+    })
+export const setSearchTitle = (dispatch, title) =>
+    dispatch({
+        type: SET_SEARCH_TITLE, title: title
+    })
+export const setSearchISBN = (dispatch, isbn) =>
+    dispatch({
+        type: SET_SEARCH_ISBN, isbn: isbn
+    })
+export const setSearchPublisher = (dispatch, publisher) =>
+    dispatch({
+        type: SET_SEARCH_PUBLISHER, publisher: publisher
+    })
+export const setSearchSubject = (dispatch, subject) =>
+    dispatch({
+        type: SET_SEARCH_SUBJECT, subject: subject
+    })

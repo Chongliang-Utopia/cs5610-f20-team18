@@ -1,0 +1,11 @@
+.Logo {
+    height: 50px;
+    width: 200px;
+    position: relative;
+    overflow: visible;
+}
+.Logo img {
+    position: absolute;
+    top: -80px;
+    right: 5px;
+}

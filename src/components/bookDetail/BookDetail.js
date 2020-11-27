@@ -42,7 +42,9 @@ class BookDetail extends React.Component {
         this.setState({
             book: {
                 title: book.volumeInfo.title,
-                image: book.volumeInfo.imageLinks.thumbnail,
+                image: book.volumeInfo.imageLinks?
+                    book.volumeInfo.imageLinks.thumbnail
+                    : "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg",
                 authors: book.volumeInfo.authors,
                 description: book.volumeInfo.description,
                 averageRating: book.volumeInfo.averageRating,
@@ -92,7 +94,7 @@ class BookDetail extends React.Component {
                     <div className="row">
                         <div className="col-6 mb-5">
                             <Link to="/">Home</Link> /
-                            <Link to="/search"> Bookstore</Link> /
+                            <Link to="/bookstore"> Bookstore</Link> /
                             <a> {this.state.book.title}</a>
                         </div>
                         <div className="col-6">
