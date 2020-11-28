@@ -1,6 +1,7 @@
 import {SET_ADVANCED_SEARCH, FETCH_BOOKS, SET_SEARCH_AUTHOR, SET_SEARCH_TITLE, SET_SEARCH_ISBN,
     SET_SEARCH_PUBLISHER, SET_SEARCH_SUBJECT,
-    SET_SEARCH_DEFAULT_TERM, FILTER_BOOK_BY_RATING, SORT_BOOK_BY_RATING_HIGH_TO_LOW} from '../actions/searchBookActions'
+    SET_SEARCH_DEFAULT_TERM, FILTER_BOOK_BY_RATING,
+    SORT_BOOK_BY_RATING_HIGH_TO_LOW, SORT_BOOK_BY_PUBLISHER_DATE} from '../actions/searchBookActions'
 
 const INITIAL_STATE = {
     books: [],
@@ -35,13 +36,21 @@ const searchBookReducer = (state = INITIAL_STATE, action) => {
         case FILTER_BOOK_BY_RATING:
             return {...state, minRating: action.minRating}
         case SORT_BOOK_BY_RATING_HIGH_TO_LOW:
-            const bookSorted = [...state.books]
+            let bookSorted = [...state.books]
             bookSorted.sort((a, b) => {
-                const ratingA = a.volumeInfo.averageRating ? a.volumeInfo.averageRating : -1;
-                const ratingB = b.volumeInfo.averageRating ? b.volumeInfo.averageRating : -1;
+                let ratingA = a.volumeInfo.averageRating ? a.volumeInfo.averageRating : -1;
+                let ratingB = b.volumeInfo.averageRating ? b.volumeInfo.averageRating : -1;
                 return ratingB - ratingA >= 0 ? 1 : -1;
             })
             return {...state, books: bookSorted}
+        case SORT_BOOK_BY_PUBLISHER_DATE:
+            let bookSortedByPublisher = [...state.books]
+            bookSortedByPublisher.sort((a, b) => {
+                let dateA = Date.parse(a.volumeInfo.publishedDate);
+                let dateB = Date.parse(b.volumeInfo.publishedDate);
+                return dateB - dateA;
+            })
+            return {...state, books: bookSortedByPublisher}
         default:
             return state;
     }

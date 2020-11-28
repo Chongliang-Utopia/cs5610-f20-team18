@@ -10,10 +10,15 @@ export const SET_SEARCH_PUBLISHER = "SET_SEARCH_PUBLISHER"
 export const SET_SEARCH_SUBJECT = "SET_SEARCH_SUBJECT"
 export const FILTER_BOOK_BY_RATING = "FILTER_BOOK_BY_RATING"
 export const SORT_BOOK_BY_RATING_HIGH_TO_LOW = "SORT_BOOK_BY_RATING_HIGH_TO_LOW"
+export const SORT_BOOK_BY_PUBLISHER_DATE = "SORT_BOOK_BY_PUBLISHER_DATE"
 
 export const sortBookHighToLow = (dispatch) => 
     dispatch({
         type: SORT_BOOK_BY_RATING_HIGH_TO_LOW
+    })
+export const sortBookPublisherDate = (dispatch) => 
+    dispatch({
+        type: SORT_BOOK_BY_PUBLISHER_DATE
     })
 
 export const filterBookByRating = (dispatch, minRating) =>
