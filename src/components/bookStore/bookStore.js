@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import {searchBook} from "../../actions/searchBookActions"
 class BookStore extends React.Component {
     componentDidMount() {
-        this.props.searchBook('Harry potter', '', '', '', '', '')
+        this.props.searchBook(this.props.search_default_term || 'Harry potter', '', '', '', '', '')
     }
     render() {
         return (
@@ -26,6 +26,7 @@ class BookStore extends React.Component {
     }
 }
 const stateToPropertyMapper = (state) => ({
+    search_default_term: state.searchBookReducer.search_default_term,
 })
 
 const propertyToDispatchMapper = (dispatch) => ({
