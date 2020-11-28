@@ -107,11 +107,11 @@ class LoginWithEmail extends Component {
                            value={password} validations={[required]}
                            onChange={this.handleChange}/>
                 </div>
-                <div className="input-group">
-                    <input className="mt-1 mr-2" type="checkbox" id="admin" name="loginAsAdmin" value={true}
-                           onChange={(e) => this.handleChange(e)}/>
-                    <label htmlFor="admin" className={classes.label}>Login as Admin</label>
-                </div>
+                {/*<div className="input-group">*/}
+                {/*    <input className="mt-1 mr-2" type="checkbox" id="admin" name="loginAsAdmin" value={true}*/}
+                {/*           onChange={(e) => this.handleChange(e)}/>*/}
+                {/*    <label htmlFor="admin" className={classes.label}>Login as Admin</label>*/}
+                {/*</div>*/}
                 <div className={classes.forgotPassword}>
                     <Link to="/createpassword">Forgot password?</Link>
                 </div>
