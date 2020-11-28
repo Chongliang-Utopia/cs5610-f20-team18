@@ -8,6 +8,7 @@ import FollowingComponent from "./Components/FollowingComponent";
 import BorrowingComponent from "./Components/BorrowingComponent";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import Rating from "react-rating";
+import {Button} from "react-bootstrap";
 
 const LoggedInProfile = ({section, userId, bookPostings, requests, userRating, reviews}) => {
     return (
@@ -32,7 +33,7 @@ const LoggedInProfile = ({section, userId, bookPostings, requests, userRating, r
             </div>
             <br/>
             <div className="row">
-                <div className="col-4">
+                <div className="col-3">
                     <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                         <Link to ={`/users/${userId}/profile`} className="nav-link">
                             Profile Home
@@ -51,7 +52,7 @@ const LoggedInProfile = ({section, userId, bookPostings, requests, userRating, r
                         </Link>
                     </div>
                 </div>
-                <div className="col-8">
+                <div className="col-9">
                     {
                         typeof section === 'undefined' &&
                             <ProfileLandingPageComponent
