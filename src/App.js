@@ -13,6 +13,10 @@ import BookStore from "./components/bookStore/bookStore";
 import Footer from "./components/footer/Footer";
 import Admin from "./components/admin/Admin";
 import history from "./history";
+import PrivateRoute from "./components/PrivateRoute";
+import PrivateRouteAdmin from "./components/PrivateRouteAdmin";
+import UserSignUpAddress from "./components/authentication/UserSignUpAddress";
+import UserSignUpProfile from "./components/authentication/UserSignUpProfile";
 
 class App extends Component {
 
@@ -23,6 +27,8 @@ class App extends Component {
                     <Route exact path="/login" component={Login}/>
                     <Route exact path="/signup" component={SignUp}/>
                     <Route exact path="/createpassword" component={CreatePassword}/>
+                    <Route exact path="/usersignupprofile" component={UserSignUpProfile}/>
+                    <Route exact path="/usersignupaddress" component={UserSignUpAddress} />
                     <Fragment>
                         <div className={classes.App}>
                         <Header/>
@@ -33,7 +39,7 @@ class App extends Component {
                         <Route exact path="/users/:userId/profile" component={UserProfile}/>
                         <Route exact path="/users/:userId/profile/:section" component={UserProfile}/>
                         <Route exact path="/bookstore" component={BookStore}/>
-                        <Route exact path="/admin" component={Admin}/>
+                        <PrivateRouteAdmin exact path="/admin" component={Admin}/>
                         </main>
                         <Footer/>
                         </div>
