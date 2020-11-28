@@ -15,10 +15,11 @@ const authWithEmailReducer = (state = initialState, action) => {
 
     switch (type) {
         case REGISTER_STEP_ONE:
-            return {...state, user: payload};
-        case REGISTER_STEP_TWO:
             return {...state, user: {...state.user, username: payload.username, firstName: payload.firstName,
                     lastName: payload.lastName, phoneNumber: payload.phoneNumber}};
+        case REGISTER_STEP_TWO:
+            return {...state, user: {...state.user, username: payload.streetAddress, firstName: payload.city,
+                    lastName: payload.state, phoneNumber: payload.zipCode}};
         case REGISTER_SUCCESS:
             return {
                 ...state,

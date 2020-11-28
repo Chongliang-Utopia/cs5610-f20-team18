@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import classes from "./Authentication.module.css";
 import {connect} from "react-redux";
-import {registerStepTwo} from "../../actions/authWithEmailActions";
+import {registerStepOne} from "../../actions/authWithEmailActions";
 
 class UserSignUpProfile extends Component {
 
@@ -26,10 +26,12 @@ class UserSignUpProfile extends Component {
     handleSubmit(e) {
         e.preventDefault();
 
+        console.log("submit")
+
         // this.form.validateAll();
 
         // if (this.checkBtn.context._errors.length === 0) {
-        this.props.registerStepTwo({
+        this.props.registerStepOne(this.props.user.id, {
             username: this.state.username, firstName: this.state.firstName,
             lastName: this.state.lastName, phoneNumber: this.state.phoneNumber
         });
@@ -42,7 +44,7 @@ class UserSignUpProfile extends Component {
             <div className={classes.titleDiv}>
                 <h1>Please Fill In</h1>
                 <div className={classes.content}>
-                    <form>
+                    <form onSubmit={this.handleSubmit}>
                         <h2>Profile</h2>
                         <div className={"form-group " + classes.inputDiv}>
                             <label htmlFor="username" className={classes.label}>User Name*</label>
@@ -75,8 +77,6 @@ class UserSignUpProfile extends Component {
                                 className="btn btn-primary btn-block mt-5">Next Step
                         </button>
                     </form>
-                    {this.props.user.email}
-                    {this.props.user.password}
                 </div>
             </div>
         </div>)
@@ -88,4 +88,4 @@ const mapState = (state) => ({
     user: state.authWithEmail.user
 });
 
-export default connect(mapState, {registerStepTwo})(UserSignUpProfile);
+export default connect(mapState, {registerStepOne})(UserSignUpProfile);

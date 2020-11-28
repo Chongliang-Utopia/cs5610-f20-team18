@@ -1,8 +1,9 @@
 import React from "react";
 import classes from "./Authentication.module.css";
 
-const StateSelector = () =>
-    <select required className={"form-control " + classes.inputForm} id="state" name="state"
+const StateSelector = ({name, value, handleChange}) =>
+    <select required className={"form-control " + classes.inputForm} id="state" name={name} value={value}
+            onChange={handleChange}
             title="Please select State">
         <option value="" disabled selected>Select a state</option>
         <option value="Alabama">Alabama</option>
