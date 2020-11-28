@@ -96,13 +96,13 @@ class LoginWithEmail extends Component {
                 this.form = c;
             }}>
                 <div className={"form-group " + classes.inputDiv}>
-                    <label htmlFor="email" className={classes.label}>Email</label>
+                    <label htmlFor="email" className={classes.label}>Email*</label>
                     <Input className={"form-control " + classes.inputForm} type="text" id="email" name="email"
                            value={email} validations={[required, vemail]}
                            onChange={this.handleChange}/>
                 </div>
                 <div className={"form-group " + classes.inputDiv}>
-                    <label htmlFor="password" className={classes.label}>Password</label>
+                    <label htmlFor="password" className={classes.label}>Password*</label>
                     <Input className={"form-control " + classes.inputForm} type="password" id="password" name="password"
                            value={password} validations={[required]}
                            onChange={this.handleChange}/>

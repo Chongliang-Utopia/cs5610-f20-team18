@@ -87,6 +87,7 @@ class SignUpWithEmail extends Component {
                     this.setState({
                         successful: true,
                     });
+
                 })
                 .catch(() => {
                     this.setState({

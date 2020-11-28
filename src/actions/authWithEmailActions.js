@@ -13,17 +13,13 @@ import UserService from "../services/UserService";
 
 export const register = (email, password) => (dispatch) => {
     return AuthService.register(email, password).then(
-        (response) => {
+        (data) => {
             dispatch({
                 type: REGISTER_SUCCESS,
+                payload: {user: data}
             });
 
-            history.push("/usersignupprofile")
-
-            dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
-            });
+            history.push("/signupprofile")
 
             return Promise.resolve();
         },
@@ -92,7 +88,7 @@ export const logout = () => (dispatch) => {
 export const registerStepOne = (userId, user) => (dispatch) => {
     return UserService.updateUser(userId, user)
         .then(status => {
-            history.push("/usersignupaddress")
+            history.push("/signupaddress")
             dispatch ({
                 type: REGISTER_STEP_ONE,
                 payload: user
@@ -104,6 +100,7 @@ export const registerStepTwo = (userId, user) => (dispatch) => {
     return UserService.updateUser(userId, user)
         .then(status => {
             history.push("/")
+            window.location.reload()
             dispatch ({
                 type: REGISTER_STEP_TWO,
                 payload: user

@@ -24,6 +24,7 @@ const authWithEmailReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoggedIn: false,
+                user: payload.user
             };
         case REGISTER_FAIL:
             return {
