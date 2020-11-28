@@ -102,7 +102,7 @@ const BookStoreSearchBar = ({
                 </div>
                 <button className="btn btn-info float-right"
                         onClick={() => searchBook(
-                                            '',
+                                            search_default_term,
                                             author,
                                             title,
                                             isbn,

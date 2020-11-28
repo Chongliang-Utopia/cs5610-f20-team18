@@ -3,7 +3,7 @@ import classes from "./filterPanel.module.css";
 import Rating from "react-rating";
 import {connect} from "react-redux";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
-import {filterBookByRating, sortBookHighToLow} from "../../actions/searchBookActions"
+import {filterBookByRating, sortBookHighToLow, sortBookPublisherDate} from "../../actions/searchBookActions"
 
 class FilterPanel extends React.Component {
 
@@ -22,16 +22,31 @@ class FilterPanel extends React.Component {
                     </li>
                     <li className="list-group-item">
                         <p><b>Sort By:</b></p>
-                        <a href="#"
-                            onClick={() => this.props.sortBook()}>
-                            Rating high -> low
-                        </a>
+                        <div>
+                            <div className={`${classes.ratingBar}`}>
+                                - Rating:
+                            </div>
+                            <a href="#"
+                                onClick={() => this.props.sortBook()}>
+                                 high -> low
+                            </a>
+                        </div>
+                        <br/>
+                        <div>
+                            <div className={`${classes.ratingBar}`}>
+                                - Published Date:
+                            </div>
+                            <a href="#"
+                               onClick={() => this.props.sortBookPublisher()}>
+                                 Newest -> oldest
+                            </a>
+                        </div>
                     </li>
                     <li className="list-group-item">
                         <div className="">
                             <p><b>Filter By:</b></p>
                             <div className={`${classes.ratingBar}`}>
-                                Avg. Book Rating:
+                                - Avg. Book Rating:
                             </div>
                             <div>
                                 <a href="#"
@@ -94,7 +109,8 @@ const stateToPropertyMapper = (state) => ({
 
 const propertyToDispatchMapper = (dispatch) => ({
     filterBook: (number) => filterBookByRating(dispatch, number),
-    sortBook: () => sortBookHighToLow(dispatch)
+    sortBook: () => sortBookHighToLow(dispatch),
+    sortBookPublisher: () => sortBookPublisherDate(dispatch)
 })
 export default connect(stateToPropertyMapper, propertyToDispatchMapper)
 (FilterPanel)
