@@ -2,8 +2,12 @@ import React from "react";
 import classes from "./filterPanel.module.css"
 import SearchBook from "./searchBook";
 import FilterPanel from "./FilterPanel"
+import {connect} from "react-redux";
+import {searchBook} from "../../actions/searchBookActions"
 class BookStore extends React.Component {
-
+    componentDidMount() {
+        this.props.searchBook(this.props.search_default_term || 'Harry potter', '', '', '', '', '')
+    }
     render() {
         return (
             <div className={`${classes.BookStore} container`}>
@@ -21,5 +25,15 @@ class BookStore extends React.Component {
         )
     }
 }
+const stateToPropertyMapper = (state) => ({
+    search_default_term: state.searchBookReducer.search_default_term,
+})
 
-export default BookStore
+const propertyToDispatchMapper = (dispatch) => ({
+    searchBook: (search_default_term, author, title, isbn, publisher, subject) =>
+        searchBook(dispatch, search_default_term, author, title, isbn, publisher, subject)
+})
+export default connect(stateToPropertyMapper, propertyToDispatchMapper)
+(BookStore)
+
+// export default BookStore

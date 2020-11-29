@@ -10,29 +10,24 @@ import {searchBook} from "../../actions/searchBookActions"
 
 class SearchBook extends React.Component {
 
-    // state = {
-    //     books: []
-    // }
-
-    componentDidMount() {
-        this.props.searchBook('Harry potter', '', '', '', '', '')
-    }
 
     render() {
         return (
             <div  className={`${classes.SearchBook}`}>
                 <BookStoreSearchBar/>
-                {/*{JSON.stringify(this.props.books)}*/}
                 <div className={`row`}>
                     {   this.props.books &&
-                        this.props.books.map(book =>
+                        this.props.books.filter(book =>
+                            this.props.minRating === 0 ? book :
+                            book.volumeInfo.averageRating >= this.props.minRating).map(book =>
                         <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xm-12 mb-5">
-                            <Link
+                            <Link title={book.volumeInfo.title}
                                 to={`/books/${book.id}`}
                                 className={`${classes.imageCard}`}>
                                 <ImageCard
                                     src={book.volumeInfo.imageLinks? book.volumeInfo.imageLinks.thumbnail:
-                                    "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg"}/>
+                                    "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg"}
+                                alt={book.volumeInfo.title} />
                                 <div className={classes.bookTitle}>
                                     {
                                         book.volumeInfo.title.length > 15 && book.volumeInfo.title.substring(0, 15)
@@ -43,10 +38,12 @@ class SearchBook extends React.Component {
                                     {
                                         book.volumeInfo.title.length <= 15 && book.volumeInfo.title
                                     }
-                                <Rating initialRating={book.volumeInfo.averageRating} readonly
-                                        emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
-                                        fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                </div>
+                                <div className={classes.bookTitle}>
+                                    <Rating initialRating={book.volumeInfo.averageRating} readonly
+                                            emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
+                                            fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
+                                </div>
                             </Link>
                         </div>)
                     }
@@ -56,7 +53,6 @@ class SearchBook extends React.Component {
                     }
                 </div>
             </div>
-
     )
     }
 }
@@ -64,12 +60,10 @@ class SearchBook extends React.Component {
 
 const stateToPropertyMapper = (state) => ({
     books: state.searchBookReducer.books,
+    minRating: state.searchBookReducer.minRating
+})
+const propertyToDispatchMapper = (dispatch) => ({
 })
 
-const propertyToDispatchMapper = (dispatch) => ({
-    searchBook: (search_default_term, author, title, isbn, publisher, subject) =>
-        searchBook(dispatch, search_default_term, author, title, isbn, publisher, subject)
-})
-// export default SearchBook
 export default connect(stateToPropertyMapper, propertyToDispatchMapper)
 (SearchBook)

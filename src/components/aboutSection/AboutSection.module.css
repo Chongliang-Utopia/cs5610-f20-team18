@@ -1,7 +1,8 @@
+/*https://littlefreelibrary.org/wp-content/uploads/2018/07/action-book-club-come-together-collage-e1532988182927.jpg*/
+
 .AboutSection {
     margin-top: 100px;
     text-align: center;
-    margin-bottom: 100px;
     padding: 30px;
 }
 
@@ -16,7 +17,7 @@
     margin-right: 30%;
     height: 500px;
     border: #0e345a 10px solid;
-    background-image: url("https://littlefreelibrary.org/wp-content/uploads/2018/07/action-book-club-come-together-collage-e1532988182927.jpg");
+    background-image: url("/src/assets/images/aboutSection.jpg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;

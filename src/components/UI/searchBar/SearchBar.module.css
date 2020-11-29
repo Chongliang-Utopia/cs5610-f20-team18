@@ -25,6 +25,7 @@
 .SearchBar .searchButton {
     width: 40px;
     height: 40px;
+    margin: 0;
     border: 1px solid #0e345a;
     border-left: none;
     text-align: center;

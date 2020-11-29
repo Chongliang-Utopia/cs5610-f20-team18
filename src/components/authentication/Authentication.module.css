@@ -71,3 +71,15 @@
     margin-bottom: -40px;
     margin-top:50px
 }
+
+.Authentication .googleButton {
+    border: none;
+    background: none;
+}
+
+.Authentication .googleButton:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+}

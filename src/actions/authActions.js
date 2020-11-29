@@ -1,4 +1,4 @@
-import {SIGN_IN, SIGN_OUT} from "./types";
+import {SIGN_IN, SIGN_OUT, SIGN_UP_WITH_EMAIL} from "./types";
 
 export const signIn = (authInstance) => {
     return {
@@ -13,6 +13,12 @@ export const signOut = () => {
     };
 };
 
+export const signUpWithEmail = (user) => {
+    return {
+        type: SIGN_UP_WITH_EMAIL,
+        user
+    }
 
+}
 
 

@@ -37,6 +37,7 @@ const BookStoreSearchBar = ({
         <div className = {classes.BookStoreSearchDiv}>
             <div className={classes.search}>
                 <input type="text" className={classes.searchInput} placeholder="Search books"
+                       value={search_default_term}
                        onChange={(e) => setSearchDefaultTerm(e.target.value)}
                        />
                 <button type="submit" className={classes.searchButton}
@@ -102,7 +103,7 @@ const BookStoreSearchBar = ({
                 </div>
                 <button className="btn btn-info float-right"
                         onClick={() => searchBook(
-                                            '',
+                                            search_default_term,
                                             author,
                                             title,
                                             isbn,
