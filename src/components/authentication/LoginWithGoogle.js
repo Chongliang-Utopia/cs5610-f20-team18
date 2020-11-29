@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import classes from "./Authentication.module.css";
 import {connect} from "react-redux";
-import {signIn} from "../../actions/authActions";
+import {loginWithGoogle} from "../../actions/authActions";
 import history from "../../history";
 import {FcGoogle} from "react-icons/fc";
 
@@ -20,19 +20,22 @@ class LoginWithGoogle extends Component {
     }
 
     onSignInClick = () => {
-        if (this.props.type === "login") {
-            this.auth.signIn()
-                .then(() => {
-                    this.props.signIn(this.auth)
-                    history.push("/")
-                })
-        } else if (this.props.type === "signup") {
-            this.auth.signIn()
-                .then(() => {
-                    this.props.signIn(this.auth)
-                    history.push("/usersignupinfo")
-                })
+        if (this.auth.isSignedIn.get()) {
+            this.auth.signOut();
         }
+
+        this.auth.signIn()
+            .then(() => {
+                const idToken = this.auth.currentUser.get().xc.id_token;
+                this.props.dispatch(loginWithGoogle(idToken))
+                    .then(this.auth.signOut())
+            })
+            .catch(
+                error => {
+                    history.push("/login")
+                }
+            )
+
     }
 
     render() {
@@ -45,7 +48,7 @@ class LoginWithGoogle extends Component {
 }
 
 const StateToPropertyMapper = (state) => ({
-    id: state.auth.userId
+
 });
 
-export default connect(StateToPropertyMapper, {signIn})(LoginWithGoogle);
+export default connect(StateToPropertyMapper)(LoginWithGoogle);
