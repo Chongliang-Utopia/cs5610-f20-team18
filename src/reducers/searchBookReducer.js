@@ -2,7 +2,8 @@ import {SET_ADVANCED_SEARCH, FETCH_BOOKS, SET_SEARCH_AUTHOR, SET_SEARCH_TITLE, S
 
     SET_SEARCH_PUBLISHER, SET_SEARCH_SUBJECT,
     SET_SEARCH_DEFAULT_TERM, FILTER_BOOK_BY_RATING,
-    SORT_BOOK_BY_RATING_HIGH_TO_LOW, SORT_BOOK_BY_PUBLISHER_DATE} from '../actions/searchBookActions'
+    SORT_BOOK_BY_RATING_HIGH_TO_LOW, SORT_BOOK_BY_PUBLISHER_DATE,
+    CLEAR_BOOKS, BOOK_ADDER} from '../actions/searchBookActions'
 
 const INITIAL_STATE = {
     books: [],
@@ -52,6 +53,12 @@ const searchBookReducer = (state = INITIAL_STATE, action) => {
                 return dateB - dateA;
             })
             return {...state, books: bookSortedByPublisher}
+        case CLEAR_BOOKS:
+            return {...state, books:[]};
+        case BOOK_ADDER:
+            let curBooks = [...state.books]
+            curBooks.push(action.book)
+            return {...state, books: curBooks}
         default:
             return state;
     }

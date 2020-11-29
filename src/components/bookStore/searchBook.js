@@ -6,7 +6,6 @@ import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import Rating from "react-rating";
 import BookStoreSearchBar from "./bookStoreSearchBar/BookStoreSearchBar";
 import {connect} from "react-redux";
-import {searchBook} from "../../actions/searchBookActions"
 
 class SearchBook extends React.Component {
 

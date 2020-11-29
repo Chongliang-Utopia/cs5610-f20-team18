@@ -31,12 +31,14 @@ const BookStoreSearchBar = ({
     setSearchPublisher,
     setSearchSubject,
     setSearchDefaultTerm,
+
     }) =>
 
     <div className={classes.BookStoreSearchBar}>
         <div className = {classes.BookStoreSearchDiv}>
             <div className={classes.search}>
                 <input type="text" className={classes.searchInput} placeholder="Search books"
+
                        value={search_default_term}
                        onChange={(e) => setSearchDefaultTerm(e.target.value)}
                        />
@@ -134,7 +136,7 @@ const propertyToDispatchMapper = (dispatch) => ({
     setSearchISBN: (isbn) => setSearchISBN(dispatch, isbn),
     setSearchPublisher: (publisher) => setSearchPublisher(dispatch, publisher),
     setSearchSubject: (subject) => setSearchSubject(dispatch, subject),
-    setSearchDefaultTerm: (term) => setSearchDefaultTerm(dispatch, term)
+    setSearchDefaultTerm: (term) => setSearchDefaultTerm(dispatch, term),
 })
 
 export default connect(stateToPropertyMapper, propertyToDispatchMapper)
