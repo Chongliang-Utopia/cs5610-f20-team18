@@ -2,10 +2,11 @@ import React from "react"
 import LoggedInProfile from "./LoggedInProfile";
 import UnloggedInProfile from "./UnLoggedInProfile";
 
+
 class UserProfile extends React.Component {
     state = {
         userId: '',
-        authenticated: true,
+        authenticated: false,
         section: "",
         // TODO: query bookItem to retrieve books this person owns
         bookPostings:
@@ -13,12 +14,12 @@ class UserProfile extends React.Component {
                 {
                     title: "Harry Potter and the chamber of Secrets",
                     bookCondition: "Good",
-                    src: "https://images-na.ssl-images-amazon.com/images/I/51qKFVatzeL.jpg"
+                    src: "/books/book1.webp"
                 },
                 {
                     title: "Harry Potter and the Goblet of Fire",
                     bookCondition: "Like New",
-                    src: "https://images-na.ssl-images-amazon.com/images/I/51OORp1XD1L._SX258_BO1,204,203,200_.jpg"
+                    src: "/books/book2.webp"
                 }
             ],
         requests: [
@@ -26,14 +27,23 @@ class UserProfile extends React.Component {
                 userName: "ILoveBooks1989",
                 userRating: 5,
                 location: "San Jose",
-                bookTitle:"harry potter"
+                bookTitle:"harry potter",
+                status: "pending"
             },
             {
                 userName: "bayAreaReader",
                 userRating: 3,
                 location: "San Francisco",
-                bookTitle: "lord of the rings"
+                bookTitle: "lord of the rings",
+                status: "approved"
             },
+            {
+                userName: "goodhedgey58",
+                userRating: 3,
+                location: "Mountain View",
+                bookTitle: "lord of the fly",
+                status: "declined"
+            }
         ],
         reviews: [
             {
@@ -59,7 +69,7 @@ class UserProfile extends React.Component {
         const section = this.props.match.params.section
         this.setState(prevState => ({
             userId: userId,
-            authenticated: true,
+            authenticated: false,
             section: section,
         }))
     }
@@ -71,7 +81,7 @@ class UserProfile extends React.Component {
         if (section !== prevProps.match.params.section || userId !== prevProps.match.params.userId) {
             this.setState(prevState => ({
                 userId: userId,
-                authenticated: true,
+                authenticated: false,
                 section: section
             }))
         }

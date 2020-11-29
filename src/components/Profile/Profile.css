@@ -23,16 +23,24 @@
     margin-left: 35px;
 }
 
+.add-15-top-margin{
+    margin-top: 15px;
+}
+
+.add-35-top-margin{
+    margin-top: 35px;
+}
+
 .add-top-margin{
-    margin-top: 100px;
+    margin-top: 70px;
 }
 
 .add-right-margin{
     right: 20px;
 }
 .image{
-    max-width:50px;
-    min-width: 50px;
+    max-width: 150px;
+    min-width: 150px;
     left: 20px;
     /*height: auto;*/
     background-size:cover;
@@ -40,6 +48,7 @@
     /*position:relative;*/
     display:inline;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    border-radius: 70%;
 }
 
 .font-size-25-italic{
@@ -69,4 +78,10 @@
         display: none;
     }
 }
+
+.transparent{
+    background-color: transparent;
+    border-style: none;
+}
+
 

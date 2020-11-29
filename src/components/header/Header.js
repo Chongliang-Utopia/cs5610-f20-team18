@@ -65,7 +65,6 @@ const Header = ({isLoggedInWithGoogle, authInstance, signOut, isLoggedInWithEmai
                             </div>
                         )
                     }
-
                 </div>
             </nav>
         </header>

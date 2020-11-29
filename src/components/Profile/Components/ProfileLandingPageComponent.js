@@ -5,9 +5,37 @@ import classes from "../../bookDetail/lenderTable/LenderTable.module.css";
 import {Link} from "react-router-dom";
 import Rating from "react-rating";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
+import {Row, Col, Button, Carousel} from 'react-bootstrap'
+import {RiErrorWarningLine} from "react-icons/ri";
+import ReportForm from "../ReportForm";
+import Modal from "../../UI/modal/Modal";
+import {closeReport, openReport} from "../../../actions/adminActions";
+import {connect} from "react-redux";
 
-const ProfileLandingPageComponent = ({reviews, userId}) =>
+
+const bestsellerBooksLists = [
+    [
+        "/books/book1.webp",
+        "/books/book2.webp",
+        "/books/book3.webp",
+        "/books/book4.webp",
+        "/books/book5.webp",
+        "/books/book6.webp",
+    ],
+    [
+        "/books/book7.webp",
+        "/books/book8.webp",
+        "/books/book9.webp",
+        "/books/book10.webp",
+        "/books/book11.webp",
+        "/books/book12.webp",
+    ],
+]
+const ProfileLandingPageComponent = ({reviews, userId, openReport, closeReport, report}) =>
     <div>
+        <Modal show={report} modalClosed={closeReport}>
+            <ReportForm/>
+        </Modal>
         <h2>My activity at a glance</h2>
         <br/>
         <CardDeck>
@@ -99,6 +127,11 @@ const ProfileLandingPageComponent = ({reviews, userId}) =>
                         <td>
                             <span>{review.content}</span>
                         </td>
+                        <td>
+                            <Button variant="warning" size="sm" className="transparent" onClick={openReport}>
+                                <RiErrorWarningLine/>
+                            </Button>
+                        </td>
                     </tr>)
                 }
                 </tbody>
@@ -106,6 +139,32 @@ const ProfileLandingPageComponent = ({reviews, userId}) =>
         </div>
         <h2>My Wishlist</h2>
 
+
+            <Carousel indicators={false}>
+                {
+                    bestsellerBooksLists.map((booksList, booksListIndex) => (
+                        <Carousel.Item key={booksListIndex}>
+                            <Row>
+                                {
+                                    booksList.map((book, bookIndex) => (
+                                        <Col key={bookIndex}>
+                                            <Card border="light" className="rounded-0" style={{width: '13rem'}}>
+                                                <Card.Img variant="top" src={book} />
+                                            </Card>
+                                        </Col>
+                                    ))
+                                }
+                            </Row>
+                        </Carousel.Item>
+                    ))
+                }
+
+            </Carousel>
+
     </div>
 
-export default ProfileLandingPageComponent
+const StateToPropertyMapper = (state) => ({
+    report: state.admin.report,
+});
+
+export default connect(StateToPropertyMapper, {openReport, closeReport})(ProfileLandingPageComponent);

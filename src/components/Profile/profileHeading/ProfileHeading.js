@@ -3,7 +3,7 @@ import Rating from "react-rating";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import classes from "./ProfileHeading.module.css"
 
-const ProfileHeading = () => {
+const ProfileHeading = ({user}) => {
     return (
         <div className={classes.ProfileHeading}>
             <div className={classes.profileImage}>
@@ -13,7 +13,7 @@ const ProfileHeading = () => {
             <div className="pt-3">
                 <div className="form-inline">
                     <h2 >
-                        Dave
+                        {user}
                     </h2>
                     <button className="btn btn-info mb-3 ml-4">Follow</button>
                 </div>
@@ -37,7 +37,6 @@ const ProfileHeading = () => {
                     <p>I am a passionate reader!</p>
                 </div>
             </div>
-            <hr/>
         </div>)
 }
 

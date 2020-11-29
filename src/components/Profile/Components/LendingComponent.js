@@ -5,6 +5,7 @@ import { MdDeleteSweep} from "react-icons/md"
 import Modal from "../../UI/modal/Modal";
 import DeletePosting from "./DeletePosting";
 import EditPosting from "./EditPosting";
+import ConfirmReturn from './ConfirmReturn';
 import classes from "../../bookDetail/lenderTable/LenderTable.module.css";
 import {Link} from "react-router-dom";
 import Rating from "react-rating";
@@ -18,8 +19,9 @@ class LendingComponent extends React.Component{
     state = {
         deleting: false,
         editing: false,
-        currentBook: {}
-
+        currentBook: {},
+        confirm: false,
+        currentRequest: {}
     }
 
     deletePosting = (book) => {
@@ -35,6 +37,21 @@ class LendingComponent extends React.Component{
             currentBook: book
         })
     }
+    
+    confirmReturning = (request) =>{
+        this.setState({
+            confirm: true,
+            currentRequest: request
+        })
+    }
+    
+    finishConfirm = () => {
+        this.setState({
+            confirm: false,
+            currentRequest: {}
+        })
+    }
+    
     cancelDelete = () => {
         this.setState({
             deleting: false,
@@ -49,11 +66,15 @@ class LendingComponent extends React.Component{
         })
     }
 
-    renderTooltip = (props) =>
-        <Tooltip {...props}>
-            Remind borrower that the book is about to overdue/ is overdue
-        </Tooltip>
+    // renderTooltip = (props) =>
+    //     <Tooltip {...props}>
+    //         Remind borrower that the book is about to overdue/ is overdue
+    //     </Tooltip>
 
+    renderConfirmTooltip = (props) =>
+        <Tooltip {...props}>
+            Confirm borrower has returned the book
+        </Tooltip>
 
     render() {
         return (
@@ -67,6 +88,10 @@ class LendingComponent extends React.Component{
             <Modal show={this.state.editing} modalClosed={this.cancelEdit}>
                 <EditPosting book={this.state.currentBook}/>
             </Modal>
+            <Modal show={this.state.confirm} modalClosed={this.finishConfirm}>
+                <ConfirmReturn request={this.state.currentRequest}/>
+            </Modal>
+            
             {
                 this.props.bookPostings.map(book =>
                     <div className="ImageCard">
@@ -111,9 +136,22 @@ class LendingComponent extends React.Component{
                             <td>
                                 <span>{request.bookTitle}</span>
                             </td>
-                            <td>
-                                <button className="btn btn-success">Approve</button>
-                                <button className="btn btn-danger">Decline</button>
+                            <td className="pull-right">
+                                {
+                                    request.status === "pending" &&
+                                    <span>
+                                        <button className="btn btn-success">Approve</button>
+                                        <button className="btn btn-danger">Decline</button>
+                                    </span>
+                                }
+                                {
+                                    request.status === "declined" &&
+                                    <button className="btn btn-warning disabled">Declined</button>
+                                }
+                                {
+                                    request.status === "approved" &&
+                                    <button className="btn btn-success disabled">Approved</button>
+                                }
                             </td>
                         </tr>)
                     }
@@ -127,7 +165,6 @@ class LendingComponent extends React.Component{
                     <tr>
                         <th>Borrower</th>
                         <th>Due Date</th>
-                        <th>Location</th>
                         <th>Book</th>
                         <th></th>
                     </tr>
@@ -144,19 +181,23 @@ class LendingComponent extends React.Component{
                                         fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                             </td>
                             <td>
-                                <span>{request.location}</span>
-                            </td>
-                            <td>
                                 <span>{request.bookTitle}</span>
                             </td>
-                            <td>
+                            <td className="pull-right">
+                                {/*<OverlayTrigger*/}
+                                {/*    placement="top"*/}
+                                {/*    delay={{ show: 250, hide: 400 }}*/}
+                                {/*    overlay={this.renderTooltip}>*/}
+                                {/*    <Button variant="warning">Reminder</Button>*/}
+                                {/*</OverlayTrigger>*/}
                                 <OverlayTrigger
-                                    placement="right"
+                                    placement="top"
                                     delay={{ show: 250, hide: 400 }}
-                                    overlay={this.renderTooltip}
-                                >
-                                    <Button variant="warning">Send Reminder</Button>
+                                    overlay={this.renderConfirmTooltip}>
+                                    <Button variant="success" onClick={()=>this.confirmReturning(request)}>Confirm</Button>
                                 </OverlayTrigger>
+
+
                             </td>
                         </tr>)
                     }
@@ -192,7 +233,7 @@ class LendingComponent extends React.Component{
                             <td>
                                 <span>{request.bookTitle}</span>
                             </td>
-                            <td>
+                            <td className="pull-right">
                                 <Button variant="light">Edit Review</Button>
                             </td>
                         </tr>)
