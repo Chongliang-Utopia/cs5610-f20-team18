@@ -38,10 +38,12 @@ class SearchBook extends React.Component {
                                     {
                                         book.volumeInfo.title.length <= 15 && book.volumeInfo.title
                                     }
-                                <Rating initialRating={book.volumeInfo.averageRating} readonly
-                                        emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
-                                        fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                </div>
+                                <div className={classes.bookTitle}>
+                                    <Rating initialRating={book.volumeInfo.averageRating} readonly
+                                            emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
+                                            fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
+                                </div>
                             </Link>
                         </div>)
                     }
