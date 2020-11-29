@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import classes from './App.module.css';
-import {Router, Route, Switch, Redirect} from "react-router-dom";
+import {Router, Route, Switch} from "react-router-dom";
 import Header from "./components/header/Header";
 import HomePage from "./components/HomePage/HomePage";
 import GoogleBookClient from "./components/googleBookClient";
@@ -15,8 +15,9 @@ import Admin from "./components/admin/Admin";
 import history from "./history";
 import PrivateRoute from "./components/PrivateRoute";
 import PrivateRouteAdmin from "./components/PrivateRouteAdmin";
-import UserSignUpAddress from "./components/authentication/UserSignUpAddress";
-import UserSignUpProfile from "./components/authentication/UserSignUpProfile";
+import UserSignUpAddress from "./components/authentication/SignUpAddress";
+import UserSignUpProfile from "./components/authentication/SignUpProfile";
+import ResetPassword from "./components/authentication/ResetPassword";
 
 class App extends Component {
 
@@ -27,8 +28,9 @@ class App extends Component {
                     <Route exact path="/login" component={Login}/>
                     <Route exact path="/signup" component={SignUp}/>
                     <Route exact path="/createpassword" component={CreatePassword}/>
-                    <Route exact path="/signupprofile" component={UserSignUpProfile}/>
-                    <Route exact path="/signupaddress" component={UserSignUpAddress} />
+                    <PrivateRoute exact path="/signupprofile" component={UserSignUpProfile}/>
+                    <PrivateRoute exact path="/signupaddress" component={UserSignUpAddress} />
+                    <PrivateRoute exact path="/resetPassword" component={ResetPassword} />
                     <Fragment>
                         <div className={classes.App}>
                         <Header/>
@@ -39,7 +41,6 @@ class App extends Component {
                         <Route exact path="/users/:userId/profile" component={UserProfile}/>
                         <Route exact path="/users/:userId/profile/:section" component={UserProfile}/>
                         <Route exact path="/bookstore" component={BookStore}/>
-
                         <PrivateRouteAdmin exact path="/admin" component={Admin}/>
                         <PrivateRouteAdmin exact path="/admin/:section" component={Admin}/>
                         </main>

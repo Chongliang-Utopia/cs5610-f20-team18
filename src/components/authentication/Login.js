@@ -21,7 +21,7 @@ const Login = () =>
                     <div className={classes.line}>
                         <span className="bg-white p-2">or Log In with</span>
                     </div>
-                    <LoginWithGoogle type="login"/>
+                    <LoginWithGoogle />
                 </div>
             </div>
         </div>

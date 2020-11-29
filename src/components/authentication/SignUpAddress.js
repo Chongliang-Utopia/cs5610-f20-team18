@@ -6,7 +6,8 @@ import {Link} from "react-router-dom";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import {registerStepTwo} from "../../actions/authWithEmailActions";
+import {updateUser, updateLocalUser} from "../../actions/userActions";
+import history from "../../history";
 
 const required = (value) => {
     if (!value) {
@@ -30,24 +31,17 @@ const vzipCode = (value) => {
 };
 
 
-class UserSignUpAddress extends Component {
+class SignUpAddress extends Component {
 
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-
-        this.state = {
-            streetAddress: "",
-            city: "",
-            state: "",
-            zipCode: ""
-        }
     }
 
     handleChange(e) {
         const {name, value} = e.target;
-        this.setState({[name]: value});
+        this.props.dispatch(updateLocalUser({[name]: value}));
     }
 
     handleSubmit(e) {
@@ -56,15 +50,13 @@ class UserSignUpAddress extends Component {
         this.form.validateAll();
 
         if (this.checkBtn.context._errors.length === 0) {
-        this.props.registerStepTwo(this.props.user.id, {
-            streetAddress: this.state.streetAddress, city: this.state.city,
-            state: this.state.state, zipCode: this.state.zipCode
-        });
+            this.props.dispatch(updateUser(this.props.user._id, this.props.user))
+                .then(history.push("/"))
         }
     }
 
     render() {
-        const {streetAddress, city, state, zipCode} = this.state
+        const {streetAddress, city, state, zipCode} = this.props.user
 
         return (
             <div className={classes.Authentication}>
@@ -76,10 +68,10 @@ class UserSignUpAddress extends Component {
                         }}>
                             <h2>Address</h2>
                             <div className={"form-group " + classes.inputDiv}>
-                                <label htmlFor="streetAddress" className={classes.label}>Street*</label>
+                                <label htmlFor="streetAddress" className={classes.label}>Street</label>
                                 <Input className={"form-control " + classes.inputForm} type="text" id="streetAddress"
                                        maxLength="35" name="streetAddress" onChange={this.handleChange}
-                                       value={streetAddress} validations={[required]}
+                                       value={streetAddress}
                                        title="Please enter a valid address"/>
                             </div>
                             <div className={"form-group " + classes.inputDiv}>
@@ -119,7 +111,7 @@ class UserSignUpAddress extends Component {
 }
 
 const mapState = (state) => ({
-    user: state.authWithEmail.user
+    user: state.auth.user
 });
 
-export default connect(mapState, {registerStepTwo})(UserSignUpAddress);
+export default connect(mapState)(SignUpAddress);

@@ -32,6 +32,18 @@ class AuthService {
             return response.data;
         });
     }
+
+    loginWithGoogle(idToken) {
+        return axios
+            .post(`${API_URL}signinwithgoogle`, {}, {headers: {'x-access-token': idToken}})
+            .then((response) => {
+                if (response.data.user.accessToken) {
+                    localStorage.setItem("user", JSON.stringify(response.data.user));
+                }
+
+                return response.data;
+            });
+    }
 }
 
 export default new AuthService();

@@ -5,7 +5,8 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import {isEmail} from "validator";
-import {register} from "../../actions/authWithEmailActions";
+import {register} from "../../actions/authActions";
+
 
 const required = (value) => {
     if (!value) {
@@ -46,7 +47,6 @@ const cpassword = (value, props, components) => {
         );
     }
 };
-
 
 
 class SignUpWithEmail extends Component {
@@ -120,7 +120,8 @@ class SignUpWithEmail extends Component {
                 </div>
                 <div className={"form-group " + classes.inputDiv}>
                     <label htmlFor="verifyPassword" className={classes.label}>Verify Password</label>
-                    <Input className={"form-control " + classes.inputForm} type="password" id="verifyPassword" name="verifyPassword"
+                    <Input className={"form-control " + classes.inputForm} type="password" id="verifyPassword"
+                           name="verifyPassword"
                            value={verifyPassword} validations={[required, cpassword]}
                            onChange={this.handleChange}/>
                 </div>
@@ -129,13 +130,14 @@ class SignUpWithEmail extends Component {
                 </button>
                 {message && (
                     <div className="form-group">
-                        <div className={ successful ? "alert alert-success mt-3" : "alert alert-danger mt-3" } role="alert">
+                        <div className={successful ? "alert alert-success mt-3" : "alert alert-danger mt-3"}
+                             role="alert">
                             {message}
                         </div>
                     </div>
                 )}
                 <CheckButton
-                    style={{ display: "none" }}
+                    style={{display: "none"}}
                     ref={(c) => {
                         this.checkBtn = c;
                     }}
@@ -145,7 +147,7 @@ class SignUpWithEmail extends Component {
 }
 
 const mapState = (state) => ({
-    message: state.message.message
+    message: state.message.message,
 });
 
 export default connect(mapState)(SignUpWithEmail);

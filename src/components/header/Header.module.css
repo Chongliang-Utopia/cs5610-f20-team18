@@ -38,3 +38,10 @@ header .searchBar {
         max-width: none;
     }
 }
+
+header button:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+}

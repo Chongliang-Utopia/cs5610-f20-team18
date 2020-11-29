@@ -6,11 +6,10 @@ import {connect} from "react-redux";
 import Logo from "../logo/Logo";
 import classes from "./Header.module.css"
 import SearchBar from "../UI/searchBar/SearchBar";
-import {signOut} from "../../actions/authActions";
-import {logout} from "../../actions/authWithEmailActions";
+import {logout} from "../../actions/authActions";
 
 
-const Header = ({isLoggedInWithGoogle, authInstance, signOut, isLoggedInWithEmail, logout, user}) => {
+const Header = ({isLoggedIn, logout, user}) => {
     const matchBookstore = useRouteMatch({path: "/bookstore", exact: true})
 
     return (
@@ -47,11 +46,11 @@ const Header = ({isLoggedInWithGoogle, authInstance, signOut, isLoggedInWithEmai
                             }
                         </li>
                         <li className="nav-item">
-                            {!isLoggedInWithGoogle && !isLoggedInWithEmail ?
+                            {!isLoggedIn?
                                 <Link className="nav-link" to="/login"><BsFillPersonFill
                                     className="mb-1"/> Login</Link> :
                                 <button
-                                    onClick={() => isLoggedInWithGoogle ? authInstance.signOut().then(signOut()) : logout()}
+                                    onClick={logout}
                                     className={"nav-link " + classes.logOutButton}><BsFillPersonFill
                                     className="mb-1"/> Log
                                     out</button>
@@ -73,13 +72,11 @@ const Header = ({isLoggedInWithGoogle, authInstance, signOut, isLoggedInWithEmai
 
 
 const StateToPropertyMapper = (state) => ({
-    isLoggedInWithGoogle: state.auth.isSignedIn,
-    isLoggedInWithEmail: state.authWithEmail.isLoggedIn,
-    authInstance: state.auth.authInstance,
-    user: state.authWithEmail.user
+    isLoggedIn: state.auth.isLoggedIn,
+    user: state.auth.user
 });
 
 
-export default connect(StateToPropertyMapper, {signOut, logout})(Header);
+export default connect(StateToPropertyMapper, {logout})(Header);
 
 
