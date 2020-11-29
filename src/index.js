@@ -1,16 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from './components/reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import "font-awesome/css/font-awesome.min.css";
 import {Provider} from "react-redux";
-import {createStore} from "redux";
+import {createStore, applyMiddleware} from "redux";
 import App from "./App";
-import reducers from "./reducers"
+import reducers from "./reducers";
+import thunkMiddleware from 'redux-thunk';
+import { composeWithDevTools } from "redux-devtools-extension";
 
 ReactDOM.render(
-    <Provider store={createStore(reducers)}>
+    <Provider store={createStore(reducers, composeWithDevTools(applyMiddleware(thunkMiddleware)))}>
         <App/>
     </Provider>,
     document.getElementById('root')
