@@ -17,6 +17,14 @@ footer {
     overflow-x: hidden;
 }
 
+footer a{
+    color: white;
+}
+
+footer a:hover{
+    color: #ccc;
+}
+
 header {
     overflow: hidden;
 }
