@@ -21,12 +21,13 @@ class SearchBook extends React.Component {
                             this.props.minRating === 0 ? book :
                             book.volumeInfo.averageRating >= this.props.minRating).map(book =>
                         <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xm-12 mb-5">
-                            <Link
+                            <Link title={book.volumeInfo.title}
                                 to={`/books/${book.id}`}
                                 className={`${classes.imageCard}`}>
                                 <ImageCard
                                     src={book.volumeInfo.imageLinks? book.volumeInfo.imageLinks.thumbnail:
-                                    "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg"}/>
+                                    "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg"}
+                                alt={book.volumeInfo.title} />
                                 <div className={classes.bookTitle}>
                                     {
                                         book.volumeInfo.title.length > 15 && book.volumeInfo.title.substring(0, 15)

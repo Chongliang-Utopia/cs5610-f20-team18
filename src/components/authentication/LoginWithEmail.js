@@ -71,7 +71,7 @@ class LoginWithEmail extends Component {
                     if (this.state.loginAsAdmin) {
                         history.push("/admin");
                     } else {
-                        history.push("/");
+                        history.goBack();
                         //window.location.reload();
                     }
                 })

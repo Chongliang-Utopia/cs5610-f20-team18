@@ -13,9 +13,9 @@ const Footer = () =>
                 </Col>
                 <Col sm={6} md={4} className="mt-5">
                     <p><b>Socials</b></p>
-                    <p>Facebook</p>
-                    <p>Twitter</p>
-                    <p>Instagram</p>
+                    <p><a href="https://www.facebook.com/">Facebook</a></p>
+                    <p><a href="https://twitter.com/">Twitter</a></p>
+                    <p><a href="https://www.instagram.com/">Instagram</a></p>
                 </Col>
                 <Col md={4} className="mt-5">
                     <p><b>Be The First To Know</b></p>

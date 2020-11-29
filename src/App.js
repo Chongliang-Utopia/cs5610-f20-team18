@@ -40,11 +40,11 @@ class App extends Component {
                         <Route exact path="/users/:userId/profile/:section" component={UserProfile}/>
                         <Route exact path="/bookstore" component={BookStore}/>
                         <PrivateRouteAdmin exact path="/admin" component={Admin}/>
-                        <Redirect to="/"/>
                         </main>
                         <Footer/>
                         </div>
                     </Fragment>
+
                 </Switch>
             </Router>
         );
