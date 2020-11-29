@@ -42,7 +42,9 @@ class BookDetail extends React.Component {
         this.setState({
             book: {
                 title: book.volumeInfo.title,
-                image: book.volumeInfo.imageLinks.thumbnail,
+                image: book.volumeInfo.imageLinks?
+                    book.volumeInfo.imageLinks.thumbnail
+                    : "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg",
                 authors: book.volumeInfo.authors,
                 description: book.volumeInfo.description,
                 averageRating: book.volumeInfo.averageRating,

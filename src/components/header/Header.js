@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, useRouteMatch} from "react-router-dom";
 import {HashLink} from 'react-router-hash-link';
 import {BsFillPersonFill} from "react-icons/bs";
 import {connect} from "react-redux";
@@ -9,7 +9,10 @@ import SearchBar from "../UI/searchBar/SearchBar";
 import {signOut} from "../../actions/authActions";
 import {logout} from "../../actions/authWithEmailActions";
 
+
 const Header = ({isLoggedInWithGoogle, authInstance, signOut, isLoggedInWithEmail, logout, user}) =>
+    const matchBookstore = useRouteMatch({path: "/bookstore", exact: true})
+
     <header className={classes.Header}>
         <nav className="navbar navbar-expand-lg navbar-light bg-light px-5">
             <Link className="navbar-brand ml-0" to="/">
@@ -51,12 +54,19 @@ const Header = ({isLoggedInWithGoogle, authInstance, signOut, isLoggedInWithEmai
                         }
                     </li>
                 </ul>
-                <div className={"pt-2 " + classes.searchBar}>
-                    <SearchBar/>
+                    {
+                        matchBookstore ? null : (
+                            <div className={"pt-2 " + classes.searchBar}>
+                                <SearchBar/>
+                            </div>
+                        )
+                    }
+
                 </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
+        </header>
+    )
+}
 
 const StateToPropertyMapper = (state) => ({
     isLoggedInWithGoogle: state.auth.isSignedIn,
@@ -65,4 +75,7 @@ const StateToPropertyMapper = (state) => ({
     user: state.authWithEmail.user
 });
 
+
 export default connect(StateToPropertyMapper, {signOut, logout})(Header);
+
+
