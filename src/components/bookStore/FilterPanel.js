@@ -3,7 +3,7 @@ import classes from "./filterPanel.module.css";
 import Rating from "react-rating";
 import {connect} from "react-redux";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
-import {filterBookByRating, sortBookHighToLow, sortBookPublisherDate} from "../../actions/searchBookActions"
+import {filterBookByRating, sortBookHighToLow, sortBookPublisherDate, getRecommendedBooks} from "../../actions/searchBookActions"
 
 class FilterPanel extends React.Component {
 
@@ -16,7 +16,9 @@ class FilterPanel extends React.Component {
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item">
                         <p><b>Editor recommends:</b></p>
-                        <a href="#">
+                        <a href="#"
+                        onClick={() => this.props.getRecommended()}
+                        >
                             Most Popular
                         </a>
                     </li>
@@ -110,7 +112,8 @@ const stateToPropertyMapper = (state) => ({
 const propertyToDispatchMapper = (dispatch) => ({
     filterBook: (number) => filterBookByRating(dispatch, number),
     sortBook: () => sortBookHighToLow(dispatch),
-    sortBookPublisher: () => sortBookPublisherDate(dispatch)
+    sortBookPublisher: () => sortBookPublisherDate(dispatch),
+    getRecommended: () => getRecommendedBooks(dispatch)
 })
 export default connect(stateToPropertyMapper, propertyToDispatchMapper)
 (FilterPanel)
