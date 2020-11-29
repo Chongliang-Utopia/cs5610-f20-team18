@@ -5,7 +5,12 @@ import classes from "../../bookDetail/lenderTable/LenderTable.module.css";
 import {Link} from "react-router-dom";
 import Rating from "react-rating";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
-import {Row, Col, Navbar, Nav, Form, FormControl, Button, Image, Carousel} from 'react-bootstrap'
+import {Row, Col, Button, Carousel} from 'react-bootstrap'
+import {RiErrorWarningLine} from "react-icons/ri";
+import ReportForm from "../ReportForm";
+import Modal from "../../UI/modal/Modal";
+import {closeReport, openReport} from "../../../actions/adminActions";
+import {connect} from "react-redux";
 
 
 const bestsellerBooksLists = [
@@ -26,8 +31,11 @@ const bestsellerBooksLists = [
         "/books/book12.webp",
     ],
 ]
-const ProfileLandingPageComponent = ({reviews, userId}) =>
+const ProfileLandingPageComponent = ({reviews, userId, openReport, closeReport, report}) =>
     <div>
+        <Modal show={report} modalClosed={closeReport}>
+            <ReportForm/>
+        </Modal>
         <h2>My activity at a glance</h2>
         <br/>
         <CardDeck>
@@ -119,6 +127,11 @@ const ProfileLandingPageComponent = ({reviews, userId}) =>
                         <td>
                             <span>{review.content}</span>
                         </td>
+                        <td>
+                            <Button variant="warning" size="sm" className="transparent" onClick={openReport}>
+                                <RiErrorWarningLine/>
+                            </Button>
+                        </td>
                     </tr>)
                 }
                 </tbody>
@@ -135,7 +148,7 @@ const ProfileLandingPageComponent = ({reviews, userId}) =>
                                 {
                                     booksList.map((book, bookIndex) => (
                                         <Col key={bookIndex}>
-                                            <Card border="light" className="rounded-0" style={{width: '10rem'}}>
+                                            <Card border="light" className="rounded-0" style={{width: '13rem'}}>
                                                 <Card.Img variant="top" src={book} />
                                             </Card>
                                         </Col>
@@ -150,4 +163,8 @@ const ProfileLandingPageComponent = ({reviews, userId}) =>
 
     </div>
 
-export default ProfileLandingPageComponent
+const StateToPropertyMapper = (state) => ({
+    report: state.admin.report,
+});
+
+export default connect(StateToPropertyMapper, {openReport, closeReport})(ProfileLandingPageComponent);

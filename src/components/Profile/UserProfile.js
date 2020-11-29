@@ -27,14 +27,23 @@ class UserProfile extends React.Component {
                 userName: "ILoveBooks1989",
                 userRating: 5,
                 location: "San Jose",
-                bookTitle:"harry potter"
+                bookTitle:"harry potter",
+                status: "pending"
             },
             {
                 userName: "bayAreaReader",
                 userRating: 3,
                 location: "San Francisco",
-                bookTitle: "lord of the rings"
+                bookTitle: "lord of the rings",
+                status: "approved"
             },
+            {
+                userName: "goodhedgey58",
+                userRating: 3,
+                location: "Mountain View",
+                bookTitle: "lord of the fly",
+                status: "declined"
+            }
         ],
         reviews: [
             {

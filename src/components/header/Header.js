@@ -7,11 +7,9 @@ import Logo from "../logo/Logo";
 import classes from "./Header.module.css"
 import SearchBar from "../UI/searchBar/SearchBar";
 import {signOut} from "../../actions/authActions";
-import {closeReport, openReport} from "../../actions/adminActions";
-import Modal from "../UI/modal/Modal";
-import ReportForm from "./ReportForm";
 
-const Header = ({isSignedIn, authInstance, signOut, report, openReport, closeReport}) =>
+
+const Header = ({isSignedIn, authInstance, signOut}) =>
 
     <header className={classes.Header}>
         <nav className="navbar navbar-expand-lg navbar-light bg-light px-5">
@@ -23,10 +21,6 @@ const Header = ({isSignedIn, authInstance, signOut, report, openReport, closeRep
                     aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"/>
             </button>
-
-            <Modal show={report} modalClosed={closeReport}>
-                <ReportForm/>
-            </Modal>
 
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
@@ -49,9 +43,6 @@ const Header = ({isSignedIn, authInstance, signOut, report, openReport, closeRep
                                 className={"nav-link " + classes.logOutButton} ><BsFillPersonFill className="mb-1"/> Log out</button>
                         }
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="#" onClick={openReport}>Report</Link>
-                    </li>
                 </ul>
                 <div className={"pt-2 " + classes.searchBar}>
                     <SearchBar/>
@@ -63,7 +54,6 @@ const Header = ({isSignedIn, authInstance, signOut, report, openReport, closeRep
 const StateToPropertyMapper = (state) => ({
     isSignedIn: state.auth.isSignedIn,
     authInstance: state.auth.authInstance,
-    report: state.admin.report,
 });
 
-export default connect(StateToPropertyMapper, {signOut, openReport, closeReport})(Header);
+export default connect(StateToPropertyMapper, {signOut})(Header);

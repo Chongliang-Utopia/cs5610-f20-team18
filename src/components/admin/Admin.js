@@ -10,15 +10,14 @@ class Admin extends React.Component{
         section: '',
         tickets: [
             {
-                type: "BOOKPOSTING",
                 reporterId: "melanie12",
                 bookTitle: "How to fake your application to graduate school",
-                reportedId: "phoebe23",
+                reviewerId: "phoebe23",
+                revieweeId: "harry67",
                 description: "this book is teaching people how to fake their application. " +
                     "Please delete this book. It's a highly unethical thing to do!!!!"
             },
             {
-                type: "REVIEW",
                 reporterId: "mel89",
                 reviewerId: "phoebe23",
                 revieweeId: "harry67",
@@ -27,10 +26,12 @@ class Admin extends React.Component{
                     "I think this is highly inappropriate. Please warn phoebe23."
             },
             {
-                type: "OTHER",
                 reporterId: "april419",
-                description: "phoebe23 insulted several person in many occations. She attacks people" +
-                    "and good books. Could you look into it?"
+                reviewerId: "phoebe23",
+                revieweeId: "harry67",
+                bookTitle: "Python for Dummies",
+                description: "phoebe23 said the book owner is an idiot for no reason. Please" +
+                    " ban phoebe23"
             }
         ],
         users : [
@@ -70,12 +71,12 @@ class Admin extends React.Component{
         return (
             <div className="container">
                 <div className="row add-top-margin add-15-padding">
-                    <div className="col-2">
+                    <div className="col-lg-2">
                         <img className="image" src="https://www.kindpng.com/picc/m/23-236356_administrator-admin-icon-admin-icons-hd-png-download.png"
                              alt="profile-image"
                         />
                     </div>
-                    <div className="col-5 add-35-top-margin font-size-25-italic">
+                    <div className="col-lg-5 add-35-top-margin font-size-25-italic">
                         <span className="add-15-padding">Welcome back, administrator!</span>
                     </div>
 

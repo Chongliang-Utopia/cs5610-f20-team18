@@ -1,4 +1,4 @@
-import {CLOSE_REPORT, OPEN_REPORT, SET_REPORT_TYPE} from "./types";
+import {CLOSE_REPORT, OPEN_REPORT} from "./types";
 
 export const closeReport = () => {
     return {
@@ -12,9 +12,3 @@ export const openReport = () => {
     };
 };
 
-export const setReportType = (actualType) => {
-    return  {
-        type: SET_REPORT_TYPE,
-        actualType
-    };
-};

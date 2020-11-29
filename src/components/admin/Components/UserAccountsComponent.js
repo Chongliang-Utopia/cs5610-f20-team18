@@ -8,7 +8,7 @@ const UserAccountsComponent =
          users=[]
     }) =>
     <div>
-        <h1>Active Users</h1>
+        <h1>Active site users</h1>
         <div className={classes.LenderTable}>
             <table className="table table-hover">
                 <thead>
@@ -19,7 +19,6 @@ const UserAccountsComponent =
                 </tr>
                 </thead>
                 <tbody>
-
                 {
                     users.filter(user => user.status === "ACTIVE")
                         .map(user=>
@@ -31,42 +30,10 @@ const UserAccountsComponent =
                                     {user.userRating}
                                 </td>
                                 <td>
-                                    <Button variant="danger">Deactivate</Button>
+                                    <Button variant="danger">Delete User</Button>
                                 </td>
                             </tr>
                 )}
-
-                </tbody>
-            </table>
-        </div>
-
-        <h1>Inactive Users</h1>
-        <div className={classes.LenderTable}>
-            <table className="table table-hover">
-                <thead>
-                <tr>
-                    <th>user</th>
-                    <th>Reason for deactivation</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-
-                {
-                    users.filter(user => user.status === "INACTIVE")
-                        .map(user=>
-                            <tr>
-                                <td>
-                                    <Link to={`/users/${user}/profile`} className="mr-1">{user.username}</Link>
-                                </td>
-                                <td>
-                                    inappropriate book posting
-                                </td>
-                                <td>
-                                    <Button variant="success">Activate</Button>
-                                </td>
-                            </tr>
-                        )}
 
                 </tbody>
             </table>

@@ -66,10 +66,10 @@ class LendingComponent extends React.Component{
         })
     }
 
-    renderTooltip = (props) =>
-        <Tooltip {...props}>
-            Remind borrower that the book is about to overdue/ is overdue
-        </Tooltip>
+    // renderTooltip = (props) =>
+    //     <Tooltip {...props}>
+    //         Remind borrower that the book is about to overdue/ is overdue
+    //     </Tooltip>
 
     renderConfirmTooltip = (props) =>
         <Tooltip {...props}>
@@ -136,9 +136,22 @@ class LendingComponent extends React.Component{
                             <td>
                                 <span>{request.bookTitle}</span>
                             </td>
-                            <td>
-                                <button className="btn btn-success">Approve</button>
-                                <button className="btn btn-danger">Decline</button>
+                            <td className="pull-right">
+                                {
+                                    request.status === "pending" &&
+                                    <span>
+                                        <button className="btn btn-success">Approve</button>
+                                        <button className="btn btn-danger">Decline</button>
+                                    </span>
+                                }
+                                {
+                                    request.status === "declined" &&
+                                    <button className="btn btn-warning disabled">Declined</button>
+                                }
+                                {
+                                    request.status === "approved" &&
+                                    <button className="btn btn-success disabled">Approved</button>
+                                }
                             </td>
                         </tr>)
                     }
@@ -171,12 +184,12 @@ class LendingComponent extends React.Component{
                                 <span>{request.bookTitle}</span>
                             </td>
                             <td className="pull-right">
-                                <OverlayTrigger
-                                    placement="top"
-                                    delay={{ show: 250, hide: 400 }}
-                                    overlay={this.renderTooltip}>
-                                    <Button variant="warning">Reminder</Button>
-                                </OverlayTrigger>
+                                {/*<OverlayTrigger*/}
+                                {/*    placement="top"*/}
+                                {/*    delay={{ show: 250, hide: 400 }}*/}
+                                {/*    overlay={this.renderTooltip}>*/}
+                                {/*    <Button variant="warning">Reminder</Button>*/}
+                                {/*</OverlayTrigger>*/}
                                 <OverlayTrigger
                                     placement="top"
                                     delay={{ show: 250, hide: 400 }}
@@ -220,7 +233,7 @@ class LendingComponent extends React.Component{
                             <td>
                                 <span>{request.bookTitle}</span>
                             </td>
-                            <td>
+                            <td className="pull-right">
                                 <Button variant="light">Edit Review</Button>
                             </td>
                         </tr>)

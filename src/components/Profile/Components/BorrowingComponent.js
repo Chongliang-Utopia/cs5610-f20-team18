@@ -20,7 +20,7 @@ const BorrowingComponent = ({requests}) =>
                 </tr>
                 </thead>
                 <tbody>
-                {requests.map(request =>
+                {requests.filter(()=>requests.status !== "returned").map(request =>
                     <tr>
                         <td>
                             <Link to={`/users/${request.userName}/profile`} className="mr-1">{request.userName}</Link>
@@ -36,8 +36,19 @@ const BorrowingComponent = ({requests}) =>
                         <td>
                             <span>{request.bookTitle}</span>
                         </td>
-                        <td>
-                            <button className="btn btn-danger">Cancel Request</button>
+                        <td className="pull-right">
+                            {
+                                request.status === "pending" &&
+                                <button className="btn btn-danger">Cancel Request</button>
+                            }
+                            {
+                                request.status === "declined" &&
+                                <button className="btn btn-warning disabled">Declined</button>
+                            }
+                            {
+                                request.status === "approved" &&
+                                <button className="btn btn-success disabled">Approved</button>
+                            }
                         </td>
                     </tr>)
                 }
@@ -53,7 +64,6 @@ const BorrowingComponent = ({requests}) =>
                     <th>Due Date</th>
                     <th>Location</th>
                     <th>Book</th>
-                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -73,9 +83,7 @@ const BorrowingComponent = ({requests}) =>
                         <td>
                             <span>{request.bookTitle}</span>
                         </td>
-                        <td>
-                            <button className="btn btn-success">Return Book</button>
-                        </td>
+
                     </tr>)
                 }
                 </tbody>
@@ -110,7 +118,7 @@ const BorrowingComponent = ({requests}) =>
                         <td>
                             <span>{request.bookTitle}</span>
                         </td>
-                        <td>
+                        <td className="pull-right">
                             <Button variant="light">Edit Review</Button>
                         </td>
                     </tr>)

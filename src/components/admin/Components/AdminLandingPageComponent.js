@@ -2,6 +2,7 @@ import React from "react";
 import CardDeck from "react-bootstrap/CardDeck";
 import Card from "react-bootstrap/Card";
 import {Link} from "react-router-dom";
+import "../admin.css"
 
 const AdminLandingPageComponent = () =>
     <div>
@@ -10,25 +11,13 @@ const AdminLandingPageComponent = () =>
         <CardDeck>
             <Card style={{ width: '10rem' }} className="center-text" bg={"light"}>
                 <Card.Body>
-                    <Card.Title>Number of new members today</Card.Title>
+                    <Card.Title>Number of members</Card.Title>
                     <Card.Text>
                         <br/>
-                        <span>23</span>
+                        <Link to={`/admin/users`} classname="bottom">208</Link>
                     </Card.Text>
                 </Card.Body>
             </Card>
-            <Card style={{ width: '10rem' }} className="center-text" bg={"light"}>
-                <Card.Body>
-                    <Card.Title>Total number of members</Card.Title>
-                    <Card.Text>
-                        <br/>
-                        <Link to={`/admin/users`}>208</Link>
-                    </Card.Text>
-                </Card.Body>
-            </Card>
-        </CardDeck>
-        <br/>
-        <CardDeck>
             <Card style={{ width: '10rem' }} className="center-text" bg={"light"}>
                 <Card.Body>
                     <Card.Title>Pending User Tickets</Card.Title>
@@ -40,7 +29,7 @@ const AdminLandingPageComponent = () =>
             </Card>
             <Card style={{ width: '10rem' }} className="center-text" bg={"light"}>
                 <Card.Body>
-                    <Card.Title>Total number of book postings</Card.Title>
+                    <Card.Title>Total book postings</Card.Title>
                     <Card.Text>
                         <br/>
                         <span>426</span>
@@ -48,7 +37,6 @@ const AdminLandingPageComponent = () =>
                 </Card.Body>
             </Card>
         </CardDeck>
-        <br/>
     </div>
 
 export default AdminLandingPageComponent

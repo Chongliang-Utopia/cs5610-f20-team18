@@ -5,6 +5,7 @@ import Image from "react-bootstrap/Image";
 import {Link} from "react-router-dom";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import Rating from "react-rating";
+import {RiErrorWarningLine} from "react-icons/ri";
 
 const FollowingComponent = () =>
     <div>
@@ -44,6 +45,8 @@ const FollowingComponent = () =>
                 <Button size="sm" className="pull-right">Following</Button>
             </ListGroup.Item>
         </ListGroup>
+
+
         <br/>
         <h4>
             People who follow you
@@ -68,5 +71,6 @@ const FollowingComponent = () =>
             </ListGroup>
 
     </div>
+
 
 export default FollowingComponent
