@@ -1,0 +1,10 @@
+.PublicProfile {
+    margin: 50px 30px 0 30px;
+    box-shadow: 0 0 3px 3px #dfe1e5;
+    overflow: scroll;
+    padding: 3% 2%;
+}
+
+.tableScroll {
+    overflow-x: scroll;
+}
