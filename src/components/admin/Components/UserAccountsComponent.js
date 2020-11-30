@@ -8,7 +8,7 @@ const UserAccountsComponent =
          users=[]
     }) =>
     <div>
-        <h1>Active site users</h1>
+        <h2>Active site users</h2>
         <div className={classes.LenderTable}>
             <table className="table table-hover">
                 <thead>
@@ -30,11 +30,10 @@ const UserAccountsComponent =
                                     {user.userRating}
                                 </td>
                                 <td>
-                                    <Button variant="danger">Delete User</Button>
+                                    <Button variant="danger float-right btn-sm">Delete User</Button>
                                 </td>
                             </tr>
                 )}
-
                 </tbody>
             </table>
         </div>

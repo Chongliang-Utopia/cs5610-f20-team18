@@ -1,0 +1,67 @@
+.bottom {
+    margin-bottom: 1px;
+}
+
+.cardDeck {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.cardDeck .card {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    height: 200px;
+    min-width: 200px;
+    max-width: 200px;
+    background: #f8f9fa;
+    text-align: center;
+}
+
+.adminDiv {
+    margin: 20px 30px 0 30px;
+    box-shadow: 0 0 3px 3px #dfe1e5;
+    overflow: scroll;
+}
+
+.adminDiv .leftSideBar {
+    background-color: #0e345a;
+    padding: 3% 3%;
+}
+
+.adminDiv .contentDiv {
+    padding: 30px 3% 3% 30px;
+}
+
+.adminDiv .leftSideBar ul {
+    position: relative;
+    list-style-type: none;
+    margin: 100px 0;
+    padding: 0;
+}
+
+.adminDiv .leftSideBar li {
+    position: relative;
+    display: block;
+    border-bottom: 1px solid white;
+    width: 100%
+}
+
+.adminDiv .leftSideBar a:hover {
+    color: darkorange;
+}
+
+.adminDiv .leftSideBar a {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 15px 20px 15px 0;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+
+

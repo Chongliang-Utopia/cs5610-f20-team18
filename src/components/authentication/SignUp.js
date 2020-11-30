@@ -2,7 +2,6 @@ import React from "react";
 import classes from "./Authentication.module.css";
 import {Link} from "react-router-dom";
 import {GrClose} from "react-icons/gr";
-import LoginWithGoogle from "./LoginWithGoogle";
 import SignUpWithEmail from "./SignUpWithEmail";
 
 const SignUp = () =>
@@ -16,10 +15,6 @@ const SignUp = () =>
             <div className={classes.content}>
                 <div>
                     <SignUpWithEmail />
-                    <div className={classes.line}>
-                        <span className="bg-white p-2">or Sign Up with</span>
-                    </div>
-                    <LoginWithGoogle type="signup"/>
                 </div>
             </div>
         </div>

@@ -9,64 +9,65 @@ import {RiErrorWarningLine} from "react-icons/ri";
 
 const FollowingComponent = () =>
     <div>
-        <h4>
+        <h2>
             People you follow
-        </h4>
+        </h2>
         <ListGroup variant="flush">
-            <ListGroup.Item>
+            <ListGroup.Item className="pl-0">
                 <Image width={40}
                        height={32}
                        src="https://banner2.cleanpng.com/20171215/92c/hedgehog-png-5a3484489a2ad5.0068272815133911766315.jpg"
                        roundedCircle
-                       className="hideAtSm"
+                       className="hideAtSm mr-2"
                 />
-                <Link to={`/users/Constanziato/profile`} className="add-15-padding">Constanziato</Link>
+                <Link to={`/users/Constanziato/profile`}>Constanziato</Link>
                 <span className="hideAtSm">
                     <Rating className="add-15-padding" initialRating={3} readonly
                             emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                             fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                 </span>
-                <Button size="sm" className="pull-right">Following</Button>
+                <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow">Following</button>
             </ListGroup.Item>
-            <ListGroup.Item>
+            <ListGroup.Item className="pl-0">
                 <Image width={40}
                        height={32}
                        src="https://jpegwall.com/wp-content/uploads/2019/10/Harry-Potter-Wallpaper.jpg" roundedCircle
+                       className="mr-2"
                 />
-                <span className="add-15-padding">Diaziato</span>
-                <Button size="sm" className="pull-right">Following</Button>
+                <span>Diaziato</span>
+                <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow">Following</button>
             </ListGroup.Item>
-            <ListGroup.Item>
+            <ListGroup.Item className="pl-0">
                 <span>HarrisoForddy</span>
-                <Button size="sm" className="pull-right">Following</Button>
+                <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow">Following</button>
             </ListGroup.Item>
-            <ListGroup.Item>
+            <ListGroup.Item className="pl-0">
                 <span>Bidenista</span>
-                <Button size="sm" className="pull-right">Following</Button>
+                <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow">Following</button>
             </ListGroup.Item>
         </ListGroup>
 
 
         <br/>
-        <h4>
+        <h2>
             People who follow you
-        </h4>
+        </h2>
             <ListGroup variant="flush">
-                <ListGroup.Item>
+                <ListGroup.Item className="pl-0">
                     <span>Constanziato</span>
-                    <Button size="sm" className="pull-right">Follow Back</Button>
+                    <button className="pull-right btn btn-sm btn-primary" title="Follow">Follow</button>
                 </ListGroup.Item>
-                <ListGroup.Item>
+                <ListGroup.Item className="pl-0">
                     <span>Diaziato</span>
-                    <Button size="sm" className="pull-right">Following</Button>
+                    <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow">Following</button>
                 </ListGroup.Item>
-                <ListGroup.Item>
+                <ListGroup.Item className="pl-0">
                     <span>HarrisoForddy</span>
-                    <Button size="sm" className="pull-right">Follow Back</Button>
+                    <button className="pull-right btn btn-sm btn-primary" title="Follow">Follow</button>
                 </ListGroup.Item>
-                <ListGroup.Item>
+                <ListGroup.Item className="pl-0">
                     <span>Bidenista</span>
-                    <Button size="sm" className="pull-right">Follow Back</Button>
+                    <button className="pull-right btn btn-sm btn-primary" title="Follow">Follow</button>
                 </ListGroup.Item>
             </ListGroup>
 

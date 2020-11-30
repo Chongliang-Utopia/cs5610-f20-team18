@@ -8,12 +8,14 @@ import FollowingComponent from "./Components/FollowingComponent";
 import BorrowingComponent from "./Components/BorrowingComponent";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import Rating from "react-rating";
+import classes from "./LoggedInProfile.module.css"
+import {BsCaretRightFill} from "react-icons/bs";
 
 
 const LoggedInProfile = ({section, userId, bookPostings, requests, userRating, reviews}) => {
     return (
-        <div className="container">
-            <div className="add-top-margin add-15-padding font-size-25-italic row">
+        <div className={"container " + classes.LogInProfile}>
+            <div className="mt-5 add-15-padding font-size-25-italic row">
                 <div className="col-lg-2">
                     <img className="image"
                          src="https://is2-ssl.mzstatic.com/image/thumb/Podcasts124/v4/54/b0/5d/54b05d73-57bf-6e94-d06f-dfc2ceb4f771/mza_1054230007255374421.jpg/1200x1200bb.jpg"
@@ -31,55 +33,71 @@ const LoggedInProfile = ({section, userId, bookPostings, requests, userRating, r
                     </div>
                 </div>
             </div>
-            <br/>
-            <div className="row">
-                <div className="col-3">
-                    <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <Link to ={`/users/${userId}/profile`} className="nav-link">
-                            Profile Home
-                        </Link>
-                        <Link to ={`/users/${userId}/profile/settings`} className="nav-link">
-                            Account Settings
-                        </Link>
-                        <Link to ={`/users/${userId}/profile/lendings`} className="nav-link">
-                            My Lendings
-                        </Link>
-                        <Link to ={`/users/${userId}/profile/borrowings`} className="nav-link">
-                            My borrowings
-                        </Link>
-                        <Link to ={`/users/${userId}/profile/followings`} className="nav-link">
-                            My followings
-                        </Link>
+
+            <div className={"row " + classes.profileDiv}>
+                <div className={"col-md-4 col-lg-3 " + classes.leftSideBar}>
+                    <div className="nav flex-column nav-pills">
+                        <li className="nav-item">
+                            <Link to={`/users/${userId}/profile`} className="nav-link">
+                                {!section &&<BsCaretRightFill className="mb-1 mr-1"/>}
+                                Profile Home
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to={`/users/${userId}/profile/settings`} className="nav-link">
+                                {section === "settings" &&<BsCaretRightFill className="mb-1 mr-1"/>}
+                                Account Settings
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to={`/users/${userId}/profile/lendings`} className="nav-link">
+                                {section === "lendings" &&<BsCaretRightFill className="mb-1 mr-1"/>}
+                                My Lendings
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to={`/users/${userId}/profile/borrowings`} className="nav-link">
+                                {section === "borrowings" &&<BsCaretRightFill className="mb-1 mr-1"/>}
+                                My borrowings
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to={`/users/${userId}/profile/followings`} className="nav-link">
+                                {section === "followings" &&<BsCaretRightFill className="mb-1 mr-1"/>}
+                                My followings
+                            </Link>
+                        </li>
                     </div>
                 </div>
-                <div className="col-9">
+                <div className={"col-md-8 col-lg-9 pr-4 " + classes.contentDiv}>
                     {
                         typeof section === 'undefined' &&
-                            <ProfileLandingPageComponent
-                                reviews={reviews}
-                                userId={userId}
-                            />
+                        <ProfileLandingPageComponent
+                            reviews={reviews}
+                            userId={userId}
+                        />
                     }
                     {
                         section === "settings" &&
-                            <AccountSettingComponent/>
+                        <AccountSettingComponent/>
                     }
                     {
                         section === "lendings" &&
-                            <LendingComponent
-                                bookPostings={bookPostings}
-                                requests={requests}
-                            />
+                        <LendingComponent
+                            bookPostings={bookPostings}
+                            requests={requests}
+                        />
                     }
                     {
                         section === "borrowings" &&
-                            <BorrowingComponent requests={requests}/>
+                        <BorrowingComponent requests={requests}/>
                     }
                     {
                         section === "followings" &&
-                            <FollowingComponent/>
+                        <FollowingComponent/>
                     }
                 </div>
+
             </div>
         </div>
     )

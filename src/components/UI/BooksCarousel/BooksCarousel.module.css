@@ -1,0 +1,48 @@
+.BookCarousel {
+    width: 85%;
+    margin: 0 auto 30px auto;
+}
+
+.bookCarouselCard {
+    padding: 10%;
+}
+
+.bookCarouselCard .bookImgDiv {
+    padding: 10%;
+    background-color: #ebebeb;
+    width: 220px;
+    height: 230px;
+    margin: auto
+}
+
+.bookCarouselCard .bookImgDiv img{
+    width:70%;
+    left: 13%;
+    height: 100%;
+    background-size:cover;
+    margin:auto;
+    position:relative;
+    display:inline-block;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    transform: scale(1.03);
+    opacity: 0.9;
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+.bookCarouselCard .bookImgDiv img:hover{
+    transform: scale(1.10);
+    opacity: 1;
+}
+
+@media screen and (max-width: 767px) {
+    .bookCarouselCard .bookImgDiv {
+        width: 180px;
+        height: 200px;
+    }
+
+    .bookCarouselCard .bookImgDiv img{
+        width:80%;
+        left: 8%;
+    }
+}
+

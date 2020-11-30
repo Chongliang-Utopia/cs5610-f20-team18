@@ -6,7 +6,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import {isEmail} from "validator";
-import {login} from "../../actions/authWithEmailActions";
+import {login} from "../../actions/authActions";
 import history from "../../history";
 import { clearMessage } from "../../actions/message";
 
@@ -138,7 +138,7 @@ class LoginWithEmail extends Component {
 }
 
 const stateToPropertyMapper = (state) => ({
-    isLoggedIn: state.authWithEmail.isLoggedIn,
+    isLoggedIn: state.auth.isLoggedIn,
     message: state.message.message
 })
 

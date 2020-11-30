@@ -1,4 +1,5 @@
 import bookService from "../services/bookService";
+import bestsellerBooksLists from '../assets/data/bestsellerBooksLists.json'
 
 export const SET_ADVANCED_SEARCH = "SET_ADVANCED_SEARCH"
 export const FETCH_BOOKS = "FETCH_BOOKS"
@@ -13,11 +14,14 @@ export const FILTER_BOOK_BY_RATING = "FILTER_BOOK_BY_RATING"
 export const SORT_BOOK_BY_RATING_HIGH_TO_LOW = "SORT_BOOK_BY_RATING_HIGH_TO_LOW"
 export const SORT_BOOK_BY_PUBLISHER_DATE = "SORT_BOOK_BY_PUBLISHER_DATE"
 
-export const sortBookHighToLow = (dispatch) => 
+export const CLEAR_BOOKS = "CLEAR_BOOKS"
+export const BOOK_ADDER = "BOOK_ADDER"
+
+export const sortBookHighToLow = (dispatch) =>
     dispatch({
         type: SORT_BOOK_BY_RATING_HIGH_TO_LOW
     })
-export const sortBookPublisherDate = (dispatch) => 
+export const sortBookPublisherDate = (dispatch) =>
     dispatch({
         type: SORT_BOOK_BY_PUBLISHER_DATE
     })
@@ -47,6 +51,31 @@ export const searchBook = (dispatch, default_term, author, title, isbn, publishe
             type: FETCH_BOOKS, books: books.items ? books.items : []
         }))
 }
+export const getRecommendedBooks = (dispatch) => {
+    dispatch({
+        type: CLEAR_BOOKS
+    })
+    getRecommendedBooksAdder(dispatch)
+}
+const getRecommendedBooksAdder = (dispatch) => {
+    const ids = []
+    let pair;
+    for (pair of bestsellerBooksLists[0]) {
+        ids.push(pair.id)
+    }
+    for (pair of bestsellerBooksLists[1]) {
+        ids.push(pair.id)
+    }
+    let id;
+    for (id of ids) {
+        bookService.findBookById(id)
+            .then(book => dispatch({
+                type: BOOK_ADDER,
+                book
+            }))
+    }
+}
+
 
 export const setSearchDefaultTerm = (dispatch, search_default_term) =>
     dispatch({

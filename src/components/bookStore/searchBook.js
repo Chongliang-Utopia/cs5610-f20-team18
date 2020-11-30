@@ -6,7 +6,6 @@ import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import Rating from "react-rating";
 import BookStoreSearchBar from "./bookStoreSearchBar/BookStoreSearchBar";
 import {connect} from "react-redux";
-import {searchBook} from "../../actions/searchBookActions"
 
 class SearchBook extends React.Component {
 
@@ -49,7 +48,7 @@ class SearchBook extends React.Component {
                     }
                     {
                         this.props.books.length === 0 &&
-                        <h4>No results available, please search again...</h4>
+                        <div className={classes.noResults}><h4>No results available, please search again...</h4></div>
                     }
                 </div>
             </div>
