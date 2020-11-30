@@ -82,8 +82,8 @@ class Admin extends React.Component{
 
                 </div>
                 <br/>
-                <div className="row">
-                    <div className="col-3">
+                <div className="row pt-3">
+                    <div className="col-md-4 col-lg-3">
                         <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                             <Link to ={`/admin`} className="nav-link">
                                 Profile Home
@@ -99,7 +99,7 @@ class Admin extends React.Component{
                             </Link>
                         </div>
                     </div>
-                    <div className="col-9">
+                    <div className="col-md-8 col-lg-9">
                         {
                             typeof this.state.section === 'undefined' &&
                             <AdminLandingPageComponent/>

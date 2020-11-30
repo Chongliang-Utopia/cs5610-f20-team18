@@ -1,0 +1,19 @@
+.bottom{
+    margin-bottom: 1px;
+}
+
+.cardDeck {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.cardDeck .card {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    height: 200px;
+    min-width: 250px;
+    max-width: 250px;
+    background: #f8f9fa;
+    text-align: center;
+}
