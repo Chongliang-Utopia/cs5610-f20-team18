@@ -20,7 +20,7 @@
     }
 }
 @media screen and (min-width: 800px) {
-    .BookStore h4{
+    .BookStore .our{
         text-align: center;
         margin-left: 250px;
     }
