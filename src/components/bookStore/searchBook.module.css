@@ -37,6 +37,12 @@
     opacity: 100;
 }
 
+.SearchBook .noResults {
+    position: relative;
+    width: 70%;
+    left: 15%
+}
+
 
 
 

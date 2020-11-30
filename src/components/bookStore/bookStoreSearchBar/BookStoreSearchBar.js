@@ -36,23 +36,24 @@ const BookStoreSearchBar = ({
 
     <div className={classes.BookStoreSearchBar}>
         <div className = {classes.BookStoreSearchDiv}>
-            <div className={classes.search}>
+            <form className={classes.search}>
                 <input type="text" className={classes.searchInput} placeholder="Search books"
 
                        value={search_default_term}
                        onChange={(e) => setSearchDefaultTerm(e.target.value)}
                        />
                 <button type="submit" className={classes.searchButton}
-                        onClick={() => searchBook(
+                        onClick={(e) => { e.preventDefault();
+                            searchBook(
                             search_default_term,
                             '',
                             '',
                             '',
                             '',
-                            '')}>
+                            '')}}>
                     <i className="fa fa-search" />
                 </button>
-            </div>
+            </form>
             {!showAdvancedSearch?
                 <button onClick={() => setAdvancedSearch(true)}
                         className={classes.advancedButton}>
@@ -67,7 +68,7 @@ const BookStoreSearchBar = ({
             }
         </div>
         {showAdvancedSearch &&
-            <div className={classes.advancedSearchDiv}>
+            <form className={classes.advancedSearchDiv}>
                 <div className="form-group row">
                     <label htmlFor="Author" className="col-sm-3 pt-2 text-dark">Author</label>
                     <div className="col-sm-9">
@@ -103,17 +104,18 @@ const BookStoreSearchBar = ({
                                onChange={(e) => setSearchSubject(e.target.value)}/>
                     </div>
                 </div>
-                <button className="btn btn-info float-right"
-                        onClick={() => searchBook(
+                <button className="btn btn-info float-right" type="submit"
+                        onClick={(e) =>{ e.preventDefault();
+                            searchBook(
                                             search_default_term,
                                             author,
                                             title,
                                             isbn,
                                             publisher,
-                                            subject)}>
+                                            subject)}}>
                     Search
                 </button>
-            </div>
+            </form>
         }
     </div>
 const stateToPropertyMapper = (state) => ({

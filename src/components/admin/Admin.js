@@ -4,8 +4,10 @@ import AdminAccountSettingComponent from "./Components/AdminAccountSettingCompon
 import AdminLandingPageComponent from "./Components/AdminLandingPageComponent";
 import UserAccountsComponent from "./Components/UserAccountsComponent";
 import UserTicketsComponent from "./Components/UserTicketsComponent";
+import classes from "./admin.module.css";
+import {BsCaretRightFill} from "react-icons/bs";
 
-class Admin extends React.Component{
+class Admin extends React.Component {
     state = {
         section: '',
         tickets: [
@@ -34,7 +36,7 @@ class Admin extends React.Component{
                     " ban phoebe23"
             }
         ],
-        users : [
+        users: [
             {
                 username: "april",
                 status: "ACTIVE"
@@ -72,7 +74,8 @@ class Admin extends React.Component{
             <div className="container">
                 <div className="row add-top-margin add-15-padding">
                     <div className="col-lg-2">
-                        <img className="image" src="https://www.kindpng.com/picc/m/23-236356_administrator-admin-icon-admin-icons-hd-png-download.png"
+                        <img className="image"
+                             src="https://www.kindpng.com/picc/m/23-236356_administrator-admin-icon-admin-icons-hd-png-download.png"
                              alt="profile-image"
                         />
                     </div>
@@ -82,24 +85,37 @@ class Admin extends React.Component{
 
                 </div>
                 <br/>
-                <div className="row">
-                    <div className="col-3">
-                        <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                            <Link to ={`/admin`} className="nav-link">
-                                Profile Home
-                            </Link>
-                            <Link to ={`/admin/settings`} className="nav-link">
-                                Account Settings
-                            </Link>
-                            <Link to ={`/admin/tickets`} className="nav-link">
-                                User Tickets
-                            </Link>
-                            <Link to ={`/admin/users`} className="nav-link">
-                                User Accounts
-                            </Link>
+                <div className={"row " + classes.adminDiv}>
+                    <div className={"col-md-4 col-lg-3 " + classes.leftSideBar}>
+
+                        <div className="nav nav-pills mb-3">
+                            <li className="nav-item">
+                                <Link to={`/admin`} className="nav-link">
+                                    {!this.state.section && <BsCaretRightFill className="mb-1 mr-1"/>}
+                                    Profile Home
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to={`/admin/settings`} className="nav-link">
+                                    {this.state.section === "settings" && <BsCaretRightFill className="mb-1 mr-1"/>}
+                                    Account Settings
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to={`/admin/tickets`} className="nav-link">
+                                    {this.state.section === 'tickets' && <BsCaretRightFill className="mb-1 mr-1"/>}
+                                    User Tickets
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to={`/admin/users`} className="nav-link">
+                                    {this.state.section === 'users' && <BsCaretRightFill className="mb-1 mr-1"/>}
+                                    User Accounts
+                                </Link>
+                            </li>
                         </div>
                     </div>
-                    <div className="col-9">
+                    <div className={"col-md-8 col-lg-9 pr-4 " + classes.contentDiv}>
                         {
                             typeof this.state.section === 'undefined' &&
                             <AdminLandingPageComponent/>

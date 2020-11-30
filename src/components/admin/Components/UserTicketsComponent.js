@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import {Accordion} from "react-bootstrap";
 import {Card} from "react-bootstrap";
+import {MdExpandMore} from "react-icons/md";
 
 const UserTicketsComponent =
     ({
@@ -18,10 +19,10 @@ const UserTicketsComponent =
         {
             tickets.length !== 0 && tickets.map(ticket=>
                 <Accordion>
-                     <Card>
+                     <Card className="mb-3">
                         <Card.Header>
                             <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                                Reporter: {ticket.reporterId}
+                                Reporter: {ticket.reporterId}<MdExpandMore className="ml-1" size="20px"/>
                             </Accordion.Toggle>
                         </Card.Header>
                         <Accordion.Collapse eventKey="0">
@@ -53,8 +54,11 @@ const UserTicketsComponent =
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <Button variant="light" className="add-15-padding">Delete Review</Button>
-                                    <Button variant="success" className="add-15-padding">Mark as Resolved</Button>
+
+                                </div>
+                                <div className="float-right mb-3">
+                                <Button variant="danger btn-sm float-right" className="m-2">Delete Review</Button>
+                                <Button variant="success btn-sm float-right" className="m-2">Mark as Resolved</Button>
                                 </div>
                             </Card.Body>
                         </Accordion.Collapse>

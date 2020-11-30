@@ -41,8 +41,8 @@ class App extends Component {
                         <Route exact path="/users/:userId/profile" component={UserProfile}/>
                         <Route exact path="/users/:userId/profile/:section" component={UserProfile}/>
                         <Route exact path="/bookstore" component={BookStore}/>
-                        <PrivateRouteAdmin exact path="/admin" component={Admin}/>
-                        <PrivateRouteAdmin exact path="/admin/:section" component={Admin}/>
+                        <Route exact path="/admin" component={Admin}/>
+                        <Route exact path="/admin/:section" component={Admin}/>
                         </main>
                         <Footer/>
                         </div>
