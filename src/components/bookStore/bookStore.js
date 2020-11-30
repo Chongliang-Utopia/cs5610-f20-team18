@@ -11,7 +11,7 @@ class BookStore extends React.Component {
     render() {
         return (
             <div className={`${classes.BookStore} container`}>
-                <h4>Our</h4>
+                <h4 className={classes.our}>Our</h4>
                 <h1><b>BOOKSTORE</b></h1>
                 <div className="row">
                     <div className="col-md-4 col-lg-3">

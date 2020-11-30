@@ -20,7 +20,7 @@
 }
 .SearchBook h4 {
     text-align: center;
-    margin-left: 50px;
+    /*margin-left: 50px;*/
     margin-top: 10px;
 }
 .SearchBook .searchBar {
@@ -37,11 +37,6 @@
     opacity: 100;
 }
 
-.SearchBook .noResults {
-    position: relative;
-    width: 70%;
-    left: 15%
-}
 
 
 
