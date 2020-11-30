@@ -1,0 +1,48 @@
+.LogInProfile {
+
+}
+
+.LogInProfile .profileDiv {
+    margin: 50px 30px 0 30px;
+    box-shadow: 0 0 3px 3px #dfe1e5;
+    overflow: scroll;
+}
+
+.LogInProfile .leftSideBar {
+    background-color: #0e345a;
+    padding: 3% 3%;
+}
+
+.LogInProfile .contentDiv {
+    padding: 30px 3% 3% 30px;
+}
+
+.LogInProfile .leftSideBar ul {
+    position: relative;
+    list-style-type: none;
+    margin: 100px 0;
+    padding: 0;
+}
+
+.LogInProfile .leftSideBar li {
+    position: relative;
+    display: block;
+    border-bottom: 1px solid white;
+    width: 100%
+}
+
+.LogInProfile .leftSideBar a:hover {
+    color: darkorange;
+}
+
+.LogInProfile .leftSideBar a {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 15px 20px 15px 0;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+}
