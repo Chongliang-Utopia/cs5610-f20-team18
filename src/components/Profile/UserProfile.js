@@ -1,6 +1,6 @@
 import React from "react"
 import LoggedInProfile from "./LoggedInProfile";
-import UnloggedInProfile from "./UnLoggedInProfile";
+import UnloggedInProfile from "./PublicProfile";
 
 
 class UserProfile extends React.Component {
@@ -107,6 +107,7 @@ class UserProfile extends React.Component {
                         <UnloggedInProfile
                             userId={this.state.userId}
                             userRating={this.state.userRating}
+                            section={this.state.section}
                             bookPostings={this.state.bookPostings}
                             reviews={this.state.reviews}
                         />
