@@ -1,12 +1,12 @@
 import React from "react"
 import LoggedInProfile from "./LoggedInProfile";
-import UnloggedInProfile from "./UnLoggedInProfile";
+import UnloggedInProfile from "./PublicProfile";
 
 
 class UserProfile extends React.Component {
     state = {
         userId: '',
-        authenticated: true,
+        authenticated: false,
         section: "",
         // TODO: query bookItem to retrieve books this person owns
         bookPostings:
@@ -69,7 +69,7 @@ class UserProfile extends React.Component {
         const section = this.props.match.params.section
         this.setState(prevState => ({
             userId: userId,
-            authenticated: true,
+            authenticated: false,
             section: section,
         }))
     }
@@ -81,7 +81,7 @@ class UserProfile extends React.Component {
         if (section !== prevProps.match.params.section || userId !== prevProps.match.params.userId) {
             this.setState(prevState => ({
                 userId: userId,
-                authenticated: true,
+                authenticated: false,
                 section: section
             }))
         }
@@ -107,6 +107,7 @@ class UserProfile extends React.Component {
                         <UnloggedInProfile
                             userId={this.state.userId}
                             userRating={this.state.userRating}
+                            section={this.state.section}
                             bookPostings={this.state.bookPostings}
                             reviews={this.state.reviews}
                         />

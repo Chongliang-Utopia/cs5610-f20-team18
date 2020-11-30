@@ -41,5 +41,9 @@ main {
     margin-bottom: 100px;
 }
 
+table {
+    overflow-x: scroll;
+}
+
 
 
