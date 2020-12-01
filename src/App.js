@@ -14,7 +14,6 @@ import Footer from "./components/footer/Footer";
 import Admin from "./components/admin/Admin";
 import history from "./history";
 import PrivateRoute from "./components/PrivateRoute";
-import PrivateRouteAdmin from "./components/PrivateRouteAdmin";
 import UserSignUpAddress from "./components/authentication/SignUpAddress";
 import UserSignUpProfile from "./components/authentication/SignUpProfile";
 import ResetPassword from "./components/authentication/ResetPassword";
@@ -33,21 +32,20 @@ class App extends Component {
                     <PrivateRoute exact path="/resetPassword" component={ResetPassword} />
                     <Fragment>
                         <div className={classes.App}>
-                        <Header/>
-                        <main>
-                        <Route exact path="/" component={HomePage}/>
-                        <Route exact path="/search" component={GoogleBookClient}/>
-                        <Route exact path="/books/:bookId" component={BookDetail}/>
-                        <Route exact path="/users/:userId/profile" component={UserProfile}/>
-                        <Route exact path="/users/:userId/profile/:section" component={UserProfile}/>
-                        <Route exact path="/bookstore" component={BookStore}/>
-                        <Route exact path="/admin" component={Admin}/>
-                        <Route exact path="/admin/:section" component={Admin}/>
-                        </main>
-                        <Footer/>
+                            <Header/>
+                                <main>
+                                    <Route exact path="/" component={HomePage}/>
+                                    <Route exact path="/search" component={GoogleBookClient}/>
+                                    <Route exact path="/books/:bookId" component={BookDetail}/>
+                                    <Route exact path="/users/:userId/profile" component={UserProfile}/>
+                                    <Route exact path="/users/:userId/profile/:section" component={UserProfile}/>
+                                    <Route exact path="/bookstore" component={BookStore}/>
+                                    <Route exact path="/admin" component={Admin}/>
+                                    <Route exact path="/admin/:section" component={Admin}/>
+                                </main>
+                            <Footer/>
                         </div>
                     </Fragment>
-
                 </Switch>
             </Router>
         );

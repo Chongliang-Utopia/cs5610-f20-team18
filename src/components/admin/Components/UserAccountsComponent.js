@@ -2,10 +2,13 @@ import React from "react";
 import classes from "../../bookDetail/lenderTable/LenderTable.module.css";
 import {Link} from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import {connect} from "react-redux";
+import {deleteUser} from "../../../actions/adminActions";
 
 const UserAccountsComponent =
     ({
-         users=[]
+         users=[],
+         deleteUser
     }) =>
     <div>
         <h2>Active site users</h2>
@@ -30,7 +33,7 @@ const UserAccountsComponent =
                                     {user.userRating}
                                 </td>
                                 <td>
-                                    <Button variant="danger float-right btn-sm">Delete User</Button>
+                                    <Button variant="danger float-right btn-sm" onClick={()=>deleteUser(user._id)}>Delete User</Button>
                                 </td>
                             </tr>
                 )}
@@ -39,4 +42,9 @@ const UserAccountsComponent =
         </div>
     </div>
 
-export default UserAccountsComponent
+
+const stateToPropertyMapper = (state) => ({
+    users: state.admin.users
+})
+
+export default connect(stateToPropertyMapper, {deleteUser})(UserAccountsComponent)

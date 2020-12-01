@@ -6,10 +6,17 @@ import Rating from "react-rating";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import {Button} from "react-bootstrap";
 import {RiErrorWarningLine} from "react-icons/ri";
+import ReportForm from "./ReportForm";
+import Modal from "../UI/modal/Modal";
+import {connect} from "react-redux";
+import {closeReport, openReport} from "../../actions/adminActions";
 
 const PublicProfilePosts = ({userId, userRating, bookPostings, reviews, report, openReport, closeReport}) =>
 
         <div>
+            <Modal show={report} modalClosed={closeReport}>
+                <ReportForm/>
+            </Modal>
         <div className="mb-5">
             <h3>
                 {userId}'s Postings
@@ -118,4 +125,8 @@ const PublicProfilePosts = ({userId, userRating, bookPostings, reviews, report, 
 
 
 
-export default PublicProfilePosts;
+const StateToPropertyMapper = (state) => ({
+    report: state.admin.report,
+});
+
+export default connect(StateToPropertyMapper, {openReport, closeReport})(PublicProfilePosts);
