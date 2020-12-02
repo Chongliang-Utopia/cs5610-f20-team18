@@ -6,12 +6,13 @@ import {Accordion} from "react-bootstrap";
 import {Card} from "react-bootstrap";
 import {MdExpandMore} from "react-icons/md";
 import {connect} from "react-redux";
-import {deleteTicket} from "../../../actions/adminActions";
+import {createTicket, deleteTicket} from "../../../actions/adminActions";
 
 const UserTicketsComponent =
     ({
          tickets=[],
          deleteTicket,
+         createTicket
     }) => {
 
         //TODO: is this correct way of doing this??? delete review here?
@@ -79,6 +80,17 @@ const UserTicketsComponent =
                                         </Button>
                                         <Button variant="success btn-sm float-right" className="m-2"
                                                 onClick={() => deleteTicket(ticket._id)}>Reject Ticket</Button>
+                                        <Button variant="success btn-sm float-right" className="m-2"
+                                                onClick={() => createTicket({_id: "3",
+                                                    reviewId: "r3",
+                                                    reporterId: "april419",
+                                                    reviewerId: "phoebe23",
+                                                    revieweeId: "harry67",
+                                                    bookTitle: "Python for Dummies",
+                                                    description: "phoebe23 said the book owner is an idiot for no reason. Please" +
+                                                    " ban phoebe23"})}>
+                                            add Ticket
+                                        </Button>
                                     </div>
                                 </Card.Body>
                             </Accordion.Collapse>
@@ -95,4 +107,4 @@ const stateToPropertyMapper = (state) => ({
     tickets: state.admin.tickets
 })
 
-export default connect (stateToPropertyMapper, {deleteTicket})(UserTicketsComponent)
+export default connect (stateToPropertyMapper, {deleteTicket, createTicket})(UserTicketsComponent)

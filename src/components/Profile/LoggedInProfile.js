@@ -10,9 +10,10 @@ import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import Rating from "react-rating";
 import classes from "./LoggedInProfile.module.css"
 import {BsCaretRightFill} from "react-icons/bs";
+import {connect} from "react-redux";
 
 
-const LoggedInProfile = ({section, userId, bookPostings, requests, userRating, reviews}) => {
+const LoggedInProfile = ({section, user}) => {
     return (
         <div className={"container " + classes.LogInProfile}>
             <div className="mt-5 add-15-padding font-size-25-italic row">
@@ -24,10 +25,10 @@ const LoggedInProfile = ({section, userId, bookPostings, requests, userRating, r
                 </div>
                 <div className="add-left-margin add-15-top-margin col-lg-5">
                     <span>
-                        Welcome back, {userId}!
+                        Welcome back, {user.username}!
                     </span>
                     <div>
-                        <Rating initialRating={userRating} readonly
+                        <Rating initialRating={user.rating} readonly
                                 emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                 fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                     </div>
@@ -38,70 +39,67 @@ const LoggedInProfile = ({section, userId, bookPostings, requests, userRating, r
                 <div className={"col-md-4 col-lg-3 " + classes.leftSideBar}>
                     <div className="nav flex-column nav-pills">
                         <li className="nav-item">
-                            <Link to={`/users/${userId}/profile`} className="nav-link">
+                            <Link to={`/users/${user._id}/profile`} className="nav-link">
                                 {!section &&<BsCaretRightFill className="mb-1 mr-1"/>}
                                 Profile Home
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={`/users/${userId}/profile/settings`} className="nav-link">
+                            <Link to={`/users/${user._id}/profile/settings`} className="nav-link">
                                 {section === "settings" &&<BsCaretRightFill className="mb-1 mr-1"/>}
                                 Account Settings
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={`/users/${userId}/profile/lendings`} className="nav-link">
+                            <Link to={`/users/${user._id}/profile/lendings`} className="nav-link">
                                 {section === "lendings" &&<BsCaretRightFill className="mb-1 mr-1"/>}
                                 My Lendings
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={`/users/${userId}/profile/borrowings`} className="nav-link">
+                            <Link to={`/users/${user._id}/profile/borrowings`} className="nav-link">
                                 {section === "borrowings" &&<BsCaretRightFill className="mb-1 mr-1"/>}
                                 My borrowings
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={`/users/${userId}/profile/followings`} className="nav-link">
+                            <Link to={`/users/${user._id}/profile/followings`} className="nav-link">
                                 {section === "followings" &&<BsCaretRightFill className="mb-1 mr-1"/>}
                                 My followings
                             </Link>
                         </li>
                     </div>
                 </div>
+
                 <div className={"col-md-8 col-lg-9 pr-4 " + classes.contentDiv}>
                     {
                         typeof section === 'undefined' &&
-                        <ProfileLandingPageComponent
-                            reviews={reviews}
-                            userId={userId}
-                        />
+                        <ProfileLandingPageComponent/>
                     }
-                    {
-                        section === "settings" &&
-                        <AccountSettingComponent/>
-                    }
+                    {/*{*/}
+                    {/*    section === "settings" &&*/}
+                    {/*    <AccountSettingComponent/>*/}
+                    {/*}*/}
                     {
                         section === "lendings" &&
-                        <LendingComponent
-                            bookPostings={bookPostings}
-                            requests={requests}
-                        />
+                        <LendingComponent/>
                     }
-                    {
-                        section === "borrowings" &&
-                        <BorrowingComponent requests={requests}/>
-                    }
-                    {
-                        section === "followings" &&
-                        <FollowingComponent/>
-                    }
+                    {/*{*/}
+                    {/*    section === "borrowings" &&*/}
+                    {/*    <BorrowingComponent/>*/}
+                    {/*}*/}
+                    {/*{*/}
+                    {/*    section === "followings" &&*/}
+                    {/*    <FollowingComponent/>*/}
+                    {/*}*/}
                 </div>
-
             </div>
         </div>
     )
 }
 
-
-export default LoggedInProfile
+const stateToPropertyMapper = (state) => ({
+    user: state.profile.user,
+    section: state.profile.section,
+})
+export default connect(stateToPropertyMapper)(LoggedInProfile)

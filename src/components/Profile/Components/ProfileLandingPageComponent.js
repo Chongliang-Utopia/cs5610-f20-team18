@@ -9,7 +9,7 @@ import {Row, Col, Button, Carousel} from 'react-bootstrap'
 import {RiErrorWarningLine} from "react-icons/ri";
 import ReportForm from "../ReportForm";
 import Modal from "../../UI/modal/Modal";
-import {closeReport, openReport} from "../../../actions/adminActions";
+import {closeReport, openReport} from "../../../actions/profileActions";
 import {connect} from "react-redux";
 
 
@@ -31,7 +31,16 @@ const bestsellerBooksLists = [
         "/books/book12.webp",
     ],
 ]
-const ProfileLandingPageComponent = ({reviews, userId, openReport, closeReport, report}) =>
+const ProfileLandingPageComponent = ({
+         reviewsUserReceived,
+         user,
+         bookPostings,
+         transactions,
+         openReport,
+         closeReport,
+         report,
+         follows
+    }) =>
     <div>
         <Modal show={report} modalClosed={closeReport}>
             <ReportForm/>
@@ -47,7 +56,7 @@ const ProfileLandingPageComponent = ({reviews, userId, openReport, closeReport, 
                     </Card.Body>
                     <Card.Footer style={{"background": "none", "border-top": "none"}}>
                         <br/>
-                        <Link to={`/users/${userId}/profile/lendings`}>3</Link>
+                        <Link to={`/users/${user._id}/profile/lendings`}>{bookPostings.length}</Link>
                     </Card.Footer>
                 </Card>
                 {/*<Card style={{ width: '10rem' }} className="center-text" bg={"light"}>*/}
@@ -64,7 +73,7 @@ const ProfileLandingPageComponent = ({reviews, userId, openReport, closeReport, 
                     </Card.Body>
                     <Card.Footer style={{"background": "none", "border-top": "none"}}>
                         <br/>
-                        <Link to={`/users/${userId}/profile/followings`}>250</Link>
+                        <Link to={`/users/${user._id}/profile/followings`}>{follows.filter(follow=>follow.followerId === user._id).length}</Link>
                     </Card.Footer>
                 </Card>
             </CardDeck>
@@ -76,7 +85,8 @@ const ProfileLandingPageComponent = ({reviews, userId, openReport, closeReport, 
                     </Card.Body>
                     <Card.Footer style={{"background": "none", "border-top": "none"}}>
                         <br/>
-                        <Link to={`/users/${userId}/profile/borrowings`}>12</Link>
+                        <Link to={`/users/${user._id}/profile/borrowings`}>
+                            {transactions.filter(transaction=>transaction.status === "approved" && transaction.borrowerId === user._id).length}</Link>
                     </Card.Footer>
                 </Card>
                 {/*<Card style={{ width: '10rem' }} className="center-text" bg={"light"}>*/}
@@ -94,7 +104,7 @@ const ProfileLandingPageComponent = ({reviews, userId, openReport, closeReport, 
                     </Card.Body>
                     <Card.Footer style={{"background": "none", "border-top": "none"}}>
                         <br/>
-                        <Link to={`/users/${userId}/profile/followings`}>65</Link>
+                        <Link to={`/users/${user._id}/profile/followings`}>{follows.filter(follow=>follow.followeeId === user._id).length}</Link>
                     </Card.Footer>
                 </Card>
             </CardDeck>
@@ -115,25 +125,25 @@ const ProfileLandingPageComponent = ({reviews, userId, openReport, closeReport, 
                     </tr>
                     </thead>
                     <tbody>
-                    {reviews.map(review =>
+                    {reviewsUserReceived.map(review =>
                         <tr>
                             <td>
-                                <Link to={`/users/${review.userName}/profile`} className="mr-1">{review.userName}</Link>
+                                <Link to={`/users/${review.reviewerId}/profile`} className="mr-1">{review.reviewer.username}</Link>
                             </td>
                             <td>
-                                {review.bookTitle}
+                                {review.transaction.bookTitle}
                             </td>
                             <td>
-                                <Rating initialRating={review.userRating} readonly
+                                <Rating initialRating={review.rating} readonly
                                         emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                         fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                             </td>
                             <td>
-                                <span>{review.content}</span>
+                                <span>{review.comments}</span>
                             </td>
                             <td>
                                 <Button variant="warning" size="sm" className="transparent" title="Report"
-                                        onClick={openReport}>
+                                        onClick={()=>openReport(review)}>
                                     <RiErrorWarningLine/>
                                 </Button>
                             </td>
@@ -168,7 +178,12 @@ const ProfileLandingPageComponent = ({reviews, userId, openReport, closeReport, 
     </div>
 
 const StateToPropertyMapper = (state) => ({
-    report: state.admin.report,
+    report: state.profile.report,
+    bookPostings:state.profile.bookPostings,
+    transactions: state.profile.transactions,
+    user: state.profile.user,
+    reviewsUserReceived: state.profile.reviewsUserReceived,
+    follows: state.profile.follows
 });
 
 export default connect(StateToPropertyMapper, {openReport, closeReport})(ProfileLandingPageComponent);

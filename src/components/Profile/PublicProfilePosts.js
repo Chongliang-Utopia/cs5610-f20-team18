@@ -9,7 +9,7 @@ import {RiErrorWarningLine} from "react-icons/ri";
 import ReportForm from "./ReportForm";
 import Modal from "../UI/modal/Modal";
 import {connect} from "react-redux";
-import {closeReport, openReport} from "../../actions/adminActions";
+import {closeReport, openReport} from "../../actions/profileActions";
 
 const PublicProfilePosts = ({userId, userRating, bookPostings, reviews, report, openReport, closeReport}) =>
 

@@ -1,17 +1,18 @@
 import {
     CHANGE_EMAIL,
     CHANGE_PASSWORD,
-    CLOSE_REPORT, DELETE_REVIEW, DELETE_TICKET, DELETE_USER,
+    CREATE_TICKET,
+    DELETE_TICKET,
+    DELETE_USER,
     FETCH_ADMINUSER,
-    OPEN_REPORT,
-    SWITCH_SECTION, UPDATE_USERINFO
+    SWITCH_SECTION,
+    UPDATE_USERINFO
 } from "../actions/types";
 
 const INTIAL_STATE = {
     numberOfMembers: 0,
     numberOfPosts: 0,
     numberOfTickets: 0,
-    report: false,
     section: '',
     tickets: [
         {
@@ -70,10 +71,6 @@ const INTIAL_STATE = {
 
 const adminReducer = (state = INTIAL_STATE, action) => {
     switch (action.type) {
-        case OPEN_REPORT:
-            return {...state, report: true};
-        case CLOSE_REPORT:
-            return {...state, report: false};
         case SWITCH_SECTION:
             return {...state, section: action.section}
         case CHANGE_EMAIL:
@@ -105,6 +102,14 @@ const adminReducer = (state = INTIAL_STATE, action) => {
             return {
                 ...state,
                 users: state.users.filter(user => user._id !== action.uid)
+            }
+        case CREATE_TICKET:
+            return {
+                ...state,
+                tickets: [
+                    ...state.tickets,
+                    action.newTicket
+                ]
             }
         default:
             return state;

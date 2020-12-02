@@ -1,25 +1,13 @@
 import {
     CHANGE_EMAIL,
     CHANGE_PASSWORD,
-    CLOSE_REPORT,
+    CREATE_TICKET,
     DELETE_TICKET,
     DELETE_USER,
-    OPEN_REPORT,
     SWITCH_SECTION,
     UPDATE_USERINFO
 } from "./types";
 
-export const closeReport = () => {
-    return {
-        type: CLOSE_REPORT
-    };
-};
-
-export const openReport = () => {
-    return {
-        type: OPEN_REPORT
-    };
-};
 
 export const switchSections = (section) => {
     return  {
@@ -68,6 +56,16 @@ export const updateAdminInfo = (adminUser) => {
         adminUser: adminUser
     }
 }
+
+// send to service and create a new user ticket
+export const createTicket = (newTicket) => {
+    // TODO: send data to server and then back
+    return {
+        type: CREATE_TICKET,
+        newTicket: newTicket
+    }
+}
+
 
 //TODO
 export const fetchMemberNumber = () => {}
