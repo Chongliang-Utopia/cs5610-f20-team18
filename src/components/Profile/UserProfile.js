@@ -15,7 +15,6 @@ import {
 
 
 class UserProfile extends React.Component {
-
     componentDidMount() {
         const uid = this.props.match.params.userId
         const section = this.props.match.params.section

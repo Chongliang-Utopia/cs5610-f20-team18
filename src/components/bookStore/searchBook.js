@@ -48,7 +48,7 @@ class SearchBook extends React.Component {
                     }
                     {
                         this.props.books.length === 0 &&
-                        <div className={classes.noResults}><h4>No results available, please search again...</h4></div>
+                        <h4>No results available, please search again...</h4>
                     }
                 </div>
             </div>

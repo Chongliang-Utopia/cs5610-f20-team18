@@ -54,7 +54,7 @@ const searchBookReducer = (state = INITIAL_STATE, action) => {
             })
             return {...state, books: bookSortedByPublisher}
         case CLEAR_BOOKS:
-            return {...state, books:[]};
+            return {...state, books:[], minRating: 0};
         case BOOK_ADDER:
             let curBooks = [...state.books]
             curBooks.push(action.book)
