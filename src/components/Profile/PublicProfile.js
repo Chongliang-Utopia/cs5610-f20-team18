@@ -1,20 +1,16 @@
 import React from "react";
 import ProfileHeading from "./profileHeading/ProfileHeading";
-import ReportForm from "./ReportForm";
-import Modal from "../UI/modal/Modal";
-import {closeReport, openReport} from "../../actions/adminActions";
-import {connect} from "react-redux";
 import classes from "./PublicProfile.module.css";
 import PublicProfilePosts from "./PublicProfilePosts";
 
 
-const PublicProfile = ({section, userId, userRating, bookPostings, reviews}) =>
-
+const PublicProfile = () =>
     <div className="container">
-        <ProfileHeading user={userId}/>
+        <ProfileHeading/>
         <div className={classes.PublicProfile}>
-                <PublicProfilePosts bookPostings={bookPostings} userId={userId} reviews={reviews}/>
+                <PublicProfilePosts/>
         </div>
     </div>
+
 export default PublicProfile;
 

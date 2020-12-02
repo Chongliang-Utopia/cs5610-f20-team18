@@ -1,6 +1,6 @@
 import {
-    CLOSE_REPORT,
-    CREATE_REVIEW,
+    CLOSE_REPORT, CREATE_FOLLOW,
+    CREATE_REVIEW, DELETE_FOLLOW,
     DELETE_POSTING, DELETE_TRANSACTION,
     OPEN_REPORT,
     SWITCH_SECTION,
@@ -77,6 +77,24 @@ export const deleteTransaction = (transaction) => {
         transaction
     }
 }
+
+export const createFollow = (follow) => {
+    //TODO: send to server and back
+    return {
+        type: CREATE_FOLLOW,
+        follow
+    }
+
+}
+
+export const deleteFollow = (fid) => {
+    //TODO: send to server and back
+    return {
+        type: DELETE_FOLLOW,
+        fid: fid
+    }
+}
+
 
 //TODO, haven't set up the type and reducer for following methods
 

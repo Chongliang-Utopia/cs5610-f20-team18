@@ -1,6 +1,6 @@
 import {
-    CLOSE_REPORT,
-    CREATE_REVIEW,
+    CLOSE_REPORT, CREATE_FOLLOW,
+    CREATE_REVIEW, DELETE_FOLLOW,
     DELETE_POSTING, DELETE_TRANSACTION,
     OPEN_REPORT,
     SWITCH_SECTION,
@@ -21,8 +21,9 @@ const INTIAL_STATE = {
         signature: "Huge Harry Potter fan!",
         rating: 4
     },
-    authenticated: true,
+    authenticated: false,
     section: "",
+    // consider moving to local state
     report: false,
     selectedReview: {},
     bookPostings: [
@@ -304,14 +305,20 @@ const INTIAL_STATE = {
         {
             _id: "f1",
             followerId: "user1",
-            follower: {
-                username: "Tom Riddle",
-                rating: 4
-            },
             followeeId: "user33",
             followee: {
                 _id: "user33",
                 username: "WoloaHope",
+                rating: 4
+            }
+        },
+        {
+            _id: "f13",
+            followerId: "user1",
+            followeeId: "user222",
+            followee: {
+                _id: "user222",
+                username: "crazycoder",
                 rating: 4
             }
         },
@@ -323,10 +330,6 @@ const INTIAL_STATE = {
                 rating: 4
             },
             followeeId: "user1",
-            followee: {
-                username: "Tom Riddle",
-                rating: 4
-            }
         }
     ]
 };
@@ -379,6 +382,19 @@ const profileReducer = (state = INTIAL_STATE, action) => {
             return {
                 ...state,
                 transactions: state.transactions.filter(transaction=>transaction._id !== action.transaction._id)
+            }
+        case DELETE_FOLLOW:
+            return {
+                ...state,
+                follows: state.follows.filter(follow=>follow._id !== action.fid)
+            }
+        case CREATE_FOLLOW:
+            return {
+                ...state,
+                follows: [
+                    ...state.follows,
+                    action.follow
+                ]
             }
         default:
             return state

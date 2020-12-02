@@ -88,10 +88,10 @@ const LoggedInProfile = ({section, user}) => {
                         section === "borrowings" &&
                         <BorrowingComponent/>
                     }
-                    {/*{*/}
-                    {/*    section === "followings" &&*/}
-                    {/*    <FollowingComponent/>*/}
-                    {/*}*/}
+                    {
+                        section === "followings" &&
+                        <FollowingComponent/>
+                    }
                 </div>
             </div>
         </div>

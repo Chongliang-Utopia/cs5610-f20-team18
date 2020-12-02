@@ -1,50 +1,42 @@
 import React from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import {Link} from "react-router-dom";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import Rating from "react-rating";
-import {RiErrorWarningLine} from "react-icons/ri";
+import {connect} from "react-redux";
+import {createFollow, deleteFollow} from "../../../actions/profileActions";
 
-const FollowingComponent = () =>
+const FollowingComponent = ({
+    user,
+    follows,
+    createFollow,
+    deleteFollow
+                            }) =>
     <div>
         <h2>
             People you follow
         </h2>
         <ListGroup variant="flush">
-            <ListGroup.Item className="pl-0">
-                <Image width={40}
-                       height={32}
-                       src="https://banner2.cleanpng.com/20171215/92c/hedgehog-png-5a3484489a2ad5.0068272815133911766315.jpg"
-                       roundedCircle
-                       className="hideAtSm mr-2"
-                />
-                <Link to={`/users/Constanziato/profile`}>Constanziato</Link>
-                <span className="hideAtSm">
-                    <Rating className="add-15-padding" initialRating={3} readonly
-                            emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
-                            fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
-                </span>
-                <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow">Following</button>
-            </ListGroup.Item>
-            <ListGroup.Item className="pl-0">
-                <Image width={40}
-                       height={32}
-                       src="https://jpegwall.com/wp-content/uploads/2019/10/Harry-Potter-Wallpaper.jpg" roundedCircle
-                       className="mr-2"
-                />
-                <span>Diaziato</span>
-                <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow">Following</button>
-            </ListGroup.Item>
-            <ListGroup.Item className="pl-0">
-                <span>HarrisoForddy</span>
-                <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow">Following</button>
-            </ListGroup.Item>
-            <ListGroup.Item className="pl-0">
-                <span>Bidenista</span>
-                <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow">Following</button>
-            </ListGroup.Item>
+            {
+                follows.filter(follow=>follow.followerId===user._id).map(follow=>
+                    <ListGroup.Item className="pl-0">
+                        <Image width={40}
+                               height={32}
+                               src={follow.followee.src}
+                               roundedCircle
+                               className="hideAtSm mr-2"
+                        />
+                        <Link to={`/users/${follow.followee._id}/profile`}>{follow.followee.username}</Link>
+                        <span className="hideAtSm">
+                            <Rating className="add-15-padding" initialRating={3} readonly
+                                    emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
+                                    fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
+                        </span>
+                        <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow" onClick={()=>deleteFollow(follow._id)}>Following</button>
+                    </ListGroup.Item>)
+            }
+
         </ListGroup>
 
 
@@ -52,26 +44,44 @@ const FollowingComponent = () =>
         <h2>
             People who follow you
         </h2>
-            <ListGroup variant="flush">
-                <ListGroup.Item className="pl-0">
-                    <span>Constanziato</span>
-                    <button className="pull-right btn btn-sm btn-primary" title="Follow">Follow</button>
-                </ListGroup.Item>
-                <ListGroup.Item className="pl-0">
-                    <span>Diaziato</span>
-                    <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow">Following</button>
-                </ListGroup.Item>
-                <ListGroup.Item className="pl-0">
-                    <span>HarrisoForddy</span>
-                    <button className="pull-right btn btn-sm btn-primary" title="Follow">Follow</button>
-                </ListGroup.Item>
-                <ListGroup.Item className="pl-0">
-                    <span>Bidenista</span>
-                    <button className="pull-right btn btn-sm btn-primary" title="Follow">Follow</button>
-                </ListGroup.Item>
-            </ListGroup>
-
+        <ListGroup variant="flush">
+            {
+                follows.filter(follow=>follow.followeeId===user._id).map(follow=>
+                    <ListGroup.Item className="pl-0">
+                        <Image width={40}
+                               height={32}
+                               src={follow.follower.src}
+                               roundedCircle
+                               className="hideAtSm mr-2"
+                        />
+                        <Link to={`/users/${follow.follower._id}/profile`}>{follow.follower.username}</Link>
+                        <span className="hideAtSm">
+                            <Rating className="add-15-padding" initialRating={3} readonly
+                                    emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
+                                    fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
+                        </span>
+                        {
+                            follows.find(f=>f.followeeId===follow.followerId && f.followerId===user._id) === undefined &&
+                            <button className="pull-right btn btn-primary btn-sm" title="Unfollow"
+                                    onClick={()=>createFollow({
+                                        _id: "newf111",
+                                        followerId: user._id,
+                                        followeeId: follow.followerId,
+                                        followee: {
+                                            _id: follow.followerId,
+                                            username: follow.follower.username,
+                                        }
+                                    })}
+                            >Follow</button>
+                        }
+                    </ListGroup.Item>)
+            }
+        </ListGroup>
     </div>
 
+const stateToPropertyMapper = (state) => ({
+    follows: state.profile.follows,
+    user: state.profile.user
+})
 
-export default FollowingComponent
+export default connect(stateToPropertyMapper, {createFollow, deleteFollow})(FollowingComponent)

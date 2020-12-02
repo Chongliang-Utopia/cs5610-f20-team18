@@ -8,6 +8,7 @@ const AdminAccountSettingComponent = ({
       changeAdminPassword,
       updateAdminInfo
     }) => {
+    // TODO: REVISE!! construct local state to store password and email!!
     return(
         <form>
             <h2>Edit admin credential</h2>

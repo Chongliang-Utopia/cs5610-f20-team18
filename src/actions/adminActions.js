@@ -17,7 +17,6 @@ export const switchSections = (section) => {
 };
 
 export const changeAdminEmail = (adminUser) => {
-    // TODO: send POST to server
     return {
         type: CHANGE_EMAIL,
         adminUser: adminUser
@@ -25,8 +24,6 @@ export const changeAdminEmail = (adminUser) => {
 }
 
 export const changeAdminPassword = (adminUser) => {
-    // TODO: send POST to server,
-    //  any special treatment needed for password?
     return {
         type: CHANGE_PASSWORD,
         adminUser: adminUser
