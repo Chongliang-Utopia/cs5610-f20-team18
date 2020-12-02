@@ -3,8 +3,9 @@ import Rating from "react-rating";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import classes from "./ProfileHeading.module.css";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
 
-const ProfileHeading = ({user, userId}) => {
+const ProfileHeading = ({user}) => {
     return (
         <div className={"mt-5 add-15-padding row " + classes.ProfileHeading}>
             <div className={"col-lg-2 " + classes.profileImage}>
@@ -15,7 +16,7 @@ const ProfileHeading = ({user, userId}) => {
             <div className="pt-3 col-9">
                 <div className="form-inline">
                     <h2 className="pl-3">
-                        {user}
+                        {user.username}
                     </h2>
                     <button className="btn btn-info mb-3  ml-3">Follow</button>
                 </div>
@@ -27,21 +28,25 @@ const ProfileHeading = ({user, userId}) => {
                 <div>
                     <ul className="nav">
                         <li className="nav-item">
-                            <Link to={`/users/${userId}/profile/posts`} className="nav-link"><b>100</b> posts</Link>
+                            <Link to={`/users/${user._id}/profile/posts`} className="nav-link"><b>100</b> posts</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={`/users/${userId}/profile/followings`} className="nav-link"><b>200</b> followers</Link>
+                            <Link to={`/users/${user._id}/profile/followings`} className="nav-link"><b>200</b> followers</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={`/users/${userId}/profile/followings`} className="nav-link"><b>300</b> following</Link>
+                            <Link to={`/users/${user._id}/profile/followings`} className="nav-link"><b>300</b> following</Link>
                         </li>
                     </ul>
                 </div>
                 <div className="pl-3">
-                    I am a passionate reader!
+                    {user.signature}
                 </div>
             </div>
         </div>)
 }
 
-export default ProfileHeading;
+const stateToPropertyMapper = (state) =>({
+    user: state.profile.user
+})
+
+export default connect(stateToPropertyMapper)(ProfileHeading);

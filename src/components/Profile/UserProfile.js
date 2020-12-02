@@ -1,120 +1,79 @@
 import React from "react"
 import LoggedInProfile from "./LoggedInProfile";
-import UnloggedInProfile from "./PublicProfile";
+import PublicProfile from "./PublicProfile";
+import {connect} from "react-redux";
+import {
+    fetchUser,
+    switchSection,
+    fetchBookPostingsForUser,
+    fetchReviewsUserGave,
+    fetchReviewsUserReceived,
+    fetchTransactionsForUser,
+    fetchFollowers,
+    fetchFollowings
+} from "../../actions/profileActions";
 
 
 class UserProfile extends React.Component {
-    state = {
-        userId: '',
-        authenticated: true,
-        section: "",
-        // TODO: query bookItem to retrieve books this person owns
-        bookPostings:
-            [
-                {
-                    title: "Harry Potter and the chamber of Secrets",
-                    bookCondition: "Good",
-                    src: "/books/book1.webp"
-                },
-                {
-                    title: "Harry Potter and the Goblet of Fire",
-                    bookCondition: "Like New",
-                    src: "/books/book2.webp"
-                }
-            ],
-        requests: [
-            {
-                userName: "ILoveBooks1989",
-                userRating: 5,
-                location: "San Jose",
-                bookTitle:"harry potter",
-                status: "pending"
-            },
-            {
-                userName: "bayAreaReader",
-                userRating: 3,
-                location: "San Francisco",
-                bookTitle: "lord of the rings",
-                status: "approved"
-            },
-            {
-                userName: "goodhedgey58",
-                userRating: 3,
-                location: "Mountain View",
-                bookTitle: "lord of the fly",
-                status: "declined"
-            }
-        ],
-        reviews: [
-            {
-                userName: "MrPerfectionist",
-                bookTitle: "Harry Potter and the chamber of Secrets",
-                userRating: 1,
-                content: "This book is not in good condition at all. The owner should take good care of his/her books!!! I would" +
-                    "not borrow from this lender ever again!!!"
-            },
-            {
-                userName: "MrGoodEnough",
-                bookTitle: "Harry Potter and the Goblet of Fire",
-                userRating: 5,
-                content: "A good book and a very helpful lender. I would recommend aprilz to anyone who wants to lend."
-            },
-        ],
-        userRating: 3
-    }
-
     componentDidMount() {
-        // authenticate user here and update state variable
-        const userId = this.props.match.params.userId
+        const uid = this.props.match.params.userId
         const section = this.props.match.params.section
-        this.setState(prevState => ({
-            userId: userId,
-            authenticated: true,
-            section: section,
-        }))
+        // TODO: fetch all data here, implement these and un-comment
+        // this.props.fetchUser(uid)
+        // this.props.fetchBookPostingsForUser(uid)
+        // this.props.fetchTransactionsForUser(uid)
+        // this.props.fetchReviewsForUser(uid)
+        // this.props.fetchReviewsUserGave(uid)
+        // this.props.fetchFollowings(uid)
+        // this.props.fetchFollowers(uid)
+        // TODO: need to deal with authentication here
+        this.props.switchSection(section)
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // authenticate user here and update state variable??
-        const userId = this.props.match.params.userId
+        const uid = this.props.match.params.userId
         const section = this.props.match.params.section
-        if (section !== prevProps.match.params.section || userId !== prevProps.match.params.userId) {
-            this.setState(prevState => ({
-                userId: userId,
-                authenticated: true,
-                section: section
-            }))
-        }
+        if (section !== prevProps.match.params.section || uid !== prevProps.match.params.userId) {
+            // TODO: fetch all data here, implement these and un-comment
+            // this.props.fetchUser(uid)
+            this.props.switchSection(section)
+            // this.props.fetchUser(uid)
+            // this.props.fetchBookPostingsForUser(uid)
+            // this.props.fetchTransactionsForUser(uid)
+            // this.props.fetchReviewsForUser(uid)
+            // this.props.fetchReviewsUserGave(uid)
+            // this.props.fetchFollowings(uid)
+            // this.props.fetchFollowers(uid)
+            }
     }
 
     render() {
         return (
             <div className="container">
                 {
-                    this.state.authenticated &&
-                    <LoggedInProfile
-                        userId={this.state.userId}
-                        userRating={this.state.userRating}
-                        section={this.state.section}
-                        bookPostings={this.state.bookPostings}
-                        requests={this.state.requests}
-                        reviews={this.state.reviews}
-                    />
+                    this.props.authenticated && <LoggedInProfile/>
                 }
 
                 {
-                    !this.state.authenticated &&
-                        <UnloggedInProfile
-                            userId={this.state.userId}
-                            userRating={this.state.userRating}
-                            section={this.state.section}
-                            bookPostings={this.state.bookPostings}
-                            reviews={this.state.reviews}
-                        />
+                    !this.props.authenticated && <PublicProfile/>
                 }
             </div>
         )
     }
 }
 
-export default UserProfile
+const stateToPropertyMapper = (state) => ({
+    authenticated: state.profile.authenticated,
+})
+
+export default connect(stateToPropertyMapper,
+    {
+        fetchUser,
+        fetchBookPostingsForUser,
+        fetchReviewsUserGave,
+        fetchReviewsUserReceived,
+        fetchTransactionsForUser,
+        switchSection,
+        fetchFollowers,
+        fetchFollowings
+    })(UserProfile)

@@ -6,67 +6,57 @@ import UserAccountsComponent from "./Components/UserAccountsComponent";
 import UserTicketsComponent from "./Components/UserTicketsComponent";
 import classes from "./admin.module.css";
 import {BsCaretRightFill} from "react-icons/bs";
+import {connect} from "react-redux";
+import {switchSections, fetchMemberNumber, fetchPostingNumber, fetchTicketNumber, fetchAdminUser, fetchAllUsers, fetchUserTickets} from "../../actions/adminActions";
 
-class Admin extends React.Component {
-    state = {
-        section: '',
-        tickets: [
-            {
-                reporterId: "melanie12",
-                bookTitle: "How to fake your application to graduate school",
-                reviewerId: "phoebe23",
-                revieweeId: "harry67",
-                description: "this book is teaching people how to fake their application. " +
-                    "Please delete this book. It's a highly unethical thing to do!!!!"
-            },
-            {
-                reporterId: "mel89",
-                reviewerId: "phoebe23",
-                revieweeId: "harry67",
-                bookTitle: "1587, a year of no significance",
-                description: "phoebe23 insulted harry67 by saying \"go to hell, you suck! \"" +
-                    "I think this is highly inappropriate. Please warn phoebe23."
-            },
-            {
-                reporterId: "april419",
-                reviewerId: "phoebe23",
-                revieweeId: "harry67",
-                bookTitle: "Python for Dummies",
-                description: "phoebe23 said the book owner is an idiot for no reason. Please" +
-                    " ban phoebe23"
-            }
-        ],
-        users: [
-            {
-                username: "april",
-                status: "ACTIVE"
-            },
-            {
-                username: "phoebe23",
-                status: "INACTIVE"
-            },
-            {
-                username: "melanie89",
-                status: "ACTIVE"
-            }
-        ]
-    }
+class Admin extends React.Component{
 
     componentDidMount() {
+        console.log('didmount')
         const section = this.props.match.params.section
-        this.setState({
-            section: section
-        })
+        this.props.switchSections(section)
+        //TODO: implement to update numbers
+        // this.props.fetchMemberNumber()
+        // this.props.fetchPostingNumber()
+        // this.props.fetchTicketNumber()
+
+        //TODO: fetch admin user object
+        // this.props.fetchAdminUser()
+
+        //TODO: fetch user tickets
+        // this.props.fetchUserTickets()
+
+        //TODO: fetch all users
+        // this.props.fetchAllUsers()
+
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('didupdate')
         // authenticate user here and update state variable??
         const section = this.props.match.params.section
         if (section !== prevProps.match.params.section) {
-            this.setState(prevState => ({
-                section: section
-            }))
+            this.props.switchSections(section)
+            if (!section) {
+                //TODO: implement to update numbers
+                // this.props.fetchMemberNumber()
+                // this.props.fetchPostingNumber()
+                // this.props.fetchTicketNumber()
+            }
+            if (section === "settings") {
+                //TODO: fetch admin user object
+                // this.props.fetchAdminUser()
+            }
+            if (section === "tickets") {
+                //TODO: fetch user tickets
+                // this.props.fetchUserTickets()
+            }
+            if (section === "users") {
+                //TODO: fetch all users
+                // this.props.fetchAllUsers()
+            }
         }
+
     }
 
     render() {
@@ -85,31 +75,32 @@ class Admin extends React.Component {
 
                 </div>
                 <br/>
+
                 <div className={"row " + classes.adminDiv}>
                     <div className={"col-md-4 col-lg-3 " + classes.leftSideBar}>
 
                         <div className="nav nav-pills mb-3">
                             <li className="nav-item">
                                 <Link to={`/admin`} className="nav-link">
-                                    {!this.state.section && <BsCaretRightFill className="mb-1 mr-1"/>}
+                                    {!this.props.section && <BsCaretRightFill className="mb-1 mr-1"/>}
                                     Profile Home
                                 </Link>
                             </li>
                             <li className="nav-item">
                                 <Link to={`/admin/settings`} className="nav-link">
-                                    {this.state.section === "settings" && <BsCaretRightFill className="mb-1 mr-1"/>}
+                                    {this.props.section === "settings" && <BsCaretRightFill className="mb-1 mr-1"/>}
                                     Account Settings
                                 </Link>
                             </li>
                             <li className="nav-item">
                                 <Link to={`/admin/tickets`} className="nav-link">
-                                    {this.state.section === 'tickets' && <BsCaretRightFill className="mb-1 mr-1"/>}
+                                    {this.props.section === 'tickets' && <BsCaretRightFill className="mb-1 mr-1"/>}
                                     User Tickets
                                 </Link>
                             </li>
                             <li className="nav-item">
                                 <Link to={`/admin/users`} className="nav-link">
-                                    {this.state.section === 'users' && <BsCaretRightFill className="mb-1 mr-1"/>}
+                                    {this.props.section === 'users' && <BsCaretRightFill className="mb-1 mr-1"/>}
                                     User Accounts
                                 </Link>
                             </li>
@@ -117,22 +108,20 @@ class Admin extends React.Component {
                     </div>
                     <div className={"col-md-8 col-lg-9 pr-4 " + classes.contentDiv}>
                         {
-                            typeof this.state.section === 'undefined' &&
+                            typeof this.props.section === 'undefined' &&
                             <AdminLandingPageComponent/>
                         }
                         {
-                            this.state.section === "settings" &&
+                            this.props.section === "settings" &&
                             <AdminAccountSettingComponent/>
                         }
                         {
-                            this.state.section === "tickets" &&
-                            <UserTicketsComponent
-                                tickets={this.state.tickets}/>
+                            this.props.section === "tickets" &&
+                            <UserTicketsComponent/>
                         }
                         {
-                            this.state.section === "users" &&
-                            <UserAccountsComponent
-                                users={this.state.users}/>
+                            this.props.section === "users" &&
+                            <UserAccountsComponent/>
                         }
                     </div>
                 </div>
@@ -142,5 +131,12 @@ class Admin extends React.Component {
 
 }
 
+const stateToPropertyMapper = (state) => ({
+    section: state.admin.section
+})
 
-export default Admin;
+
+
+export default connect (
+    stateToPropertyMapper,
+    {switchSections, fetchTicketNumber, fetchMemberNumber, fetchPostingNumber, fetchAdminUser, fetchAllUsers, fetchUserTickets})(Admin);
