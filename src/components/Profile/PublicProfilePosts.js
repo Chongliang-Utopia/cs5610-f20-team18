@@ -12,19 +12,18 @@ import {connect} from "react-redux";
 import {closeReport, openReport} from "../../actions/profileActions";
 
 const PublicProfilePosts = ({
-        user,
-        bookPostings,
-        transactions,
-        report,
-        openReport,
-        closeReport,
-        reviewsUserReceived}) =>
-
-    (
+            user,
+            bookPostings=[],
+            transactions=[],
+            report,
+            openReport,
+            closeReport,
+            reviewsUserReceived
+        }) =>
         <div>
-            {/*<Modal show={report} modalClosed={closeReport}>*/}
-            {/*    <ReportForm/>*/}
-            {/*</Modal>*/}
+            <Modal show={report} modalClosed={closeReport}>
+                <ReportForm/>
+            </Modal>
             <div className="mb-5">
                 <h3>
                     {user.username}'s Postings
@@ -132,13 +131,12 @@ const PublicProfilePosts = ({
                 </div>
             </div>
         </div>
-    )
 
 
 
 
 const StateToPropertyMapper = (state) => ({
-    report: state.admin.report,
+    report: state.profile.report,
     bookPostings: state.profile.bookPostings,
     user: state.profile.user,
     transactions: state.profile.transactions,
