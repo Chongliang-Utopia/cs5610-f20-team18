@@ -76,18 +76,18 @@ const LoggedInProfile = ({section, user}) => {
                         typeof section === 'undefined' &&
                         <ProfileLandingPageComponent/>
                     }
-                    {/*{*/}
-                    {/*    section === "settings" &&*/}
-                    {/*    <AccountSettingComponent/>*/}
-                    {/*}*/}
+                    {
+                        section === "settings" &&
+                        <AccountSettingComponent/>
+                    }
                     {
                         section === "lendings" &&
                         <LendingComponent/>
                     }
-                    {/*{*/}
-                    {/*    section === "borrowings" &&*/}
-                    {/*    <BorrowingComponent/>*/}
-                    {/*}*/}
+                    {
+                        section === "borrowings" &&
+                        <BorrowingComponent/>
+                    }
                     {/*{*/}
                     {/*    section === "followings" &&*/}
                     {/*    <FollowingComponent/>*/}

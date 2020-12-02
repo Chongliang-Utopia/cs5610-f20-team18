@@ -1,7 +1,7 @@
 import {
     CLOSE_REPORT,
     CREATE_REVIEW,
-    DELETE_POSTING,
+    DELETE_POSTING, DELETE_TRANSACTION,
     OPEN_REPORT,
     SWITCH_SECTION,
     UPDATE_POSTING, UPDATE_REVIEW,
@@ -68,8 +68,16 @@ export const updateTransaction = (transaction) => {
         type: UPDATE_TRANSACTION,
         transaction
     }
-
 }
+
+export const deleteTransaction = (transaction) => {
+    //TODO: send to server and back
+    return {
+        type: DELETE_TRANSACTION,
+        transaction
+    }
+}
+
 //TODO, haven't set up the type and reducer for following methods
 
 // list of book inventory objects

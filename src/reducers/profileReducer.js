@@ -1,7 +1,7 @@
 import {
     CLOSE_REPORT,
     CREATE_REVIEW,
-    DELETE_POSTING,
+    DELETE_POSTING, DELETE_TRANSACTION,
     OPEN_REPORT,
     SWITCH_SECTION,
     UPDATE_POSTING,
@@ -54,6 +54,27 @@ const INTIAL_STATE = {
             },
             borrowerId: "user22",
             borrower: {
+                username: "LazyReader54",
+                rating: 1,
+                city: "MTV"
+            },
+            startDate: "",
+            endDate: "",
+            transactionTime: "11-13-2020",
+            bookTitle:"harry potter",
+            status: "pending"
+        },
+        {
+            _id: "ts1ds",
+            borrowerId: "user1",
+            borrower: {
+                _id: "user1",
+                username: "Tom Riddle",
+                rating: 4,
+                city: "MTV"
+            },
+            lenderId: "user22",
+            lender: {
                 username: "LazyReader54",
                 rating: 1,
                 city: "MTV"
@@ -275,7 +296,7 @@ const INTIAL_STATE = {
                 status: "returned"
             },
             rating: 1,
-            comments: "This lender is terrible",
+            comments: "",
             date: "10-26-2020"
         },
     ],
@@ -353,6 +374,11 @@ const profileReducer = (state = INTIAL_STATE, action) => {
             return {
                 ...state,
                 reviewsUserGave: state.reviewsUserGave.map(review=>review._id === action.review._id? action.review: review)
+            }
+        case DELETE_TRANSACTION:
+            return {
+                ...state,
+                transactions: state.transactions.filter(transaction=>transaction._id !== action.transaction._id)
             }
         default:
             return state
