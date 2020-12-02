@@ -60,10 +60,7 @@ export const getRecommendedBooks = (dispatch) => {
 const getRecommendedBooksAdder = (dispatch) => {
     const ids = []
     let pair;
-    for (pair of bestsellerBooksLists[0]) {
-        ids.push(pair.id)
-    }
-    for (pair of bestsellerBooksLists[1]) {
+    for (pair of bestsellerBooksLists) {
         ids.push(pair.id)
     }
     let id;
