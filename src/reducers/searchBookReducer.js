@@ -1,9 +1,11 @@
-import {SET_ADVANCED_SEARCH, FETCH_BOOKS, SET_SEARCH_AUTHOR, SET_SEARCH_TITLE, SET_SEARCH_ISBN,
+import {
+    SET_ADVANCED_SEARCH, FETCH_BOOKS, SET_SEARCH_AUTHOR, SET_SEARCH_TITLE, SET_SEARCH_ISBN,
 
     SET_SEARCH_PUBLISHER, SET_SEARCH_SUBJECT,
     SET_SEARCH_DEFAULT_TERM, FILTER_BOOK_BY_RATING,
     SORT_BOOK_BY_RATING_HIGH_TO_LOW, SORT_BOOK_BY_PUBLISHER_DATE,
-    CLEAR_BOOKS, BOOK_ADDER} from '../actions/searchBookActions'
+    CLEAR_BOOKS, BOOK_ADDER, SET_CURRENT_INDEX
+} from '../actions/searchBookActions'
 
 const INITIAL_STATE = {
     books: [],
@@ -14,7 +16,8 @@ const INITIAL_STATE = {
     title: '',
     isbn: '',
     publisher: '',
-    subject: ''
+    subject: '',
+    currentIndex: 0
 };
 
 const searchBookReducer = (state = INITIAL_STATE, action) => {
@@ -59,6 +62,8 @@ const searchBookReducer = (state = INITIAL_STATE, action) => {
             let curBooks = [...state.books]
             curBooks.push(action.book)
             return {...state, books: curBooks}
+        case SET_CURRENT_INDEX:
+            return {...state, currentIndex: action.index}
         default:
             return state;
     }

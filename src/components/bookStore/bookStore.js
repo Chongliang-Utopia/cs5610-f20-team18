@@ -4,9 +4,15 @@ import SearchBook from "./searchBook";
 import FilterPanel from "./FilterPanel"
 import {connect} from "react-redux";
 import {searchBook} from "../../actions/searchBookActions"
+import {getRecommendedBooks} from "../../actions/searchBookActions";
+
 class BookStore extends React.Component {
     componentDidMount() {
-        this.props.searchBook(this.props.search_default_term || 'Harry potter', '', '', '', '', '')
+        if (this.props.search_default_term) {
+            this.props.searchBook(this.props.search_default_term)
+        } else {
+            this.props.getRecommended();
+        }
     }
     render() {
         return (
@@ -31,7 +37,8 @@ const stateToPropertyMapper = (state) => ({
 
 const propertyToDispatchMapper = (dispatch) => ({
     searchBook: (search_default_term, author, title, isbn, publisher, subject) =>
-        searchBook(dispatch, search_default_term, author, title, isbn, publisher, subject)
+        searchBook(dispatch, search_default_term, author, title, isbn, publisher, subject),
+    getRecommended: () => getRecommendedBooks(dispatch)
 })
 export default connect(stateToPropertyMapper, propertyToDispatchMapper)
 (BookStore)

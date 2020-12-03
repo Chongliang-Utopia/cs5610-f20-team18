@@ -10,7 +10,7 @@ import {logout} from "../../actions/authActions";
 
 
 const Header = ({isLoggedIn, logout, user}) => {
-    const matchBookstore = useRouteMatch({path: "/bookstore", exact: true})
+    const matchBookstore = useRouteMatch({path: "/books", exact: true})
 
     return (
         <header className={classes.Header}>
@@ -35,7 +35,7 @@ const Header = ({isLoggedIn, logout, user}) => {
                             <HashLink className="nav-link" to="/#about">About</HashLink>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/bookstore">Bookstore</Link>
+                            <Link className="nav-link" to="/books">Bookstore</Link>
                         </li>
                         <li className="nav-item">
                             {user && user.isAdmin ?
