@@ -17,6 +17,8 @@ export const SORT_BOOK_BY_PUBLISHER_DATE = "SORT_BOOK_BY_PUBLISHER_DATE"
 export const CLEAR_BOOKS = "CLEAR_BOOKS"
 export const BOOK_ADDER = "BOOK_ADDER"
 
+export const SET_CURRENT_INDEX= "SET_CURRENT_INDEX"
+
 export const sortBookHighToLow = (dispatch) =>
     dispatch({
         type: SORT_BOOK_BY_RATING_HIGH_TO_LOW
@@ -99,4 +101,10 @@ export const setSearchPublisher = (dispatch, publisher) =>
 export const setSearchSubject = (dispatch, subject) =>
     dispatch({
         type: SET_SEARCH_SUBJECT, subject: subject
+    })
+
+export const setCurrentIndex = (dispatch, index) =>
+    dispatch({
+        type: SET_CURRENT_INDEX,
+        index
     })

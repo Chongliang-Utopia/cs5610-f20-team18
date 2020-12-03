@@ -39,7 +39,7 @@ class App extends Component {
                                     <Route exact path="/books/:bookId" component={BookDetail}/>
                                     <Route exact path="/users/:userId/profile" component={UserProfile}/>
                                     <Route exact path="/users/:userId/profile/:section" component={UserProfile}/>
-                                    <Route exact path="/bookstore" component={BookStore}/>
+                                    <Route exact path="/books" component={BookStore}/>
                                     <Route exact path="/admin" component={Admin}/>
                                     <Route exact path="/admin/:section" component={Admin}/>
                                 </main>
