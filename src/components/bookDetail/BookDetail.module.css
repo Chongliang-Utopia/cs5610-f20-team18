@@ -16,3 +16,19 @@
     font-size: 90%;
     margin-left: 10px;
 }
+
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+    color: grey
+}
+
+.BookDetail .navIconDisabled {
+    color: grey;
+    margin-bottom: 3px;
+}
+
+.BookDetail .navIcon{
+    color: #0e345a;
+    margin-bottom: 3px;
+}

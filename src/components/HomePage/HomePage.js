@@ -16,7 +16,7 @@ const HomePage = () => (
         </div>
 
         <div className="pb-5" style={{background: "linear-gradient(180deg, #ffffff 200px, #0e345a 140px)"}}>
-            <h1 className="text-center mb-5" style={{color: "#0e345a"}}>BESTSELLERS</h1>
+            <h1 className="text-center mb-5" style={{color: "#0e345a"}}>MOST POPULAR</h1>
             <BooksCarousel booksLists={bestsellerBooksLists}/>
 
             <div className={classes.recommendBook}>

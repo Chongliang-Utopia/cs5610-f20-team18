@@ -24,6 +24,7 @@ const PublicProfilePosts = ({
             <Modal show={report} modalClosed={closeReport}>
                 <ReportForm/>
             </Modal>
+
             <div className="mb-5">
                 <h3>
                     {user.username}'s Postings
@@ -131,7 +132,6 @@ const PublicProfilePosts = ({
                 </div>
             </div>
         </div>
-
 
 
 

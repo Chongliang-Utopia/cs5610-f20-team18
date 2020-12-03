@@ -8,6 +8,7 @@ import {closeReport} from "../../actions/profileActions";
 import {createTicket} from "../../actions/adminActions";
 
 class ReportForm extends React.Component {
+
     state = {
         reportReason: "",
     }
@@ -47,6 +48,7 @@ class ReportForm extends React.Component {
                 </div>
             </div>
         );
+
     }
 }
 const stateToPropertyMapper = (state) => ({
@@ -54,5 +56,6 @@ const stateToPropertyMapper = (state) => ({
     user: state.profile.user,
     tickets: state.admin.tickets
 });
+
 
 export default connect(stateToPropertyMapper, {createTicket, closeReport})(ReportForm);
