@@ -1,5 +1,6 @@
 import bookService from "../services/bookService";
 import bestsellerBooksLists from '../assets/data/bestsellerBooksLists.json'
+import {UPDATE_USER} from "./types/userTypes";
 
 export const SET_ADVANCED_SEARCH = "SET_ADVANCED_SEARCH"
 export const FETCH_BOOKS = "FETCH_BOOKS"
@@ -39,13 +40,13 @@ export  const setAdvancedSearch = (dispatch, showAdvancedSearch) =>
     })
 export const searchBook = (dispatch, default_term, author, title, isbn, publisher, subject) => {
     let keyword = '';
-    if (default_term.length > 0) keyword += default_term;
-    if (author.length > 0) keyword += '+inauthor:' + author
-    if (title.length > 0) keyword += '+intitle:' + title
-    if (isbn.length > 0) keyword += '+isbn:' + isbn
-    if (publisher.length > 0) keyword += '+inpublisher:' + publisher
-    if (subject.length > 0) keyword += '+subject:' + subject
-    if (keyword.length > 0 && keyword.charAt(0) === '+') {
+    if (default_term && default_term.length > 0) keyword += default_term;
+    if (author && author.length > 0) keyword += '+inauthor:' + author
+    if (title && title.length > 0) keyword += '+intitle:' + title
+    if (isbn && isbn.length > 0) keyword += '+isbn:' + isbn
+    if (publisher && publisher.length > 0) keyword += '+inpublisher:' + publisher
+    if (subject && subject.length > 0) keyword += '+subject:' + subject
+    if (keyword && keyword.length > 0 && keyword.charAt(0) === '+') {
         keyword = keyword.substring(1)
     }
     bookService.searchBooks(keyword)
@@ -103,8 +104,9 @@ export const setSearchSubject = (dispatch, subject) =>
         type: SET_SEARCH_SUBJECT, subject: subject
     })
 
-export const setCurrentIndex = (dispatch, index) =>
+export const setCurrentIndex = (index) => (dispatch) => {
     dispatch({
         type: SET_CURRENT_INDEX,
         index
     })
+}

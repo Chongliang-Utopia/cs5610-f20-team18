@@ -1,2 +1,3 @@
-export const RESET_PASSWORD = "RESET_PASSWORD";
 export const UPDATE_USER = "UPDATE_USER";
+
+export const ADD_TO_READING_LIST = "ADD_TO_READING_LIST";

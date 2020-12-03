@@ -14,6 +14,8 @@ import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import ImageCard from "../UI/imageCard/ImageCard";
 import {connect} from "react-redux";
 import {setCurrentIndex} from "../../actions/searchBookActions";
+import UserActions from "../../actions/userActions";
+import googleBookClient from "../googleBookClient";
 
 class BookDetail extends React.Component {
     state = {
@@ -79,16 +81,17 @@ class BookDetail extends React.Component {
     }
 
     addToReadingList = () => {
-        this.setState({alertVisible: true}, () => {
-            window.setTimeout(() => {
-                this.setState({alertVisible: false})
-            }, 2000)
-        })
+        this.props.dispatch(UserActions.addToMyReadingList(this.props.userId, {"googleBookId": this.props.match.params.bookId}))
+            .then(this.setState({alertVisible: true}, () => {
+                window.setTimeout(() => {
+                    this.setState({alertVisible: false})
+                }, 2000)
+            }))
     }
 
     render() {
         const {index, books} = this.props
-        const {book} =this.state
+        const {book} = this.state
 
         return (
             <Fragment>
@@ -112,15 +115,16 @@ class BookDetail extends React.Component {
                             <div className="col-6">
                         <span className="float-right">
                         <Link to={books.length > 0 && index > 0 && `/books/${books[index - 1].id}`}
-                              onClick={() => index > 0 && this.props.setCurrentIndex(index - 1)}
+                              onClick={() => index > 0 && this.props.dispatch(setCurrentIndex(index - 1))}
                               className={(index === 0 || books.length === 0) && classes.disabled}>
-                            <BsChevronLeft className={(index === 0 || books.length === 0)? classes.navIconDisabled : classes.navIcon}
+                            <BsChevronLeft
+                                className={(index === 0 || books.length === 0) ? classes.navIconDisabled : classes.navIcon}
                             /> Prev
                         </Link> |
                         <Link to={books.length > 0 && index < books.length - 1 && `/books/${books[index + 1].id}`}
-                              onClick={() => index < books.length - 1 && this.props.setCurrentIndex(index + 1)}
+                              onClick={() => index < books.length - 1 && this.props.dispatch(setCurrentIndex(index + 1))}
                               className={index >= books.length - 1 && classes.disabled}> Next <BsChevronRight
-                            className={index >= books.length - 1? classes.navIconDisabled : classes.navIcon}/>
+                            className={index >= books.length - 1 ? classes.navIconDisabled : classes.navIcon}/>
                         </Link>
                         </span>
                             </div>
@@ -140,11 +144,12 @@ class BookDetail extends React.Component {
                                             emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                             fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                     <span className={classes.ratingFont}>
-                                {!book.ratingsCount? 0 : this.state.book.ratingsCount} ratings
+                                {!book.ratingsCount ? 0 : this.state.book.ratingsCount} ratings
                             </span>
                                 </div>
                                 <h5>Authors: </h5>
-                                {!book.authors? <span>Anonymous</span> : book.authors.map(author => <span>{author}</span>)}
+                                {!book.authors ? <span>Anonymous</span> : book.authors.map(author =>
+                                    <span>{author}</span>)}
                                 <button className="btn btn-info btn-block mt-4"
                                         onClick={this.lendingHandler}>
                                     <HiBadgeCheck className="float-left" size="25px"/>
@@ -178,10 +183,8 @@ class BookDetail extends React.Component {
 
 const stateToPropertyMapper = (state) => ({
     index: state.searchBookReducer.currentIndex,
-    books: state.searchBookReducer.books
-})
-const propertyToDispatchMapper = (dispatch) => ({
-    setCurrentIndex: (index) => setCurrentIndex(dispatch, index)
+    books: state.searchBookReducer.books,
+    userId: state.auth.user._id
 })
 
-export default connect(stateToPropertyMapper, propertyToDispatchMapper)(BookDetail)
+export default connect(stateToPropertyMapper)(BookDetail)

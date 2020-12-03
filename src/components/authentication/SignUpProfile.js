@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import {updateUser, updateLocalUser} from "../../actions/userActions";
+import UserActions from "../../actions/userActions";
 import history from "../../history";
 
 const required = (value) => {
@@ -38,7 +38,7 @@ class SignUpProfile extends Component {
 
     handleChange(e) {
         const {name, value} = e.target;
-        this.props.dispatch(updateLocalUser({[name]: value}));
+        this.props.dispatch(UserActions.updateLocalUser({[name]: value}));
     }
 
     handleSubmit(e) {
@@ -49,7 +49,7 @@ class SignUpProfile extends Component {
         this.form.validateAll();
 
         if (this.checkBtn.context._errors.length === 0) {
-            this.props.dispatch(updateUser(this.props.user._id, this.props.user))
+            this.props.dispatch(UserActions.updateUser(this.props.user._id, this.props.user))
                 .then(history.push("/signupaddress"))
         }
     }

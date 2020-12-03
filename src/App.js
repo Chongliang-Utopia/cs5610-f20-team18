@@ -34,12 +34,12 @@ class App extends Component {
                         <div className={classes.App}>
                             <Header/>
                                 <main>
-                                    <Route exact path="/" component={HomePage}/>
+                                    <Route exact path={["/", "/home"]} component={HomePage}/>
                                     <Route exact path="/search" component={GoogleBookClient}/>
                                     <Route exact path="/books/:bookId" component={BookDetail}/>
                                     <Route exact path="/users/:userId/profile" component={UserProfile}/>
                                     <Route exact path="/users/:userId/profile/:section" component={UserProfile}/>
-                                    <Route exact path="/books" component={BookStore}/>
+                                    <Route exact path={["/books", "/bookstore"]} component={BookStore}/>
                                     <Route exact path="/admin" component={Admin}/>
                                     <Route exact path="/admin/:section" component={Admin}/>
                                 </main>

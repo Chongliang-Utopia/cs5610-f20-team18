@@ -8,6 +8,7 @@ import {
     UPDATE_REVIEW,
     UPDATE_TRANSACTION
 } from "../actions/types";
+import {ADD_TO_READING_LIST} from "../actions/types/userTypes";
 
 const INTIAL_STATE = {
     user: {
@@ -331,7 +332,8 @@ const INTIAL_STATE = {
             },
             followeeId: "user1",
         }
-    ]
+    ],
+    readingList: []
 };
 
 const profileReducer = (state = INTIAL_STATE, action) => {
@@ -394,6 +396,14 @@ const profileReducer = (state = INTIAL_STATE, action) => {
                 follows: [
                     ...state.follows,
                     action.follow
+                ]
+            }
+        case ADD_TO_READING_LIST:
+            return {
+                ...state,
+                readingList: [
+                    ...state.readingList,
+                    action.googleBook.googleBookId
                 ]
             }
         default:

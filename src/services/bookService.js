@@ -1,4 +1,5 @@
 const url = 'https://www.googleapis.com/books/v1/volumes?q=';
+const API_URL = 'http://localhost:8080/api/users';
 
 const searchBooks = (keyword) =>
     fetch(url + keyword + "&maxResults=20")
