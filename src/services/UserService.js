@@ -13,8 +13,12 @@ class UserService {
         return axios.post(`${API_URL}/${userId}/reading-list`, googleBook, {headers: authHeader()});
     }
 
-
-
+    getFollowingsReadingList(userId) {
+        return axios.get(`${API_URL}/${userId}/followings-reading-list`, {headers: authHeader()})
+            .then((response) => (
+                response.data ? response.data : []
+            ));
+    }
 
 }
 
