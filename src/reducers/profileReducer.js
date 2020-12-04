@@ -12,6 +12,8 @@ import {
     APPROVE_TRANSACTION,
     DECLINE_TRANSACTION, RETURN_TRANSACTION, CREATE_REVIEW_AS_LENDER, CREATE_REVIEW_AS_BORROWER, UPDATE_USERINFO
 } from "../actions/types";
+import {ADD_TO_READING_LIST, GET_FOLLOWINGS_READING_LIST} from "../actions/types/userTypes";
+import {LOGOUT} from "../actions/types/authTypes";
 
 const INTIAL_STATE = {
     user:  {
@@ -601,6 +603,8 @@ const INTIAL_STATE = {
         "ECvxEpH7VZYC",
         "f280CwAAQBAJ",
     ]
+    readingList: [],
+    followingsReadingList: [],
 };
 
 const profileReducer = (state = INTIAL_STATE, action) => {
@@ -688,12 +692,29 @@ const profileReducer = (state = INTIAL_STATE, action) => {
                     action.following_body
                 ]
             }
-            // ACCOUNT
         case UPDATE_USERINFO:
             return {
                 ...state,
                 user: action.user
             }
+        case ADD_TO_READING_LIST:
+            return {
+                ...state,
+                readingList: [
+                    ...state.readingList,
+                    action.googleBook.googleBookId
+                ]
+            }
+        case GET_FOLLOWINGS_READING_LIST:
+            return {
+                ...state,
+                followingsReadingList: [...action.followingsReadingList]
+            }
+        case LOGOUT:
+            return {
+                ...state,
+                followingsReadingList: []
+            };
         default:
             return state
     }
