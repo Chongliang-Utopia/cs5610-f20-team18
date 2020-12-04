@@ -94,6 +94,11 @@ class FilterPanel extends React.Component {
                                     & up
                                 </a>
                             </div>
+                            <div>
+                                <a href="#"
+                                   onClick={() => this.props.filterBook(0)}>Show All
+                                </a>
+                            </div>
                         </div>
                     </li>
                 </ul>

@@ -9,21 +9,17 @@ class UserService {
         return axios.put(`${API_URL}/${userId}`, user, {headers: authHeader()});
     }
 
-    resetPassword(userId, user) {
-        return axios.put(`${API_URL}/${userId}/password`, user, {headers: authHeader()});
+    addToMyReadingList(userId, googleBook) {
+        return axios.post(`${API_URL}/${userId}/reading-list`, googleBook, {headers: authHeader()});
     }
 
-    getPublicContent() {
-        return axios.get(`${API_URL}/all`);
+    getFollowingsReadingList(userId) {
+        return axios.get(`${API_URL}/${userId}/followings-reading-list`, {headers: authHeader()})
+            .then((response) => (
+                response.data ? response.data : []
+            ));
     }
 
-    getUserBoard() {
-        return axios.get(`${API_URL}/user`, {headers: authHeader()});
-    }
-
-    getAdminBoard() {
-        return axios.get(`${API_URL}/admin`, {headers: authHeader()});
-    }
 }
 
 export default new UserService();

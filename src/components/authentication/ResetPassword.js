@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import {updateUser} from "../../actions/userActions";
+import UserActions from "../../actions/userActions";
 import history from "../../history";
 
 const required = (value) => {
@@ -69,7 +69,7 @@ class ResetPassword extends Component {
         if (this.checkBtn.context._errors.length === 0) {
             this.props
                 .dispatch(
-                    updateUser(this.props.userId, {password: this.state.password})
+                    UserActions.updateUser(this.props.userId, {password: this.state.password})
                 )
                 .then(() => {
                     this.setState({
