@@ -3,7 +3,7 @@ import classes from "../../bookDetail/lendingSummary/LendingSummary.module.css";
 import {TiHeart} from "react-icons/ti";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import {createNewReview, updateTransaction} from "../../../actions/profileActions";
+import {createReviewAsLender, createReviewAsBorrower, finishTransaction} from "../../../actions/profileActions";
 import {connect} from "react-redux";
 
 class ConfirmReturn extends React.Component {
@@ -58,23 +58,27 @@ class ConfirmReturn extends React.Component {
                         </Form.Control>
                     </Form.Group>
                     <Button variant="success" onClick={()=>{
-                        this.props.createNewReview({
-                            _id: "newreview111",
-                            isLender: true,
-                            revieweeId: this.props.transaction.borrowerId,
-                            reviewerId: this.props.user._id,
-                            transactionId: this.props.transaction._id,
+                        // use create review as lender
+                        this.props.createReviewAsLender({
+                            reviewer: this.props.user._id,
+                            reviewee: this.props.transaction.borrower._id,
+                            book: this.props.transaction.book._id,
                             comments: this.state.newComment,
-                            rating: this.state.newRating
-                        })
-                        this.props.updateTransaction({
+                            rating: this.state.newRating === 0? 5: this.state.newRating
+                        }, this.props.transaction)
+                        this.props.finishTransaction({
                             ...this.props.transaction,
-                            status: "returned"
+                            status: "RETURNED",
+                            lenderReview: {
+                                reviewer: this.props.user._id,
+                                reviewee: this.props.transaction.borrower._id,
+                                book: this.props.transaction.book._id,
+                                comments: this.state.newComment,
+                                rating: this.state.newRating === 0? 5: this.state.newRating
+                            }
                         })
                         this.props.cancelConfirm()
                     }}>Submit</Button>
-                    {"  "}
-                    <Button variant="danger" onClick={()=>this.props.cancelConfirm()}>Cancel</Button>
                 </div>
             </div>
         )
@@ -87,4 +91,4 @@ const stateToPropertyMapper = (state) => ({
 })
 
 
-export default connect(stateToPropertyMapper, {createNewReview, updateTransaction})(ConfirmReturn)
+export default connect(stateToPropertyMapper, {createReviewAsLender, createReviewAsBorrower, finishTransaction})(ConfirmReturn)

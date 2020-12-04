@@ -2,7 +2,12 @@ import React from "react";
 import classes from "../../bookDetail/lendingSummary/LendingSummary.module.css";
 import {TiHeart} from "react-icons/ti";
 
-const EditPosting = ({book, cancelEdit, newCondition, updatePosting, updateBookCondition}) =>
+const EditPosting = ({
+                         book,
+                         cancelEdit,
+                         newCondition,
+                         updatePosting,
+                         updateBookCondition}) =>
             <div className={classes.LendingSummary}>
                 <div className={classes.heading}>
                     <h1>BayBookClub</h1>
@@ -11,14 +16,14 @@ const EditPosting = ({book, cancelEdit, newCondition, updatePosting, updateBookC
                     </div>
                     <h4>{book.title}</h4>
                     <div>status: Lent</div>
-                    <div>condition: {book.bookCondition}</div>
+                    <div>condition: {book.condition}</div>
                     <label htmlFor="bookCondition" className={classes.condtionLabel} >Book Condition:</label>
                     <select className="form-control" id="bookCondition">
                         <option>Choose the condition of the book</option>
-                        <option onClick={()=>updateBookCondition("Like New")}>Like New</option>
-                        <option onClick={()=>updateBookCondition("Very Good")}>Very Good</option>
-                        <option onClick={()=>updateBookCondition("Good")}>Good</option>
-                        <option onClick={()=>updateBookCondition("Acceptable")}>Acceptable</option>
+                        <option onClick={()=>updateBookCondition("LIKE_NEW")}>Like New</option>
+                        <option onClick={()=>updateBookCondition("VERY_GOOD")}>Very Good</option>
+                        <option onClick={()=>updateBookCondition("GOOD")}>Good</option>
+                        <option onClick={()=>updateBookCondition("ACCEPTABLE")}>Acceptable</option>
                     </select>
                     <br/>
                     <div>
@@ -27,14 +32,14 @@ const EditPosting = ({book, cancelEdit, newCondition, updatePosting, updateBookC
                     </div>
                     <br/>
                     <div className>
-                        <button className="btn btn-danger mr-3" onClick={()=>cancelEdit()}>Cancel</button>
-                        <button className="btn btn-success" onClick={()=>{
+                        <button className="btn btn-success mr-3" onClick={()=>{
                             updatePosting({
-                            ...book,
-                            bookCondition: newCondition
+                                ...book,
+                                condition: newCondition
                             })
                             cancelEdit()
                         }}>Confirm</button>
+                        <button className="btn btn-danger" onClick={()=>cancelEdit()}>Cancel</button>
                     </div>
                 </div>
             </div>

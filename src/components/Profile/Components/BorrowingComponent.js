@@ -12,29 +12,29 @@ class BorrowingComponent extends React.Component {
 
     state = {
         editReview: false,
-        reviewBeingEdited: {}
+        borrowingBeingEdited: {}
     }
 
-    editReview = (review) => {
+    editReview = (borrowing) => {
         this.setState({
             editReview: true,
-            reviewBeingEdited: review
+            borrowingBeingEdited: borrowing
         })
     }
 
     cancelReview = () => {
         this.setState({
             editReview: false,
-            reviewBeingEdited: {}
+            borrowingBeingEdited: {}
         })
     }
     render(){
         return (
             <div>
-                <Modal show={this.state.editReview} modalClosed={this.cancelReview}>
+                <Modal show={this.state.editReview}>
                     <EditReview
                         cancelReview={this.cancelReview}
-                        review={this.state.reviewBeingEdited}
+                        borrowingBeingEdited={this.state.borrowingBeingEdited}
                     />
                 </Modal>
 
@@ -52,34 +52,34 @@ class BorrowingComponent extends React.Component {
                             </tr>
                             </thead>
                             <tbody>
-                            {this.props.transactions.filter(transaction => transaction.status!=="returned" && transaction.borrowerId===this.props.user._id).map(transaction =>
+                            {this.props.UserBorrowings.filter(borrowing => borrowing.status!=="RETURNED").map(borrowing =>
                                 <tr>
                                     <td>
-                                        <Link to={`/users/${transaction.lender.username}/profile`}
-                                              className="mr-1">{transaction.lender.username}</Link>
+                                        <Link to={`/users/${borrowing.lender._id}/profile`}
+                                              className="mr-1">{borrowing.lender.username}</Link>
                                     </td>
                                     <td>
-                                        <span>{transaction.transactionTime}</span>
+                                        <span>{borrowing.createdAt.slice(0, 10)}</span>
                                     </td>
                                     <td>
-                                        <span>{transaction.lender.city}</span>
+                                        <span>{borrowing.lender.city + ", " + borrowing.lender.state}</span>
                                     </td>
                                     <td>
-                                        <span>{transaction.bookTitle}</span>
+                                        <span>{borrowing.book.title}</span>
                                     </td>
                                     <td>
                                         {
-                                            transaction.status === "pending" &&
+                                            borrowing.status === "PENDING" &&
                                             <button className="btn btn-sm btn-danger m-1 float-right"
-                                                    onClick={()=>this.props.deleteTransaction(transaction)}
+                                                    onClick={()=>this.props.deleteTransaction(borrowing)}
                                             >Cancel Request</button>
                                         }
                                         {
-                                            transaction.status === "declined" &&
-                                            <button className="btn btn-sm btn-danger m-1 float-right" disabled>Declined</button>
+                                            borrowing.status === "DECLINED" &&
+                                            <button className="btn btn-sm btn-warning m-1 float-right" disabled>Declined</button>
                                         }
                                         {
-                                            transaction.status === "approved" &&
+                                            borrowing.status === "APPROVED" &&
                                             <button className="btn btn-sm btn-success m-1 float-right"
                                                     disabled>Approved</button>
                                         }
@@ -103,20 +103,20 @@ class BorrowingComponent extends React.Component {
                             </tr>
                             </thead>
                             <tbody>
-                            {this.props.transactions.filter(transaction => transaction.status==="approved" && transaction.borrowerId===this.props.user._id).map(transaction =>
+                            {this.props.UserBorrowings.filter(borrowing => borrowing.status==="APPROVED").map(borrowing =>
                                 <tr>
                                     <td>
-                                        <Link to={`/users/${transaction.lender.username}/profile`}
-                                              className="mr-1">{transaction.lender.username}</Link>
+                                        <Link to={`/users/${borrowing.lender._id}/profile`}
+                                              className="mr-1">{borrowing.lender.username}</Link>
                                     </td>
                                     <td>
-                                        <span>{transaction.endDate}</span>
+                                        <span>{borrowing.endDate.slice(0, 10)}</span>
                                     </td>
                                     <td>
-                                        <span>{transaction.lender.city}</span>
+                                        <span>{borrowing.lender.city + ", " + borrowing.lender.state}</span>
                                     </td>
                                     <td>
-                                        <span>{transaction.bookTitle}</span>
+                                        <span>{borrowing.book.title}</span>
                                     </td>
 
                                 </tr>)
@@ -132,42 +132,42 @@ class BorrowingComponent extends React.Component {
                             <thead>
                             <tr>
                                 <th>Lender</th>
-                                <th>Rating given</th>
+                                <th>Rating</th>
                                 <th>Borrow Duration</th>
                                 <th>Book Title</th>
-                                <th>Your review</th>
+                                <th>My Review</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            {this.props.transactions.filter(transaction => transaction.status==="returned" && transaction.borrowerId===this.props.user._id).map(transaction =>
+                            {this.props.UserBorrowings.filter(borrowing => borrowing.status==="RETURNED").map(borrowing =>
                                 <tr>
                                     <td>
-                                        <Link to={`/users/${transaction.lender.username}/profile`}
-                                              className="mr-1">{transaction.lender.username}</Link>
+                                        <Link to={`/users/${borrowing.lender._id}/profile`}
+                                              className="mr-1">{borrowing.lender.username}</Link>
                                     </td>
                                     <td>
-                                        <Rating initialRating={this.props.reviewsUserGave.find(review=>review.transactionId===transaction._id).rating} readonly
+                                        <Rating initialRating={borrowing.borrowerReview===undefined?0:borrowing.borrowerReview.rating} readonly
                                                 emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                                 fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                     </td>
                                     <td>
-                                        <Link to={`/users/${transaction.lender.username}/profile`}
-                                              className="mr-1">{transaction.lender.username}</Link>
+                                        <span>{borrowing.startDate.slice(0, 10)} ~ {borrowing.endDate.slice(0, 10)}</span>
                                     </td>
                                     <td>
-                                        <span>{transaction.startDate} ~ {transaction.endDate}</span>
+                                        <span>{borrowing.book.title}</span>
                                     </td>
                                     <td>
-                                        <span>{this.props.reviewsUserGave.find(review=>review.transactionId===transaction._id).comments}</span>
+                                        {
+                                            borrowing.borrowerReview === undefined &&
+                                            <button className="btn btn-sm btn-info m-1 float-right" onClick={()=>this.editReview(borrowing)}>
+                                                Edit Review</button>
+                                        }
+                                        {
+                                            borrowing.borrowerReview !== undefined &&
+                                            <span>{borrowing.borrowerReview.comments}</span>
+                                        }
                                     </td>
-                                    <td>
-                                    {
-                                        this.props.reviewsUserGave.find(review=>review.transactionId===transaction._id).comments=== "" &&
-                                        <button className="btn btn-sm btn-info m-1 float-right" onClick={()=>this.editReview(
-                                            this.props.reviewsUserGave.find(review=>review.transactionId===transaction._id))}>
-                                            Edit Review</button>
-                                    }</td>
                                 </tr>)
                             }
                             </tbody>
@@ -183,8 +183,7 @@ class BorrowingComponent extends React.Component {
 
 const stateToPropertyMapper = (state) => ({
     bookPostings: state.profile.bookPostings,
-    transactions: state.profile.transactions,
-    reviewsUserGave: state.profile.reviewsUserGave,
+    UserBorrowings: state.profile.UserBorrowings,
     user: state.profile.user
 })
 

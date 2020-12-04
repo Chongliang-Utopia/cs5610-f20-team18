@@ -7,7 +7,8 @@ import {connect} from "react-redux";
 import {closeReport} from "../../actions/profileActions";
 import {createTicket} from "../../actions/adminActions";
 
-class ReportForm extends React.Component{
+class ReportForm extends React.Component {
+
     state = {
         reportReason: "",
     }
@@ -34,24 +35,27 @@ class ReportForm extends React.Component{
                         <Form.Label>Please tell us the reason for reporting this review</Form.Label>
                         <Form.Control as="textarea" rows={3}
                                       value={this.state.reportReason}
-                                      onChange={(event)=>this.editReportReason(event.target.value)}
+                                      onChange={(event) => this.editReportReason(event.target.value)}
                         />
                     </Form.Group>
-                    <Button variant="success" onClick={()=>this.props.createTicket({
+                    <Button variant="success" onClick={() => this.props.createTicket({
                         reporterId: this.props.user._id,
                         description: this.state.reportReason,
                         reviewerId: this.props.selectedReview.reviewerId
                     })}>Submit</Button>
-                    <Button variant="danger" className="add-left-margin" onClick={this.props.closeReport}>Cancel</Button>
+                    <Button variant="danger" className="add-left-margin"
+                            onClick={this.props.closeReport}>Cancel</Button>
                 </div>
             </div>
-        )
+        );
+
     }
 }
 const stateToPropertyMapper = (state) => ({
     selectedReview: state.profile.selectedReview,
     user: state.profile.user,
     tickets: state.admin.tickets
-})
+});
+
 
 export default connect(stateToPropertyMapper, {createTicket, closeReport})(ReportForm);
