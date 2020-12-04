@@ -2,10 +2,11 @@ import React from "react";
 import classes from "./Authentication.module.css";
 import {Link} from "react-router-dom";
 import {GrClose} from "react-icons/gr";
+import {connect} from "react-redux";
 
-const CreatePassword = () =>
+const CreatePassword = ({preLocation}) =>
     <div className={classes.Authentication}>
-        <Link to="/" className={classes.closeButton}><GrClose size="20px"/></Link>
+        <Link to={preLocation} className={classes.closeButton}><GrClose size="20px"/></Link>
         <div className={classes.titleDiv}>
             <h1>Create Password</h1>
             <div className="mt-3 mb-5">
@@ -23,4 +24,8 @@ const CreatePassword = () =>
         </div>
     </div>
 
-export default CreatePassword;
+const stateToPropertyMapper = (state) => ({
+    preLocation: state.auth.preLocation
+})
+
+export default connect(stateToPropertyMapper)(CreatePassword);

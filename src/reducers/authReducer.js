@@ -3,13 +3,13 @@ import {
     REGISTER_FAIL,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    LOGOUT, GOOGLE_REGISTER,
+    LOGOUT, GOOGLE_REGISTER, RECORD_LOCATION,
 } from "../actions/types/authTypes";
 import {UPDATE_USER} from "../actions/types/userTypes";
 
 const user = JSON.parse(localStorage.getItem("user"));
 
-const initialState = user? {isLoggedIn: true, user: user} : {isLoggedIn: false, user: {}};
+const initialState = user? {isLoggedIn: true, user: user, preLocation: "/"} : {isLoggedIn: false, user: {}, preLocation: "/"};
 
 const authReducer = (state = initialState, action) => {
     const {type, payload} = action;
@@ -50,7 +50,13 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoggedIn: true,
-                user: payload.user
+                user: payload.user,
+                googleRegister: true
+            }
+        case RECORD_LOCATION:
+            return {
+                ...state,
+                preLocation: action.location
             }
         default:
             return state;
