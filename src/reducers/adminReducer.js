@@ -73,16 +73,6 @@ const adminReducer = (state = INTIAL_STATE, action) => {
     switch (action.type) {
         case SWITCH_SECTION:
             return {...state, section: action.section}
-        case CHANGE_EMAIL:
-            return {
-                ...state,
-                adminUser: action.adminUser
-            }
-        case CHANGE_PASSWORD:
-            return {
-                ...state,
-                adminUser: action.adminUser
-            }
         case FETCH_ADMINUSER:
             return {
                 ...state,
@@ -102,14 +92,6 @@ const adminReducer = (state = INTIAL_STATE, action) => {
             return {
                 ...state,
                 users: state.users.filter(user => user._id !== action.uid)
-            }
-        case CREATE_TICKET:
-            return {
-                ...state,
-                tickets: [
-                    ...state.tickets,
-                    action.newTicket
-                ]
             }
         default:
             return state;

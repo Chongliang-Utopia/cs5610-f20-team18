@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {changeAdminEmail, changeAdminPassword, fetchAdminUser, updateAdminInfo} from "../../../actions/adminActions";
+import {updateAdminInfo} from "../../../actions/adminActions";
 
 class AdminAccountSettingComponent extends React.Component{
     state = {

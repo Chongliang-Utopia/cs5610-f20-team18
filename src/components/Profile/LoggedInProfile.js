@@ -101,5 +101,6 @@ const LoggedInProfile = ({section, user}) => {
 const stateToPropertyMapper = (state) => ({
     user: state.profile.user,
     section: state.profile.section,
+
 })
 export default connect(stateToPropertyMapper)(LoggedInProfile)

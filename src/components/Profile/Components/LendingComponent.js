@@ -153,7 +153,6 @@ class LendingComponent extends React.Component {
                             <tr>
                                 <th>Borrower</th>
                                 <th>Rating</th>
-                                <th>Email</th>
                                 <th>Location</th>
                                 <th>Book</th>
                                 <th></th>
@@ -171,9 +170,6 @@ class LendingComponent extends React.Component {
                                         <Rating initialRating={lending.borrower.rating} readonly
                                                 emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                                 fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
-                                    </td>
-                                    <td>
-                                        <span>{lending.borrower.email}</span>
                                     </td>
                                     <td>
                                         <span>{lending.borrower.city + ", " + lending.borrower.state}</span>
@@ -225,6 +221,7 @@ class LendingComponent extends React.Component {
                             <thead>
                             <tr>
                                 <th>Borrower</th>
+                                <th>Email</th>
                                 <th>Due Date</th>
                                 <th>Book</th>
                                 <th></th>
@@ -236,6 +233,9 @@ class LendingComponent extends React.Component {
                                     <td>
                                         <Link to={`/users/${lending.borrower._id}/profile`}
                                               className="mr-1">{lending.borrower.username}</Link>
+                                    </td>
+                                    <td>
+                                        <span>{lending.borrower.email}</span>
                                     </td>
                                     <td>
                                         <span>{lending.endDate.slice(0, 10)}</span>

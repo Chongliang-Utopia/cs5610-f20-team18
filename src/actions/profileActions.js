@@ -10,7 +10,7 @@ import {
     UPDATE_POSTING, CREATE_REVIEW_AS_LENDER,
     CREATE_REVIEW_AS_BORROWER,
     DECLINE_TRANSACTION, RETURN_TRANSACTION,
-    UPDATE_REVIEW, UPDATE_ADMININFO, UPDATE_USERINFO
+    UPDATE_REVIEW, UPDATE_USERINFO, CREATE_TICKET, DELETE_FROMREADINGLIST
 } from "./types";
 
 export const fetchUser = (uid) => {};
@@ -21,7 +21,7 @@ export const switchSection = (section) => {
         section: section
     };
 }
-
+// REPORT TO ADMIN
 export const closeReport = () => {
     return {
         type: CLOSE_REPORT
@@ -34,6 +34,14 @@ export const openReport = (review) => {
         review: review
     };
 };
+
+export const createReport = (report) => {
+    //TODO: just call server is enough
+    return {
+        type: CREATE_TICKET,
+        report
+    }
+}
 
 // Posting
 export const deletePosting = (posting) => {
@@ -135,6 +143,13 @@ export const updateUserInfo = (user) => {
     }
 }
 
+// READING LIST
+export const deleteFromReadingList = (uid, googleId) => {
+    return {
+        type: DELETE_FROMREADINGLIST,
+        googleId: googleId
+    }
+}
 
 //TODO, haven't set up the type and reducer for following methods
 

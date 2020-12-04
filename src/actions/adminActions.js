@@ -1,11 +1,7 @@
 import {
-    CHANGE_EMAIL,
-    CHANGE_PASSWORD,
-    CREATE_TICKET,
     DELETE_TICKET,
     DELETE_USER,
     SWITCH_SECTION, UPDATE_ADMININFO,
-    UPDATE_USERINFO
 } from "./types";
 
 
@@ -40,14 +36,6 @@ export const updateAdminInfo = (adminUser) => {
     }
 }
 
-// send to service and create a new user ticket
-export const createTicket = (newTicket) => {
-    // TODO: send data to server and then back
-    return {
-        type: CREATE_TICKET,
-        newTicket: newTicket
-    }
-}
 
 
 //TODO

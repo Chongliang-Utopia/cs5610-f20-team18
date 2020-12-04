@@ -6,7 +6,7 @@ import {Accordion} from "react-bootstrap";
 import {Card} from "react-bootstrap";
 import {MdExpandMore} from "react-icons/md";
 import {connect} from "react-redux";
-import {createTicket, deleteTicket} from "../../../actions/adminActions";
+import {deleteTicket} from "../../../actions/adminActions";
 
 const UserTicketsComponent =
     ({
@@ -96,4 +96,4 @@ const stateToPropertyMapper = (state) => ({
     tickets: state.admin.tickets
 })
 
-export default connect (stateToPropertyMapper, {deleteTicket, createTicket})(UserTicketsComponent)
+export default connect (stateToPropertyMapper, {deleteTicket})(UserTicketsComponent)

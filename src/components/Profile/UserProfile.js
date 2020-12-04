@@ -26,6 +26,9 @@ class UserProfile extends React.Component {
         // this.props.fetchReviewsUserGave(uid)
         // this.props.fetchFollowings(uid)
         // this.props.fetchFollowers(uid)
+        // this will first fetch reading list of google book ids and then
+        // populate the book into UserReadingListBooks
+        // this.props.fetchReadingList(uid)
         // TODO: need to deal with authentication here
         this.props.switchSection(section)
     }

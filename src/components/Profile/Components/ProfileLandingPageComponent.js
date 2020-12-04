@@ -9,158 +9,182 @@ import {Row, Col, Button, Carousel} from 'react-bootstrap'
 import {RiErrorWarningLine} from "react-icons/ri";
 import ReportForm from "../ReportForm";
 import Modal from "../../UI/modal/Modal";
-import {closeReport, openReport} from "../../../actions/profileActions";
+import {closeReport, openReport, deleteFromReadingList} from "../../../actions/profileActions";
 import {connect} from "react-redux";
+import ImageCard from "../../UI/imageCard/ImageCard";
+import {MdDeleteSweep} from "react-icons/md";
+import DeleteFromReadingList from "./DeleteFromReadingList";
 
 
-const ProfileLandingPageComponent = ({
-         reviewsUserReceived,
-         user,
-         bookPostings,
-         UserBorrowings,
-         openReport,
-         closeReport,
-         report,
-         UserFollowings,
-         UserFollowers,
-         UserReadingList
-    }) =>
-    <div>
-        <Modal show={report} modalClosed={closeReport}>
-            <ReportForm/>
-        </Modal>
-        <div className="mb-5">
-            <h2>My activity at a glance</h2>
-            <br/>
-            <CardDeck>
-                <Card style={{width: '10rem'}} className="center-text" bg={"light"}>
-                    <Card.Body>
-                        <Card.Title>Active Postings</Card.Title>
+class ProfileLandingPageComponent extends React.Component {
+    state = {
+        deleting: false,
+        bookBeingEdited: {},
+    }
 
-                    </Card.Body>
-                    <Card.Footer style={{"background": "none", "border-top": "none"}}>
-                        <br/>
-                        <Link to={`/users/${user._id}/profile/lendings`}>{bookPostings.filter(posting=>posting.isActive).length}</Link>
-                    </Card.Footer>
-                </Card>
-                {/*<Card style={{ width: '10rem' }} className="center-text" bg={"light"}>*/}
-                {/*    <Card.Body>*/}
-                {/*        <Card.Title>Pending borrowing requests</Card.Title>*/}
-                {/*        <Card.Text>*/}
-                {/*            <Link to={`/users/${userId}/profile/borrowings`}>2</Link>*/}
-                {/*        </Card.Text>*/}
-                {/*    </Card.Body>*/}
-                {/*</Card>*/}
-                <Card style={{width: '10rem'}} className="center-text" bg={"light"}>
-                    <Card.Body>
-                        <Card.Title>Following</Card.Title>
-                    </Card.Body>
-                    <Card.Footer style={{"background": "none", "border-top": "none"}}>
-                        <br/>
-                        <Link to={`/users/${user._id}/profile/followings`}>{UserFollowings.length}</Link>
-                    </Card.Footer>
-                </Card>
-            </CardDeck>
-            <br/>
-            <CardDeck>
-                <Card style={{width: '10rem'}} className="center-text" bg={"light"}>
-                    <Card.Body>
-                        <Card.Title>Active Borrowings</Card.Title>
-                    </Card.Body>
-                    <Card.Footer style={{"background": "none", "border-top": "none"}}>
-                        <br/>
-                        <Link to={`/users/${user._id}/profile/borrowings`}>
-                            {UserBorrowings.filter(borrrowing=>borrrowing.status === "APPROVED").length}</Link>
-                    </Card.Footer>
-                </Card>
-                {/*<Card style={{ width: '10rem' }} className="center-text" bg={"light"}>*/}
-                {/*    <Card.Body>*/}
-                {/*        <Card.Title>Pending Lending requests</Card.Title>*/}
-                {/*        <Card.Text>*/}
-                {/*            <Link to={`/users/${userId}/profile/lendings`}>6</Link>*/}
-                {/*        </Card.Text>*/}
-                {/*    </Card.Body>*/}
-                {/*</Card>*/}
+    deleteBook = (book) => {
+        this.setState({
+            deleting: true,
+            bookBeingEdited: book
+        })
+    }
 
-                <Card style={{width: '10rem'}} className="center-text" bg={"light"}>
-                    <Card.Body>
-                        <Card.Title>Follower</Card.Title>
-                    </Card.Body>
-                    <Card.Footer style={{"background": "none", "border-top": "none"}}>
-                        <br/>
-                        <Link to={`/users/${user._id}/profile/followings`}>{UserFollowers.length}</Link>
-                    </Card.Footer>
-                </Card>
-            </CardDeck>
-        </div>
+    cancelDelete = () => {
+        this.setState({
+            deleting: false,
+            bookBeingEdited: {}
+        })
+    }
 
-        <div className="mb-3">
-            <h2>Reviews I have received</h2>
-            <br/>
-            <div className={classes.LenderTable}>
-                <table className="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>User Name</th>
-                        <th>Book Borrowed</th>
-                        <th>Rating for me</th>
-                        <th>Review</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
+
+    render() {
+        return (
+            <div>
+                <Modal show={this.props.report} modalClosed={this.props.closeReport}>
+                    <ReportForm/>
+                </Modal>
+                <Modal show={this.state.deleting} modalClosed={this.cancelDelete}>
+                    <DeleteFromReadingList
+                        book={this.state.bookBeingEdited}
+                        cancelDelete={this.cancelDelete}
+                        user={this.props.user}
+                        deleteBookFromReadingList={this.props.deleteFromReadingList}
+                    />
+                </Modal>
+                <div className="mb-5">
+                    <h2>My activity at a glance</h2>
+                    <br/>
+                    <CardDeck>
+                        <Card style={{width: '10rem'}} className="center-text" bg={"light"}>
+                            <Card.Body>
+                                <Card.Title>Active Postings</Card.Title>
+
+                            </Card.Body>
+                            <Card.Footer style={{"background": "none", "border-top": "none"}}>
+                                <br/>
+                                <Link
+                                    to={`/users/${this.props.user._id}/profile/lendings`}>{this.props.bookPostings.filter(posting => posting.isActive).length}</Link>
+                            </Card.Footer>
+                        </Card>
+                        {/*<Card style={{ width: '10rem' }} className="center-text" bg={"light"}>*/}
+                        {/*    <Card.Body>*/}
+                        {/*        <Card.Title>Pending borrowing requests</Card.Title>*/}
+                        {/*        <Card.Text>*/}
+                        {/*            <Link to={`/users/${userId}/profile/borrowings`}>2</Link>*/}
+                        {/*        </Card.Text>*/}
+                        {/*    </Card.Body>*/}
+                        {/*</Card>*/}
+                        <Card style={{width: '10rem'}} className="center-text" bg={"light"}>
+                            <Card.Body>
+                                <Card.Title>Following</Card.Title>
+                            </Card.Body>
+                            <Card.Footer style={{"background": "none", "border-top": "none"}}>
+                                <br/>
+                                <Link to={`/users/${this.props.user._id}/profile/followings`}>{this.props.UserFollowings.length}</Link>
+                            </Card.Footer>
+                        </Card>
+                    </CardDeck>
+                    <br/>
+                    <CardDeck>
+                        <Card style={{width: '10rem'}} className="center-text" bg={"light"}>
+                            <Card.Body>
+                                <Card.Title>Active Borrowings</Card.Title>
+                            </Card.Body>
+                            <Card.Footer style={{"background": "none", "border-top": "none"}}>
+                                <br/>
+                                <Link to={`/users/${this.props.user._id}/profile/borrowings`}>
+                                    {this.props.UserBorrowings.filter(borrrowing => borrrowing.status === "APPROVED").length}</Link>
+                            </Card.Footer>
+                        </Card>
+                        {/*<Card style={{ width: '10rem' }} className="center-text" bg={"light"}>*/}
+                        {/*    <Card.Body>*/}
+                        {/*        <Card.Title>Pending Lending requests</Card.Title>*/}
+                        {/*        <Card.Text>*/}
+                        {/*            <Link to={`/users/${userId}/profile/lendings`}>6</Link>*/}
+                        {/*        </Card.Text>*/}
+                        {/*    </Card.Body>*/}
+                        {/*</Card>*/}
+
+                        <Card style={{width: '10rem'}} className="center-text" bg={"light"}>
+                            <Card.Body>
+                                <Card.Title>Follower</Card.Title>
+                            </Card.Body>
+                            <Card.Footer style={{"background": "none", "border-top": "none"}}>
+                                <br/>
+                                <Link to={`/users/${this.props.user._id}/profile/followings`}>{this.props.UserFollowers.length}</Link>
+                            </Card.Footer>
+                        </Card>
+                    </CardDeck>
+                </div>
+
+                <div className="mb-3">
+                    <h2>Reviews I have received</h2>
+                    <br/>
+                    <div className={classes.LenderTable}>
+                        <table className="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>User Name</th>
+                                <th>Book Borrowed</th>
+                                <th>Rating for me</th>
+                                <th>Review</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {
+                                this.props.reviewsUserReceived.map(review =>
+                                    <tr>
+                                        <td>
+                                            <Link to={`/users/${review.reviewer._id}/profile`}
+                                                  className="mr-1">{review.reviewer.username}</Link>
+                                        </td>
+                                        <td>
+                                            {review.book.title}
+                                        </td>
+                                        <td>
+                                            <Rating initialRating={review.rating} readonly
+                                                    emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
+                                                    fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
+                                        </td>
+                                        <td>
+                                            <span>{review.comments}</span>
+                                        </td>
+                                        <td>
+                                            <Button variant="warning" size="sm" className="transparent" title="Report"
+                                                    onClick={() => this.props.openReport(review)}>
+                                                <RiErrorWarningLine/>
+                                            </Button>
+                                        </td>
+                                    </tr>)
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div className="mb-3">
+                    <h2>My Reading list</h2>
                     {
-                        reviewsUserReceived.map(review =>
-                        <tr>
-                            <td>
-                                <Link to={`/users/${review.reviewer._id}/profile`} className="mr-1">{review.reviewer.username}</Link>
-                            </td>
-                            <td>
-                                {review.book.title}
-                            </td>
-                            <td>
-                                <Rating initialRating={review.rating} readonly
-                                        emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
-                                        fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
-                            </td>
-                            <td>
-                                <span>{review.comments}</span>
-                            </td>
-                            <td>
-                                <Button variant="warning" size="sm" className="transparent" title="Report"
-                                        onClick={()=>openReport(review)}>
-                                    <RiErrorWarningLine/>
-                                </Button>
-                            </td>
-                        </tr>)
+                        this.props.UserReadingListBooks.length===0 &&
+                        <h4>Reading List is empty</h4>
                     }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        {/*<div className="mb-3">*/}
-        {/*    <h2>My Reading list</h2>*/}
-        {/*    <Carousel indicators={false}>*/}
-        {/*        {*/}
-        {/*            UserReadingList.map((booksList, booksListIndex) => (*/}
-        {/*                <Carousel.Item key={booksListIndex}>*/}
-        {/*                    <Row>*/}
-        {/*                        {*/}
-        {/*                            booksList.map((book, bookIndex) => (*/}
-        {/*                                <Col key={bookIndex}>*/}
-        {/*                                    <Card border="light" className="rounded-0" style={{width: '13rem'}}>*/}
-        {/*                                        <Card.Img variant="top" src={book}/>*/}
-        {/*                                    </Card>*/}
-        {/*                                </Col>*/}
-        {/*                            ))*/}
-        {/*                        }*/}
-        {/*                    </Row>*/}
-        {/*                </Carousel.Item>*/}
-        {/*            ))*/}
-        {/*        }*/}
-        {/*    </Carousel>*/}
-        {/*</div>*/}
-    </div>
+                    {
+                        this.props.UserReadingListBooks.length !==0 &&
+                        this.props.UserReadingListBooks.filter(book => book.isActive).map(book =>
+                            <div className="ImageCard">
+                                <ImageCard src={book.picture}/>
+                                <div className="center-text">{book.title}</div>
+                                <div className="center-text">
+                                    <MdDeleteSweep size={"1.5em"} onClick={() =>this.deleteBook(book)}/>
+                                </div>
+                            </div>
+                        )
+                    }
+                </div>
+            </div>)
+    }
+}
+
 
 const StateToPropertyMapper = (state) => ({
     report: state.profile.report,
@@ -170,7 +194,8 @@ const StateToPropertyMapper = (state) => ({
     reviewsUserReceived: state.profile.reviewsUserReceived,
     UserFollowings: state.profile.UserFollowings,
     UserFollowers: state.profile.UserFollowers,
-    UserReadingList: state.profile.UserReadinglist
+    UserReadingListBooks: state.profile.UserReadingListBooks
 });
 
-export default connect(StateToPropertyMapper, {openReport, closeReport})(ProfileLandingPageComponent);
+export default connect(StateToPropertyMapper,
+    {openReport, closeReport, deleteFromReadingList})(ProfileLandingPageComponent);
