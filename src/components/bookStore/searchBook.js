@@ -20,7 +20,7 @@ class SearchBook extends React.Component {
                         this.props.books.filter(book =>
                             this.props.minRating === 0 ? book :
                             book.volumeInfo.averageRating >= this.props.minRating).map((book, index) =>
-                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xm-12 mb-5">
+                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xm-12 mb-5" key={index}>
                             <Link title={book.volumeInfo.title}
                                 to={`/books/${book.id}`}
                                   onClick={() => this.props.dispatch(setCurrentIndex(index))}
@@ -63,9 +63,6 @@ const stateToPropertyMapper = (state) => ({
     books: state.searchBookReducer.books,
     minRating: state.searchBookReducer.minRating
 })
-// const propertyToDispatchMapper = (dispatch) => ({
-//     setCurrentIndex: (index) => setCurrentIndex(dispatch, index)
-// })
 
 export default connect(stateToPropertyMapper)
 (SearchBook)

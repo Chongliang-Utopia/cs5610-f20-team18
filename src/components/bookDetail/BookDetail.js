@@ -15,16 +15,10 @@ import ImageCard from "../UI/imageCard/ImageCard";
 import {connect} from "react-redux";
 import {setCurrentIndex} from "../../actions/searchBookActions";
 import UserActions from "../../actions/userActions";
-import googleBookClient from "../googleBookClient";
+import BookActions from "../../actions/bookActions";
 
 class BookDetail extends React.Component {
     state = {
-        book: {
-            title: '',
-            image: '',
-            authors: [],
-            description: ''
-        },
         lending: false,
         borrowing: false,
         alertVisible: false,
@@ -33,29 +27,7 @@ class BookDetail extends React.Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);
-        this.findBook()
-    }
-
-    findBook = () => {
-        const bookId = this.props.match.params.bookId
-        const url = `https://www.googleapis.com/books/v1/volumes/${bookId}`
-        fetch(url).then(response => response.json()).then(this.setBook)
-    }
-
-    setBook = (book) => {
-        // console.log(book.volumeInfo.imageLinks)
-        this.setState({
-            book: {
-                title: book.volumeInfo.title,
-                image: book.volumeInfo.imageLinks ?
-                    book.volumeInfo.imageLinks.thumbnail
-                    : "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg",
-                authors: book.volumeInfo.authors,
-                description: book.volumeInfo.description,
-                averageRating: book.volumeInfo.averageRating,
-                ratingsCount: book.volumeInfo.ratingsCount
-            }
-        })
+        this.props.dispatch(BookActions.findBook(this.props.match.params.bookId))
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -90,19 +62,18 @@ class BookDetail extends React.Component {
     }
 
     render() {
-        const {index, books} = this.props
-        const {book} = this.state
+        const {index, books, book} = this.props
+        const {lender} = this.state
 
         return (
             <Fragment>
                 <Modal show={this.state.lending} modalClosed={this.lendingCancelHandler}>
-                    <LendingSummary title={this.state.book.title}
-                                    imageUrl={this.state.book.image}/>
+                    <LendingSummary cancel={this.lendingCancelHandler}/>
                 </Modal>
                 <Modal show={this.state.borrowing} modalClosed={this.borrowingCancelHandler}>
-                    <BorrowingSummary title={this.state.book.title}
-                                      imageUrl={this.state.book.image}
-                                      lender={this.state.lender}/>
+                    <BorrowingSummary title={book.title}
+                                      imageUrl={book.picture}
+                                      lender={lender}/>
                 </Modal>
                 <div className="container">
                     <div className={classes.BookDetail}>
@@ -110,20 +81,20 @@ class BookDetail extends React.Component {
                             <div className="col-6 mb-5">
                                 <Link to="/">Home</Link> /
                                 <Link to="/books"> Bookstore</Link> /
-                                <a> {this.state.book.title}</a>
+                                <a> {book.title}</a>
                             </div>
                             <div className="col-6">
                         <span className="float-right">
-                        <Link to={books.length > 0 && index > 0 && `/books/${books[index - 1].id}`}
+                        <Link to={(books.length > 0 && index > 0)? `/books/${books[index - 1].id}`: ""}
                               onClick={() => index > 0 && this.props.dispatch(setCurrentIndex(index - 1))}
-                              className={(index === 0 || books.length === 0) && classes.disabled}>
+                              className={(index === 0 || books.length === 0)? classes.disabled: ""}>
                             <BsChevronLeft
                                 className={(index === 0 || books.length === 0) ? classes.navIconDisabled : classes.navIcon}
                             /> Prev
                         </Link> |
-                        <Link to={books.length > 0 && index < books.length - 1 && `/books/${books[index + 1].id}`}
+                        <Link to={(books.length > 0 && index < books.length - 1)? `/books/${books[index + 1].id}`: ""}
                               onClick={() => index < books.length - 1 && this.props.dispatch(setCurrentIndex(index + 1))}
-                              className={index >= books.length - 1 && classes.disabled}> Next <BsChevronRight
+                              className={index >= books.length - 1? classes.disabled: ""}> Next <BsChevronRight
                             className={index >= books.length - 1 ? classes.navIconDisabled : classes.navIcon}/>
                         </Link>
                         </span>
@@ -135,21 +106,21 @@ class BookDetail extends React.Component {
                         </Alert>
                         <div className="row mb-5">
                             <div className="col-sm-6">
-                                <ImageCard src={this.state.book.image}/>
+                                <ImageCard src={book.picture}/>
                             </div>
                             <div className="col-sm-6">
                                 <h2>{book.title}</h2>
                                 <div className="mb-3">
-                                    <Rating initialRating={this.state.book.averageRating} readonly
+                                    <Rating initialRating={book.rating} readonly
                                             emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                             fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                     <span className={classes.ratingFont}>
-                                {!book.ratingsCount ? 0 : this.state.book.ratingsCount} ratings
+                                {!book.numberOfReviews ? 0 : book.numberOfReviews} ratings
                             </span>
                                 </div>
                                 <h5>Authors: </h5>
-                                {!book.authors ? <span>Anonymous</span> : book.authors.map(author =>
-                                    <span>{author}</span>)}
+                                {!book.author ? <span>Anonymous</span> : book.author.map((author, i) =>
+                                    <span key={i}>{author}</span>)}
                                 <button className="btn btn-info btn-block mt-4"
                                         onClick={this.lendingHandler}>
                                     <HiBadgeCheck className="float-left" size="25px"/>
@@ -165,7 +136,7 @@ class BookDetail extends React.Component {
                         <hr/>
                         <div className="row mb-5 mt-5">
                             <h5>Description: </h5>
-                            <p> {book.description && ReactHtmlParser(book.description)} </p>
+                            <span> {book.description && ReactHtmlParser(book.description)} </span>
                         </div>
                         <hr/>
                         <div className="row mb-5 mt-5">
@@ -184,7 +155,8 @@ class BookDetail extends React.Component {
 const stateToPropertyMapper = (state) => ({
     index: state.searchBookReducer.currentIndex,
     books: state.searchBookReducer.books,
-    userId: state.auth.user._id
+    userId: state.auth.user._id,
+    book: state.book.book
 })
 
 export default connect(stateToPropertyMapper)(BookDetail)
