@@ -1,5 +1,13 @@
-import {FIND_BOOK, POST_A_BOOK, UPDATE_BOOK} from "./types/bookTypes";
-import bookService from "../services/bookService";
+import {
+    CANCEL_BORROWING,
+    FIND_BOOK,
+    FIND_ALL_BORROWING_OPTIONS,
+    START_A_BORROWING_REQUEST,
+    POST_A_BOOK,
+    SUBMIT_A_BORROWING_REQUEST,
+    UPDATE_BOOK
+} from "./types/bookTypes";
+import BookService from "../services/bookService";
 
 
 class BookActions {
@@ -36,14 +44,45 @@ class BookActions {
     }
 
     postBook = (dispatch, userId, book) => {
-        return bookService.postBook(userId, book)
-            .then(status =>
-            dispatch({
-                type: POST_A_BOOK,
-                book
-            }))
+        return BookService.postBook(userId, book)
+            .then(status => {
+                this.findAllBorrowingOptions(dispatch, book.googleBookId)
+                return dispatch({
+                    type: POST_A_BOOK,
+                    book
+                })
+            })
     }
 
+    findAllBorrowingOptions = (dispatch, googleId) => {
+        return BookService.findAllBorrowingOptions(googleId)
+            .then(response => {
+                dispatch({
+                    type: FIND_ALL_BORROWING_OPTIONS,
+                    options: response.data
+                })
+            })
+    }
+
+    startABorrowingRequest = (dispatch, lender) => {
+        dispatch({
+            type: START_A_BORROWING_REQUEST,
+            lender
+        })
+    }
+
+    cancelBorrowing = (dispatch, lender) => {
+        dispatch({
+            type: CANCEL_BORROWING
+        })
+    }
+
+    submitBorrowingRequest = (dispatch, request) => {
+        return BookService.submitBorrowingRequest(request)
+            .then(status => dispatch({
+                type: SUBMIT_A_BORROWING_REQUEST
+            }))
+    }
 }
 
 export default new BookActions();

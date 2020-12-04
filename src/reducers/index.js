@@ -12,7 +12,7 @@ export default combineReducers({
     searchBookReducer: searchBookReducer,
     admin: adminReducer,
     profile: profileReducer,
-    book: bookReducer
+    bookDetail: bookReducer
 });
 
 

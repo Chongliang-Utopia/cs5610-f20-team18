@@ -2,7 +2,7 @@ import axios from "axios";
 import authHeader from "./AuthHeader";
 
 const url = 'https://www.googleapis.com/books/v1/volumes?q=';
-const API_URL = 'http://localhost:8080/api/users';
+const API_URL = 'http://localhost:8080/api';
 
 const searchBooks = (keyword) =>
     fetch(url + keyword + "&maxResults=20")
@@ -13,15 +13,21 @@ const findBookById = (id) =>
         .then(response => response.json())
 
 
-const postBook = (userId, book) => {
-    const newBook = {
-        ...book,
-        "isAvailable": true,
-        "isActive": true,
-        "user": userId
-    }
-    return axios.post(`${API_URL}/${userId}/books`, newBook, {headers: authHeader()});
+const postBook = (userId, book) =>
+    axios.post(`${API_URL}/users/${userId}/books`, book, {headers: authHeader()});
+
+
+const findAllBorrowingOptions = (googleBookId) =>
+    axios.get(`${API_URL}/${googleBookId}/books`);
+
+const submitBorrowingRequest = (request) =>
+    axios.post(`${API_URL}/transactions`, request, {headers: authHeader()})
+
+export default {
+    searchBooks,
+    findBookById,
+    postBook,
+    findAllBorrowingOptions,
+    submitBorrowingRequest
 }
 
-
-export default {searchBooks, findBookById, postBook}
