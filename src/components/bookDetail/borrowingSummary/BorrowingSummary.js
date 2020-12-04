@@ -7,6 +7,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import ImageCard from "../../UI/imageCard/ImageCard";
 import {connect} from "react-redux";
 import BookActions from "../../../actions/bookActions";
+import history from "../../../history"
 
 class BorrowingSummary extends Component {
 

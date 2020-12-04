@@ -5,7 +5,7 @@ import {GrBook} from "react-icons/gr";
 import classes from "./LenderTable.module.css";
 import {connect} from "react-redux";
 import BookActions from "../../../actions/bookActions";
-import history from "../../../history";
+import {requestLogin} from "../../../actions/authActions";
 
 class LenderTable extends React.Component {
 
@@ -57,7 +57,7 @@ class LenderTable extends React.Component {
                                     <button className="btn btn-warning btn-sm"
                                             onClick={() => {
                                                 if (!this.props.isLoggedIn) {
-                                                    history.push("/login");
+                                                    this.props.requestLogin(window.location.pathname)
                                                 } else {
                                                     this.props.startABorrowingRequest({
                                                         ...book.user,
@@ -91,7 +91,8 @@ const stateToPropertyMapper = (state) => ({
 
 const propertyToDispatchMapper = (dispatch) => ({
     findAllBorrowingOptions: (googleId) => BookActions.findAllBorrowingOptions(dispatch, googleId),
-    startABorrowingRequest: (lender) => BookActions.startABorrowingRequest(dispatch, lender)
+    startABorrowingRequest: (lender) => BookActions.startABorrowingRequest(dispatch, lender),
+    requestLogin: (location) => requestLogin(dispatch, location)
 })
 
 export default connect(stateToPropertyMapper, propertyToDispatchMapper)(LenderTable);

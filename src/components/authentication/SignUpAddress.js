@@ -51,7 +51,7 @@ class SignUpAddress extends Component {
 
         if (this.checkBtn.context._errors.length === 0) {
             this.props.dispatch(UserActions.updateUser(this.props.user._id, this.props.user))
-                .then(history.push("/"))
+                .then(history.push(this.props.preLocation))
         }
     }
 
@@ -111,7 +111,8 @@ class SignUpAddress extends Component {
 }
 
 const mapState = (state) => ({
-    user: state.auth.user
+    user: state.auth.user,
+    preLocation: state.auth.preLocation
 });
 
 export default connect(mapState)(SignUpAddress);

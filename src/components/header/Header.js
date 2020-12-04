@@ -6,10 +6,10 @@ import {connect} from "react-redux";
 import Logo from "../logo/Logo";
 import classes from "./Header.module.css"
 import SearchBar from "../UI/searchBar/SearchBar";
-import {logout} from "../../actions/authActions";
+import {logout, requestLoginWithThunk} from "../../actions/authActions";
 
 
-const Header = ({isLoggedIn, logout, user}) => {
+const Header = ({isLoggedIn, logout, user, requestLoginWithThunk}) => {
     const matchBookstore = useRouteMatch({path: "/books", exact: true})
 
     return (
@@ -47,7 +47,9 @@ const Header = ({isLoggedIn, logout, user}) => {
                         </li>
                         <li className="nav-item">
                             {!isLoggedIn?
-                                <Link className="nav-link" to="/login"><BsFillPersonFill
+                                <Link className="nav-link" to="/login"
+                                      onClick={() => requestLoginWithThunk(window.location.pathname)}
+                                ><BsFillPersonFill
                                     className="mb-1"/> Login</Link> :
                                 <button
                                     onClick={logout}
@@ -77,6 +79,6 @@ const StateToPropertyMapper = (state) => ({
 });
 
 
-export default connect(StateToPropertyMapper, {logout})(Header);
+export default connect(StateToPropertyMapper, {logout, requestLoginWithThunk})(Header);
 
 

@@ -28,14 +28,20 @@ class LoginWithGoogle extends Component {
             .then(() => {
                 const idToken = this.auth.currentUser.get().xc.id_token;
                 this.props.dispatch(loginWithGoogle(idToken))
-                    .then(this.auth.signOut())
+                    .then(() => {
+                        this.auth.signOut()
+                        if (this.props.googleRegister) {
+                            history.push("/resetPassword")
+                        } else {
+                            history.push(this.props.preLocation);
+                        }
+                    })
             })
             .catch(
                 error => {
                     history.push("/login")
                 }
             )
-
     }
 
     render() {
@@ -48,7 +54,8 @@ class LoginWithGoogle extends Component {
 }
 
 const StateToPropertyMapper = (state) => ({
-
+    preLocation: state.auth.preLocation,
+    googleRegister: state.auth.googleRegister
 });
 
 export default connect(StateToPropertyMapper)(LoginWithGoogle);

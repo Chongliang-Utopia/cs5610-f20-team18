@@ -602,7 +602,7 @@ const INTIAL_STATE = {
     UserReadinglist: [
         "ECvxEpH7VZYC",
         "f280CwAAQBAJ",
-    ]
+    ],
     readingList: [],
     followingsReadingList: [],
 };
