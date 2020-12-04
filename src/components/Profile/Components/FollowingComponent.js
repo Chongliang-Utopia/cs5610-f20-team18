@@ -9,7 +9,8 @@ import {createFollow, deleteFollow} from "../../../actions/profileActions";
 
 const FollowingComponent = ({
     user,
-    follows,
+    UserFollowings,
+    UserFollowers,
     createFollow,
     deleteFollow
                             }) =>
@@ -19,21 +20,21 @@ const FollowingComponent = ({
         </h2>
         <ListGroup variant="flush">
             {
-                follows.filter(follow=>follow.followerId===user._id).map(follow=>
+                UserFollowings.map(follow=>
                     <ListGroup.Item className="pl-0">
                         <Image width={40}
                                height={32}
-                               src={follow.followee.src}
+                               src={follow.profilePicture}
                                roundedCircle
                                className="hideAtSm mr-2"
                         />
-                        <Link to={`/users/${follow.followee._id}/profile`}>{follow.followee.username}</Link>
+                        <Link to={`/users/${follow._id}/profile`}>{follow.username}</Link>
                         <span className="hideAtSm">
-                            <Rating className="add-15-padding" initialRating={3} readonly
+                            <Rating className="add-15-padding" initialRating={follow.rating} readonly
                                     emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                     fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                         </span>
-                        <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow" onClick={()=>deleteFollow(follow._id)}>Following</button>
+                        <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow" onClick={()=>deleteFollow(user._id, follow._id)}>Following</button>
                     </ListGroup.Item>)
             }
 
@@ -46,33 +47,35 @@ const FollowingComponent = ({
         </h2>
         <ListGroup variant="flush">
             {
-                follows.filter(follow=>follow.followeeId===user._id).map(follow=>
+                UserFollowers.map(follow=>
                     <ListGroup.Item className="pl-0">
                         <Image width={40}
                                height={32}
-                               src={follow.follower.src}
+                               src={follow.profilePicture}
                                roundedCircle
                                className="hideAtSm mr-2"
                         />
-                        <Link to={`/users/${follow.follower._id}/profile`}>{follow.follower.username}</Link>
+                        <Link to={`/users/${follow._id}/profile`}>{follow.username}</Link>
                         <span className="hideAtSm">
-                            <Rating className="add-15-padding" initialRating={3} readonly
+                            <Rating className="add-15-padding" initialRating={follow.rating} readonly
                                     emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                     fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                         </span>
                         {
-                            follows.find(f=>f.followeeId===follow.followerId && f.followerId===user._id) === undefined &&
-                            <button className="pull-right btn btn-primary btn-sm" title="Unfollow"
-                                    onClick={()=>createFollow({
-                                        _id: "newf111",
-                                        followerId: user._id,
-                                        followeeId: follow.followerId,
-                                        followee: {
-                                            _id: follow.followerId,
-                                            username: follow.follower.username,
-                                        }
-                                    })}
+                            UserFollowings.find(f=>f._id===follow._id) === undefined &&
+                            <button className="pull-right btn btn-primary btn-sm" title="follow"
+                                    onClick={()=>
+                                        createFollow(
+                                        follow._id,
+                                        user._id,
+                                        follow)}
                             >Follow</button>
+                        }
+                        {
+                            UserFollowings.find(f=>f._id===follow._id) !== undefined &&
+                            <button className="pull-right btn btn-sm btn-outline-secondary" title="unfollow"
+                                    onClick={()=>deleteFollow(user._id, follow._id)}>Following</button>
+
                         }
                     </ListGroup.Item>)
             }
@@ -80,7 +83,8 @@ const FollowingComponent = ({
     </div>
 
 const stateToPropertyMapper = (state) => ({
-    follows: state.profile.follows,
+    UserFollowers: state.profile.UserFollowers,
+    UserFollowings: state.profile.UserFollowings,
     user: state.profile.user
 })
 

@@ -13,33 +13,17 @@ import {closeReport, openReport} from "../../../actions/profileActions";
 import {connect} from "react-redux";
 
 
-const bestsellerBooksLists = [
-    [
-        "/books/book1.webp",
-        "/books/book2.webp",
-        "/books/book3.webp",
-        "/books/book4.webp",
-        "/books/book5.webp",
-        "/books/book6.webp",
-    ],
-    [
-        "/books/book7.webp",
-        "/books/book8.webp",
-        "/books/book9.webp",
-        "/books/book10.webp",
-        "/books/book11.webp",
-        "/books/book12.webp",
-    ],
-]
 const ProfileLandingPageComponent = ({
          reviewsUserReceived,
          user,
          bookPostings,
-         transactions,
+         UserBorrowings,
          openReport,
          closeReport,
          report,
-         follows
+         UserFollowings,
+         UserFollowers,
+         UserReadingList
     }) =>
     <div>
         <Modal show={report} modalClosed={closeReport}>
@@ -51,12 +35,12 @@ const ProfileLandingPageComponent = ({
             <CardDeck>
                 <Card style={{width: '10rem'}} className="center-text" bg={"light"}>
                     <Card.Body>
-                        <Card.Title>Postings</Card.Title>
+                        <Card.Title>Active Postings</Card.Title>
 
                     </Card.Body>
                     <Card.Footer style={{"background": "none", "border-top": "none"}}>
                         <br/>
-                        <Link to={`/users/${user._id}/profile/lendings`}>{bookPostings.length}</Link>
+                        <Link to={`/users/${user._id}/profile/lendings`}>{bookPostings.filter(posting=>posting.isActive).length}</Link>
                     </Card.Footer>
                 </Card>
                 {/*<Card style={{ width: '10rem' }} className="center-text" bg={"light"}>*/}
@@ -73,7 +57,7 @@ const ProfileLandingPageComponent = ({
                     </Card.Body>
                     <Card.Footer style={{"background": "none", "border-top": "none"}}>
                         <br/>
-                        <Link to={`/users/${user._id}/profile/followings`}>{follows.filter(follow=>follow.followerId === user._id).length}</Link>
+                        <Link to={`/users/${user._id}/profile/followings`}>{UserFollowings.length}</Link>
                     </Card.Footer>
                 </Card>
             </CardDeck>
@@ -81,12 +65,12 @@ const ProfileLandingPageComponent = ({
             <CardDeck>
                 <Card style={{width: '10rem'}} className="center-text" bg={"light"}>
                     <Card.Body>
-                        <Card.Title>Borrowings</Card.Title>
+                        <Card.Title>Active Borrowings</Card.Title>
                     </Card.Body>
                     <Card.Footer style={{"background": "none", "border-top": "none"}}>
                         <br/>
                         <Link to={`/users/${user._id}/profile/borrowings`}>
-                            {transactions.filter(transaction=>transaction.status === "approved" && transaction.borrowerId === user._id).length}</Link>
+                            {UserBorrowings.filter(borrrowing=>borrrowing.status === "APPROVED").length}</Link>
                     </Card.Footer>
                 </Card>
                 {/*<Card style={{ width: '10rem' }} className="center-text" bg={"light"}>*/}
@@ -104,7 +88,7 @@ const ProfileLandingPageComponent = ({
                     </Card.Body>
                     <Card.Footer style={{"background": "none", "border-top": "none"}}>
                         <br/>
-                        <Link to={`/users/${user._id}/profile/followings`}>{follows.filter(follow=>follow.followeeId === user._id).length}</Link>
+                        <Link to={`/users/${user._id}/profile/followings`}>{UserFollowers.length}</Link>
                     </Card.Footer>
                 </Card>
             </CardDeck>
@@ -125,13 +109,14 @@ const ProfileLandingPageComponent = ({
                     </tr>
                     </thead>
                     <tbody>
-                    {reviewsUserReceived.map(review =>
+                    {
+                        reviewsUserReceived.map(review =>
                         <tr>
                             <td>
-                                <Link to={`/users/${review.reviewerId}/profile`} className="mr-1">{review.reviewer.username}</Link>
+                                <Link to={`/users/${review.reviewer._id}/profile`} className="mr-1">{review.reviewer.username}</Link>
                             </td>
                             <td>
-                                {review.transaction.bookTitle}
+                                {review.book.title}
                             </td>
                             <td>
                                 <Rating initialRating={review.rating} readonly
@@ -153,37 +138,39 @@ const ProfileLandingPageComponent = ({
                 </table>
             </div>
         </div>
-        <div className="mb-3">
-            <h2>My Reading list</h2>
-            <Carousel indicators={false}>
-                {
-                    bestsellerBooksLists.map((booksList, booksListIndex) => (
-                        <Carousel.Item key={booksListIndex}>
-                            <Row>
-                                {
-                                    booksList.map((book, bookIndex) => (
-                                        <Col key={bookIndex}>
-                                            <Card border="light" className="rounded-0" style={{width: '13rem'}}>
-                                                <Card.Img variant="top" src={book}/>
-                                            </Card>
-                                        </Col>
-                                    ))
-                                }
-                            </Row>
-                        </Carousel.Item>
-                    ))
-                }
-            </Carousel>
-        </div>
+        {/*<div className="mb-3">*/}
+        {/*    <h2>My Reading list</h2>*/}
+        {/*    <Carousel indicators={false}>*/}
+        {/*        {*/}
+        {/*            UserReadingList.map((booksList, booksListIndex) => (*/}
+        {/*                <Carousel.Item key={booksListIndex}>*/}
+        {/*                    <Row>*/}
+        {/*                        {*/}
+        {/*                            booksList.map((book, bookIndex) => (*/}
+        {/*                                <Col key={bookIndex}>*/}
+        {/*                                    <Card border="light" className="rounded-0" style={{width: '13rem'}}>*/}
+        {/*                                        <Card.Img variant="top" src={book}/>*/}
+        {/*                                    </Card>*/}
+        {/*                                </Col>*/}
+        {/*                            ))*/}
+        {/*                        }*/}
+        {/*                    </Row>*/}
+        {/*                </Carousel.Item>*/}
+        {/*            ))*/}
+        {/*        }*/}
+        {/*    </Carousel>*/}
+        {/*</div>*/}
     </div>
 
 const StateToPropertyMapper = (state) => ({
     report: state.profile.report,
     bookPostings:state.profile.bookPostings,
-    transactions: state.profile.transactions,
+    UserBorrowings: state.profile.UserBorrowings,
     user: state.profile.user,
     reviewsUserReceived: state.profile.reviewsUserReceived,
-    follows: state.profile.follows
+    UserFollowings: state.profile.UserFollowings,
+    UserFollowers: state.profile.UserFollowers,
+    UserReadingList: state.profile.UserReadinglist
 });
 
 export default connect(StateToPropertyMapper, {openReport, closeReport})(ProfileLandingPageComponent);

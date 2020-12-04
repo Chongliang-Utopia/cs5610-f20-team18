@@ -4,7 +4,7 @@ import {
     CREATE_TICKET,
     DELETE_TICKET,
     DELETE_USER,
-    SWITCH_SECTION,
+    SWITCH_SECTION, UPDATE_ADMININFO,
     UPDATE_USERINFO
 } from "./types";
 
@@ -15,20 +15,6 @@ export const switchSections = (section) => {
         section: section
     };
 };
-
-export const changeAdminEmail = (adminUser) => {
-    return {
-        type: CHANGE_EMAIL,
-        adminUser: adminUser
-    }
-}
-
-export const changeAdminPassword = (adminUser) => {
-    return {
-        type: CHANGE_PASSWORD,
-        adminUser: adminUser
-    }
-}
 
 export const deleteTicket = (tid) => {
     // TODO: delete request to server then back
@@ -49,7 +35,7 @@ export const deleteUser = (uid) => {
 export const updateAdminInfo = (adminUser) => {
     // TODO: send data to server and then back
     return {
-        type: UPDATE_USERINFO,
+        type: UPDATE_ADMININFO,
         adminUser: adminUser
     }
 }

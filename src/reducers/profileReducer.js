@@ -1,336 +1,605 @@
 import {
-    CLOSE_REPORT, CREATE_FOLLOW,
-    CREATE_REVIEW, DELETE_FOLLOW,
-    DELETE_POSTING, DELETE_TRANSACTION,
+    CLOSE_REPORT,
+    CREATE_FOLLOW,
+    CREATE_REVIEW,
+    DELETE_FOLLOW,
+    DELETE_POSTING,
+    DELETE_TRANSACTION,
     OPEN_REPORT,
     SWITCH_SECTION,
     UPDATE_POSTING,
     UPDATE_REVIEW,
-    UPDATE_TRANSACTION
+    APPROVE_TRANSACTION,
+    DECLINE_TRANSACTION, RETURN_TRANSACTION, CREATE_REVIEW_AS_LENDER, CREATE_REVIEW_AS_BORROWER, UPDATE_USERINFO
 } from "../actions/types";
 
 const INTIAL_STATE = {
-    user: {
-        _id: "user1",
-        username: "Tom Riddle",
-        email: "tom.riddle@gmail.com",
-        city: "San Jose",
-        state: "California",
-        zipCode: "94040",
-        phoneNumber: "6507989687",
-        signature: "Huge Harry Potter fan!",
-        rating: 4
+    user:  {
+        "rating": 0,
+        "numOfReviews": 0,
+        "_id": "5fc82fd8afbc1294a5503741",
+        "city": "SF",
+        "profilePicture": "url",
+        "signature": "hello",
+        "state": "CA",
+        "username": "a",
+        "email": "a@bbc.com",
+        "password": "afdsafdsffa"
     },
-    authenticated: false,
+    authenticated: true,
     section: "",
-    // consider moving to local state
     report: false,
     selectedReview: {},
     bookPostings: [
         {
-            _id: "b1",
-            bookTitle: "Harry Potter and the chamber of Secrets",
-            bookCondition: "Good",
-            userId: "user1",
-            src: "/books/book1.webp",
-            bookStatus: "lent"
+            "isAvailable": true,
+            "author": [
+                "Margaret Atwood"
+            ],
+            "isActive": true,
+            "_id": "5fc3f66b91b3aa84d9e9f9e7",
+            "user": "5fc82fd8afbc1294a5503741",
+            "googleBookId": "ECvxEpH7VZYC",
+            "title": "The Handmaid's Tale",
+            "picture": "http://books.google.com/books/content?id=ECvxEpH7VZYC&printsec=frontcover&img=1&zoom=1&edge=curl&imgtk=AFLRE72FajBMJYgCNCTrcL1phfb3TTAS7ZdYkroMZdZH5g9tyP_tBtIzohJOBKnUTv4SL-NEPmQlJEqZp0RUoyaf4LNnoiihNmgnp5klWAO3vnm8UUkrpFP0OiqlyX4GF-XRao_nIi1z&source=gbs_api",
+            "rating": 4,
+            "description": "<b>An instant classic and eerily prescient cultural phenomenon, from “the patron saint of feminist dystopian fiction” (<i>New York Times</i>). Now an award-winning Hulu series starring Elizabeth Moss.</b>",
+            "condition": "LIKE_NEW"
+        }
+        ,
+        {
+            "isAvailable": true,
+            "author": [
+                "J.K. Rowling"
+            ],
+            "isActive": true,
+            "_id": "5fc854687c627f07fd275260",
+            "user": "5fc82fd8afbc1294a5503741",
+            "googleBookId": "f280CwAAQBAJ",
+            "title": "Harry Potter: The Complete Collection (1-7)",
+            "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+            "rating": 4.5,
+            "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+            "condition": "ACCEPTABLE",
+        }
+
+    ],
+    UserBorrowings: [
+        {
+            "lenderReview": "5fc864b1fce6bf0e672cb250",
+            "borrowerReview": {
+                "rating": 4.5,
+                "_id": "5fc860aa00778d0e030fde20",
+                "reviewer": "5fc82fd8afbc1294a5503741",
+                "reviewee": "5fc2da3767a1ea31cc0850b3",
+                "book": "5fc45bebd09b89aa95f9c445",
+                "comments": "This book is great",
+                "reviewerIsLender": false,
+                "createdAt": "2020-12-03T03:51:06.895Z",
+                "updatedAt": "2020-12-03T03:51:06.895Z",
+                "__v": 0
+            },
+            "_id": "1",
+            "lender": {
+                "rating": 4.083333333333333,
+                "_id": "5fc2da3767a1ea31cc0850b3",
+                "username": "fadf",
+                "city": "fdfda",
+                "state": "Arizona"
+            },
+            "borrower": "5fc82fd8afbc1294a5503741",
+            "book": {
+                "isAvailable": true,
+                "author": [
+                    "J.K. Rowling"
+                ],
+                "isActive": true,
+                "_id": "5fc45bebd09b89aa95f9c445",
+                "user": "5fc2da3767a1ea31cc0850b3",
+                "googleBookId": "f280CwAAQBAJ",
+                "title": "Harry Potter: The Complete Collection (1-7)",
+                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+                "rating": 4.5,
+                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+                "condition": "ACCEPTABLE",
+                "__v": 0
+            },
+            "startDate": "2020-11-29T00:00:00.000Z",
+            "endDate": "2021-01-29T00:00:00.000Z",
+            "transactionDate": "2020-11-29T00:00:00.000Z",
+            "status": "DECLINED",
+            "__v": 0,
+            "createdAt": "2020-12-03T04:08:17.493Z",
+            "updatedAt": "2020-12-03T03:51:06.895Z",
         },
         {
-            _id: "b2",
-            bookTitle: "Harry Potter and the Goblet of Fire",
-            bookCondition: "Like New",
-            userId: "user1",
-            src: "/books/book2.webp",
-            bookStatus: "available"
+            "lenderReview": "5fc864b1fce6bf0e672cb250",
+            "borrowerReview": {
+                "rating": 4.5,
+                "_id": "5fc860aa00778d0e030fde20",
+                "reviewer": "5fc82fd8afbc1294a5503741",
+                "reviewee": "5fc2da3767a1ea31cc0850b3",
+                "book": "5fc45bebd09b89aa95f9c445",
+                "comments": "This book is great",
+                "reviewerIsLender": false,
+                "createdAt": "2020-12-03T03:51:06.895Z",
+                "updatedAt": "2020-12-03T03:51:06.895Z",
+                "__v": 0
+            },
+            "_id": "2",
+            "lender": {
+                "rating": 4.083333333333333,
+                "_id": "5fc2da3767a1ea31cc0850b3",
+                "username": "fadf",
+                "city": "fdfda",
+                "state": "Arizona"
+            },
+            "borrower": "5fc82fd8afbc1294a5503741",
+            "book": {
+                "isAvailable": true,
+                "author": [
+                    "J.K. Rowling"
+                ],
+                "isActive": true,
+                "_id": "5fc45bebd09b89aa95f9c445",
+                "user": "5fc2da3767a1ea31cc0850b3",
+                "googleBookId": "f280CwAAQBAJ",
+                "title": "Harry Potter: The Complete Collection (1-7)",
+                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+                "rating": 4.5,
+                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+                "condition": "ACCEPTABLE",
+                "__v": 0
+            },
+            "startDate": "2020-11-29T00:00:00.000Z",
+            "endDate": "2021-01-29T00:00:00.000Z",
+            "transactionDate": "2020-11-29T00:00:00.000Z",
+            "status": "PENDING",
+            "__v": 0,
+            "createdAt": "2020-12-03T04:08:17.493Z",
+            "updatedAt": "2020-12-03T03:51:06.895Z",
+        },
+        {
+            "lenderReview": "5fc864b1fce6bf0e672cb250",
+            "borrowerReview": {
+                "rating": 4.5,
+                "_id": "5fc860aa00778d0e030fde20",
+                "reviewer": "5fc82fd8afbc1294a5503741",
+                "reviewee": "5fc2da3767a1ea31cc0850b3",
+                "book": "5fc45bebd09b89aa95f9c445",
+                "comments": "This book is great",
+                "reviewerIsLender": false,
+                "createdAt": "2020-12-03T03:51:06.895Z",
+                "updatedAt": "2020-12-03T03:51:06.895Z",
+                "__v": 0
+            },
+            "_id": "3",
+            "lender": {
+                "rating": 4.083333333333333,
+                "_id": "5fc2da3767a1ea31cc0850b3",
+                "username": "fadf",
+                "city": "fdfda",
+                "state": "Arizona"
+            },
+            "borrower": "5fc82fd8afbc1294a5503741",
+            "book": {
+                "isAvailable": true,
+                "author": [
+                    "J.K. Rowling"
+                ],
+                "isActive": true,
+                "_id": "5fc45bebd09b89aa95f9c445",
+                "user": "5fc2da3767a1ea31cc0850b3",
+                "googleBookId": "f280CwAAQBAJ",
+                "title": "Harry Potter: The Complete Collection (1-7)",
+                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+                "rating": 4.5,
+                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+                "condition": "ACCEPTABLE",
+                "__v": 0
+            },
+            "startDate": "2020-11-29T00:00:00.000Z",
+            "endDate": "2021-01-29T00:00:00.000Z",
+            "transactionDate": "2020-11-29T00:00:00.000Z",
+            "status": "APPROVED",
+            "__v": 0,
+            "createdAt": "2020-12-03T04:08:17.493Z",
+            "updatedAt": "2020-12-03T03:51:06.895Z",
+        },
+        {
+            "lenderReview": "5fc864b1fce6bf0e672cb250",
+
+            "_id": "4",
+            "lender": {
+                "rating": 4.083333333333333,
+                "_id": "5fc2da3767a1ea31cc0850b3",
+                "username": "fadf",
+                "city": "fdfda",
+                "state": "Arizona"
+            },
+            "borrower": "5fc82fd8afbc1294a5503741",
+            "book": {
+                "isAvailable": true,
+                "author": [
+                    "J.K. Rowling"
+                ],
+                "isActive": true,
+                "_id": "5fc45bebd09b89aa95f9c445",
+                "user": "5fc2da3767a1ea31cc0850b3",
+                "googleBookId": "f280CwAAQBAJ",
+                "title": "Harry Potter: The Complete Collection (1-7)",
+                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+                "rating": 4.5,
+                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+                "condition": "ACCEPTABLE",
+                "__v": 0
+            },
+            "startDate": "2020-11-29T00:00:00.000Z",
+            "endDate": "2021-01-29T00:00:00.000Z",
+            "transactionDate": "2020-11-29T00:00:00.000Z",
+            "status": "RETURNED",
+            "__v": 0,
+            "createdAt": "2020-12-03T04:08:17.493Z",
+            "updatedAt": "2020-12-03T03:51:06.895Z",
         }
     ],
-    transactions: [
+    UserLendings:
+    [
         {
-            _id: "ts1",
-            lenderId: "user1",
-            lender: {
-                _id: "user1",
-                username: "Tom Riddle",
-                rating: 4
+            "lenderReview": {
+                "rating": 4,
+                "_id": "5fc864b1fce6bf0e672cb250",
+                "reviewer": "5fc82fd8afbc1294a5503741",
+                "reviewee": "5fc2c4cc67a1ea31cc0850af",
+                "book": "5fc45bebd09b89aa95f9c445",
+                "comments": "He kept my book well",
+                "reviewerIsLender": true,
+                "createdAt": "2020-12-03T04:08:17.463Z",
+                "updatedAt": "2020-12-03T04:08:17.463Z",
+                "__v": 0
             },
-            borrowerId: "user22",
-            borrower: {
-                username: "LazyReader54",
-                rating: 1,
-                city: "MTV"
+            "borrowerReview": "5fc860aa00778d0e030fde20",
+            "_id": "5",
+            "lender": "5fc82fd8afbc1294a5503741",
+            "borrower": {
+                "rating": 4.25,
+                "_id": "5fc2c4cc67a1ea31cc0850af",
+                "username": "fad",
+                "city": "",
+                "state": ""
             },
-            startDate: "",
-            endDate: "",
-            transactionTime: "11-13-2020",
-            bookTitle:"harry potter",
-            status: "pending"
+            "book": {
+                "isAvailable": true,
+                "author": [
+                    "J.K. Rowling"
+                ],
+                "isActive": true,
+                "_id": "5fc45bebd09b89aa95f9c445",
+                "user": "5fc2da3767a1ea31cc0850b3",
+                "googleBookId": "f280CwAAQBAJ",
+                "title": "Harry Potter: The Complete Collection (1-7)",
+                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+                "rating": 4.5,
+                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+                "condition": "ACCEPTABLE",
+                "__v": 0
+            },
+            "startDate": "2020-11-29T00:00:00.000Z",
+            "endDate": "2021-01-29T00:00:00.000Z",
+            "transactionDate": "2020-11-29T00:00:00.000Z",
+            "status": "DECLINED",
+            "__v": 0,
+            "createdAt": "2020-12-03T04:08:17.493Z",
+            "updatedAt": "2020-12-03T03:51:06.895Z",
         },
         {
-            _id: "ts1ds",
-            borrowerId: "user1",
-            borrower: {
-                _id: "user1",
-                username: "Tom Riddle",
-                rating: 4,
-                city: "MTV"
+            "lenderReview": {
+                "rating": 4,
+                "_id": "5fc864b1fce6bf0e672cb250",
+                "reviewer": "5fc82fd8afbc1294a5503741",
+                "reviewee": "5fc2c4cc67a1ea31cc0850af",
+                "book": "5fc45bebd09b89aa95f9c445",
+                "comments": "He kept my book well",
+                "reviewerIsLender": true,
+                "createdAt": "2020-12-03T04:08:17.463Z",
+                "updatedAt": "2020-12-03T04:08:17.463Z",
+                "__v": 0
             },
-            lenderId: "user22",
-            lender: {
-                username: "LazyReader54",
-                rating: 1,
-                city: "MTV"
+            "borrowerReview": "5fc860aa00778d0e030fde20",
+            "_id": "6",
+            "lender": "5fc82fd8afbc1294a5503741",
+            "borrower": {
+                "rating": 4.25,
+                "_id": "5fc2c4cc67a1ea31cc0850af",
+                "username": "fad",
+                "city": "",
+                "state": ""
             },
-            startDate: "",
-            endDate: "",
-            transactionTime: "11-13-2020",
-            bookTitle:"harry potter",
-            status: "pending"
+            "book": {
+                "isAvailable": true,
+                "author": [
+                    "J.K. Rowling"
+                ],
+                "isActive": true,
+                "_id": "5fc45bebd09b89aa95f9c445",
+                "user": "5fc2da3767a1ea31cc0850b3",
+                "googleBookId": "f280CwAAQBAJ",
+                "title": "Harry Potter: The Complete Collection (1-7)",
+                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+                "rating": 4.5,
+                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+                "condition": "ACCEPTABLE",
+                "__v": 0
+            },
+            "startDate": "2020-11-29T00:00:00.000Z",
+            "endDate": "2021-01-29T00:00:00.000Z",
+            "transactionDate": "2020-11-29T00:00:00.000Z",
+            "status": "PENDING",
+            "__v": 0,
+            "createdAt": "2020-12-03T04:08:17.493Z",
+            "updatedAt": "2020-12-03T03:51:06.895Z",
         },
         {
-            _id: "ts12",
-            lenderId: "user1",
-            lender: {
-                _id: "user1",
-                username: "Tom Riddle",
-                rating: 4
+            "lenderReview": {
+                "rating": 4,
+                "_id": "5fc864b1fce6bf0e672cb250",
+                "reviewer": "5fc82fd8afbc1294a5503741",
+                "reviewee": "5fc2c4cc67a1ea31cc0850af",
+                "book": "5fc45bebd09b89aa95f9c445",
+                "comments": "He kept my book well",
+                "reviewerIsLender": true,
+                "createdAt": "2020-12-03T04:08:17.463Z",
+                "updatedAt": "2020-12-03T04:08:17.463Z",
+                "__v": 0
             },
-            borrowerId: "user22",
-            borrower: {
-                username: "LazyReader54",
-                rating: 1,
-                city: "MTV"
+            "borrowerReview": "5fc860aa00778d0e030fde20",
+            "_id": "7",
+            "lender": "5fc82fd8afbc1294a5503741",
+            "borrower": {
+                "rating": 4.25,
+                "_id": "5fc2c4cc67a1ea31cc0850af",
+                "username": "fad",
+                "city": "",
+                "state": ""
             },
-            startDate: "11-16-2020",
-            endDate: "12-16-2020",
-            transactionTime: "11-13-2020",
-            bookTitle:"computer science rocks",
-            status: "approved"
+            "book": {
+                "isAvailable": true,
+                "author": [
+                    "J.K. Rowling"
+                ],
+                "isActive": true,
+                "_id": "5fc45bebd09b89aa95f9c445",
+                "user": "5fc2da3767a1ea31cc0850b3",
+                "googleBookId": "f280CwAAQBAJ",
+                "title": "Harry Potter: The Complete Collection (1-7)",
+                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+                "rating": 4.5,
+                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+                "condition": "ACCEPTABLE",
+                "__v": 0
+            },
+            "startDate": "2020-11-29T00:00:00.000Z",
+            "endDate": "2021-01-29T00:00:00.000Z",
+            "transactionDate": "2020-11-29T00:00:00.000Z",
+            "status": "APPROVED",
+            "__v": 0,
+            "createdAt": "2020-12-03T04:08:17.493Z",
+            "updatedAt": "2020-12-03T03:51:06.895Z",
         },
         {
-            _id: "ts2",
-            lenderId: "user33",
-            lender: {
-                _id: "user33",
-                username: "WoloaHope",
-                rating: 4,
-                city: "MTV"
-
+            "lenderReview": {
+                "rating": 4,
+                "_id": "5fc864b1fce6bf0e672cb250",
+                "reviewer": "5fc82fd8afbc1294a5503741",
+                "reviewee": "5fc2c4cc67a1ea31cc0850af",
+                "book": "5fc45bebd09b89aa95f9c445",
+                "comments": "He kept my book well",
+                "reviewerIsLender": true,
+                "createdAt": "2020-12-03T04:08:17.463Z",
+                "updatedAt": "2020-12-03T04:08:17.463Z",
+                "__v": 0
             },
-            borrowerId: "user1",
-            borrower: {
-                username: "Tom Riddle",
-                rating: 4
+            "borrowerReview": "5fc860aa00778d0e030fde20",
+            "_id": "8",
+            "lender": "5fc82fd8afbc1294a5503741",
+            "borrower": {
+                "rating": 4.25,
+                "_id": "5fc2c4cc67a1ea31cc0850af",
+                "username": "fad",
+                "city": "",
+                "state": ""
             },
-            startDate: "11-16-2020",
-            endDate: "12-16-2020",
-            transactionTime: "11-13-2020",
-            bookTitle:"1587, a year of no significance",
-            status: "approved"
-        },
-        {
-            _id: "ts3",
-            lenderId: "user33",
-            lender: {
-                _id: "user33",
-                username: "WoloaHope",
-                rating: 4
+            "book": {
+                "isAvailable": true,
+                "author": [
+                    "J.K. Rowling"
+                ],
+                "isActive": true,
+                "_id": "5fc45bebd09b89aa95f9c445",
+                "user": "5fc2da3767a1ea31cc0850b3",
+                "googleBookId": "f280CwAAQBAJ",
+                "title": "Harry Potter: The Complete Collection (1-7)",
+                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+                "rating": 4.5,
+                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+                "condition": "ACCEPTABLE",
+                "__v": 0
             },
-            borrowerId: "user1",
-            borrower: {
-                username: "Tom Riddle",
-                rating: 4
-            },
-            startDate: "10-24-2020",
-            endDate: "11-24-2020",
-            transactionTime: "10-13-2020",
-            bookTitle:"The tale of Forbidden City",
-            status: "returned"
-        },
-        {
-            _id: "ts4",
-            lenderId: "user1",
-            lender: {
-                _id: "user1",
-                username: "Tom Riddle",
-                rating: 4
-            },
-            borrowerId: "user55",
-            borrower: {
-                username: "PearRepublic",
-                rating: 4
-            },
-            startDate: "9-24-2020",
-            endDate: "10-24-2020",
-            transactionTime: "9-1-2020",
-            bookTitle:"Love Actually",
-            status: "returned"
+            "startDate": "2020-11-29T00:00:00.000Z",
+            "endDate": "2021-01-29T00:00:00.000Z",
+            "transactionDate": "2020-11-29T00:00:00.000Z",
+            "status": "RETURNED",
+            "__v": 0,
+            "createdAt": "2020-12-03T04:08:17.493Z",
+            "updatedAt": "2020-12-03T03:51:06.895Z",
         }
-
-
     ],
     reviewsUserReceived: [
         {
-            revieweeId: "user1",
-            reviewerId: "user55",
-            reviewer: {
-                username: "PearRepublic",
-                rating: 4
+            "rating": 4.5,
+            "_id": "5fc860aa00778d0e030fde20",
+            "reviewer": {
+                "rating": 4.25,
+                "_id": "5fc2c4cc67a1ea31cc0850af",
+                "username": "fad"
             },
-            isLender: true,
-            transactionId: "ts4",
-            transaction: {
-                _id: "ts4",
-                lenderId: "user1",
-                lender: {
-                    _id: "user1",
-                    username: "Tom Riddle",
-                    rating: 4
-                },
-                borrowerId: "user55",
-                borrower: {
-                    username: "PearRepublic",
-                    rating: 4
-                },
-                startDate: "9-24-2020",
-                endDate: "10-24-2020",
-                transactionTime: "9-1-2020",
-                bookTitle:"Love Actually",
-                status: "returned"
+            "reviewee": "5fc82fd8afbc1294a5503741",
+            "book": {
+                "isAvailable": true,
+                "author": [
+                    "J.K. Rowling"
+                ],
+                "isActive": false,
+                "_id": "5fc45bebd09b89aa95f9c445",
+                "user": "5fc2da3767a1ea31cc0850b3",
+                "googleBookId": "f280CwAAQBAJ",
+                "title": "Harry Potter: The Complete Collection (1-7)",
+                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+                "rating": 4.5,
+                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+                "condition": "ACCEPTABLE",
+                "__v": 0
             },
-            rating: 4,
-            comments: "This book is not in good condition at all. The owner should take good care of his/her books!!! I would" +
-                "not borrow from this lender ever again!!!",
-            date: "10-26-2020"
+            "comments": "This book is great",
+            "reviewerIsLender": false,
+            "createdAt": "2020-12-03T03:51:06.895Z",
+            "updatedAt": "2020-12-03T03:51:06.895Z",
+            "__v": 0
         },
         {
-            revieweeId: "user1",
-            reviewerId: "user33",
-            reviewer: {
-                _id: "user33",
-                username: "WoloaHope",
-                rating: 4
+            "rating": 4.5,
+            "_id": "5fc860aa00778d0e030fde20",
+            "reviewer": {
+                "rating": 4.25,
+                "_id": "5fc2c4cc67a1ea31cc0850af",
+                "username": "fad"
             },
-            isLender: false,
-            transactionId: "ts3",
-            transaction: {
-                _id: "ts3",
-                lenderId: "user33",
-                lender: {
-                    _id: "user33",
-                    username: "WoloaHope",
-                    rating: 4
-                },
-                borrowerId: "user1",
-                borrower: {
-                    username: "Tom Riddle",
-                    rating: 4
-                },
-                startDate: "10-24-2020",
-                endDate: "11-24-2020",
-                transactionTime: "10-13-2020",
-                bookTitle:"The tale of Forbidden City",
-                status: "returned"
+            "reviewee": "5fc82fd8afbc1294a5503741",
+            "book": {
+                "isAvailable": true,
+                "author": [
+                    "J.K. Rowling"
+                ],
+                "isActive": true,
+                "_id": "5fc45bebd09b89aa95f9c445",
+                "user": "5fc2da3767a1ea31cc0850b3",
+                "googleBookId": "f280CwAAQBAJ",
+                "title": "Harry Potter: The Complete Collection (1-7)",
+                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+                "rating": 4.5,
+                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+                "condition": "ACCEPTABLE",
+                "__v": 0
             },
-            rating: 1,
-            comments: "This borrower is terrible",
-            date: "10-26-2020"
+            "comments": "This book is great",
+            "reviewerIsLender": true,
+            "createdAt": "2020-12-03T03:51:06.895Z",
+            "updatedAt": "2020-12-03T03:51:06.895Z",
+            "__v": 0
         },
     ],
     reviewsUserGave: [
         {
-            revieweeId: "user55",
-            reviewee: {
-                username: "PearRepublic",
-                rating: 4
+            "rating": 4,
+            "_id": "5fc864b1fce6bf0e672cb250",
+            "reviewer": "5fc82fd8afbc1294a5503741",
+            "reviewee": {
+                "rating": 4.25,
+                "_id": "5fc2c4cc67a1ea31cc0850af",
+                "username": "fad"
             },
-            isLender: true,
-            transactionId: "ts4",
-            transaction: {
-                _id: "ts4",
-                lenderId: "user1",
-                lender: {
-                    _id: "user1",
-                    username: "Tom Riddle",
-                    rating: 4
-                },
-                borrowerId: "user55",
-                borrower: {
-                    username: "PearRepublic",
-                    rating: 4
-                },
-                startDate: "9-24-2020",
-                endDate: "10-24-2020",
-                transactionTime: "9-1-2020",
-                bookTitle:"Love Actually",
-                status: "returned"
+            "book": {
+                "isAvailable": true,
+                "author": [
+                    "J.K. Rowling"
+                ],
+                "isActive": true,
+                "_id": "5fc45bebd09b89aa95f9c445",
+                "user": "5fc2da3767a1ea31cc0850b3",
+                "googleBookId": "f280CwAAQBAJ",
+                "title": "Harry Potter: The Complete Collection (1-7)",
+                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+                "rating": 4.5,
+                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+                "condition": "ACCEPTABLE",
+                "__v": 0
             },
-            rating: 4,
-            comments: "This borrower is terrible",
-            date: "10-26-2020"
+            "comments": "He kept my book well",
+            "reviewerIsLender": true,
+            "createdAt": "2020-12-03T04:08:17.463Z",
+            "updatedAt": "2020-12-03T04:08:17.463Z",
+            "__v": 0
         },
+
         {
-            revieweeId: "user33",
-            reviewee: {
-                _id: "user33",
-                username: "WoloaHope",
-                rating: 4
+            "rating": 4,
+            "_id": "5fc864b1fce6bf0e672cb250",
+            "reviewer": "5fc82fd8afbc1294a5503741",
+            "reviewee": {
+                "rating": 4.25,
+                "_id": "5fc2c4cc67a1ea31cc0850af",
+                "username": "fad"
             },
-            isLender: false,
-            transactionId: "ts3",
-            transaction: {
-                _id: "ts3",
-                lenderId: "user33",
-                lender: {
-                    _id: "user33",
-                    username: "WoloaHope",
-                    rating: 4
-                },
-                borrowerId: "user1",
-                borrower: {
-                    username: "Tom Riddle",
-                    rating: 4
-                },
-                startDate: "10-24-2020",
-                endDate: "11-24-2020",
-                transactionTime: "10-13-2020",
-                bookTitle:"The tale of Forbidden City",
-                status: "returned"
+            "book": {
+                "isAvailable": true,
+                "author": [
+                    "J.K. Rowling"
+                ],
+                "isActive": true,
+                "_id": "5fc45bebd09b89aa95f9c445",
+                "user": "5fc2da3767a1ea31cc0850b3",
+                "googleBookId": "f280CwAAQBAJ",
+                "title": "Harry Potter: The Complete Collection (1-7)",
+                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+                "rating": 4.5,
+                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+                "condition": "ACCEPTABLE",
+                "__v": 0
             },
-            rating: 1,
-            comments: "",
-            date: "10-26-2020"
+            "comments": "He kept my book well",
+            "reviewerIsLender": false,
+            "createdAt": "2020-12-03T04:08:17.463Z",
+            "updatedAt": "2020-12-03T04:08:17.463Z",
+            "__v": 0
         },
     ],
-    follows: [
+    UserFollowings:
+    [
         {
-            _id: "f1",
-            followerId: "user1",
-            followeeId: "user33",
-            followee: {
-                _id: "user33",
-                username: "WoloaHope",
-                rating: 4
-            }
+            "rating": 0,
+            "_id": "5fc832970dd35f96292e58ca",
+            "username": "b",
+            "city": "SF",
+            "profilePicture": "url",
+            "signature": "hello",
+            "state": "CA"
         },
         {
-            _id: "f13",
-            followerId: "user1",
-            followeeId: "user222",
-            followee: {
-                _id: "user222",
-                username: "crazycoder",
-                rating: 4
-            }
-        },
-        {
-            _id: "f2",
-            followerId: "user55",
-            follower: {
-                username: "PearRepublic",
-                rating: 4
-            },
-            followeeId: "user1",
+            "rating": 0,
+            "_id": "5fc841544eaaaf974ad6284c",
+            "username": "c"
         }
+    ],
+    UserFollowers:
+    [
+        {
+            "rating": 0,
+            "_id": "5fc832970dd35f96292e58ca",
+            "username": "b",
+            "city": "SF",
+            "profilePicture": "url",
+            "signature": "hello",
+            "state": "CA"
+        },
+        {
+            "rating": 0,
+            "_id": "5fc841544eaaaf974ad6284c",
+            "username": "c"
+        }
+    ],
+    UserReadinglist: [
+        "ECvxEpH7VZYC",
+        "f280CwAAQBAJ",
     ]
 };
 
@@ -350,17 +619,19 @@ const profileReducer = (state = INTIAL_STATE, action) => {
             };
         case SWITCH_SECTION:
             return {...state, section: action.section}
+        //POSTING
         case DELETE_POSTING:
             return {
                 ...state,
-                bookPostings: state.bookPostings.filter(posting=>posting._id!==action.posting._id)
+                bookPostings: state.bookPostings.map(posting=>posting._id === action.posting._id? action.posting: posting)
             }
         case UPDATE_POSTING:
             return {
                 ...state,
                 bookPostings: state.bookPostings.map(posting=>posting._id === action.posting._id? action.posting: posting)
             }
-        case CREATE_REVIEW:
+        //REVIEW
+        case CREATE_REVIEW_AS_LENDER:
             return {
                 ...state,
                 reviewsUserGave: [
@@ -368,33 +639,60 @@ const profileReducer = (state = INTIAL_STATE, action) => {
                     action.review
                 ]
             }
-        case UPDATE_TRANSACTION:
+        case CREATE_REVIEW_AS_BORROWER:
             return {
                 ...state,
-                transactions: state.transactions.map(transaction=>transaction._id === action.transaction._id? action.transaction: transaction)
+                reviewsUserGave: [
+                    ...state.reviewsUserGave,
+                    action.review
+                ]
             }
         case UPDATE_REVIEW:
             return {
                 ...state,
                 reviewsUserGave: state.reviewsUserGave.map(review=>review._id === action.review._id? action.review: review)
             }
+        //TRANSACTION
+        case APPROVE_TRANSACTION:
+            return {
+                ...state,
+                UserLendings: state.UserLendings.map(lending=>lending._id === action.transaction._id? action.transaction: lending)
+            }
+        case DECLINE_TRANSACTION:
+            return {
+                ...state,
+                UserLendings: state.UserLendings.map(lending=>lending._id === action.transaction._id ? action.transaction: lending)
+            }
         case DELETE_TRANSACTION:
             return {
                 ...state,
-                transactions: state.transactions.filter(transaction=>transaction._id !== action.transaction._id)
+                UserBorrowings: state.UserBorrowings.filter(borrowing=>borrowing._id !== action.transaction._id)
             }
+        case RETURN_TRANSACTION:
+            return {
+                ...state,
+                UserLendings: state.UserLendings.map(lending=>lending._id === action.transaction._id ? action.transaction: lending),
+                UserBorrowings: state.UserBorrowings.map(borrowing=>borrowing._id === action.transaction._id ? action.transaction: borrowing)
+            }
+        //FOLLOW
         case DELETE_FOLLOW:
             return {
                 ...state,
-                follows: state.follows.filter(follow=>follow._id !== action.fid)
+                UserFollowings: state.UserFollowings.filter(follow=>follow._id !== action.fid)
             }
         case CREATE_FOLLOW:
             return {
                 ...state,
-                follows: [
-                    ...state.follows,
-                    action.follow
+                UserFollowings: [
+                    ...state.UserFollowings,
+                    action.following_body
                 ]
+            }
+            // ACCOUNT
+        case UPDATE_USERINFO:
+            return {
+                ...state,
+                user: action.user
             }
         default:
             return state

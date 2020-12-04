@@ -1,11 +1,16 @@
 import {
-    CLOSE_REPORT, CREATE_FOLLOW,
-    CREATE_REVIEW, DELETE_FOLLOW,
-    DELETE_POSTING, DELETE_TRANSACTION,
+    APPROVE_TRANSACTION,
+    CLOSE_REPORT,
+    CREATE_FOLLOW,
+    DELETE_FOLLOW,
+    DELETE_POSTING,
+    DELETE_TRANSACTION,
     OPEN_REPORT,
     SWITCH_SECTION,
-    UPDATE_POSTING, UPDATE_REVIEW,
-    UPDATE_TRANSACTION
+    UPDATE_POSTING, CREATE_REVIEW_AS_LENDER,
+    CREATE_REVIEW_AS_BORROWER,
+    DECLINE_TRANSACTION, RETURN_TRANSACTION,
+    UPDATE_REVIEW, UPDATE_ADMININFO, UPDATE_USERINFO
 } from "./types";
 
 export const fetchUser = (uid) => {};
@@ -30,6 +35,7 @@ export const openReport = (review) => {
     };
 };
 
+// Posting
 export const deletePosting = (posting) => {
     //TODO: send to server and back
     return {
@@ -46,10 +52,19 @@ export const updatePosting = (posting) => {
     }
 }
 
-export const createNewReview = (review) => {
-    //TODO: send to server and back
+// Review
+export const createReviewAsLender = (review, lending) => {
+    //TODO: send to server and back, call need lending id
     return {
-        type: CREATE_REVIEW,
+        type: CREATE_REVIEW_AS_LENDER,
+        review
+    }
+}
+
+export const createReviewAsBorrower = (review, borrowing) => {
+    //TODO: call need borrowing id
+    return {
+        type: CREATE_REVIEW_AS_BORROWER,
         review
     }
 }
@@ -62,10 +77,18 @@ export const updateReview = (review) => {
     }
 }
 
-export const updateTransaction = (transaction) => {
+// Transaction
+export const approveTransaction = (transaction) => {
     //TODO: send to server and back
     return {
-        type: UPDATE_TRANSACTION,
+        type: APPROVE_TRANSACTION,
+        transaction
+    }
+}
+
+export const declineTransaction = (transaction) => {
+    return {
+        type: DECLINE_TRANSACTION,
         transaction
     }
 }
@@ -78,20 +101,37 @@ export const deleteTransaction = (transaction) => {
     }
 }
 
-export const createFollow = (follow) => {
+export const finishTransaction = (transaction) => {
+    return {
+        type: RETURN_TRANSACTION,
+        transaction
+    }
+}
+
+// Following
+export const createFollow = (following_id, uid, following_body) => {
     //TODO: send to server and back
     return {
         type: CREATE_FOLLOW,
-        follow
+        following_body
     }
 
 }
 
-export const deleteFollow = (fid) => {
-    //TODO: send to server and back
+export const deleteFollow = (uid, fid) => {
+    //TODO: send to server and back, need user id
     return {
         type: DELETE_FOLLOW,
         fid: fid
+    }
+}
+
+// Account Setting
+export const updateUserInfo = (user) => {
+    //TODO: call server
+    return {
+        type: UPDATE_USERINFO,
+        user
     }
 }
 

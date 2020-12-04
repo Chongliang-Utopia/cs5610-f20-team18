@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import ImageCard from "../../UI/imageCard/ImageCard";
 import {RiEdit2Line} from "react-icons/ri";
 import {MdDeleteSweep} from "react-icons/md"
@@ -12,10 +12,9 @@ import {Link} from "react-router-dom";
 import Rating from "react-rating";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Button from "react-bootstrap/Button";
 import {Tooltip} from "react-bootstrap";
 import {connect} from "react-redux";
-import {updatePosting, updateTransaction} from "../../../actions/profileActions";
+import {updatePosting, approveTransaction, declineTransaction} from "../../../actions/profileActions";
 
 
 class LendingComponent extends React.Component {
@@ -120,7 +119,7 @@ class LendingComponent extends React.Component {
                             updatePosting={this.props.updatePosting}
                         />
                     </Modal>
-                    <Modal show={this.state.confirm} modalClosed={this.cancelConfirm}>
+                    <Modal show={this.state.confirm}>
                         <ConfirmReturn
                             transaction={this.state.transactionBeingConfirmed}
                             finishReturning={this.finishReturning}
@@ -134,10 +133,10 @@ class LendingComponent extends React.Component {
                         />
                     </Modal>
                     {
-                        this.props.bookPostings.map(book =>
+                        this.props.bookPostings.filter(book=>book.isActive).map(book =>
                             <div className="ImageCard">
-                                <ImageCard src={book.src}/>
-                                <div className="center-text">{book.bookTitle}</div>
+                                <ImageCard src={book.picture}/>
+                                <div className="center-text">{book.title}</div>
                                 <div className="center-text">
                                     <RiEdit2Line size={"1.5em"} onClick={() => this.editPosting(book)}/>
                                     <MdDeleteSweep size={"1.5em"} onClick={() => this.deletePosting(book)}/>
@@ -152,56 +151,64 @@ class LendingComponent extends React.Component {
                         <table className="table table-hover">
                             <thead>
                             <tr>
-                                <th>User Name</th>
+                                <th>Borrower</th>
                                 <th>Rating</th>
+                                <th>Email</th>
                                 <th>Location</th>
                                 <th>Book</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            {this.props.transactions.filter(
-                                transaction=>
-                                    transaction.status!=="returned" && transaction.lenderId === this.props.user._id
-                                ).map(transaction =>
+                            {this.props.UserLendings.filter(
+                                lending=>lending.status!=="RETURNED").map(lending =>
                                 <tr>
                                     <td>
-                                        <Link to={`/users/${transaction.borrower.username}/profile`}
-                                              className="mr-1">{transaction.borrower.username}</Link>
+                                        <Link to={`/users/${lending.borrower.username}/profile`}
+                                              className="mr-1">{lending.borrower.username}</Link>
                                     </td>
                                     <td>
-                                        <Rating initialRating={transaction.borrower.rating} readonly
+                                        <Rating initialRating={lending.borrower.rating} readonly
                                                 emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                                 fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                     </td>
                                     <td>
-                                        <span>{transaction.borrower.city}</span>
+                                        <span>{lending.borrower.email}</span>
                                     </td>
                                     <td>
-                                        <span>{transaction.bookTitle}</span>
+                                        <span>{lending.borrower.city + ", " + lending.borrower.state}</span>
+                                    </td>
+                                    <td>
+                                        <span>{lending.book.title}</span>
                                     </td>
                                     <td>
                                         {
-                                            transaction.status === "pending" &&
+                                            lending.status === "PENDING" &&
                                            <div>
                                                 <button className="btn btn-sm btn-danger m-1 float-right"
-                                                        onClick={()=>this.props.updateTransaction({
-                                                            ...transaction,
-                                                            status: "declined"
+                                                        onClick={()=>this.props.declineTransaction({
+                                                            ...lending,
+                                                            status: "DECLINED"
                                                         })}>Decline</button>
                                                 <button className="btn btn-sm btn-success m-1 float-right"
-                                                        onClick={()=>this.props.updateTransaction({
-                                                            ...transaction,
-                                                            status: "approved"
-                                                        })}>Approve</button>
+                                                        onClick={()=>{
+                                                            this.props.approveTransaction({
+                                                                ...lending,
+                                                                status: "APPROVED"
+                                                            })
+                                                            this.props.updatePosting({
+                                                                ...lending.book,
+                                                                isAvailable: false
+                                                            })
+                                                        }}>Approve</button>
                                            </div>
                                         }
                                         {
-                                            transaction.status === "declined" &&
+                                            lending.status === "DECLINED" &&
                                             <button className="btn btn-sm btn-warning m-1 float-right" disabled>Declined</button>
                                         }
                                         {
-                                            transaction.status === "approved" &&
+                                            lending.status === "APPROVED" &&
                                             <button className="btn btn-sm btn-success m-1 float-right" disabled>Approved</button>
                                         }
                                     </td>
@@ -224,17 +231,17 @@ class LendingComponent extends React.Component {
                             </tr>
                             </thead>
                             <tbody>
-                            {this.props.transactions.filter(transaction=>transaction.status==="approved" && transaction.lenderId===this.props.user._id).map(transaction =>
+                            {this.props.UserLendings.filter(lending=>lending.status==="APPROVED").map(lending =>
                                 <tr>
                                     <td>
-                                        <Link to={`/users/${transaction.borrower.username}/profile`}
-                                              className="mr-1">{transaction.borrower.username}</Link>
+                                        <Link to={`/users/${lending.borrower._id}/profile`}
+                                              className="mr-1">{lending.borrower.username}</Link>
                                     </td>
                                     <td>
-                                        <span>{transaction.endDate}</span>
+                                        <span>{lending.endDate.slice(0, 10)}</span>
                                     </td>
                                     <td>
-                                        <span>{transaction.bookTitle}</span>
+                                        <span>{lending.book.title}</span>
                                     </td>
                                     <td>
                                         <OverlayTrigger
@@ -242,7 +249,7 @@ class LendingComponent extends React.Component {
                                             delay={{show: 250, hide: 400}}
                                             overlay={this.renderConfirmTooltip}>
                                             <button className="btn btn-sm btn-success m-1 float-right"
-                                                    onClick={() => this.confirmReturning(transaction)}>Confirm</button>
+                                                    onClick={() => this.confirmReturning(lending)}>Returned</button>
                                         </OverlayTrigger>
                                     </td>
                                 </tr>)
@@ -262,38 +269,29 @@ class LendingComponent extends React.Component {
                                 <th>Borrow Duration</th>
                                 <th>Book Title</th>
                                 <th>Your review</th>
-                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
                             {
-                                this.props.transactions.filter(transaction=>transaction.status==="returned" && transaction.lenderId===this.props.user._id).map(transaction =>
+                                this.props.UserLendings.filter(lending=>lending.status==="RETURNED").map(lending =>
                                     <tr>
                                         <td>
-                                            <Link to={`/users/${transaction.borrower.username}/profile`}
-                                                  className="mr-1">{transaction.borrower.username}</Link>
+                                            <Link to={`/users/${lending.borrower._id}/profile`}
+                                                  className="mr-1">{lending.borrower.username}</Link>
                                         </td>
                                         <td>
-                                            <Rating initialRating={this.props.reviewsUserGave.find(review=>review.transactionId===transaction._id).rating} readonly
+                                            <Rating initialRating={lending.lenderReview.rating} readonly
                                                     emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                                     fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                         </td>
                                         <td>
-                                            <span>{transaction.startDate} ~ {transaction.endDate}</span>
+                                            <span>{lending.startDate.slice(0, 10)} ~ {lending.endDate.slice(0, 10)}</span>
                                         </td>
                                         <td>
-                                            <span>{transaction.bookTitle}</span>
+                                            <span>{lending.book.title}</span>
                                         </td>
                                         <td>
-                                            <span>{this.props.reviewsUserGave.find(review=>review.transactionId===transaction._id).comments}</span>
-                                        </td>
-                                        <td>
-                                            {
-                                                this.props.reviewsUserGave.find(review=>review.transactionId===transaction._id).comments=== "" &&
-                                                <button className="btn btn-sm btn-info m-1 float-right" onClick={()=>this.editReview(
-                                                    this.props.reviewsUserGave.find(review=>review.transactionId===transaction._id))}>
-                                                    Edit Review</button>
-                                            }
+                                            <span>{lending.lenderReview.comments}</span>
                                         </td>
                                     </tr>
                                 )
@@ -305,15 +303,14 @@ class LendingComponent extends React.Component {
             </div>
         )
     }
-
 }
 
 const stateToPropertyMapper = (state) => ({
     bookPostings: state.profile.bookPostings,
-    transactions: state.profile.transactions,
+    UserLendings: state.profile.UserLendings,
     reviewsUserGave: state.profile.reviewsUserGave,
     user: state.profile.user
 })
 
 
-export default connect(stateToPropertyMapper, {updatePosting, updateTransaction})(LendingComponent)
+export default connect(stateToPropertyMapper, {updatePosting, approveTransaction, declineTransaction})(LendingComponent)

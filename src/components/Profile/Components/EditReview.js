@@ -4,7 +4,7 @@ import {TiHeart} from "react-icons/ti";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {connect} from "react-redux";
-import {updateReview} from "../../../actions/profileActions";
+import {createReviewAsBorrower, finishTransaction} from "../../../actions/profileActions";
 
 class EditReview extends React.Component {
     state = {
@@ -54,22 +54,36 @@ class EditReview extends React.Component {
                         </Form.Control>
                     </Form.Group>
                     <Button variant="success" onClick={()=>{
-                        this.props.updateReview({
-                            ...this.props.review,
+                        this.props.createReviewAsBorrower({
+                            reviewer: this.props.user._id,
+                            reviewee: this.props.borrowingBeingEdited.lender._id,
+                            book: this.props.borrowingBeingEdited.book._id,
                             comments: this.state.newComment,
-                            rating: this.state.newRating
+                            rating: this.state.newRating === 0? 5: this.state.newRating
+                        }, this.props.borrowingBeingEdited)
+                        this.props.finishTransaction({
+                            ...this.props.borrowingBeingEdited,
+                            status: "RETURNED",
+                            borrowerReview: {
+                                reviewer: this.props.user._id,
+                                reviewee: this.props.borrowingBeingEdited.lender._id,
+                                book: this.props.borrowingBeingEdited.book._id,
+                                comments: this.state.newComment,
+                                rating: this.state.newRating === 0? 5: this.state.newRating
+                            }
                         })
                         this.props.cancelReview()
                     }}>Submit</Button>
                     {"  "}
-                    <Button variant="danger" onClick={()=>this.props.cancelReview()}>Cancel</Button>
                 </div>
             </div>
         )
     }
 }
 
-const stateToPropertyMapper = (state) => ({})
+const stateToPropertyMapper = (state) => ({
+    user: state.profile.user
+})
 
 
-export default connect(stateToPropertyMapper, {updateReview})(EditReview)
+export default connect(stateToPropertyMapper, {createReviewAsBorrower, finishTransaction})(EditReview)

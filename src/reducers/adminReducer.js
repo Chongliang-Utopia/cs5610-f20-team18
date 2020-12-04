@@ -5,7 +5,7 @@ import {
     DELETE_TICKET,
     DELETE_USER,
     FETCH_ADMINUSER,
-    SWITCH_SECTION,
+    SWITCH_SECTION, UPDATE_ADMININFO,
     UPDATE_USERINFO
 } from "../actions/types";
 
@@ -88,7 +88,7 @@ const adminReducer = (state = INTIAL_STATE, action) => {
                 ...state,
                 adminUser: action.adminUser
             }
-        case UPDATE_USERINFO:
+        case UPDATE_ADMININFO:
             return {
                 ...state,
                 adminUser: action.adminUser
