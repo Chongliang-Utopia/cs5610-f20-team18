@@ -1,4 +1,5 @@
-import {UPDATE_USER, ADD_TO_READING_LIST} from "./types/userTypes";
+import {UPDATE_USER} from "./types/userTypes";
+import {ADD_TO_READING_LIST} from "./types/userTypes";
 import UserService from "../services/UserService";
 
 class UserActions {
@@ -23,6 +24,7 @@ class UserActions {
     addToMyReadingList = (userId, googleBook) => (dispatch) => {
         return UserService.addToMyReadingList(userId, googleBook)
             .then(status => {
+                console.log(status)
                 dispatch({
                     type: ADD_TO_READING_LIST,
                     googleBook
@@ -30,7 +32,6 @@ class UserActions {
             })
     }
 }
-
 
 export default new UserActions();
 

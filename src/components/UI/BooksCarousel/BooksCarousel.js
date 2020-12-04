@@ -115,8 +115,8 @@ export default class BooksCarousel extends Component {
                 <Slider {...settings}>
 
                     {
-                        this.props.booksLists.map((book) =>
-                            <Link to={`/books/${book.id}`}>
+                        this.props.booksLists.map((book, index) =>
+                            <Link to={`/books/${book.id}`} key={index}>
                                 <div className={classes.bookCarouselCard}>
                                     <div className={classes.bookImgDiv}>
                                         <img src={book.thumbnail}/>
