@@ -5,15 +5,15 @@ import ImageCard from "../../UI/imageCard/ImageCard";
 import {connect} from "react-redux";
 import BookActions from "../../../actions/bookActions";
 
-const LendingSummary = ({book, cancel, updateBook, postBook, userId}) =>
+const LendingSummary = ({book, cancel, updateBook, postBook, user}) =>
     <div className={classes.LendingSummary}>
         <div className={classes.heading}>
-        <h1>BayBookClub</h1>
+            <h1>BayBookClub</h1>
             <div className={classes.line}>
                 <span className="bg-white p-2"><TiHeart color="red"/></span>
             </div>
-        <p>Thank you for offering to lend your copy of {book.title}. When
-            someone asks to borrow this book, you will see a note on your profile page!</p>
+            <p>Thank you for offering to lend your copy of {book.title}. When
+                someone asks to borrow this book, you will see a note on your profile page!</p>
         </div>
         <div className="row mt-5">
             <div className="col-md-4">
@@ -22,20 +22,22 @@ const LendingSummary = ({book, cancel, updateBook, postBook, userId}) =>
             <div className="col-md-8">
                 <h5>{book.title}</h5>
                 <div className="from-group mb-5">
-                <label htmlFor="bookCondition" className={classes.condtionLabel} >Book Condition:</label>
-                <select className="form-control" id="bookCondition" onChange={e => updateBook({...book, condition: e.target.value})}>
-                    <option value="LIKE_NEW">Like New</option>
-                    <option value="VERY_GOOD">Very Good</option>
-                    <option value="GOOD">Good</option>
-                    <option value="ACCEPTABLE">Acceptable</option>
-                </select>
+                    <label htmlFor="bookCondition" className={classes.condtionLabel}>Book Condition:</label>
+                    <select className="form-control" id="bookCondition"
+                            onChange={e => updateBook({...book, condition: e.target.value})}>
+                        <option value="LIKE_NEW">Like New</option>
+                        <option value="VERY_GOOD">Very Good</option>
+                        <option value="GOOD">Good</option>
+                        <option value="ACCEPTABLE">Acceptable</option>
+                    </select>
                 </div>
                 <div className="float-right">
-                <button className="btn btn-danger mr-3" onClick={cancel}>Cancel</button>
-                <button className="btn btn-success" onClick={() => {
-                    postBook(userId, book)
-                    cancel()
-                }}>Confirm</button>
+                    <button className="btn btn-danger mr-3" onClick={cancel}>Cancel</button>
+                    <button className="btn btn-success" onClick={() => {
+                        postBook(user._id, book)
+                        cancel()
+                    }}>Confirm
+                    </button>
                 </div>
             </div>
         </div>
@@ -43,13 +45,13 @@ const LendingSummary = ({book, cancel, updateBook, postBook, userId}) =>
 
 
 const stateToPropertyMapper = (state) => ({
-    book: state.book.book,
-    userId: state.auth.user._id
+    book: state.bookDetail.book,
+    user: state.auth.user
 })
 
 const propertyToDispatchMapper = (dispatch) => ({
     updateBook: (book) => BookActions.updateBook(dispatch, book),
-    postBook: (userId, book) => BookActions.postBook(dispatch, userId, book)
+    postBook: (userId, book) => BookActions.postBook(dispatch, userId, book),
 })
 
 export default connect(stateToPropertyMapper, propertyToDispatchMapper)(LendingSummary);

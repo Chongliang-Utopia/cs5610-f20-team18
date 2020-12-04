@@ -16,13 +16,12 @@ import {connect} from "react-redux";
 import {setCurrentIndex} from "../../actions/searchBookActions";
 import UserActions from "../../actions/userActions";
 import BookActions from "../../actions/bookActions";
+import history from "../../history";
 
 class BookDetail extends React.Component {
     state = {
         lending: false,
-        borrowing: false,
         alertVisible: false,
-        lender: {}
     }
 
     componentDidMount() {
@@ -32,7 +31,7 @@ class BookDetail extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.match.params.bookId !== prevProps.match.params.bookId) {
-            this.findBook()
+            this.props.dispatch(BookActions.findBook(this.props.match.params.bookId))
         }
     }
 
@@ -44,16 +43,8 @@ class BookDetail extends React.Component {
         this.setState({lending: false})
     }
 
-    borrowingHandler = (lender) => {
-        this.setState({borrowing: true, lender})
-    }
-
-    borrowingCancelHandler = () => {
-        this.setState({borrowing: false})
-    }
-
     addToReadingList = () => {
-        this.props.dispatch(UserActions.addToMyReadingList(this.props.userId, {"googleBookId": this.props.match.params.bookId}))
+        this.props.dispatch(UserActions.addToMyReadingList(this.props.user._id, {"googleBookId": this.props.match.params.bookId}))
             .then(this.setState({alertVisible: true}, () => {
                 window.setTimeout(() => {
                     this.setState({alertVisible: false})
@@ -63,17 +54,14 @@ class BookDetail extends React.Component {
 
     render() {
         const {index, books, book} = this.props
-        const {lender} = this.state
 
         return (
             <Fragment>
                 <Modal show={this.state.lending} modalClosed={this.lendingCancelHandler}>
                     <LendingSummary cancel={this.lendingCancelHandler}/>
                 </Modal>
-                <Modal show={this.state.borrowing} modalClosed={this.borrowingCancelHandler}>
-                    <BorrowingSummary title={book.title}
-                                      imageUrl={book.picture}
-                                      lender={lender}/>
+                <Modal show={this.props.borrowing}>
+                    <BorrowingSummary/>
                 </Modal>
                 <div className="container">
                     <div className={classes.BookDetail}>
@@ -81,20 +69,20 @@ class BookDetail extends React.Component {
                             <div className="col-6 mb-5">
                                 <Link to="/">Home</Link> /
                                 <Link to="/books"> Bookstore</Link> /
-                                <a> {book.title}</a>
+                                <span> {book.title}</span>
                             </div>
                             <div className="col-6">
                         <span className="float-right">
-                        <Link to={(books.length > 0 && index > 0)? `/books/${books[index - 1].id}`: ""}
+                        <Link to={(books.length > 0 && index > 0) ? `/books/${books[index - 1].id}` : ""}
                               onClick={() => index > 0 && this.props.dispatch(setCurrentIndex(index - 1))}
-                              className={(index === 0 || books.length === 0)? classes.disabled: ""}>
+                              className={(index === 0 || books.length === 0) ? classes.disabled : ""}>
                             <BsChevronLeft
                                 className={(index === 0 || books.length === 0) ? classes.navIconDisabled : classes.navIcon}
                             /> Prev
                         </Link> |
-                        <Link to={(books.length > 0 && index < books.length - 1)? `/books/${books[index + 1].id}`: ""}
+                        <Link to={(books.length > 0 && index < books.length - 1) ? `/books/${books[index + 1].id}` : ""}
                               onClick={() => index < books.length - 1 && this.props.dispatch(setCurrentIndex(index + 1))}
-                              className={index >= books.length - 1? classes.disabled: ""}> Next <BsChevronRight
+                              className={index >= books.length - 1 ? classes.disabled : ""}> Next <BsChevronRight
                             className={index >= books.length - 1 ? classes.navIconDisabled : classes.navIcon}/>
                         </Link>
                         </span>
@@ -122,12 +110,24 @@ class BookDetail extends React.Component {
                                 {!book.author ? <span>Anonymous</span> : book.author.map((author, i) =>
                                     <span key={i}>{author}</span>)}
                                 <button className="btn btn-info btn-block mt-4"
-                                        onClick={this.lendingHandler}>
+                                        onClick={() => {
+                                            if (!this.props.isLoggedIn) {
+                                                history.push("/login");
+                                            } else {
+                                                this.lendingHandler()
+                                            }
+                                        }}>
                                     <HiBadgeCheck className="float-left" size="25px"/>
                                     I want to lend the book
                                 </button>
                                 <button className="btn btn-secondary btn-block"
-                                        onClick={this.addToReadingList}>
+                                        onClick={() => {
+                                            if (!this.props.isLoggedIn) {
+                                                history.push("/login");
+                                            } else {
+                                                this.addToReadingList()
+                                            }
+                                        }}>
                                     <HiHeart className="float-left" size="25px"/>
                                     Add to My Reading List
                                 </button>
@@ -143,7 +143,7 @@ class BookDetail extends React.Component {
                             <div className="col-12 pl-0 pb-3">
                                 <h5>Borrowing Options:</h5>
                             </div>
-                            <LenderTable borrowingHandler={this.borrowingHandler}/>
+                            <LenderTable googleBookId={this.props.match.params.bookId}/>
                         </div>
                     </div>
                 </div>
@@ -155,8 +155,10 @@ class BookDetail extends React.Component {
 const stateToPropertyMapper = (state) => ({
     index: state.searchBookReducer.currentIndex,
     books: state.searchBookReducer.books,
-    userId: state.auth.user._id,
-    book: state.book.book
+    user: state.auth.user,
+    book: state.bookDetail.book,
+    borrowing: state.bookDetail.borrowing,
+    isLoggedIn: state.auth.isLoggedIn
 })
 
 export default connect(stateToPropertyMapper)(BookDetail)

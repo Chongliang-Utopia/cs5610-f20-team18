@@ -3,63 +3,96 @@ import Rating from "react-rating";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import {GrBook} from "react-icons/gr";
 import classes from "./LenderTable.module.css";
+import {connect} from "react-redux";
+import BookActions from "../../../actions/bookActions";
+import history from "../../../history";
 
-const LenderTable = ({borrowingHandler}) => {
+class LenderTable extends React.Component {
 
-    const lenders = [
-        {
-            username: "Tom Hanks",
-            city: "San Jose",
-            state: "CA",
-            userRating: 4.5,
-            bookCondition: "Good"
-        },
-        {
-            username: "Jeff Bezos",
-            city: "Seattle",
-            state: "WA",
-            userRating: 3.5,
-            bookCondition: "Like New"
+    componentDidMount() {
+        this.props.findAllBorrowingOptions(this.props.googleBookId)
+    }
+
+    renderCondition(condtion) {
+        switch (condtion) {
+            case "LIKE_NEW":
+                return <span>Like New</span>
+            case "VERY_GOOD":
+                return <span>Very Good</span>
+            case "GOOD":
+                return <span>Good</span>
+            case "ACCEPTABLE":
+                return <span>Acceptable</span>
+            default:
+                return null
         }
-    ]
+    }
 
-    return (
-        <div className={"col-12 " + classes.LenderTable}>
+    render() {
+        return (
+            <div className={"col-12 " + classes.LenderTable}>
 
-        <table className="table table-hover">
-            <thead>
-            <tr>
-                <th>Condition</th>
-                <th>Location</th>
-                <th>Lender Information</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            {   lenders.map(lender =>
-                <tr>
-                    <td>{lender.bookCondition}</td>
-                    <td>{lender.city}, {lender.state}</td>
-                    <td>
-                        <span className="mr-1">{lender.username}</span>
-                        <Rating initialRating={lender.userRating} readonly
-                                emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
-                                fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
-                    </td>
-                    <td>
-                        <button className="btn btn-warning btn-sm"
-                                onClick={() => borrowingHandler(lender)}>
-                            <GrBook className="mr-2 mb-1"/>
-                            Borrow
-                        </button>
-                    </td>
-                </tr>)
-            }
-            </tbody>
-        </table>
-        </div>
-    )
+                <table className="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Condition</th>
+                        <th>Location</th>
+                        <th>Lender Information</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {this.props.borrowingOptions && this.props.borrowingOptions.map((book, index) =>
+                        <tr key={index}>
+                            <td>{this.renderCondition(book.condition)}</td>
+                            <td>{book.user.city}, {book.user.state}</td>
+                            <td>
+                                <span className="mr-1">{book.user.username}</span>
+                                <Rating initialRating={book.user.rating} readonly
+                                        emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
+                                        fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
+                            </td>
+                            <td>
+                                {book.isAvailable ?
+                                    <button className="btn btn-warning btn-sm"
+                                            onClick={() => {
+                                                if (!this.props.isLoggedIn) {
+                                                    history.push("/login");
+                                                } else {
+                                                    this.props.startABorrowingRequest({
+                                                        ...book.user,
+                                                        bookCondition: book.condition,
+                                                        bookId: book._id
+                                                    })
+                                                }
+                                            }}>
+                                        <GrBook className="mr-2 mb-1"/>
+                                        Borrow
+                                    </button> :
+                                    < button className="btn btn-outline-secondary btn-sm" disabled>
+                                        Not Available
+                                    </button>
+                                }
+                            </td>
+                        </tr>)
+                    }
+                    </tbody>
+                </table>
+            </div>
+        )
+    }
 }
 
-export default LenderTable;
+const stateToPropertyMapper = (state) => ({
+    borrowingOptions: state.bookDetail.borrowingOptions,
+    user: state.auth.user,
+    isLoggedIn: state.auth.isLoggedIn
+})
+
+const propertyToDispatchMapper = (dispatch) => ({
+    findAllBorrowingOptions: (googleId) => BookActions.findAllBorrowingOptions(dispatch, googleId),
+    startABorrowingRequest: (lender) => BookActions.startABorrowingRequest(dispatch, lender)
+})
+
+export default connect(stateToPropertyMapper, propertyToDispatchMapper)(LenderTable);
 
