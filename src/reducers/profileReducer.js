@@ -8,7 +8,8 @@ import {
     UPDATE_REVIEW,
     UPDATE_TRANSACTION
 } from "../actions/types";
-import {ADD_TO_READING_LIST} from "../actions/types/userTypes";
+import {ADD_TO_READING_LIST, GET_FOLLOWINGS_READING_LIST} from "../actions/types/userTypes";
+import {LOGOUT} from "../actions/types/authTypes";
 
 const INTIAL_STATE = {
     user: {
@@ -333,7 +334,8 @@ const INTIAL_STATE = {
             followeeId: "user1",
         }
     ],
-    readingList: []
+    readingList: [],
+    followingsReadingList: [],
 };
 
 const profileReducer = (state = INTIAL_STATE, action) => {
@@ -406,6 +408,16 @@ const profileReducer = (state = INTIAL_STATE, action) => {
                     action.googleBook.googleBookId
                 ]
             }
+        case GET_FOLLOWINGS_READING_LIST:
+            return {
+                ...state,
+                followingsReadingList: [...action.followingsReadingList]
+            }
+        case LOGOUT:
+            return {
+                ...state,
+                followingsReadingList: []
+            };
         default:
             return state
     }
