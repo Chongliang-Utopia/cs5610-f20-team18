@@ -1,5 +1,5 @@
 import bookService from "../services/bookService";
-import bestsellerBooksLists from '../assets/data/bestsellerBooksLists.json'
+import bestsellerBooksList from '../assets/data/bestsellerBooksList.json'
 import {UPDATE_USER} from "./types/userTypes";
 
 export const SET_ADVANCED_SEARCH = "SET_ADVANCED_SEARCH"
@@ -63,7 +63,7 @@ export const getRecommendedBooks = (dispatch) => {
 const getRecommendedBooksAdder = (dispatch) => {
     const ids = []
     let pair;
-    for (pair of bestsellerBooksLists) {
+    for (pair of bestsellerBooksList) {
         ids.push(pair.id)
     }
     let id;
