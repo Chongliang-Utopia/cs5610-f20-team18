@@ -18,7 +18,7 @@ const Header = ({isLoggedIn, logout, user, requestLoginWithThunk}) => {
             if (user.isAdmin) {
                 return <Link className="nav-link" to="/admin">Admin</Link>
             } else {
-                return <Link className="nav-link" to="/users/:userId/profile">Profile</Link>
+                return <Link className="nav-link" to={`/users/${user._id}/profile`}>Profile</Link>
 
             }
         } else {
