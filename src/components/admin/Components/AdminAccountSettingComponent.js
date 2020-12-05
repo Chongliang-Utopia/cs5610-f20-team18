@@ -2,55 +2,45 @@ import React from "react";
 import {connect} from "react-redux";
 import UserActions from "../../../actions/userActions";
 import {Alert} from "reactstrap";
+import {Field, reduxForm} from "redux-form";
 
 
 class AdminAccountSettingComponent extends React.Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            user: {
-                email: this.props.user.email,
-                password: "",
-            },
-            alertVisible: false
-        }
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+    state = {
+        alertVisible: false
     }
 
-    handleChange(e) {
-        const {name, value} = e.target;
-        this.setState(prevState => ({user: {...prevState.user, [name]: value}}));
+    renderInput = ({input, label, type, placeholder, id}) => {
+        return (
+            <div className="form-group row">
+                <label className="col-sm-3 col-form-label" htmlFor={id}>
+                    {label}
+                </label>
+                <div className="col-sm-9">
+                    <input {...input} className="form-control" type={type} placeholder={placeholder} id={id}/>
+                </div>
+            </div>
+        )
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-
-        const user = this.state.user;
-        if (user.password === "") {
-            delete user.password;
+    onSubmit = (formValues) => {
+        let user = {};
+        user.email = formValues.email;
+        if (formValues.password) {
+            user.password = formValues.password;
         }
-        this.props.dispatch(UserActions.updateUser(this.props.user._id, user))
+        console.log(user)
+        this.props.dispatch(UserActions.updateUser(formValues._id, user))
             .then(this.setState({alertVisible: true}, () => {
                 window.setTimeout(() => {
                     this.setState({alertVisible: false})
                 }, 2000)
             }))
-
     }
 
-    reset = () => this.setState({
-        user: {
-            email: this.props.user.email,
-            password: ""
-        }
-    })
-
     render() {
-        const {email, password} = this.state.user;
+        const {handleSubmit, pristine, reset, submitting} = this.props
 
         return (
             <div>
@@ -59,41 +49,15 @@ class AdminAccountSettingComponent extends React.Component {
                        isOpen={this.state.alertVisible}>
                     Success updating your account!
                 </Alert>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={handleSubmit(this.onSubmit)} >
                     <br/>
-                    <div className="form-group row">
-                        <label htmlFor="change-email" className="col-sm-3 col-form-label">
-                            Email*
-                        </label>
-                        <div className="col-sm-9">
-                            <input required
-                                className="form-control"
-                                   id="change-email"
-                                   placeholder="user@user.com"
-                                   type="email" name="email"
-                                   value={email}
-                                   onChange={this.handleChange}
-                            />
-                        </div>
-                    </div>
-                    <div className='form-group row'>
-                        <label htmlFor="change-password" className="col-sm-3 col-form-label">
-                            Password
-                        </label>
-                        <div className="col-sm-9">
-                            <input className="form-control"
-                                   type="password"
-                                   id="change-password"
-                                   name="password"
-                                   placeholder="Enter New Password"
-                                   value={password}
-                                   onChange={this.handleChange}
-                            />
-                        </div>
-                    </div>
+                    <Field name="email" component={this.renderInput} label="Email*" type="email"
+                           placeholder="user@user.com" id="email"/>
+                    <Field name="password" component={this.renderInput} label="Password" type="password"
+                           placeholder="Enter New Password" id="password"/>
                     <div className="float-right">
-                        <button className="btn btn-danger m-2" type="button" onClick={this.reset}>Reset</button>
-                        <button className="btn btn-success m-2" type="submit">Save</button>
+                        <button className="btn btn-danger m-2" type="button" disabled={pristine || submitting} onClick={reset}>Reset</button>
+                        <button className="btn btn-success m-2" type="submit" disabled = {pristine || submitting}>Save</button>
                     </div>
                 </form>
             </div>
@@ -102,7 +66,13 @@ class AdminAccountSettingComponent extends React.Component {
 }
 
 const stateToPropertyMapper = (state) => ({
-    user: state.auth.user,
+    initialValues: state.auth.user
 })
 
-export default connect(stateToPropertyMapper)(AdminAccountSettingComponent)
+export default connect(stateToPropertyMapper)(reduxForm({
+    form: 'adminAccountSettingComponent',
+    enableReinitialize : true
+})(AdminAccountSettingComponent));
+
+
+
