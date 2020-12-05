@@ -65,7 +65,8 @@ class BorrowingComponent extends React.Component {
                                         <span>{borrowing.lender.city + ", " + borrowing.lender.state}</span>
                                     </td>
                                     <td>
-                                        <span>{borrowing.book.title}</span>
+                                        <Link to={`/books/${borrowing.book._id}`} className="mr-1">{borrowing.book.title}</Link>
+
                                     </td>
                                     <td>
                                         {
@@ -97,6 +98,7 @@ class BorrowingComponent extends React.Component {
                             <thead>
                             <tr>
                                 <th>Owner</th>
+                                <th>Email</th>
                                 <th>Due Date</th>
                                 <th>Location</th>
                                 <th>Book</th>
@@ -110,13 +112,16 @@ class BorrowingComponent extends React.Component {
                                               className="mr-1">{borrowing.lender.username}</Link>
                                     </td>
                                     <td>
+                                        <span>{borrowing.borrower.email}</span>
+                                    </td>
+                                    <td>
                                         <span>{borrowing.endDate.slice(0, 10)}</span>
                                     </td>
                                     <td>
                                         <span>{borrowing.lender.city + ", " + borrowing.lender.state}</span>
                                     </td>
                                     <td>
-                                        <span>{borrowing.book.title}</span>
+                                        <Link to={`/books/${borrowing.book._id}`} className="mr-1">{borrowing.book.title}</Link>
                                     </td>
 
                                 </tr>)
@@ -155,7 +160,7 @@ class BorrowingComponent extends React.Component {
                                         <span>{borrowing.startDate.slice(0, 10)} ~ {borrowing.endDate.slice(0, 10)}</span>
                                     </td>
                                     <td>
-                                        <span>{borrowing.book.title}</span>
+                                        <Link to={`/books/${borrowing.book._id}`} className="mr-1">{borrowing.book.title}</Link>
                                     </td>
                                     <td>
                                         {

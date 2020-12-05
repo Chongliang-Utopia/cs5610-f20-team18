@@ -14,7 +14,6 @@ import {closeReport, openReport} from "../../actions/profileActions";
 const PublicProfilePosts = ({
             user,
             bookPostings=[],
-            transactions=[],
             report,
             openReport,
             closeReport,
@@ -32,8 +31,8 @@ const PublicProfilePosts = ({
                 {
                     bookPostings.map(book =>
                         <div className="ImageCard">
-                            <ImageCard src={book.src}/>
-                            {book.bookTitle}
+                            <ImageCard src={book.picture}/>
+                            {book.title}
                         </div>
                     )
                 }
@@ -55,26 +54,26 @@ const PublicProfilePosts = ({
                         </tr>
                         </thead>
                         <tbody>
-                            {transactions.filter(transaction=>transaction.status==="returned" && transaction.borrowerId===user._id).map(transaction =>
+                            {reviewsUserReceived.filter(review=>review.reviewerIsLender).map(review =>
                                 <tr>
                                     <td>
-                                        <Link to={`/users/${transaction.lenderId}/profile`}
-                                              className="mr-1">{transaction.lender.username}</Link>
+                                        <Link to={`/users/${review.reviewer._id}/profile`}
+                                              className="mr-1">{review.reviewer.username}</Link>
                                     </td>
                                     <td>
-                                        {transaction.bookTitle}
+                                        {review.book.title}
                                     </td>
                                     <td>
-                                        <Rating initialRating={reviewsUserReceived.find(review=>review.transactionId===transaction._id).rating} readonly
+                                        <Rating initialRating={review.rating} readonly
                                                 emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                                 fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                     </td>
                                     <td>
-                                        <span>{reviewsUserReceived.find(review=>review.transactionId===transaction._id).comments}</span>
+                                        <span>{review.comments}</span>
                                     </td>
                                     <td>
                                         <Button variant="warning" size="sm" className="transparent"
-                                                onClick={()=>openReport(reviewsUserReceived.find(review=>review.transactionId===transaction._id))}
+                                                onClick={()=>openReport(review)}
                                                 title="Report">
                                             <RiErrorWarningLine/>
                                         </Button>
@@ -100,26 +99,26 @@ const PublicProfilePosts = ({
                             </tr>
                             </thead>
                             <tbody>
-                                {transactions.filter(transaction=>transaction.status==="returned" && transaction.lenderId===user._id).map(transaction =>
+                                {reviewsUserReceived.filter(review=>!review.reviewerIsLender).map(review =>
                                     <tr>
                                         <td>
-                                            <Link to={`/users/${transaction.borrowerId}/profile`}
-                                                  className="mr-1">{transaction.borrower.username}</Link>
+                                            <Link to={`/users/${review.reviewer._id}/profile`}
+                                                  className="mr-1">{review.reviewer.username}</Link>
                                         </td>
                                         <td>
-                                            {transaction.bookTitle}
+                                            {review.book.title}
                                         </td>
                                         <td>
-                                            <Rating initialRating={reviewsUserReceived.find(review=>review.transactionId===transaction._id).rating} readonly
+                                            <Rating initialRating={review.rating} readonly
                                                     emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                                     fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                         </td>
                                         <td>
-                                            <span>{reviewsUserReceived.find(review=>review.transactionId===transaction._id).comments}</span>
+                                            <span>{review.comments}</span>
                                         </td>
                                         <td>
                                             <Button variant="warning" size="sm" className="transparent"
-                                                    onClick={()=>openReport(reviewsUserReceived.find(review=>review.transactionId===transaction._id))}
+                                                    onClick={()=>openReport(review)}
                                                     title="Report">
                                                 <RiErrorWarningLine/>
                                             </Button>
@@ -139,7 +138,6 @@ const StateToPropertyMapper = (state) => ({
     report: state.profile.report,
     bookPostings: state.profile.bookPostings,
     user: state.profile.user,
-    transactions: state.profile.transactions,
     reviewsUserReceived: state.profile.reviewsUserReceived
 });
 
