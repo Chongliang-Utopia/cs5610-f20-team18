@@ -30,6 +30,14 @@ class TransactionService{
                 response.data ? response.data : []
             ))
     }
+
+    acceptBorrowRequest(transactionId) {
+        return axios.put(`${API_TRANSACTION_URL}/${transactionId}/accept`, {headers: authHeader()})
+    }
+
+    returnBook(transactionId) {
+        return axios.put(`${API_TRANSACTION_URL}/${transactionId}/return`, {headers: authHeader()})
+    }
 }
 
 export default new TransactionService();
