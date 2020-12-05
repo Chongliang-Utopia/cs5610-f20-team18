@@ -7,7 +7,7 @@ import UserTicketsComponent from "./Components/UserTicketsComponent";
 import classes from "./admin.module.css";
 import {BsCaretRightFill} from "react-icons/bs";
 import {connect} from "react-redux";
-import {switchSections, fetchMemberNumber, fetchPostingNumber, fetchTicketNumber, fetchAdminUser, fetchAllUsers, fetchUserTickets} from "../../actions/adminActions";
+import {switchSections,fetchAdminUser, fetchAllUsers, fetchUserTickets} from "../../actions/adminActions";
 import AllBookPostings from "./Components/AllBookPostingsComponent";
 
 class Admin extends React.Component{
@@ -153,4 +153,4 @@ const stateToPropertyMapper = (state) => ({
 
 export default connect (
     stateToPropertyMapper,
-    {switchSections, fetchTicketNumber, fetchMemberNumber, fetchPostingNumber, fetchAdminUser, fetchAllUsers, fetchUserTickets})(Admin);
+    {switchSections, fetchAdminUser, fetchAllUsers, fetchUserTickets})(Admin);
