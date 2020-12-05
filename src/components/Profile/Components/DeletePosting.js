@@ -1,8 +1,6 @@
 import React from "react";
 import classes from "../../bookDetail/lendingSummary/LendingSummary.module.css";
 import {TiHeart} from "react-icons/ti";
-import {connect} from "react-redux";
-import {deletePosting} from "../../../actions/profileActions";
 
 
 const DeletePosting = ({book, cancelDelete, deletePosting}) =>
@@ -26,8 +24,4 @@ const DeletePosting = ({book, cancelDelete, deletePosting}) =>
         </div>
     </div>
 
-const stateToPropertyMapper = (state) => ({
-    bookPostings: state.profile.bookPostings
-})
-
-export default connect(stateToPropertyMapper, {deletePosting})(DeletePosting)
+export default DeletePosting

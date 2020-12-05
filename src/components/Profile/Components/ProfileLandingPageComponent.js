@@ -140,7 +140,7 @@ class ProfileLandingPageComponent extends React.Component {
                                                   className="mr-1">{review.reviewer.username}</Link>
                                         </td>
                                         <td>
-                                            {review.book.title}
+                                            <Link to={`/books/${review.book._id}`} className="mr-1">{review.book.title}</Link>
                                         </td>
                                         <td>
                                             <Rating initialRating={review.rating} readonly
@@ -166,7 +166,7 @@ class ProfileLandingPageComponent extends React.Component {
                     <h2>My Reading list</h2>
                     {
                         this.props.UserReadingListBooks.length===0 &&
-                        <h4>Reading List is empty</h4>
+                        <h3>Reading List is empty</h3>
                     }
                     {
                         this.props.UserReadingListBooks.length !==0 &&

@@ -8,6 +8,7 @@ import classes from "./admin.module.css";
 import {BsCaretRightFill} from "react-icons/bs";
 import {connect} from "react-redux";
 import {switchSections, fetchMemberNumber, fetchPostingNumber, fetchTicketNumber, fetchAdminUser, fetchAllUsers, fetchUserTickets} from "../../actions/adminActions";
+import AllBookPostings from "./Components/AllBookPostingsComponent";
 
 class Admin extends React.Component{
 
@@ -54,6 +55,9 @@ class Admin extends React.Component{
             if (section === "users") {
                 //TODO: fetch all users
                 // this.props.fetchAllUsers()
+            }
+            if (section === "postings") {
+                // TODO: fetch all book
             }
         }
 
@@ -104,6 +108,12 @@ class Admin extends React.Component{
                                     User Accounts
                                 </Link>
                             </li>
+                            <li className="nav-item">
+                                <Link to={`/admin/postings`} className="nav-link">
+                                    {this.props.section === 'postings' && <BsCaretRightFill className="mb-1 mr-1"/>}
+                                    Book Postings
+                                </Link>
+                            </li>
                         </div>
                     </div>
                     <div className={"col-md-8 col-lg-9 pr-4 " + classes.contentDiv}>
@@ -122,6 +132,10 @@ class Admin extends React.Component{
                         {
                             this.props.section === "users" &&
                             <UserAccountsComponent/>
+                        }
+                        {
+                            this.props.section === "postings" &&
+                                <AllBookPostings/>
                         }
                     </div>
                 </div>

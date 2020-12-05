@@ -21,7 +21,7 @@ import {LOGOUT} from "../actions/types/authTypes";
 
 const INTIAL_STATE = {
     user:  {
-        "rating": 0,
+        "rating": 3,
         "numOfReviews": 0,
         "_id": "5fc82fd8afbc1294a5503741",
         "city": "SF",
@@ -68,7 +68,6 @@ const INTIAL_STATE = {
             "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
             "condition": "ACCEPTABLE",
         }
-
     ],
     UserBorrowings: [
         {
