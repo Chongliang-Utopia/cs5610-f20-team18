@@ -5,6 +5,13 @@ const API_URL = 'http://localhost:8080/api/users';
 
 class UserService {
 
+    findUserById(userId) {
+        return axios.get(`${API_URL}/${userId}`, {headers: authHeader()})
+            .then((response) => {
+                return response.data;
+            });
+    }
+
     updateUser(userId, user) {
         return axios.put(`${API_URL}/${userId}`, user, {headers: authHeader()});
     }

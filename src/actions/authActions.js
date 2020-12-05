@@ -126,6 +126,9 @@ export const logout = () => (dispatch) => {
 };
 
 export const requestLoginWithThunk = (location) => (dispatch) => {
+    if (location.startsWith("/admin")) {
+        location = "/"
+    }
     dispatch({
         type: RECORD_LOCATION,
         location
@@ -134,6 +137,9 @@ export const requestLoginWithThunk = (location) => (dispatch) => {
 }
 
 export const requestLogin = (dispatch, location) => {
+    if (location.startsWith("/admin")) {
+        location = "/"
+    }
     dispatch({
         type: RECORD_LOCATION,
         location
