@@ -45,6 +45,7 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 isLoggedIn: false,
                 user: null,
+                preLocation: "/"
             };
         case GOOGLE_REGISTER:
             return {
