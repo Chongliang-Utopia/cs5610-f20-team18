@@ -5,7 +5,7 @@ import {
     LOGIN_FAIL,
     LOGOUT, GOOGLE_REGISTER, RECORD_LOCATION,
 } from "../actions/types/authTypes";
-import {UPDATE_USER} from "../actions/types/userTypes";
+import {FIND_USER_BY_ID, UPDATE_USER} from "../actions/types/userTypes";
 
 const user = JSON.parse(localStorage.getItem("user"));
 
@@ -15,6 +15,8 @@ const authReducer = (state = initialState, action) => {
     const {type, payload} = action;
 
     switch (type) {
+        case FIND_USER_BY_ID:
+            return {...state, user: action.user}
         case UPDATE_USER:
             return {...state , user:{...state.user, ...payload.user}}
         case REGISTER_SUCCESS:

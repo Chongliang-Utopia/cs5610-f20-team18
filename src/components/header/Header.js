@@ -13,6 +13,19 @@ import history from "../../history";
 const Header = ({isLoggedIn, logout, user, requestLoginWithThunk}) => {
     const matchBookstore = useRouteMatch({path: "/books", exact: true})
 
+    const renderProfile = () => {
+        if (isLoggedIn) {
+            if (user.isAdmin) {
+                return <Link className="nav-link" to="/admin">Admin</Link>
+            } else {
+                return <Link className="nav-link" to="/users/:userId/profile">Profile</Link>
+
+            }
+        } else {
+            return null
+        }
+    }
+
     return (
         <header className={classes.Header}>
             <nav className="navbar navbar-expand-lg navbar-light bg-light px-5">
@@ -39,25 +52,20 @@ const Header = ({isLoggedIn, logout, user, requestLoginWithThunk}) => {
                             <Link className="nav-link" to="/books">Bookstore</Link>
                         </li>
                         <li className="nav-item">
-                            {user && user.isAdmin ?
-                                <Link className="nav-link" to="/admin">Admin</Link>:
-                                <Link className="nav-link" to="/users/:userId/profile">Profile</Link>
-                            }
+                            {renderProfile()}
                         </li>
                         <li className="nav-item">
                             {!isLoggedIn ?
-                                <Link className="nav-link" to="/login"
+                                <button className={"nav-link " + classes.logOutButton} to="/login"
                                       onClick={() => requestLoginWithThunk(window.location.pathname)}
                                 ><BsFillPersonFill
-                                    className="mb-1"/> Login</Link> :
+                                    className="mb-1"/> Login</button> :
                                 <button
                                     onClick={() => {
-                                        logout();
-                                        let i = window.location.pathname.indexOf("/", 1);
-                                        let loc = window.location.pathname.slice(1, i);
-                                        if (loc === "admin" || loc === "users") {
+                                        if (window.location.pathname.startsWith("/admin")) {
                                             history.push("/")
                                         }
+                                        logout();
                                     }}
                                     className={"nav-link " + classes.logOutButton}><BsFillPersonFill
                                     className="mb-1"/> Log
