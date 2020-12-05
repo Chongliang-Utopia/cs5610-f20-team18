@@ -22,11 +22,7 @@ const AdminLandingPageComponent = ({
                         </Card.Body>
                         <Card.Footer style={{ "background": "none", "borderTop": "none" }}>
                             <br/>
-<<<<<<< HEAD
                             <Link to={`/admin/users`} classname="bottom">{users.length}</Link>
-=======
-                            <Link to={`/admin/users`} className="bottom">{numberOfMembers}</Link>
->>>>>>> master
                         </Card.Footer>
                     </Card>
                     <Card className={classes.card}>
