@@ -97,7 +97,6 @@ class BorrowingSummary extends Component {
     }
 }
 
-
 const stateToPropertyMapper = (state) => ({
     user: state.auth.user,
     isLoggedIn: state.auth.isLoggedIn,
