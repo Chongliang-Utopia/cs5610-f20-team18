@@ -1,9 +1,16 @@
 import {
     DELETE_POSTING_FROM_ADMIN,
     DELETE_TICKET,
+<<<<<<< HEAD
     FETCH_ADMINUSER, FETCH_ALLPOSTINGS, FETCH_ALLTICKETS,
     SWITCH_SECTION,
     UPDATE_ADMININFO,
+=======
+    DELETE_USER,
+    FETCH_ADMINUSER,
+    SWITCH_SECTION, UPDATE_ADMININFO,
+    UPDATE_USERINFO
+>>>>>>> master
 } from "../actions/types";
 
 const INTIAL_STATE = {
@@ -140,7 +147,11 @@ const adminReducer = (state = INTIAL_STATE, action) => {
                 ...state,
                 tickets: state.tickets.filter(ticket => ticket._id !== action.tid)
             }
+<<<<<<< HEAD
         case DELETE_POSTING_FROM_ADMIN:
+=======
+        case UPDATE_ADMININFO:
+>>>>>>> master
             return {
                 ...state,
                 AllBooks: state.AllBooks.map(book=>book._id===action.book._id ? action.book: book)

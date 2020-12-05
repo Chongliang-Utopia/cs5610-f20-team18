@@ -195,6 +195,7 @@ const StateToPropertyMapper = (state) => ({
     UserFollowings: state.profile.UserFollowings,
     UserFollowers: state.profile.UserFollowers,
     UserReadingListBooks: state.profile.UserReadingListBooks
+
 });
 
 export default connect(StateToPropertyMapper,

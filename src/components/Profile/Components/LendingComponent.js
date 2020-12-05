@@ -153,6 +153,7 @@ class LendingComponent extends React.Component {
                             <tr>
                                 <th>Borrower</th>
                                 <th>Rating</th>
+                                <th>Email</th>
                                 <th>Location</th>
                                 <th>Book</th>
                                 <th></th>

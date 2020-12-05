@@ -16,7 +16,7 @@ import {connect} from "react-redux";
 import {setCurrentIndex} from "../../actions/searchBookActions";
 import UserActions from "../../actions/userActions";
 import BookActions from "../../actions/bookActions";
-import history from "../../history";
+import {requestLoginWithThunk} from "../../actions/authActions";
 
 class BookDetail extends React.Component {
     state = {
@@ -112,7 +112,7 @@ class BookDetail extends React.Component {
                                 <button className="btn btn-info btn-block mt-4"
                                         onClick={() => {
                                             if (!this.props.isLoggedIn) {
-                                                history.push("/login");
+                                                this.props.dispatch(requestLoginWithThunk(window.location.pathname))
                                             } else {
                                                 this.lendingHandler()
                                             }
@@ -123,7 +123,7 @@ class BookDetail extends React.Component {
                                 <button className="btn btn-secondary btn-block"
                                         onClick={() => {
                                             if (!this.props.isLoggedIn) {
-                                                history.push("/login");
+                                                this.props.dispatch(requestLoginWithThunk(window.location.pathname))
                                             } else {
                                                 this.addToReadingList()
                                             }

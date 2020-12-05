@@ -4,7 +4,7 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
-    SET_MESSAGE, GOOGLE_REGISTER,
+    SET_MESSAGE, GOOGLE_REGISTER, RECORD_LOCATION,
 } from "./types/authTypes";
 import history from "../history"
 
@@ -85,13 +85,13 @@ export const loginWithGoogle = (idToken) => (dispatch) => {
                     type: GOOGLE_REGISTER,
                     payload: {user: data.user},
                 })
-                history.push("/resetPassword")
+
             } else {
                 dispatch({
                     type: LOGIN_SUCCESS,
                     payload: {user: data.user},
                 });
-                history.push("/");
+
             }
             return Promise.resolve();
         },
@@ -124,6 +124,22 @@ export const logout = () => (dispatch) => {
         type: LOGOUT,
     });
 };
+
+export const requestLoginWithThunk = (location) => (dispatch) => {
+    dispatch({
+        type: RECORD_LOCATION,
+        location
+    })
+    history.push("/login")
+}
+
+export const requestLogin = (dispatch, location) => {
+    dispatch({
+        type: RECORD_LOCATION,
+        location
+    })
+    history.push("/login")
+}
 
 
 

@@ -6,10 +6,11 @@ import {connect} from "react-redux";
 import Logo from "../logo/Logo";
 import classes from "./Header.module.css"
 import SearchBar from "../UI/searchBar/SearchBar";
-import {logout} from "../../actions/authActions";
+import {logout, requestLoginWithThunk} from "../../actions/authActions";
+import history from "../../history";
 
 
-const Header = ({isLoggedIn, logout, user}) => {
+const Header = ({isLoggedIn, logout, user, requestLoginWithThunk}) => {
     const matchBookstore = useRouteMatch({path: "/books", exact: true})
 
     return (
@@ -39,18 +40,25 @@ const Header = ({isLoggedIn, logout, user}) => {
                         </li>
                         <li className="nav-item">
                             {user && user.isAdmin ?
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/admin">Admin</Link>
-                                </li> :
+                                <Link className="nav-link" to="/admin">Admin</Link>:
                                 <Link className="nav-link" to="/users/:userId/profile">Profile</Link>
                             }
                         </li>
                         <li className="nav-item">
-                            {!isLoggedIn?
-                                <Link className="nav-link" to="/login"><BsFillPersonFill
+                            {!isLoggedIn ?
+                                <Link className="nav-link" to="/login"
+                                      onClick={() => requestLoginWithThunk(window.location.pathname)}
+                                ><BsFillPersonFill
                                     className="mb-1"/> Login</Link> :
                                 <button
-                                    onClick={logout}
+                                    onClick={() => {
+                                        logout();
+                                        let i = window.location.pathname.indexOf("/", 1);
+                                        let loc = window.location.pathname.slice(1, i);
+                                        if (loc === "admin" || loc === "users") {
+                                            history.push("/")
+                                        }
+                                    }}
                                     className={"nav-link " + classes.logOutButton}><BsFillPersonFill
                                     className="mb-1"/> Log
                                     out</button>
@@ -77,6 +85,6 @@ const StateToPropertyMapper = (state) => ({
 });
 
 
-export default connect(StateToPropertyMapper, {logout})(Header);
+export default connect(StateToPropertyMapper, {logout, requestLoginWithThunk})(Header);
 
 

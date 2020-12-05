@@ -71,7 +71,7 @@ class BookActions {
         })
     }
 
-    cancelBorrowing = (dispatch, lender) => {
+    cancelBorrowing = (dispatch) => {
         dispatch({
             type: CANCEL_BORROWING
         })

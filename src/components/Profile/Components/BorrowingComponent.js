@@ -66,6 +66,7 @@ class BorrowingComponent extends React.Component {
                                     </td>
                                     <td>
                                         <Link to={`/books/${borrowing.book._id}`} className="mr-1">{borrowing.book.title}</Link>
+
                                     </td>
                                     <td>
                                         {

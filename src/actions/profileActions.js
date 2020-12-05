@@ -11,6 +11,7 @@ import {
     CREATE_REVIEW_AS_BORROWER,
     DECLINE_TRANSACTION, RETURN_TRANSACTION,
     UPDATE_REVIEW, UPDATE_USERINFO, CREATE_TICKET, DELETE_FROMREADINGLIST
+
 } from "./types";
 
 export const fetchUser = (uid) => {};
@@ -150,6 +151,7 @@ export const deleteFromReadingList = (uid, googleId) => {
         googleId: googleId
     }
 }
+
 
 //TODO, haven't set up the type and reducer for following methods
 

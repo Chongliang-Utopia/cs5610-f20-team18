@@ -4,12 +4,12 @@ import {Link} from "react-router-dom";
 import {GrClose} from "react-icons/gr";
 import LoginWithGoogle from "./LoginWithGoogle";
 import LoginWithEmail from "./LoginWithEmail";
+import {connect} from "react-redux";
 
-
-const Login = () =>
+const Login = ({preLocation}) =>
 
     <div className={classes.Authentication}>
-        <Link to="/" className={classes.closeButton}><GrClose size="20px"/></Link>
+        <Link to={preLocation} className={classes.closeButton}><GrClose size="20px"/></Link>
         <div className={classes.titleDiv}>
             <h1>Log In</h1>
             <div className="mt-3 mb-5">
@@ -27,5 +27,8 @@ const Login = () =>
         </div>
     </div>
 
+const stateToPropertyMapper = (state) => ({
+    preLocation: state.auth.preLocation
+})
 
-export default Login;
+export default connect(stateToPropertyMapper)(Login);

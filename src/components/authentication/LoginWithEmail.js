@@ -71,7 +71,7 @@ class LoginWithEmail extends Component {
                     if (this.state.loginAsAdmin) {
                         history.push("/admin");
                     } else {
-                        history.goBack();
+                        history.push(this.props.preLocation);
                         //window.location.reload();
                     }
                 })
@@ -139,7 +139,8 @@ class LoginWithEmail extends Component {
 
 const stateToPropertyMapper = (state) => ({
     isLoggedIn: state.auth.isLoggedIn,
-    message: state.message.message
+    message: state.message.message,
+    preLocation: state.auth.preLocation
 })
 
 export default connect(stateToPropertyMapper)(LoginWithEmail);
