@@ -16,7 +16,7 @@ import {connect} from "react-redux";
 import {setCurrentIndex} from "../../actions/searchBookActions";
 import UserActions from "../../actions/userActions";
 import BookActions from "../../actions/bookActions";
-import {requestLogin, requestLoginWithThunk} from "../../actions/authActions";
+import {requestLoginWithThunk} from "../../actions/authActions";
 
 class BookDetail extends React.Component {
     state = {

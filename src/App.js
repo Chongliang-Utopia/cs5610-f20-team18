@@ -17,6 +17,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import UserSignUpAddress from "./components/authentication/SignUpAddress";
 import UserSignUpProfile from "./components/authentication/SignUpProfile";
 import ResetPassword from "./components/authentication/ResetPassword";
+import PrivateRouteAdmin from "./components/PrivateRouteAdmin"
 
 class App extends Component {
 
@@ -40,8 +41,8 @@ class App extends Component {
                                     <Route exact path="/users/:userId/profile" component={UserProfile}/>
                                     <Route exact path="/users/:userId/profile/:section" component={UserProfile}/>
                                     <Route exact path={["/books", "/bookstore"]} component={BookStore}/>
-                                    <Route exact path="/admin" component={Admin}/>
-                                    <Route exact path="/admin/:section" component={Admin}/>
+                                    <PrivateRouteAdmin exact path="/admin" component={Admin}/>
+                                    <PrivateRouteAdmin exact path="/admin/:section" component={Admin}/>
                                 </main>
                             <Footer/>
                         </div>
