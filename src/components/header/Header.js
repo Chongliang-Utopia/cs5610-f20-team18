@@ -86,5 +86,3 @@ const StateToPropertyMapper = (state) => ({
 
 
 export default connect(StateToPropertyMapper, {logout, requestLoginWithThunk})(Header);
-
-
