@@ -2,7 +2,7 @@ import axios from 'axios';
 import authHeader from './AuthHeader';
 
 const API_TRANSACTION_URL = 'http://localhost:8080/api/transactions';
-const APT_USER_URL = 'http://localhost:8080/api/users';
+const API_USER_URL = 'http://localhost:8080/api/users';
 
 class TransactionService{
     createBorrowRequest(borrowRequest) {
@@ -18,17 +18,25 @@ class TransactionService{
     }
 
     getAllUserBorrowings(userId) {
-        return axios.get(`${APT_USER_URL}/${userId}/transactions/borrow`,{headers: authHeader()})
+        return axios.get(`${API_USER_URL}/${userId}/transactions/borrow`,{headers: authHeader()})
             .then((response) => (
                 response.data ? response.data : []
             ))
     }
 
     getAllUserLendings(userId) {
-        return axios.get(`${APT_USER_URL}/${userId}/transactions/lend`,{headers: authHeader()})
+        return axios.get(`${API_USER_URL}/${userId}/transactions/lend`,{headers: authHeader()})
             .then((response) => (
                 response.data ? response.data : []
             ))
+    }
+
+    acceptBorrowRequest(transactionId) {
+        return axios.put(`${API_TRANSACTION_URL}/${transactionId}/accept`, {headers: authHeader()})
+    }
+
+    returnBook(transactionId) {
+        return axios.put(`${API_TRANSACTION_URL}/${transactionId}/return`, {headers: authHeader()})
     }
 }
 
