@@ -1,7 +1,22 @@
-import {UPDATE_USER, ADD_TO_READING_LIST, GET_FOLLOWINGS_READING_LIST} from "./types/userTypes";
+import {
+    UPDATE_USER,
+    ADD_TO_READING_LIST,
+    GET_FOLLOWINGS_READING_LIST,
+    FIND_USER_BY_ID
+} from "./types/userTypes";
 import UserService from "../services/UserService";
 
 class UserActions {
+
+    findUserById = (userId) => (dispatch) => {
+        return UserService.findUserById(userId)
+            .then(user => {
+                dispatch({
+                  type: FIND_USER_BY_ID,
+                  user
+                })
+            })
+    }
 
     updateUser = (userId, user) => (dispatch) => {
         return UserService.updateUser(userId, user)

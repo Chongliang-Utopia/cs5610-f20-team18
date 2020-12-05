@@ -23,12 +23,11 @@ class AdminAccountSettingComponent extends React.Component {
 
     handleChange(e) {
         const {name, value} = e.target;
-        this.setState({user: {[name]: value}});
+        this.setState(prevState => ({user: {...prevState.user, [name]: value}}));
     }
 
     handleSubmit(e) {
         e.preventDefault();
-
 
         const user = this.state.user;
         if (user.password === "") {
@@ -64,10 +63,11 @@ class AdminAccountSettingComponent extends React.Component {
                     <br/>
                     <div className="form-group row">
                         <label htmlFor="change-email" className="col-sm-3 col-form-label">
-                            Email
+                            Email*
                         </label>
                         <div className="col-sm-9">
-                            <input className="form-control"
+                            <input required
+                                className="form-control"
                                    id="change-email"
                                    placeholder="user@user.com"
                                    type="email" name="email"
@@ -92,7 +92,7 @@ class AdminAccountSettingComponent extends React.Component {
                         </div>
                     </div>
                     <div className="float-right">
-                        <button className="btn btn-danger m-2" type="button" onClick={this.reset}>Cancel</button>
+                        <button className="btn btn-danger m-2" type="button" onClick={this.reset}>Reset</button>
                         <button className="btn btn-success m-2" type="submit">Save</button>
                     </div>
                 </form>

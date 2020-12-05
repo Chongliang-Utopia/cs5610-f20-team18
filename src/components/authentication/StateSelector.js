@@ -3,9 +3,9 @@ import classes from "./Authentication.module.css";
 
 const StateSelector = ({name, value, handleChange}) =>
     <select required className={"form-control " + classes.inputForm} id="state" name={name} value={value}
-            onChange={handleChange}
+            onChange={handleChange} defaultValue={'DEFAULT'}
             title="Please select State">
-        <option value="" disabled selected>Select a state</option>
+        <option value="" disabled value="DEFAULT" >Select a state</option>
         <option value="Alabama">Alabama</option>
         <option value="Alaska">Alaska</option>
         <option value="Arizona">Arizona</option>

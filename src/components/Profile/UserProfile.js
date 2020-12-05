@@ -12,6 +12,7 @@ import {
     fetchFollowers,
     fetchFollowings
 } from "../../actions/profileActions";
+import UserActions from "../../actions/userActions";
 
 
 class UserProfile extends React.Component {
@@ -19,6 +20,7 @@ class UserProfile extends React.Component {
         const uid = this.props.match.params.userId
         const section = this.props.match.params.section
         // TODO: fetch all data here, implement these and un-comment
+        this.props.findUserById(uid)
         // this.props.fetchUser(uid)
         // this.props.fetchBookPostingsForUser(uid)
         // this.props.fetchTransactionsForUser(uid)
@@ -71,6 +73,7 @@ const stateToPropertyMapper = (state) => ({
 
 export default connect(stateToPropertyMapper,
     {
+        findUserById: UserActions.findUserById,
         fetchUser,
         fetchBookPostingsForUser,
         fetchReviewsUserGave,
