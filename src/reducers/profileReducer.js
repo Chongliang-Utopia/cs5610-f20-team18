@@ -1,10 +1,6 @@
 import {
     CLOSE_REPORT,
     CREATE_FOLLOW,
-<<<<<<< HEAD
-=======
-    CREATE_REVIEW,
->>>>>>> master
     DELETE_FOLLOW,
     DELETE_POSTING,
     DELETE_TRANSACTION,
@@ -13,27 +9,19 @@ import {
     UPDATE_POSTING,
     UPDATE_REVIEW,
     APPROVE_TRANSACTION,
-<<<<<<< HEAD
     DECLINE_TRANSACTION,
     RETURN_TRANSACTION,
     CREATE_REVIEW_AS_LENDER,
     CREATE_REVIEW_AS_BORROWER,
     UPDATE_USERINFO,
     DELETE_FROMREADINGLIST
-=======
-    DECLINE_TRANSACTION, RETURN_TRANSACTION, CREATE_REVIEW_AS_LENDER, CREATE_REVIEW_AS_BORROWER, UPDATE_USERINFO
->>>>>>> master
 } from "../actions/types";
 import {ADD_TO_READING_LIST, GET_FOLLOWINGS_READING_LIST} from "../actions/types/userTypes";
 import {LOGOUT} from "../actions/types/authTypes";
 
 const INTIAL_STATE = {
     user:  {
-<<<<<<< HEAD
         "rating": 3,
-=======
-        "rating": 0,
->>>>>>> master
         "numOfReviews": 0,
         "_id": "5fc82fd8afbc1294a5503741",
         "city": "SF",
@@ -190,7 +178,6 @@ const INTIAL_STATE = {
                 "createdAt": "2020-12-03T03:51:06.895Z",
                 "updatedAt": "2020-12-03T03:51:06.895Z",
                 "__v": 0
-<<<<<<< HEAD
             },
             "_id": "3",
             "lender": {
@@ -217,34 +204,6 @@ const INTIAL_STATE = {
                 "condition": "ACCEPTABLE",
                 "__v": 0
             },
-=======
-            },
-            "_id": "3",
-            "lender": {
-                "rating": 4.083333333333333,
-                "_id": "5fc2da3767a1ea31cc0850b3",
-                "username": "fadf",
-                "city": "fdfda",
-                "state": "Arizona"
-            },
-            "borrower": "5fc82fd8afbc1294a5503741",
-            "book": {
-                "isAvailable": true,
-                "author": [
-                    "J.K. Rowling"
-                ],
-                "isActive": true,
-                "_id": "5fc45bebd09b89aa95f9c445",
-                "user": "5fc2da3767a1ea31cc0850b3",
-                "googleBookId": "f280CwAAQBAJ",
-                "title": "Harry Potter: The Complete Collection (1-7)",
-                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
-                "rating": 4.5,
-                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
-                "condition": "ACCEPTABLE",
-                "__v": 0
-            },
->>>>>>> master
             "startDate": "2020-11-29T00:00:00.000Z",
             "endDate": "2021-01-29T00:00:00.000Z",
             "transactionDate": "2020-11-29T00:00:00.000Z",
@@ -385,8 +344,6 @@ const INTIAL_STATE = {
             "__v": 0,
             "createdAt": "2020-12-03T04:08:17.493Z",
             "updatedAt": "2020-12-03T03:51:06.895Z",
-<<<<<<< HEAD
-=======
         },
         {
             "lenderReview": {
@@ -400,55 +357,6 @@ const INTIAL_STATE = {
                 "createdAt": "2020-12-03T04:08:17.463Z",
                 "updatedAt": "2020-12-03T04:08:17.463Z",
                 "__v": 0
-            },
-            "borrowerReview": "5fc860aa00778d0e030fde20",
-            "_id": "7",
-            "lender": "5fc82fd8afbc1294a5503741",
-            "borrower": {
-                "rating": 4.25,
-                "_id": "5fc2c4cc67a1ea31cc0850af",
-                "username": "fad",
-                "city": "",
-                "state": ""
-            },
-            "book": {
-                "isAvailable": true,
-                "author": [
-                    "J.K. Rowling"
-                ],
-                "isActive": true,
-                "_id": "5fc45bebd09b89aa95f9c445",
-                "user": "5fc2da3767a1ea31cc0850b3",
-                "googleBookId": "f280CwAAQBAJ",
-                "title": "Harry Potter: The Complete Collection (1-7)",
-                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
-                "rating": 4.5,
-                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
-                "condition": "ACCEPTABLE",
-                "__v": 0
-            },
-            "startDate": "2020-11-29T00:00:00.000Z",
-            "endDate": "2021-01-29T00:00:00.000Z",
-            "transactionDate": "2020-11-29T00:00:00.000Z",
-            "status": "APPROVED",
-            "__v": 0,
-            "createdAt": "2020-12-03T04:08:17.493Z",
-            "updatedAt": "2020-12-03T03:51:06.895Z",
->>>>>>> master
-        },
-        {
-            "lenderReview": {
-                "rating": 4,
-                "_id": "5fc864b1fce6bf0e672cb250",
-                "reviewer": "5fc82fd8afbc1294a5503741",
-                "reviewee": "5fc2c4cc67a1ea31cc0850af",
-                "book": "5fc45bebd09b89aa95f9c445",
-                "comments": "He kept my book well",
-                "reviewerIsLender": true,
-                "createdAt": "2020-12-03T04:08:17.463Z",
-                "updatedAt": "2020-12-03T04:08:17.463Z",
-                "__v": 0
-<<<<<<< HEAD
             },
             "borrowerReview": "5fc860aa00778d0e030fde20",
             "_id": "7",
@@ -507,19 +415,6 @@ const INTIAL_STATE = {
                 "city": "",
                 "state": ""
             },
-=======
-            },
-            "borrowerReview": "5fc860aa00778d0e030fde20",
-            "_id": "8",
-            "lender": "5fc82fd8afbc1294a5503741",
-            "borrower": {
-                "rating": 4.25,
-                "_id": "5fc2c4cc67a1ea31cc0850af",
-                "username": "fad",
-                "city": "",
-                "state": ""
-            },
->>>>>>> master
             "book": {
                 "isAvailable": true,
                 "author": [
@@ -706,7 +601,6 @@ const INTIAL_STATE = {
             "rating": 0,
             "_id": "5fc841544eaaaf974ad6284c",
             "username": "c"
-<<<<<<< HEAD
         }
     ],
     UserReadingList: [
@@ -745,15 +639,6 @@ const INTIAL_STATE = {
             "condition": "ACCEPTABLE",
         }
     ],
-=======
-        }
-    ],
-    UserReadinglist: [
-        "ECvxEpH7VZYC",
-        "f280CwAAQBAJ",
-    ],
-    readingList: [],
->>>>>>> master
     followingsReadingList: [],
 };
 
@@ -821,7 +706,6 @@ const profileReducer = (state = INTIAL_STATE, action) => {
             return {
                 ...state,
                 UserBorrowings: state.UserBorrowings.filter(borrowing=>borrowing._id !== action.transaction._id)
-<<<<<<< HEAD
             }
         case RETURN_TRANSACTION:
             return {
@@ -829,15 +713,6 @@ const profileReducer = (state = INTIAL_STATE, action) => {
                 UserLendings: state.UserLendings.map(lending=>lending._id === action.transaction._id ? action.transaction: lending),
                 UserBorrowings: state.UserBorrowings.map(borrowing=>borrowing._id === action.transaction._id ? action.transaction: borrowing)
             }
-=======
-            }
-        case RETURN_TRANSACTION:
-            return {
-                ...state,
-                UserLendings: state.UserLendings.map(lending=>lending._id === action.transaction._id ? action.transaction: lending),
-                UserBorrowings: state.UserBorrowings.map(borrowing=>borrowing._id === action.transaction._id ? action.transaction: borrowing)
-            }
->>>>>>> master
         //FOLLOW
         case DELETE_FOLLOW:
             return {
@@ -852,19 +727,13 @@ const profileReducer = (state = INTIAL_STATE, action) => {
                     action.following_body
                 ]
             }
-<<<<<<< HEAD
         // ACCOUNT SETTING
-=======
->>>>>>> master
         case UPDATE_USERINFO:
             return {
                 ...state,
                 user: action.user
             }
-<<<<<<< HEAD
         // READING_LIST
-=======
->>>>>>> master
         case ADD_TO_READING_LIST:
             return {
                 ...state,
