@@ -1,7 +1,7 @@
 import {
     DELETE_POSTING_FROM_ADMIN,
     DELETE_TICKET,
-    FETCH_ADMINUSER, FETCH_ALLTICKETS,
+    FETCH_ADMINUSER, FETCH_ALLPOSTINGS, FETCH_ALLTICKETS,
     SWITCH_SECTION,
     UPDATE_ADMININFO,
 } from "../actions/types";
@@ -154,6 +154,11 @@ const adminReducer = (state = INTIAL_STATE, action) => {
             return {
                 ...state,
                 adminUser: action.adminUser
+            }
+        case FETCH_ALLPOSTINGS:
+            return {
+                ...state,
+                AllBooks: action.books
             }
         default:
             return state;

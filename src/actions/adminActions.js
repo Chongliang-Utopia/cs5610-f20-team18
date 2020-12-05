@@ -62,5 +62,9 @@ export const fetchAllUsers = () => {
     // }
 }
 export const fetchAllPostings = () => {}
-
-
+    //service.getAllPostings.then(postings=>
+    //  service.getBooksByGoogleId.then(books=>
+    //      return {
+    //          type: FETCH_ALLPOSTINGS
+    //          books
+    //      }
