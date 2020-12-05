@@ -6,6 +6,7 @@ import classes from "./LenderTable.module.css";
 import {connect} from "react-redux";
 import BookActions from "../../../actions/bookActions";
 import {requestLogin} from "../../../actions/authActions";
+import {Link} from "react-router-dom";
 
 class LenderTable extends React.Component {
 
@@ -47,10 +48,12 @@ class LenderTable extends React.Component {
                             <td>{this.renderCondition(book.condition)}</td>
                             <td>{book.user.city}, {book.user.state}</td>
                             <td>
+                                <Link className="nav-link" to={`/users/${book.user._id}/profile`}>
                                 <span className="mr-1">{book.user.username}</span>
                                 <Rating initialRating={book.user.rating} readonly
                                         emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                         fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
+                                </Link>
                             </td>
                             <td>
                                 {book.isAvailable ?

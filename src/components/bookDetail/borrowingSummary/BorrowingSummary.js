@@ -8,6 +8,7 @@ import ImageCard from "../../UI/imageCard/ImageCard";
 import {connect} from "react-redux";
 import BookActions from "../../../actions/bookActions";
 import history from "../../../history"
+import {Link} from "react-router-dom";
 
 class BorrowingSummary extends Component {
 
@@ -52,7 +53,11 @@ class BorrowingSummary extends Component {
                 <div className="col-md-8">
                     <h5>{book.title}</h5>
                     <ul>
-                        <li>Lender: {lender.username}</li>
+                        <li>
+                            <Link to={`/users/${lender._id}/profile`}>
+                                Lender: {lender.username}
+                            </Link>
+                        </li>
                         <li>Location: {lender.city}, {lender.state}</li>
                         <li>Condition: {this.renderCondition(lender.bookCondition)}</li>
                     </ul>
@@ -91,7 +96,6 @@ class BorrowingSummary extends Component {
         </div>
     }
 }
-
 
 const stateToPropertyMapper = (state) => ({
     user: state.auth.user,
