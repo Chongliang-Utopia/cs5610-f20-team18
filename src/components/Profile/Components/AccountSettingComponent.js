@@ -10,20 +10,20 @@ class AccountSettingComponent extends React.Component {
     constructor(props) {
         super(props);
 
-        const {email, username, firstName, lastName, phoneNumber, signature, streetAddress, city, state, zipCode} = this.props.user
+        // const {email, username, firstName, lastName, phoneNumber, signature, streetAddress, city, state, zipCode} = this.props.user
 
         this.state = {
             user: {
-                email: email,
-                username: username,
-                firstName: firstName,
-                lastName: lastName,
-                phoneNumber: phoneNumber,
-                signature: signature,
-                streetAddress: streetAddress,
-                city: city,
-                state: state,
-                zipCode: zipCode,
+                email: this.props.user.email,
+                username: this.props.user.username,
+                firstName: this.props.user.firstName,
+                lastName: this.props.user.lastName,
+                phoneNumber: this.props.user.phoneNumber,
+                signature: this.props.user.signature,
+                streetAddress: this.props.user.streetAddress,
+                city: this.props.user.city,
+                state: this.props.user.state,
+                zipCode: this.props.user.zipCode,
                 password: ""
             },
             alertVisible: false
@@ -31,10 +31,6 @@ class AccountSettingComponent extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    componentDidMount() {
-        this.props.dispatch(UserActions.findUserById(this.props.user._id))
     }
 
     handleChange(e) {
@@ -231,7 +227,7 @@ class AccountSettingComponent extends React.Component {
                         </div>
                     </div>
                     <div className="float-right">
-                        <button className="btn btn-danger m-2" type="button" onClick={this.reset}>Cancel</button>
+                        <button className="btn btn-danger m-2" type="button" onClick={this.reset}>Reset</button>
                         <button className="btn btn-success m-2" type="submit">Save</button>
                     </div>
                 </form>
@@ -241,7 +237,7 @@ class AccountSettingComponent extends React.Component {
 }
 
 const stateToPropertyMapper = (state) => ({
-    user: state.auth.user,
+    user: state.profile.user,
 })
 
 export default connect(stateToPropertyMapper)(AccountSettingComponent)

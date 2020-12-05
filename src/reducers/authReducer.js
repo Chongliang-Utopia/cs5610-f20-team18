@@ -15,8 +15,7 @@ const authReducer = (state = initialState, action) => {
     const {type, payload} = action;
 
     switch (type) {
-        case FIND_USER_BY_ID:
-            return {...state, user: action.user}
+
         case UPDATE_USER:
             return {...state , user:{...state.user, ...payload.user}}
         case REGISTER_SUCCESS:

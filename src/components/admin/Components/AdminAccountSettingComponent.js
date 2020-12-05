@@ -92,7 +92,7 @@ class AdminAccountSettingComponent extends React.Component {
                         </div>
                     </div>
                     <div className="float-right">
-                        <button className="btn btn-danger m-2" type="button" onClick={this.reset}>Cancel</button>
+                        <button className="btn btn-danger m-2" type="button" onClick={this.reset}>Reset</button>
                         <button className="btn btn-success m-2" type="submit">Save</button>
                     </div>
                 </form>

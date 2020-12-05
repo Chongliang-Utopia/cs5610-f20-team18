@@ -16,7 +16,7 @@ import {
     UPDATE_USERINFO,
     DELETE_FROMREADINGLIST
 } from "../actions/types";
-import {ADD_TO_READING_LIST, GET_FOLLOWINGS_READING_LIST} from "../actions/types/userTypes";
+import {ADD_TO_READING_LIST, FIND_USER_BY_ID, GET_FOLLOWINGS_READING_LIST} from "../actions/types/userTypes";
 import {LOGOUT} from "../actions/types/authTypes";
 
 const INTIAL_STATE = {
@@ -644,6 +644,8 @@ const INTIAL_STATE = {
 
 const profileReducer = (state = INTIAL_STATE, action) => {
     switch (action.type) {
+        case FIND_USER_BY_ID:
+            return {...state, user: action.user}
         case OPEN_REPORT:
             return {
                 ...state,
