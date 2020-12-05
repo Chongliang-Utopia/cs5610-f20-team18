@@ -27,6 +27,16 @@ class UserService {
             ));
     }
 
+    getReadingListForUser(userId) {
+        return axios.get(`${API_URL}/${userId}/reading-list`, {headers: authHeader()})
+            .then((response) => (
+                response.data ? response.data : []
+            ));
+    }
+
+    deleteBookFromList(userId, googleBookId) {
+        return axios.delete(`${API_URL}/${userId}/reading-list/${googleBookId}`, {headers: authHeader()})
+    }
 }
 
 export default new UserService();

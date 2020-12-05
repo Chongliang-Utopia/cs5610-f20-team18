@@ -16,6 +16,12 @@ const findBookById = (id) =>
 const postBook = (userId, book) =>
     axios.post(`${API_URL}/users/${userId}/books`, book, {headers: authHeader()});
 
+const deleteBook = (bookId) => {
+    return axios.put(`${API_URL}/books/${bookId}`);
+}
+
+const updateBook = (bookId, book) =>
+    axios.put(`${API_URL}/books/${bookId}`, book, {headers: authHeader()});
 
 const findAllBorrowingOptions = (googleBookId) =>
     axios.get(`${API_URL}/${googleBookId}/books`);
@@ -23,10 +29,17 @@ const findAllBorrowingOptions = (googleBookId) =>
 const submitBorrowingRequest = (request) =>
     axios.post(`${API_URL}/transactions`, request, {headers: authHeader()})
 
+const getAllBooksForUser = (userId) =>
+    axios.get(`${API_URL}/users/${userId}/books`, {headers: authHeader()});
+
+
 export default {
     searchBooks,
+    deleteBook,
+    updateBook,
     findBookById,
     postBook,
+    getAllBooksForUser,
     findAllBorrowingOptions,
     submitBorrowingRequest
 }
