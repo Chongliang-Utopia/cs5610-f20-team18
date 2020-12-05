@@ -173,13 +173,10 @@ class LendingComponent extends React.Component {
                                                 fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                     </td>
                                     <td>
-                                        <span>{lending.borrower.email}</span>
-                                    </td>
-                                    <td>
                                         <span>{lending.borrower.city + ", " + lending.borrower.state}</span>
                                     </td>
                                     <td>
-                                        <span>{lending.book.title}</span>
+                                        <Link to={`/books/${lending.book._id}`} className="mr-1">{lending.book.title}</Link>
                                     </td>
                                     <td>
                                         {
@@ -225,6 +222,7 @@ class LendingComponent extends React.Component {
                             <thead>
                             <tr>
                                 <th>Borrower</th>
+                                <th>Email</th>
                                 <th>Due Date</th>
                                 <th>Book</th>
                                 <th></th>
@@ -238,10 +236,13 @@ class LendingComponent extends React.Component {
                                               className="mr-1">{lending.borrower.username}</Link>
                                     </td>
                                     <td>
+                                        <span>{lending.borrower.email}</span>
+                                    </td>
+                                    <td>
                                         <span>{lending.endDate.slice(0, 10)}</span>
                                     </td>
                                     <td>
-                                        <span>{lending.book.title}</span>
+                                        <Link to={`/books/${lending.book._id}`} className="mr-1">{lending.book.title}</Link>
                                     </td>
                                     <td>
                                         <OverlayTrigger
@@ -288,7 +289,7 @@ class LendingComponent extends React.Component {
                                             <span>{lending.startDate.slice(0, 10)} ~ {lending.endDate.slice(0, 10)}</span>
                                         </td>
                                         <td>
-                                            <span>{lending.book.title}</span>
+                                            <Link to={`/books/${lending.book._id}`} className="mr-1">{lending.book.title}</Link>
                                         </td>
                                         <td>
                                             <span>{lending.lenderReview.comments}</span>

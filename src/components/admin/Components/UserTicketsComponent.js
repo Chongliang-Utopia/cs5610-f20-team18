@@ -6,21 +6,13 @@ import {Accordion} from "react-bootstrap";
 import {Card} from "react-bootstrap";
 import {MdExpandMore} from "react-icons/md";
 import {connect} from "react-redux";
-import {createTicket, deleteTicket} from "../../../actions/adminActions";
+import {deleteTicket, deleteReview} from "../../../actions/adminActions";
 
 const UserTicketsComponent =
     ({
          tickets=[],
          deleteTicket,
-         createTicket
     }) => {
-
-        //TODO: is this correct way of doing this??? delete review here?
-        const deleteReview = (rid) => {
-        //     reviewService.deleteReviewById(rid)
-        //         .then(response => response.json())
-        }
-
         return(
         <div>
             <h2>Pending Tickets</h2>
@@ -34,7 +26,7 @@ const UserTicketsComponent =
                         <Card className="mb-3">
                             <Card.Header>
                                 <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                                    Reporter: {ticket.reporterId}<MdExpandMore className="ml-1" size="20px"/>
+                                    Reporter: {ticket.reporter.username}<MdExpandMore className="ml-1" size="20px"/>
                                 </Accordion.Toggle>
                             </Card.Header>
                             <Accordion.Collapse eventKey="0">
@@ -46,24 +38,28 @@ const UserTicketsComponent =
                                                 <th>Reviewer</th>
                                                 <th>Reviewee</th>
                                                 <th>Related Book</th>
+                                                <th>Review</th>
                                                 <th>Description</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
                                                 <td>
-                                                    <Link to={`/users/${ticket.reviewerId}/profile`}
-                                                          className="mr-1">{ticket.reviewerId}</Link>
+                                                    <Link to={`/users/${ticket.review.reviewer._id}/profile`}
+                                                          className="mr-1">{ticket.review.reviewer.username}</Link>
                                                 </td>
                                                 <td>
-                                                    <Link to={`/users/${ticket.revieweeId}/profile`}
-                                                          className="mr-1">{ticket.revieweeId}</Link>
+                                                    <Link to={`/users/${ticket.review.reviewee._id}/profile`}
+                                                          className="mr-1">{ticket.review.reviewee.username}</Link>
                                                 </td>
                                                 <td>
-                                                    <Link to={`/book/${ticket.bookTitle}`}>{ticket.bookTitle}</Link>
+                                                    <Link to={`/book/${ticket.review.book.title}`}>{ticket.review.book.title}</Link>
                                                 </td>
                                                 <td>
-                                                    <span>{ticket.description}</span>
+                                                    <span>{ticket.review.comments}</span>
+                                                </td>
+                                                <td>
+                                                    <span>{ticket.reason}</span>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -72,7 +68,7 @@ const UserTicketsComponent =
                                     <div className="float-right mb-3">
                                         <Button variant="danger btn-sm float-right" className="m-2"
                                                 onClick={() => {
-                                                    deleteReview(ticket.reviewId)
+                                                    deleteReview(ticket.review._id)
                                                     deleteTicket(ticket._id)
                                                 }}
                                         >
@@ -96,4 +92,4 @@ const stateToPropertyMapper = (state) => ({
     tickets: state.admin.tickets
 })
 
-export default connect (stateToPropertyMapper, {deleteTicket, createTicket})(UserTicketsComponent)
+export default connect (stateToPropertyMapper, {deleteTicket, deleteReview})(UserTicketsComponent)

@@ -6,9 +6,9 @@ import classes from "../admin.module.css";
 import {connect} from "react-redux";
 
 const AdminLandingPageComponent = ({
-    numberOfMembers,
-    numberOfPosts,
-    numberOfTickets
+    AllBooks,
+    users,
+    tickets
                                    }) => {
         return(
             <div>
@@ -22,7 +22,7 @@ const AdminLandingPageComponent = ({
                         </Card.Body>
                         <Card.Footer style={{ "background": "none", "borderTop": "none" }}>
                             <br/>
-                            <Link to={`/admin/users`} className="bottom">{numberOfMembers}</Link>
+                            <Link to={`/admin/users`} classname="bottom">{users.length}</Link>
                         </Card.Footer>
                     </Card>
                     <Card className={classes.card}>
@@ -32,7 +32,7 @@ const AdminLandingPageComponent = ({
                         </Card.Body>
                         <Card.Footer style={{ "background": "none", "borderTop": "none" }}>
                             <br/>
-                            <Link to={`/admin/tickets`}>{numberOfTickets}</Link>
+                            <Link to={`/admin/tickets`}>{tickets.length}</Link>
                         </Card.Footer>
                     </Card>
                     <Card className={classes.card}>
@@ -42,7 +42,7 @@ const AdminLandingPageComponent = ({
                         </Card.Body>
                         <Card.Footer style={{ "background": "none", "borderTop": "none" }}>
                             <br/>
-                            <span>{numberOfPosts}</span>
+                            <Link to={`/admin/postings`}>{AllBooks.length}</Link>
                         </Card.Footer>
                     </Card>
                 </CardDeck>
@@ -51,8 +51,8 @@ const AdminLandingPageComponent = ({
 }
 
 const stateToPropertyMapper = (state) => ({
-    numberOfMembers: state.admin.numberOfMembers,
-    numberOfPosts: state.admin.numberOfPosts,
-    numberOfTickets: state.admin.numberOfTickets,
+    AllBooks: state.admin.AllBooks,
+    users: state.admin.users,
+    tickets: state.admin.tickets
 })
 export default connect(stateToPropertyMapper)(AdminLandingPageComponent)

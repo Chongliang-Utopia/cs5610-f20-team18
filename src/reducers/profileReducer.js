@@ -1,7 +1,6 @@
 import {
     CLOSE_REPORT,
     CREATE_FOLLOW,
-    CREATE_REVIEW,
     DELETE_FOLLOW,
     DELETE_POSTING,
     DELETE_TRANSACTION,
@@ -10,14 +9,19 @@ import {
     UPDATE_POSTING,
     UPDATE_REVIEW,
     APPROVE_TRANSACTION,
-    DECLINE_TRANSACTION, RETURN_TRANSACTION, CREATE_REVIEW_AS_LENDER, CREATE_REVIEW_AS_BORROWER, UPDATE_USERINFO
+    DECLINE_TRANSACTION,
+    RETURN_TRANSACTION,
+    CREATE_REVIEW_AS_LENDER,
+    CREATE_REVIEW_AS_BORROWER,
+    UPDATE_USERINFO,
+    DELETE_FROMREADINGLIST
 } from "../actions/types";
 import {ADD_TO_READING_LIST, GET_FOLLOWINGS_READING_LIST} from "../actions/types/userTypes";
 import {LOGOUT} from "../actions/types/authTypes";
 
 const INTIAL_STATE = {
     user:  {
-        "rating": 0,
+        "rating": 3,
         "numOfReviews": 0,
         "_id": "5fc82fd8afbc1294a5503741",
         "city": "SF",
@@ -599,11 +603,42 @@ const INTIAL_STATE = {
             "username": "c"
         }
     ],
-    UserReadinglist: [
+    UserReadingList: [
         "ECvxEpH7VZYC",
         "f280CwAAQBAJ",
     ],
-    readingList: [],
+    UserReadingListBooks: [
+        {
+            "isAvailable": true,
+            "author": [
+                "Margaret Atwood"
+            ],
+            "isActive": true,
+            "_id": "5fc3f66b91b3aa84d9e9f9e7",
+            "user": "5fc82fd8afbc1294a5503741",
+            "googleBookId": "ECvxEpH7VZYC",
+            "title": "The Handmaid's Tale",
+            "picture": "http://books.google.com/books/content?id=ECvxEpH7VZYC&printsec=frontcover&img=1&zoom=1&edge=curl&imgtk=AFLRE72FajBMJYgCNCTrcL1phfb3TTAS7ZdYkroMZdZH5g9tyP_tBtIzohJOBKnUTv4SL-NEPmQlJEqZp0RUoyaf4LNnoiihNmgnp5klWAO3vnm8UUkrpFP0OiqlyX4GF-XRao_nIi1z&source=gbs_api",
+            "rating": 4,
+            "description": "<b>An instant classic and eerily prescient cultural phenomenon, from “the patron saint of feminist dystopian fiction” (<i>New York Times</i>). Now an award-winning Hulu series starring Elizabeth Moss.</b>",
+            "condition": "LIKE_NEW"
+        },
+        {
+            "isAvailable": true,
+            "author": [
+                "J.K. Rowling"
+            ],
+            "isActive": true,
+            "_id": "5fc854687c627f07fd275260",
+            "user": "5fc82fd8afbc1294a5503741",
+            "googleBookId": "f280CwAAQBAJ",
+            "title": "Harry Potter: The Complete Collection (1-7)",
+            "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+            "rating": 4.5,
+            "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+            "condition": "ACCEPTABLE",
+        }
+    ],
     followingsReadingList: [],
 };
 
@@ -692,16 +727,18 @@ const profileReducer = (state = INTIAL_STATE, action) => {
                     action.following_body
                 ]
             }
+        // ACCOUNT SETTING
         case UPDATE_USERINFO:
             return {
                 ...state,
                 user: action.user
             }
+        // READING_LIST
         case ADD_TO_READING_LIST:
             return {
                 ...state,
-                readingList: [
-                    ...state.readingList,
+                UserReadingList: [
+                    ...state.UserReadingList,
                     action.googleBook.googleBookId
                 ]
             }
@@ -710,6 +747,13 @@ const profileReducer = (state = INTIAL_STATE, action) => {
                 ...state,
                 followingsReadingList: [...action.followingsReadingList]
             }
+        case DELETE_FROMREADINGLIST:
+            return {
+                ...state,
+                UserReadingList: state.UserReadingList.filter(id=>id !== action.googleId),
+                UserReadingListBooks: state.UserReadingListBooks.filter(book=>book.googleBookId !== action.googleId)
+            }
+        // LOGOUT
         case LOGOUT:
             return {
                 ...state,

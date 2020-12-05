@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
 import {connect} from "react-redux";
 import {closeReport} from "../../actions/profileActions";
-import {createTicket} from "../../actions/adminActions";
+import {createReport} from "../../actions/profileActions";
 
 class ReportForm extends React.Component {
 
@@ -38,11 +38,16 @@ class ReportForm extends React.Component {
                                       onChange={(event) => this.editReportReason(event.target.value)}
                         />
                     </Form.Group>
-                    <Button variant="success" onClick={() => this.props.createTicket({
-                        reporterId: this.props.user._id,
-                        description: this.state.reportReason,
-                        reviewerId: this.props.selectedReview.reviewerId
-                    })}>Submit</Button>
+                    <Button variant="success" onClick={() =>
+                    {
+                        this.props.createReport({
+                            reporterId: this.props.user._id,
+                            reason: this.state.reportReason,
+                            reviewId: this.props.selectedReview._id
+                        })
+                        this.props.closeReport()
+                    }
+                    }>Submit</Button>
                     <Button variant="danger" className="add-left-margin"
                             onClick={this.props.closeReport}>Cancel</Button>
                 </div>
@@ -58,4 +63,4 @@ const stateToPropertyMapper = (state) => ({
 });
 
 
-export default connect(stateToPropertyMapper, {createTicket, closeReport})(ReportForm);
+export default connect(stateToPropertyMapper, {createReport, closeReport})(ReportForm);
