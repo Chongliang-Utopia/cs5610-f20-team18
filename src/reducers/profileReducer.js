@@ -14,7 +14,12 @@ import {
     CREATE_REVIEW_AS_LENDER,
     CREATE_REVIEW_AS_BORROWER,
     UPDATE_USERINFO,
-    DELETE_FROMREADINGLIST
+    DELETE_FROMREADINGLIST,
+    ADD_BOOK,
+    FETCH_ALLPOSTINGS,
+    FETCH_ALLUSERBORROWINGS,
+    FETCH_ALLUSERLENDINGS,
+    FETCH_REVIEWSUSERRECEIVED, FETCH_REVIEWSUSERGAVE, FETCH_USERFOLLOWINGS, FETCH_USERFOLLOWERS
 } from "../actions/types";
 import {ADD_TO_READING_LIST, FIND_USER_BY_ID, GET_FOLLOWINGS_READING_LIST} from "../actions/types/userTypes";
 import {LOGOUT} from "../actions/types/authTypes";
@@ -603,10 +608,6 @@ const INTIAL_STATE = {
             "username": "c"
         }
     ],
-    UserReadingList: [
-        "ECvxEpH7VZYC",
-        "f280CwAAQBAJ",
-    ],
     UserReadingListBooks: [
         {
             "isAvailable": true,
@@ -644,8 +645,10 @@ const INTIAL_STATE = {
 
 const profileReducer = (state = INTIAL_STATE, action) => {
     switch (action.type) {
+        // USER
         case FIND_USER_BY_ID:
             return {...state, user: action.user}
+        // REPORT
         case OPEN_REPORT:
             return {
                 ...state,
@@ -658,20 +661,36 @@ const profileReducer = (state = INTIAL_STATE, action) => {
                 report: false,
                 selectedReview: {}
             };
+        // SECTION
         case SWITCH_SECTION:
             return {...state, section: action.section}
         //POSTING
         case DELETE_POSTING:
             return {
                 ...state,
-                bookPostings: state.bookPostings.map(posting=>posting._id === action.posting._id? action.posting: posting)
+                bookPostings: state.bookPostings.map(posting=>posting._id === action.book._id? action.book: posting)
             }
         case UPDATE_POSTING:
             return {
                 ...state,
                 bookPostings: state.bookPostings.map(posting=>posting._id === action.posting._id? action.posting: posting)
             }
+        case FETCH_ALLPOSTINGS:
+            return {
+                ...state,
+                bookPostings: action.books
+            }
         //REVIEW
+        case FETCH_REVIEWSUSERRECEIVED:
+            return {
+                ...state,
+                reviewsUserReceived: action.reviews
+            }
+        case FETCH_REVIEWSUSERGAVE:
+            return {
+                ...state,
+                reviewsUserGave: action.reviews
+            }
         case CREATE_REVIEW_AS_LENDER:
             return {
                 ...state,
@@ -694,6 +713,16 @@ const profileReducer = (state = INTIAL_STATE, action) => {
                 reviewsUserGave: state.reviewsUserGave.map(review=>review._id === action.review._id? action.review: review)
             }
         //TRANSACTION
+        case FETCH_ALLUSERBORROWINGS:
+            return {
+                ...state,
+                UserBorrowings: action.borrowings
+            }
+        case FETCH_ALLUSERLENDINGS:
+            return {
+                ...state,
+                UserLendings: action.lendings
+            }
         case APPROVE_TRANSACTION:
             return {
                 ...state,
@@ -729,6 +758,16 @@ const profileReducer = (state = INTIAL_STATE, action) => {
                     action.following_body
                 ]
             }
+        case FETCH_USERFOLLOWINGS:
+            return {
+                ...state,
+                UserFollowings: action.followings
+            }
+        case FETCH_USERFOLLOWERS:
+            return {
+                ...state,
+                UserFollowers: action.followers
+            }
         // ACCOUNT SETTING
         case UPDATE_USERINFO:
             return {
@@ -752,8 +791,16 @@ const profileReducer = (state = INTIAL_STATE, action) => {
         case DELETE_FROMREADINGLIST:
             return {
                 ...state,
-                UserReadingList: state.UserReadingList.filter(id=>id !== action.googleId),
                 UserReadingListBooks: state.UserReadingListBooks.filter(book=>book.googleBookId !== action.googleId)
+            }
+        case ADD_BOOK:
+            return {
+                ...state,
+                UserReadingListBooks:
+                [
+                    ...state.UserReadingListBooks,
+                    action.book
+                ]
             }
         // LOGOUT
         case LOGOUT:
