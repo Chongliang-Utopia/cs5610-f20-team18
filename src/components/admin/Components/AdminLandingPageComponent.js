@@ -20,9 +20,9 @@ const AdminLandingPageComponent = ({
                             <Card.Title>Number of members</Card.Title>
 
                         </Card.Body>
-                        <Card.Footer style={{ "background": "none", "border-top": "none" }}>
+                        <Card.Footer style={{ "background": "none", "borderTop": "none" }}>
                             <br/>
-                            <Link to={`/admin/users`} classname="bottom">{numberOfMembers}</Link>
+                            <Link to={`/admin/users`} className="bottom">{numberOfMembers}</Link>
                         </Card.Footer>
                     </Card>
                     <Card className={classes.card}>
@@ -30,7 +30,7 @@ const AdminLandingPageComponent = ({
                             <Card.Title>Pending User Tickets</Card.Title>
 
                         </Card.Body>
-                        <Card.Footer style={{ "background": "none", "border-top": "none" }}>
+                        <Card.Footer style={{ "background": "none", "borderTop": "none" }}>
                             <br/>
                             <Link to={`/admin/tickets`}>{numberOfTickets}</Link>
                         </Card.Footer>
@@ -40,7 +40,7 @@ const AdminLandingPageComponent = ({
                             <Card.Title>Total book postings</Card.Title>
 
                         </Card.Body>
-                        <Card.Footer style={{ "background": "none", "border-top": "none" }}>
+                        <Card.Footer style={{ "background": "none", "borderTop": "none" }}>
                             <br/>
                             <span>{numberOfPosts}</span>
                         </Card.Footer>
