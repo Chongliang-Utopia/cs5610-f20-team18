@@ -4,8 +4,11 @@ import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import classes from "./ProfileHeading.module.css";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
+import {createFollow} from "../../../actions/profileActions";
 
 const ProfileHeading = ({
+                            isLoggedIn,
+                            LoggedInUser,
                             user,
                             bookPostings,
                             UserFollowings,
@@ -24,7 +27,13 @@ const ProfileHeading = ({
                     <h2 className="pl-3">
                         {user.username}
                     </h2>
-                    <button className="btn btn-info mb-3  ml-3" onClick={()=>{}}>Follow</button>
+                    {
+                        isLoggedIn && <button className="btn btn-info mb-3  ml-3" onClick={()=>{createFollow(user._id, LoggedInUser._id, user)}}>Follow</button>
+                    }
+                    {
+                        isLoggedIn && UserFollowers.find(follower=>follower._id === LoggedInUser._id) !== undefined &&
+                        <button className="btn btn-info mb-3  ml-3" onClick={()=>{}}>Unfollow</button>
+                    }
                 </div>
                 <div>
                     <Rating className="add-15-padding" initialRating={user.rating} readonly
@@ -55,7 +64,9 @@ const stateToPropertyMapper = (state) =>({
     user: state.profile.user,
     bookPostings: state.profile.bookPostings,
     UserFollowings: state.profile.UserFollowings,
-    UserFollowers: state.profile.UserFollowers
+    UserFollowers: state.profile.UserFollowers,
+    isLoggedIn: state.auth.isLoggedIn,
+    LoggedInUser: state.auth.user
 })
 
-export default connect(stateToPropertyMapper)(ProfileHeading);
+export default connect(stateToPropertyMapper, {createFollow})(ProfileHeading);

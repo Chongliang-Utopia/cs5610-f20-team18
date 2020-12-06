@@ -23,7 +23,7 @@ import {
     FETCH_ALLUSERLENDINGS,
     FETCH_REVIEWSUSERRECEIVED,
     FETCH_REVIEWSUSERGAVE,
-    FETCH_USERFOLLOWINGS, FETCH_USERFOLLOWERS
+    FETCH_USERFOLLOWINGS, FETCH_USERFOLLOWERS, FETCH_USERREADINGLIST, AUTHENTICATE
 
 } from "./types";
 import ReportService from "../services/ReportService";
@@ -34,6 +34,16 @@ import FollowService from "../services/FollowService";
 import UserService from "../services/UserService";
 
 // USER
+export const authenticate = (userId, authUser, isLoggedIn) => (dispatch) => {
+    let authenticated = false;
+    if (isLoggedIn && authUser._id === userId) {
+        authenticated = true
+    }
+    dispatch({
+        type: AUTHENTICATE,
+        authenticated
+    })
+}
 // export const fetchUser = (uid) => (dispatch) => {
 //     UserService.findUserById(uid)
 //         .then(user => {
@@ -77,24 +87,32 @@ export const createReport = (report) => (dispatch) => {
 }
 
 // Posting
-export const deletePosting = (book) => (dispatch) => {
-    return bookService.deleteBook(book._id)
-        .then(status=> {
+export const deletePosting = (book) => (dispatch)=>{
+    return bookService.deleteBook(book._id, book)
+        .then(status=>{
             dispatch({
                 type: DELETE_POSTING,
                 book
             })
         })
+        // dispatch({
+        //     type: DELETE_POSTING,
+        //     book
+        // });
 }
 
 export const updatePosting = (posting) => (dispatch) => {
     return bookService.updateBook(posting._id, posting)
-        .then(posting=> {
+        .then(()=> {
             dispatch({
                 type: UPDATE_POSTING,
                 posting
             })
         })
+    //     dispatch({
+    //         type: UPDATE_POSTING,
+    //         posting
+    //     })
 }
 
 // Review
@@ -130,7 +148,7 @@ export const updateReview = (review) => (dispatch) => {
 
 // Transaction
 export const approveTransaction = (transaction) => (dispatch) => {
-    return TransactionService.acceptBorrowRequest(transaction._id)
+    return TransactionService.acceptBorrowRequest(transaction._id, transaction)
         .then(status=>{
             dispatch({
                 type: APPROVE_TRANSACTION,
@@ -140,7 +158,7 @@ export const approveTransaction = (transaction) => (dispatch) => {
 }
 
 export const declineTransaction = (transaction) => (dispatch) => {
-    return TransactionService.declineBorrowRequest(transaction._id)
+    return TransactionService.declineBorrowRequest(transaction._id, transaction)
         .then(status=>{
             dispatch({
                 type: DECLINE_TRANSACTION,
@@ -150,7 +168,7 @@ export const declineTransaction = (transaction) => (dispatch) => {
 }
 
 export const deleteTransaction = (transaction) => (dispatch) =>{
-    return TransactionService.deleteBorrowRequest(transaction._id)
+    return TransactionService.deleteBorrowRequest(transaction._id, transaction)
         .then(status=>{
             dispatch({
                 type: DELETE_TRANSACTION,
@@ -160,7 +178,7 @@ export const deleteTransaction = (transaction) => (dispatch) =>{
 }
 
 export const finishTransaction = (transaction) => (dispatch) =>{
-    return TransactionService.returnBook(transaction._id)
+    return TransactionService.returnBook(transaction._id, transaction)
         .then(status=> {
             dispatch({
                 type: RETURN_TRANSACTION,
@@ -211,17 +229,28 @@ export const deleteFromReadingList = (uid, googleId) => (dispatch) => {
 
 export const getReadingListForUser = (uid) => (dispatch) => {
     return UserService.getReadingListForUser(uid)
-        .then(readingList=>{
-            for (let id of readingList){
-                bookService.findBookById(id)
-                    .then(book=>dispatch({
-                        type: ADD_BOOK,
-                        book
-                }))
-            }
+        .then(readingList => {
+            dispatch({
+                type: FETCH_USERREADINGLIST,
+                readingList
+            })
+            // populateReadingListBooks(readingList)
         })
 }
 
+export const populateReadingListBooks = (readingList) => (dispatch) => {
+    for (let id of readingList){
+        bookService.findBookById(id)
+            .then(book=>
+            {
+                console.log("executed")
+                console.log(book)
+                dispatch({
+                type: ADD_BOOK,
+                book
+            })})
+    }
+}
 //All FETCHES
 // list of book inventory objects
 export const fetchBookPostingsForUser = (uid) => (dispatch) => {
