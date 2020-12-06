@@ -16,21 +16,24 @@ const findBookById = (id) =>
 const postBook = (userId, book) =>
     axios.post(`${API_URL}/users/${userId}/books`, book, {headers: authHeader()});
 
-const deleteBook = (bookId) => {
-    return axios.put(`${API_URL}/books/${bookId}`);
+const deleteBook = (bookId, book) => {
+    return axios.put(`${API_URL}/books/${bookId}`, book, {headers: authHeader()});
 }
 
 const updateBook = (bookId, book) =>
     axios.put(`${API_URL}/books/${bookId}`, book, {headers: authHeader()});
 
 const findAllBorrowingOptions = (googleBookId) =>
-    axios.get(`${API_URL}/${googleBookId}/books`);
+    axios.get(`${API_URL}/${googleBookId}/books`).then((response) => (
+        response.data ? response.data : []
+    ));
 
 const submitBorrowingRequest = (request) =>
     axios.post(`${API_URL}/transactions`, request, {headers: authHeader()})
 
 const getAllBooksForUser = (userId) =>
-    axios.get(`${API_URL}/users/${userId}/books`, {headers: authHeader()});
+    axios.get(`${API_URL}/users/${userId}/books`, {headers: authHeader()})
+        .then(response=>response.data? response.data: []);
 
 
 export default {
