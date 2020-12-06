@@ -21,7 +21,12 @@ import {
     FETCH_ALLUSERLENDINGS,
     FETCH_REVIEWSUSERRECEIVED, FETCH_REVIEWSUSERGAVE, FETCH_USERFOLLOWINGS, FETCH_USERFOLLOWERS
 } from "../actions/types";
-import {ADD_TO_READING_LIST, FIND_USER_BY_ID, GET_FOLLOWINGS_READING_LIST} from "../actions/types/userTypes";
+import {
+    ADD_TO_READING_LIST,
+    FIND_USER_BY_ID,
+    GET_FOLLOWINGS_READING_LIST,
+    UPDATE_USER
+} from "../actions/types/userTypes";
 import {LOGOUT} from "../actions/types/authTypes";
 
 const INTIAL_STATE = {
@@ -769,10 +774,10 @@ const profileReducer = (state = INTIAL_STATE, action) => {
                 UserFollowers: action.followers
             }
         // ACCOUNT SETTING
-        case UPDATE_USERINFO:
+        case UPDATE_USER:
             return {
                 ...state,
-                user: action.user
+                user: {...state.user, ...action.payload.user}
             }
         // READING_LIST
         case ADD_TO_READING_LIST:
