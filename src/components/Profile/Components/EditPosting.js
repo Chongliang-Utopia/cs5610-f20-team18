@@ -18,12 +18,12 @@ const EditPosting = ({
                     <div>status: Lent</div>
                     <div>condition: {book.condition}</div>
                     <label htmlFor="bookCondition" className={classes.condtionLabel} >Book Condition:</label>
-                    <select className="form-control" id="bookCondition">
+                    <select className="form-control" id="bookCondition" onChange={e => updateBookCondition(e.target.value)}>
                         <option>Choose the condition of the book</option>
-                        <option onClick={()=>updateBookCondition("LIKE_NEW")}>Like New</option>
-                        <option onClick={()=>updateBookCondition("VERY_GOOD")}>Very Good</option>
-                        <option onClick={()=>updateBookCondition("GOOD")}>Good</option>
-                        <option onClick={()=>updateBookCondition("ACCEPTABLE")}>Acceptable</option>
+                        <option value="LIKE_NEW">Like New</option>
+                        <option value="VERY_GOOD">Very Good</option>
+                        <option value="GOOD">Good</option>
+                        <option value="ACCEPTABLE">Acceptable</option>
                     </select>
                     <br/>
                     <div>
