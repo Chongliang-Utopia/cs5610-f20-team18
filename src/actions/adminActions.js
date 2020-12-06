@@ -75,13 +75,12 @@ export const fetchUserTickets = () => (dispatch) => {
     //  tickets
     // })
 }
-export const fetchAdminUser = () => {
-
+export const fetchAdminUser = (currentUser) => {
     //service.getUser.then(adminUser=>
-    // return {
-    //  type: FETCH_ADMINUSER,
-    //  adminUser
-    // })
+    return {
+     type: FETCH_ADMINUSER,
+     adminUser: currentUser
+    }
 }
 export const fetchAllUsers = () => (dispatch) => {
     UserService.findAllUsers().then(users => {

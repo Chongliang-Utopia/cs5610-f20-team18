@@ -22,7 +22,7 @@ class Admin extends React.Component{
         // this.props.fetchTicketNumber()
 
         //TODO: fetch admin user object
-        // this.props.fetchAdminUser()
+        this.props.fetchAdminUser(this.props.currentUser)
 
         //TODO: fetch user tickets
         this.props.fetchUserTickets()
@@ -47,10 +47,10 @@ class Admin extends React.Component{
                 // this.props.fetchPostingNumber()
                 // this.props.fetchTicketNumber()
             }
-            // if (section === "settings") {
-            //     //TODO: fetch admin user object
-            //     this.props.fetchAdminUser()
-            // }
+            if (section === "settings") {
+                //TODO: fetch admin user object
+                this.props.fetchAdminUser(this.props.currentUser)
+            }
             if (section === "tickets") {
                 //TODO: fetch user tickets
                 this.props.fetchUserTickets()
@@ -150,7 +150,8 @@ class Admin extends React.Component{
 }
 
 const stateToPropertyMapper = (state) => ({
-    section: state.admin.section
+    section: state.admin.section,
+    currentUser: state.auth.user
 })
 
 export default connect (
