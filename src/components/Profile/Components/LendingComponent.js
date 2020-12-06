@@ -174,6 +174,10 @@ class LendingComponent extends React.Component {
                                                 fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                     </td>
                                     <td>
+                                        <span>{lending.borrower.email}</span>
+
+                                    </td>
+                                    <td>
                                         <span>{lending.borrower.city + ", " + lending.borrower.state}</span>
                                     </td>
                                     <td>

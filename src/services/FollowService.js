@@ -26,7 +26,6 @@ class FollowService {
     unfollow(userId, followingId) {
         return axios.delete(`${API_URL}/${userId}/followings/${followingId}`, {headers: authHeader()})
     }
-
 }
 
 export default new FollowService();

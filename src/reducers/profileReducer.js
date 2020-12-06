@@ -19,7 +19,12 @@ import {
     FETCH_ALLPOSTINGS,
     FETCH_ALLUSERBORROWINGS,
     FETCH_ALLUSERLENDINGS,
-    FETCH_REVIEWSUSERRECEIVED, FETCH_REVIEWSUSERGAVE, FETCH_USERFOLLOWINGS, FETCH_USERFOLLOWERS
+    FETCH_REVIEWSUSERRECEIVED,
+    FETCH_REVIEWSUSERGAVE,
+    FETCH_USERFOLLOWINGS,
+    FETCH_USERFOLLOWERS,
+    FETCH_USERREADINGLIST,
+    AUTHENTICATE
 } from "../actions/types";
 import {
     ADD_TO_READING_LIST,
@@ -613,6 +618,10 @@ const INTIAL_STATE = {
             "username": "c"
         }
     ],
+    UserReadingList:[
+        "ECvxEpH7VZYC",
+        "f280CwAAQBAJ"
+    ],
     UserReadingListBooks: [
         {
             "isAvailable": true,
@@ -653,6 +662,11 @@ const profileReducer = (state = INTIAL_STATE, action) => {
         // USER
         case FIND_USER_BY_ID:
             return {...state, user: action.user}
+        case AUTHENTICATE:
+            return {
+                ...state,
+                authenticated: action.authenticated
+            }
         // REPORT
         case OPEN_REPORT:
             return {
@@ -798,14 +812,20 @@ const profileReducer = (state = INTIAL_STATE, action) => {
                 ...state,
                 UserReadingListBooks: state.UserReadingListBooks.filter(book=>book.googleBookId !== action.googleId)
             }
+        case FETCH_USERREADINGLIST:
+            return {
+                ...state,
+                UserReadingListBooks: [],
+                UserReadingList: action.readingList
+            }
         case ADD_BOOK:
             return {
                 ...state,
                 UserReadingListBooks:
-                [
-                    ...state.UserReadingListBooks,
-                    action.book
-                ]
+                    [
+                        ...state.UserReadingListBooks,
+                        action.book
+                    ]
             }
         // LOGOUT
         case LOGOUT:

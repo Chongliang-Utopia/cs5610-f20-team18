@@ -23,7 +23,7 @@ import {
     FETCH_ALLUSERLENDINGS,
     FETCH_REVIEWSUSERRECEIVED,
     FETCH_REVIEWSUSERGAVE,
-    FETCH_USERFOLLOWINGS, FETCH_USERFOLLOWERS
+    FETCH_USERFOLLOWINGS, FETCH_USERFOLLOWERS, FETCH_USERREADINGLIST, AUTHENTICATE
 
 } from "./types";
 import ReportService from "../services/ReportService";
@@ -34,6 +34,16 @@ import FollowService from "../services/FollowService";
 import UserService from "../services/UserService";
 
 // USER
+export const authenticate = (userId, authUser, isLoggedIn) => (dispatch) => {
+    let authenticated = false;
+    if (isLoggedIn && authUser._id === userId) {
+        authenticated = true
+    }
+    dispatch({
+        type: AUTHENTICATE,
+        authenticated
+    })
+}
 // export const fetchUser = (uid) => (dispatch) => {
 //     UserService.findUserById(uid)
 //         .then(user => {
@@ -219,17 +229,28 @@ export const deleteFromReadingList = (uid, googleId) => (dispatch) => {
 
 export const getReadingListForUser = (uid) => (dispatch) => {
     return UserService.getReadingListForUser(uid)
-        .then(readingList=>{
-            for (let id of readingList){
-                bookService.findBookById(id)
-                    .then(book=>dispatch({
-                        type: ADD_BOOK,
-                        book
-                }))
-            }
+        .then(readingList => {
+            dispatch({
+                type: FETCH_USERREADINGLIST,
+                readingList
+            })
+            // populateReadingListBooks(readingList)
         })
 }
 
+export const populateReadingListBooks = (readingList) => (dispatch) => {
+    for (let id of readingList){
+        bookService.findBookById(id)
+            .then(book=>
+            {
+                console.log("executed")
+                console.log(book)
+                dispatch({
+                type: ADD_BOOK,
+                book
+            })})
+    }
+}
 //All FETCHES
 // list of book inventory objects
 export const fetchBookPostingsForUser = (uid) => (dispatch) => {
