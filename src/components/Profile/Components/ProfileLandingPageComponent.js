@@ -39,6 +39,7 @@ class ProfileLandingPageComponent extends React.Component {
 
     render() {
         console.log("readinglist")
+        console.log(this.props.UserReadingList)
         console.log(this.props.UserReadingListBooks)
         return (
             <div>
@@ -172,12 +173,15 @@ class ProfileLandingPageComponent extends React.Component {
                     }
                     {
                         this.props.UserReadingListBooks.length !==0 &&
-                        this.props.UserReadingListBooks.filter(book => book.isActive).map(book =>
+                        this.props.UserReadingListBooks.map(book =>
                             <div className="ImageCard">
-                                <ImageCard src={book.picture}/>
-                                <div className="center-text">{book.title}</div>
+                                <ImageCard src={book.volumeInfo.imageLinks? book.volumeInfo.imageLinks.thumbnail:
+                                    "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg"}/>
+                                <div className="center-text">{book.volumeInfo.title}</div>
                                 <div className="center-text">
-                                    <MdDeleteSweep size={"1.5em"} onClick={() =>this.deleteBook(book)}/>
+                                    <MdDeleteSweep size={"1.5em"} onClick={() =>{
+                                        this.deleteBook(book)
+                                    }}/>
                                 </div>
                             </div>
                         )
@@ -196,8 +200,8 @@ const StateToPropertyMapper = (state) => ({
     reviewsUserReceived: state.profile.reviewsUserReceived,
     UserFollowings: state.profile.UserFollowings,
     UserFollowers: state.profile.UserFollowers,
+    UserReadingList: state.profile.UserReadingList,
     UserReadingListBooks: state.profile.UserReadingListBooks
-
 });
 
 export default connect(StateToPropertyMapper,

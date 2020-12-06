@@ -234,23 +234,31 @@ export const getReadingListForUser = (uid) => (dispatch) => {
                 type: FETCH_USERREADINGLIST,
                 readingList
             })
-            // populateReadingListBooks(readingList)
-        })
+            for (let id of readingList){
+                bookService.findBookById(id)
+                    .then(book=>
+                        dispatch({
+                            type: ADD_BOOK,
+                            book
+                }))
+        }})
 }
 
 export const populateReadingListBooks = (readingList) => (dispatch) => {
+
+    let readingListBooks = []
     for (let id of readingList){
         bookService.findBookById(id)
             .then(book=>
-            {
-                console.log("executed")
-                console.log(book)
-                dispatch({
-                type: ADD_BOOK,
-                book
-            })})
+                readingListBooks.push(book)
+        )
     }
+    dispatch({
+        type: ADD_BOOK,
+        readingListBooks
+    })
 }
+
 //All FETCHES
 // list of book inventory objects
 export const fetchBookPostingsForUser = (uid) => (dispatch) => {
