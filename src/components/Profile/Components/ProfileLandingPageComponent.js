@@ -168,7 +168,7 @@ class ProfileLandingPageComponent extends React.Component {
                     <h2>My Reading list</h2>
                     {
                         this.props.UserReadingListBooks.length===0 &&
-                        <h3>Reading List is empty</h3>
+                        <h5>No active reading list</h5>
                     }
                     {
                         this.props.UserReadingListBooks.length !==0 &&

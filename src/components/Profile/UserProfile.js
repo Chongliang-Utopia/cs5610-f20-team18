@@ -22,24 +22,8 @@ class UserProfile extends React.Component {
         const uid = this.props.match.params.userId
         const section = this.props.match.params.section
         this.props.findUserById(uid)
-        this.props.fetchBookPostingsForUser(uid)
-        this.props.fetchUserBorrowings(uid)
-        this.props.fetchUserLendings(uid)
-        this.props.fetchReviewsUserReceived(uid)
-        this.props.fetchReviewsUserGave(uid)
-        this.props.fetchFollowings(uid)
-        this.props.fetchFollowers(uid)
-        this.props.getReadingListForUser(uid)
-        this.props.switchSection(section)
-        this.props.authenticate(uid, this.props.user, this.props.isLoggedIn)
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        const uid = this.props.match.params.userId
-        const section = this.props.match.params.section
-        if (section !== prevProps.match.params.section || uid !== prevProps.match.params.userId) {
-            // TODO: fetch all data here, implement these and un-comment
-            this.props.findUserById(uid)
+        this.props.authenticate(uid, this.props.loggedInUser, this.props.isLoggedIn)
+        if (this.props.isLoggedIn && this.props.user._id === this.props.loggedInUser._id) {
             this.props.fetchBookPostingsForUser(uid)
             this.props.fetchUserBorrowings(uid)
             this.props.fetchUserLendings(uid)
@@ -48,9 +32,40 @@ class UserProfile extends React.Component {
             this.props.fetchFollowings(uid)
             this.props.fetchFollowers(uid)
             this.props.getReadingListForUser(uid)
-            this.props.switchSection(section)
-            this.props.authenticate(uid, this.props.user, this.props.isLoggedIn)
+        } else {
+            this.props.fetchBookPostingsForUser(uid)
+            this.props.fetchReviewsUserReceived(uid)
+            this.props.fetchReviewsUserGave(uid)
+            this.props.fetchFollowings(uid)
+            this.props.fetchFollowers(uid)
+        }
+        this.props.switchSection(section)
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const uid = this.props.match.params.userId
+        const section = this.props.match.params.section
+        if (section !== prevProps.match.params.section || uid !== prevProps.match.params.userId) {
+            this.props.findUserById(uid)
+            this.props.authenticate(uid, this.props.loggedInUser, this.props.isLoggedIn)
+            if (this.props.isLoggedIn && this.props.user._id === this.props.loggedInUser._id) {
+                this.props.fetchBookPostingsForUser(uid)
+                this.props.fetchUserBorrowings(uid)
+                this.props.fetchUserLendings(uid)
+                this.props.fetchReviewsUserReceived(uid)
+                this.props.fetchReviewsUserGave(uid)
+                this.props.fetchFollowings(uid)
+                this.props.fetchFollowers(uid)
+                this.props.getReadingListForUser(uid)
+            } else {
+                this.props.fetchBookPostingsForUser(uid)
+                this.props.fetchReviewsUserReceived(uid)
+                this.props.fetchReviewsUserGave(uid)
+                this.props.fetchFollowings(uid)
+                this.props.fetchFollowers(uid)
             }
+        }
+        this.props.switchSection(section)
     }
 
     render() {
@@ -70,8 +85,9 @@ class UserProfile extends React.Component {
 
 const stateToPropertyMapper = (state) => ({
     authenticated: state.profile.authenticated,
-    user: state.auth.user,
-    isLoggedIn: state.auth.isLoggedIn
+    loggedInUser: state.auth.user,
+    isLoggedIn: state.auth.isLoggedIn,
+    user: state.profile.user
 })
 
 export default connect(stateToPropertyMapper,

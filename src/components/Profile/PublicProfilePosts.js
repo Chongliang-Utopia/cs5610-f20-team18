@@ -17,7 +17,8 @@ const PublicProfilePosts = ({
             report,
             openReport,
             closeReport,
-            reviewsUserReceived
+            reviewsUserReceived,
+            isLoggedIn
         }) =>
         <div>
             <Modal show={report} modalClosed={closeReport}>
@@ -72,11 +73,14 @@ const PublicProfilePosts = ({
                                         <span>{review.comments}</span>
                                     </td>
                                     <td>
-                                        <Button variant="warning" size="sm" className="transparent"
-                                                onClick={()=>openReport(review)}
-                                                title="Report">
-                                            <RiErrorWarningLine/>
-                                        </Button>
+                                        {
+                                            isLoggedIn &&
+                                            <Button variant="warning" size="sm" className="transparent"
+                                                    onClick={() => openReport(review)}
+                                                    title="Report">
+                                                <RiErrorWarningLine/>
+                                            </Button>
+                                        }
                                     </td>
                                 </tr>)
                             }
@@ -117,11 +121,14 @@ const PublicProfilePosts = ({
                                             <span>{review.comments}</span>
                                         </td>
                                         <td>
-                                            <Button variant="warning" size="sm" className="transparent"
-                                                    onClick={()=>openReport(review)}
-                                                    title="Report">
-                                                <RiErrorWarningLine/>
-                                            </Button>
+                                            {
+                                                isLoggedIn &&
+                                                <Button variant="warning" size="sm" className="transparent"
+                                                        onClick={()=>openReport(review)}
+                                                        title="Report">
+                                                    <RiErrorWarningLine/>
+                                                </Button>
+                                            }
                                         </td>
                                     </tr>)
                                 }
@@ -138,7 +145,8 @@ const StateToPropertyMapper = (state) => ({
     report: state.profile.report,
     bookPostings: state.profile.bookPostings,
     user: state.profile.user,
-    reviewsUserReceived: state.profile.reviewsUserReceived
+    reviewsUserReceived: state.profile.reviewsUserReceived,
+    isLoggedIn: state.auth.isLoggedIn
 });
 
 export default connect(StateToPropertyMapper, {openReport, closeReport})(PublicProfilePosts);
