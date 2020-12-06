@@ -31,6 +31,7 @@ class UserProfile extends React.Component {
         this.props.fetchFollowers(uid)
         this.props.getReadingListForUser(uid)
         this.props.switchSection(section)
+        this.props.authenticate(uid, this.props.user, this.props.isLoggedIn)
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
