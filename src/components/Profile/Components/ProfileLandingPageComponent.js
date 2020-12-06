@@ -38,8 +38,6 @@ class ProfileLandingPageComponent extends React.Component {
 
 
     render() {
-        console.log("landing page")
-        console.log(typeof this.props.bookPostings)
         return (
             <div>
                 <Modal show={this.props.report} modalClosed={this.props.closeReport}>
