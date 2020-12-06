@@ -12,6 +12,7 @@ const UserTicketsComponent =
     ({
          tickets=[],
          deleteTicket,
+         deleteReview
     }) => {
         return(
         <div>
@@ -53,7 +54,7 @@ const UserTicketsComponent =
                                                           className="mr-1">{ticket.review.reviewee.username}</Link>
                                                 </td>
                                                 <td>
-                                                    <Link to={`/book/${ticket.review.book.title}`}>{ticket.review.book.title}</Link>
+                                                    <Link to={`/book/${ticket.review.book.title}`}>{ticket.book.title}</Link>
                                                 </td>
                                                 <td>
                                                     <span>{ticket.review.comments}</span>
