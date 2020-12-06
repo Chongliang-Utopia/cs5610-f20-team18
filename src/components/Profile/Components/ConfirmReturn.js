@@ -47,14 +47,14 @@ class ConfirmReturn extends React.Component {
                     </Form.Group>
 
                     <Form.Group controlId="exampleForm.ControlSelect1">
-                        <Form.Label>Please select a rating for this experience</Form.Label>
-                        <Form.Control as="select">
-                            <option>Please select a rating</option>
-                            <option onClick={()=>this.setNewRating(1)}>1</option>
-                            <option onClick={()=>this.setNewRating(2)}>2</option>
-                            <option onClick={()=>this.setNewRating(3)}>3</option>
-                            <option onClick={()=>this.setNewRating(4)}>4</option>
-                            <option onClick={()=>this.setNewRating(5)}>5</option>
+                        <Form.Label htmlFor="bookCondition">Please select a rating for this experience</Form.Label>
+                        <Form.Control as="select" className="form-control" id="bookCondition" onChange={e => this.setNewRating(e.target.value)}>
+                                <option>Please select a rating</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
                         </Form.Control>
                     </Form.Group>
                     <Button variant="success" onClick={()=>{
