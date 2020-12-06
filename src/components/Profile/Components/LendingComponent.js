@@ -286,7 +286,7 @@ class LendingComponent extends React.Component {
                                                   className="mr-1">{lending.borrower.username}</Link>
                                         </td>
                                         <td>
-                                            <Rating initialRating={lending.lenderReview.rating} readonly
+                                            <Rating initialRating={lending.lenderReview == null? 0: lending.lenderReview.rating} readonly
                                                     emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                                     fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                         </td>
@@ -297,7 +297,7 @@ class LendingComponent extends React.Component {
                                             <Link to={`/books/${lending.book._id}`} className="mr-1">{lending.book.title}</Link>
                                         </td>
                                         <td>
-                                            <span>{lending.lenderReview.comments}</span>
+                                            <span>{lending.lenderReview == null? "": lending.lenderReview.comments}</span>
                                         </td>
                                     </tr>
                                 )

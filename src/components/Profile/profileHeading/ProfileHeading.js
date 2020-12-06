@@ -4,7 +4,7 @@ import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import classes from "./ProfileHeading.module.css";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {createFollow} from "../../../actions/profileActions";
+import {createFollow, deleteFollow} from "../../../actions/profileActions";
 
 const ProfileHeading = ({
                             isLoggedIn,
@@ -12,7 +12,9 @@ const ProfileHeading = ({
                             user,
                             bookPostings,
                             UserFollowings,
-                            UserFollowers
+                            UserFollowers,
+                            createFollow,
+                            deleteFollow
                         }) => {
     // TODO: ask yewen how to retrieve logged in user id to create new following
     return (
@@ -28,11 +30,13 @@ const ProfileHeading = ({
                         {user.username}
                     </h2>
                     {
-                        isLoggedIn && <button className="btn btn-info mb-3  ml-3" onClick={()=>{createFollow(user._id, LoggedInUser._id, user)}}>Follow</button>
+                        isLoggedIn && UserFollowers.find(follower=>follower._id === LoggedInUser._id) === undefined &&
+                        <button className="btn btn-info mb-3  ml-3"
+                                              onClick={()=>{createFollow(user._id, LoggedInUser._id, user)}}>Follow</button>
                     }
                     {
                         isLoggedIn && UserFollowers.find(follower=>follower._id === LoggedInUser._id) !== undefined &&
-                        <button className="btn btn-info mb-3  ml-3" onClick={()=>{}}>Unfollow</button>
+                        <button className="btn btn-info mb-3  ml-3" onClick={()=>{deleteFollow(LoggedInUser._id, user._id)}}>Unfollow</button>
                     }
                 </div>
                 <div>
@@ -69,4 +73,4 @@ const stateToPropertyMapper = (state) =>({
     LoggedInUser: state.auth.user
 })
 
-export default connect(stateToPropertyMapper, {createFollow})(ProfileHeading);
+export default connect(stateToPropertyMapper, {createFollow, deleteFollow})(ProfileHeading);
