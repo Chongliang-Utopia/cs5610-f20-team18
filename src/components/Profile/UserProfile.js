@@ -23,7 +23,7 @@ class UserProfile extends React.Component {
         const section = this.props.match.params.section
         this.props.findUserById(uid)
         this.props.authenticate(uid, this.props.loggedInUser, this.props.isLoggedIn)
-        if (this.props.isLoggedIn && this.props.user._id === this.props.loggedInUser._id) {
+        if (this.props.isLoggedIn && uid === this.props.loggedInUser._id) {
             this.props.fetchBookPostingsForUser(uid)
             this.props.fetchUserBorrowings(uid)
             this.props.fetchUserLendings(uid)
@@ -48,7 +48,7 @@ class UserProfile extends React.Component {
         if (section !== prevProps.match.params.section || uid !== prevProps.match.params.userId) {
             this.props.findUserById(uid)
             this.props.authenticate(uid, this.props.loggedInUser, this.props.isLoggedIn)
-            if (this.props.isLoggedIn && this.props.user._id === this.props.loggedInUser._id) {
+            if (this.props.isLoggedIn && uid === this.props.loggedInUser._id) {
                 this.props.fetchBookPostingsForUser(uid)
                 this.props.fetchUserBorrowings(uid)
                 this.props.fetchUserLendings(uid)

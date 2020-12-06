@@ -19,7 +19,7 @@ const LoggedInProfile = ({section, user}) => {
             <div className="mt-5 add-15-padding font-size-25-italic row">
                 <div className="col-lg-2">
                     <img className="image"
-                         src="https://is2-ssl.mzstatic.com/image/thumb/Podcasts124/v4/54/b0/5d/54b05d73-57bf-6e94-d06f-dfc2ceb4f771/mza_1054230007255374421.jpg/1200x1200bb.jpg"
+                         src={user.profilePicture === undefined? "https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-3/177800/130-512.png": user.profilePicture}
                          alt="profile-image"
                     />
                 </div>

@@ -21,7 +21,7 @@ const ProfileHeading = ({
         <div className={"mt-5 add-15-padding row " + classes.ProfileHeading}>
             <div className={"col-lg-2 " + classes.profileImage}>
                 <img
-                    src="https://img1.looper.com/img/gallery/the-despicable-me-minions-were-originally-supposed-to-look-much-different/intro-1587406973.jpg"
+                    src={user.profilePicture === undefined? "https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-3/177800/130-512.png": user.profilePicture}
                     alt="profile"/>
             </div>
             <div className="pt-3 col-9">

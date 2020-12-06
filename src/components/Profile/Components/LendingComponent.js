@@ -97,8 +97,8 @@ class LendingComponent extends React.Component {
         </Tooltip>
 
     render() {
+        console.log(this.props.UserLendings)
         return (
-
             <div>
                 <div className="mb-5">
                     <h2>

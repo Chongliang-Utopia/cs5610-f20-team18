@@ -41,9 +41,9 @@ class ReportForm extends React.Component {
                     <Button variant="success" onClick={() =>
                     {
                         this.props.createReport({
-                            reporterId: this.props.user._id,
+                            reporter: this.props.LoggedInUser._id,
                             reason: this.state.reportReason,
-                            reviewId: this.props.selectedReview._id
+                            review: this.props.selectedReview._id
                         })
                         this.props.closeReport()
                     }
@@ -59,7 +59,8 @@ class ReportForm extends React.Component {
 const stateToPropertyMapper = (state) => ({
     selectedReview: state.profile.selectedReview,
     user: state.profile.user,
-    tickets: state.admin.tickets
+    tickets: state.admin.tickets,
+    LoggedInUser: state.auth.user
 });
 
 

@@ -17,7 +17,7 @@ const DeleteFromReadingList = ({
             <p>Are you sure you want to delete this book from your reading list?</p>
             <div>
                 <button className="btn btn-success mr-3" onClick={()=>{
-                    deleteBookFromReadingList(user._id, book.googleBookId)
+                    deleteBookFromReadingList(user._id, book.id)
                     cancelDelete()
                 }}>Confirm</button>
                 <button className="btn btn-danger" onClick={()=>cancelDelete()}>Cancel</button>
