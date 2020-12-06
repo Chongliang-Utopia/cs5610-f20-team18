@@ -93,7 +93,7 @@ export const deletePosting = (book) => (dispatch)=>{
 
 export const updatePosting = (posting) => (dispatch) => {
     return bookService.updateBook(posting._id, posting)
-        .then(() => {
+        .then(()=> {
             dispatch({
                 type: UPDATE_POSTING,
                 posting
