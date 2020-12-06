@@ -11,7 +11,8 @@ import {
     fetchUserBorrowings,
     fetchUserLendings,
     fetchFollowers,
-    fetchFollowings
+    fetchFollowings,
+    authenticate
 } from "../../actions/profileActions";
 import UserActions from "../../actions/userActions";
 
@@ -47,6 +48,7 @@ class UserProfile extends React.Component {
             this.props.fetchFollowers(uid)
             this.props.getReadingListForUser(uid)
             this.props.switchSection(section)
+            this.props.authenticate(uid, this.props.user, this.props.isLoggedIn)
             }
     }
 
@@ -67,6 +69,8 @@ class UserProfile extends React.Component {
 
 const stateToPropertyMapper = (state) => ({
     authenticated: state.profile.authenticated,
+    user: state.auth.user,
+    isLoggedIn: state.auth.isLoggedIn
 })
 
 export default connect(stateToPropertyMapper,
@@ -80,5 +84,6 @@ export default connect(stateToPropertyMapper,
         switchSection,
         fetchFollowers,
         fetchFollowings,
-        getReadingListForUser
+        getReadingListForUser,
+        authenticate
     })(UserProfile)

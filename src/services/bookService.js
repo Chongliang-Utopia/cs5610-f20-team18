@@ -35,6 +35,8 @@ const getAllBooksForUser = (userId) =>
     axios.get(`${API_URL}/users/${userId}/books`, {headers: authHeader()})
         .then(response=>response.data? response.data: []);
 
+const getBookByGoogleId = (googleBookId) =>
+    axios.get(`${API_URL}/${googleBookId}/books`).then(response=>response.data? response.data: [])
 
 export default {
     searchBooks,
@@ -44,6 +46,7 @@ export default {
     postBook,
     getAllBooksForUser,
     findAllBorrowingOptions,
-    submitBorrowingRequest
+    submitBorrowingRequest,
+    getBookByGoogleId
 }
 
