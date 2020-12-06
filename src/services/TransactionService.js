@@ -9,8 +9,8 @@ class TransactionService{
         return axios.post(API_TRANSACTION_URL, borrowRequest, {headers: authHeader()})
     }
 
-    declineBorrowRequest(transactionId) {
-        return axios.put(`${API_TRANSACTION_URL}/${transactionId}/decline`, {headers: authHeader()})
+    declineBorrowRequest(transactionId, transaction) {
+        return axios.put(`${API_TRANSACTION_URL}/${transactionId}/decline`, transaction, {headers: authHeader()})
     }
 
     deleteBorrowRequest(transactionId) {
@@ -31,12 +31,12 @@ class TransactionService{
             ))
     }
 
-    acceptBorrowRequest(transactionId) {
-        return axios.put(`${API_TRANSACTION_URL}/${transactionId}/accept`, {headers: authHeader()})
+    acceptBorrowRequest(transactionId, transaction) {
+        return axios.put(`${API_TRANSACTION_URL}/${transactionId}/accept`, transaction, {headers: authHeader()})
     }
 
-    returnBook(transactionId) {
-        return axios.put(`${API_TRANSACTION_URL}/${transactionId}/return`, {headers: authHeader()})
+    returnBook(transactionId, transaction) {
+        return axios.put(`${API_TRANSACTION_URL}/${transactionId}/return`, transaction, {headers: authHeader()})
     }
 }
 

@@ -14,7 +14,7 @@ import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import {Tooltip} from "react-bootstrap";
 import {connect} from "react-redux";
-import {updatePosting, approveTransaction, declineTransaction} from "../../../actions/profileActions";
+import {updatePosting, approveTransaction, declineTransaction, deletePosting} from "../../../actions/profileActions";
 
 
 class LendingComponent extends React.Component {
@@ -29,7 +29,7 @@ class LendingComponent extends React.Component {
         reviewBeingEdited: {}
     }
 
-    deletePosting = (book) => {
+    deleteBook = (book) => {
         this.setState({
             deleting: true,
             bookBeingEdited: book
@@ -108,6 +108,7 @@ class LendingComponent extends React.Component {
                         <DeletePosting
                             book={this.state.bookBeingEdited}
                             cancelDelete={this.cancelDelete}
+                            deletePosting={this.props.deletePosting}
                         />
                     </Modal>
                     <Modal show={this.state.editing} modalClosed={this.cancelEdit}>
@@ -139,7 +140,7 @@ class LendingComponent extends React.Component {
                                 <div className="center-text">{book.title}</div>
                                 <div className="center-text">
                                     <RiEdit2Line size={"1.5em"} onClick={() => this.editPosting(book)}/>
-                                    <MdDeleteSweep size={"1.5em"} onClick={() => this.deletePosting(book)}/>
+                                    <MdDeleteSweep size={"1.5em"} onClick={() => this.deleteBook(book)}/>
                                 </div>
                             </div>
                         )
@@ -314,4 +315,4 @@ const stateToPropertyMapper = (state) => ({
 })
 
 
-export default connect(stateToPropertyMapper, {updatePosting, approveTransaction, declineTransaction})(LendingComponent)
+export default connect(stateToPropertyMapper, {updatePosting, approveTransaction, declineTransaction, deletePosting})(LendingComponent)
