@@ -29,6 +29,7 @@ class BorrowingComponent extends React.Component {
         })
     }
     render(){
+        console.log(this.props.UserBorrowings)
         return (
             <div>
                 <Modal show={this.state.editReview}>
@@ -152,7 +153,7 @@ class BorrowingComponent extends React.Component {
                                               className="mr-1">{borrowing.lender.username}</Link>
                                     </td>
                                     <td>
-                                        <Rating initialRating={borrowing.borrowerReview===undefined?0:borrowing.borrowerReview.rating} readonly
+                                        <Rating initialRating={borrowing.borrowerReview == null? 0:borrowing.borrowerReview.rating} readonly
                                                 emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                                 fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                     </td>
@@ -164,12 +165,12 @@ class BorrowingComponent extends React.Component {
                                     </td>
                                     <td>
                                         {
-                                            borrowing.borrowerReview === undefined &&
+                                            borrowing.borrowerReview == null &&
                                             <button className="btn btn-sm btn-info m-1 float-right" onClick={()=>this.editReview(borrowing)}>
                                                 Edit Review</button>
                                         }
                                         {
-                                            borrowing.borrowerReview !== undefined &&
+                                            borrowing.borrowerReview != null &&
                                             <span>{borrowing.borrowerReview.comments}</span>
                                         }
                                     </td>
