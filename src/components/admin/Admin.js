@@ -7,7 +7,7 @@ import UserTicketsComponent from "./Components/UserTicketsComponent";
 import classes from "./admin.module.css";
 import {BsCaretRightFill} from "react-icons/bs";
 import {connect} from "react-redux";
-import {switchSections,fetchAdminUser, fetchAllUsers, fetchUserTickets} from "../../actions/adminActions";
+import {switchSections,fetchAdminUser, fetchAllUsers, fetchUserTickets, fetchAllPostings} from "../../actions/adminActions";
 import AllBookPostings from "./Components/AllBookPostingsComponent";
 
 class Admin extends React.Component{
@@ -22,13 +22,16 @@ class Admin extends React.Component{
         // this.props.fetchTicketNumber()
 
         //TODO: fetch admin user object
-        // this.props.fetchAdminUser()
+        this.props.fetchAdminUser(this.props.currentUser)
 
         //TODO: fetch user tickets
-        // this.props.fetchUserTickets()
+        this.props.fetchUserTickets()
 
         //TODO: fetch all users
-        // this.props.fetchAllUsers()
+        this.props.fetchAllUsers()
+
+        //TODO: fetch all books
+        this.props.fetchAllPostings()
 
     }
 
@@ -46,18 +49,19 @@ class Admin extends React.Component{
             }
             if (section === "settings") {
                 //TODO: fetch admin user object
-                // this.props.fetchAdminUser()
+                this.props.fetchAdminUser(this.props.currentUser)
             }
             if (section === "tickets") {
                 //TODO: fetch user tickets
-                // this.props.fetchUserTickets()
+                this.props.fetchUserTickets()
             }
             if (section === "users") {
                 //TODO: fetch all users
-                // this.props.fetchAllUsers()
+                this.props.fetchAllUsers()
             }
             if (section === "postings") {
                 // TODO: fetch all book
+                this.props.fetchAllPostings()
             }
         }
 
@@ -146,11 +150,10 @@ class Admin extends React.Component{
 }
 
 const stateToPropertyMapper = (state) => ({
-    section: state.admin.section
+    section: state.admin.section,
+    currentUser: state.auth.user
 })
-
-
 
 export default connect (
     stateToPropertyMapper,
-    {switchSections, fetchAdminUser, fetchAllUsers, fetchUserTickets})(Admin);
+    {switchSections, fetchAdminUser, fetchAllUsers, fetchUserTickets, fetchAllPostings})(Admin);

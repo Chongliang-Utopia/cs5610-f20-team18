@@ -4,6 +4,12 @@ import authHeader from './AuthHeader';
 const API_URL = 'http://localhost:8080/api/users';
 
 class UserService {
+    findAllUsers() {
+        return axios.get(`${API_URL}`, {headers: authHeader()})
+            .then((response) => {
+                return response.data;
+            });
+    }
 
     findUserById(userId) {
         return axios.get(`${API_URL}/${userId}`, {headers: authHeader()})

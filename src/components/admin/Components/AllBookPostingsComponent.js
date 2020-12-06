@@ -9,6 +9,7 @@ import {BsTrash} from "react-icons/bs"
 import DeletePosting from "../../Profile/Components/DeletePosting";
 import {deletePosting} from "../../../actions/adminActions";
 import Modal from "../../UI/modal/Modal";
+import ReactHtmlParser from "react-html-parser";
 
 class AllBookPostings extends React.Component{
     state = {
@@ -74,7 +75,7 @@ class AllBookPostings extends React.Component{
                                         }
                                     </td>
                                     <td>
-                                        {book.description}
+                                        {ReactHtmlParser(book.description)}
                                     </td>
                                     <td>
                                         <Button variant="warning" size="sm" className="transparent" title="Report"
