@@ -12,6 +12,7 @@ import {
     fetchUserLendings,
     fetchFollowers,
     fetchFollowings,
+    fetchLoggedInUserFollowings,
     authenticate
 } from "../../actions/profileActions";
 import UserActions from "../../actions/userActions";
@@ -32,13 +33,20 @@ class UserProfile extends React.Component {
             this.props.fetchFollowings(uid)
             this.props.fetchFollowers(uid)
             this.props.getReadingListForUser(uid)
-        } else {
+        } else if (this.props.isLoggedIn && uid !== this.props.loggedInUser._id) {
+            this.props.fetchLoggedInUserFollowings(this.props.loggedInUser._id)
             this.props.fetchBookPostingsForUser(uid)
             this.props.fetchReviewsUserReceived(uid)
             this.props.fetchReviewsUserGave(uid)
             this.props.fetchFollowings(uid)
             this.props.fetchFollowers(uid)
-        }
+        } else {
+                this.props.fetchBookPostingsForUser(uid)
+                this.props.fetchReviewsUserReceived(uid)
+                this.props.fetchReviewsUserGave(uid)
+                this.props.fetchFollowings(uid)
+                this.props.fetchFollowers(uid)
+            }
         this.props.switchSection(section)
     }
 
@@ -57,6 +65,13 @@ class UserProfile extends React.Component {
                 this.props.fetchFollowings(uid)
                 this.props.fetchFollowers(uid)
                 this.props.getReadingListForUser(uid)
+            } else if (this.props.isLoggedIn && uid !== this.props.loggedInUser._id) {
+                this.props.fetchLoggedInUserFollowings(this.props.loggedInUser._id)
+                this.props.fetchBookPostingsForUser(uid)
+                this.props.fetchReviewsUserReceived(uid)
+                this.props.fetchReviewsUserGave(uid)
+                this.props.fetchFollowings(uid)
+                this.props.fetchFollowers(uid)
             } else {
                 this.props.fetchBookPostingsForUser(uid)
                 this.props.fetchReviewsUserReceived(uid)
@@ -101,6 +116,7 @@ export default connect(stateToPropertyMapper,
         switchSection,
         fetchFollowers,
         fetchFollowings,
+        fetchLoggedInUserFollowings,
         getReadingListForUser,
-        authenticate
+        authenticate,
     })(UserProfile)

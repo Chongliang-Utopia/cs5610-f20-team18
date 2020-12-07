@@ -23,7 +23,15 @@ import {
     FETCH_ALLUSERLENDINGS,
     FETCH_REVIEWSUSERRECEIVED,
     FETCH_REVIEWSUSERGAVE,
-    FETCH_USERFOLLOWINGS, FETCH_USERFOLLOWERS, FETCH_USERREADINGLIST, AUTHENTICATE
+    FETCH_USERFOLLOWINGS,
+    FETCH_USERFOLLOWERS,
+    FETCH_USERREADINGLIST,
+    AUTHENTICATE,
+    FETCH_LOGGEDINUSERFOLLOWERS,
+    FETCH_LOGGEDINUSERFOLLOWINGS,
+    ADD_TO_LOGGEDINUSERFOLLOWINGS,
+    DELETE_FROM_LOGGEDINUSERFOLLOWINGS,
+    CREATE_USERFOLLOWING, DELETE_USERFOLLOWING, CREATE_USERFOLLOWER, DELETE_USERFOLLOWER
 
 } from "./types";
 import ReportService from "../services/ReportService";
@@ -188,26 +196,59 @@ export const finishTransaction = (transaction) => (dispatch) =>{
 }
 
 // Following
-export const createFollow = (following_id, uid, following_body) => (dispatch) => {
+export const createUserFollowing = (following_id, uid, following_body) => (dispatch) => {
     return FollowService.createFollow(uid, following_id)
         .then(status=>{
             dispatch({
-                type: CREATE_FOLLOW,
+                type: CREATE_USERFOLLOWING,
                 following_body
             })
         })
 }
 
-export const deleteFollow = (uid, fid) => (dispatch) => {
+export const deleteUserFollowing = (uid, fid) => (dispatch) => {
     return FollowService.unfollow(uid, fid)
         .then(status=>{
             dispatch({
-                type: DELETE_FOLLOW,
-                fid: fid
+                type: DELETE_USERFOLLOWING,
+                following_id: fid
             })
         })
 }
 
+export const createUserFollower = (following_id, uid, follower_body) => (dispatch) => {
+    return FollowService.createFollow(uid, following_id)
+        .then(status=>{
+            dispatch({
+                type: CREATE_USERFOLLOWER,
+                follower_body
+            })
+        })
+}
+
+export const deleteUserFollower = (uid, fid) => (dispatch) => {
+    return FollowService.unfollow(uid, fid)
+        .then(status=>{
+            dispatch({
+                type: DELETE_USERFOLLOWER,
+                follower_id: uid
+            })
+        })
+}
+
+export const addToLoggedInUserFollowings = (following) => (dispatch) => {
+    dispatch({
+        type: ADD_TO_LOGGEDINUSERFOLLOWINGS,
+        following
+    })
+}
+
+export const deleteFromLoggedInUserFollowings = (following) => (dispatch) => {
+    dispatch({
+        type: DELETE_FROM_LOGGEDINUSERFOLLOWINGS,
+        following
+    })
+}
 // Account Setting
 // export const updateUserInfo = (user) => {
 //     return {
@@ -242,21 +283,6 @@ export const getReadingListForUser = (uid) => (dispatch) => {
                             book
                 }))
         }})
-}
-
-export const populateReadingListBooks = (readingList) => (dispatch) => {
-
-    let readingListBooks = []
-    for (let id of readingList){
-        bookService.findBookById(id)
-            .then(book=>
-                readingListBooks.push(book)
-        )
-    }
-    dispatch({
-        type: ADD_BOOK,
-        readingListBooks
-    })
 }
 
 //All FETCHES
@@ -332,6 +358,16 @@ export const fetchFollowers = (uid) => (dispatch) => {
             dispatch({
                 type: FETCH_USERFOLLOWERS,
                 followers
+            })
+        })
+}
+
+export const fetchLoggedInUserFollowings = (uid) => (dispatch) => {
+    return FollowService.getAllFollowings(uid)
+        .then(followings=>{
+            dispatch({
+                type: FETCH_LOGGEDINUSERFOLLOWINGS,
+                followings
             })
         })
 }

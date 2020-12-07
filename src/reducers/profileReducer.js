@@ -24,7 +24,15 @@ import {
     FETCH_USERFOLLOWINGS,
     FETCH_USERFOLLOWERS,
     FETCH_USERREADINGLIST,
-    AUTHENTICATE
+    AUTHENTICATE,
+    FETCH_LOGGEDINUSERFOLLOWERS,
+    FETCH_LOGGEDINUSERFOLLOWINGS,
+    ADD_TO_LOGGEDINUSERFOLLOWINGS,
+    DELETE_FROM_LOGGEDINUSERFOLLOWINGS,
+    CREATE_USERFOLLOWING,
+    DELETE_USERFOLLOWING,
+    CREATE_USERFOLLOWER,
+    DELETE_USERFOLLOWER
 } from "../actions/types";
 import {
     ADD_TO_READING_LIST,
@@ -601,6 +609,7 @@ const INTIAL_STATE = {
             "username": "c"
         }
     ],
+    LoggedInUserFollowings: [],
     UserFollowers:
     [
         {
@@ -764,18 +773,27 @@ const profileReducer = (state = INTIAL_STATE, action) => {
                 UserBorrowings: state.UserBorrowings.map(borrowing=>borrowing._id === action.transaction._id ? action.transaction: borrowing)
             }
         //FOLLOW
-        case DELETE_FOLLOW:
+        case CREATE_USERFOLLOWING:
             return {
                 ...state,
-                UserFollowings: state.UserFollowings.filter(follow=>follow._id !== action.fid)
+                UserFollowings: state.UserFollowings.find(follow=>follow._id===action.following_body._id)===undefined?
+                    [...state.UserFollowings, action.following_body]: state.UserFollowings
             }
-        case CREATE_FOLLOW:
+        case DELETE_USERFOLLOWING:
             return {
                 ...state,
-                UserFollowings: [
-                    ...state.UserFollowings,
-                    action.following_body
-                ]
+                UserFollowings: state.UserFollowings.filter(follow=>follow._id !== action.following_id)
+            }
+        case CREATE_USERFOLLOWER:
+            return {
+                ...state,
+                UserFollowers: state.UserFollowers.find(follow=>follow._id===action.follower_body._id)===undefined?
+                    [...state.UserFollowers, action.follower_body]: state.UserFollowers
+            }
+        case DELETE_USERFOLLOWER:
+            return {
+                ...state,
+                UserFollowers: state.UserFollowers.filter(follow=>follow._id !== action.follower_id)
             }
         case FETCH_USERFOLLOWINGS:
             return {
@@ -786,6 +804,23 @@ const profileReducer = (state = INTIAL_STATE, action) => {
             return {
                 ...state,
                 UserFollowers: action.followers
+            }
+        case FETCH_LOGGEDINUSERFOLLOWINGS:
+            return {
+                ...state,
+                LoggedInUserFollowings: action.followings
+            }
+        case ADD_TO_LOGGEDINUSERFOLLOWINGS:
+            return {
+                ...state,
+                LoggedInUserFollowings:
+                    state.LoggedInUserFollowings.find(following=>following._id===action.following._id) === undefined?
+                    [...state.LoggedInUserFollowings,action.following]: state.LoggedInUserFollowings
+            }
+        case DELETE_FROM_LOGGEDINUSERFOLLOWINGS:
+            return {
+                ...state,
+                LoggedInUserFollowings: state.LoggedInUserFollowings.filter(following=>following._id !== action.following._id)
             }
         // ACCOUNT SETTING
         case UPDATE_USER:

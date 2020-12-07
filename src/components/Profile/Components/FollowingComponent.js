@@ -5,14 +5,14 @@ import {Link} from "react-router-dom";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import Rating from "react-rating";
 import {connect} from "react-redux";
-import {createFollow, deleteFollow} from "../../../actions/profileActions";
+import {createUserFollowing, deleteUserFollowing} from "../../../actions/profileActions";
 
 const FollowingComponent = ({
     user,
     UserFollowings,
     UserFollowers,
-    createFollow,
-    deleteFollow
+    createUserFollowing,
+    deleteUserFollowing
                             }) =>
     <div>
         <h2>
@@ -34,7 +34,7 @@ const FollowingComponent = ({
                                     emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                     fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                         </span>
-                        <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow" onClick={()=>deleteFollow(user._id, follow._id)}>Following</button>
+                        <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow" onClick={()=>deleteUserFollowing(user._id, follow._id)}>Following</button>
                     </ListGroup.Item>)
             }
 
@@ -65,7 +65,7 @@ const FollowingComponent = ({
                             UserFollowings.find(f=>f._id===follow._id) === undefined &&
                             <button className="pull-right btn btn-primary btn-sm" title="follow"
                                     onClick={()=>
-                                        createFollow(
+                                        createUserFollowing(
                                         follow._id,
                                         user._id,
                                         follow)}
@@ -74,7 +74,7 @@ const FollowingComponent = ({
                         {
                             UserFollowings.find(f=>f._id===follow._id) !== undefined &&
                             <button className="pull-right btn btn-sm btn-outline-secondary" title="unfollow"
-                                    onClick={()=>deleteFollow(user._id, follow._id)}>Following</button>
+                                    onClick={()=>deleteUserFollowing(user._id, follow._id)}>Following</button>
 
                         }
                     </ListGroup.Item>)
@@ -88,4 +88,4 @@ const stateToPropertyMapper = (state) => ({
     user: state.profile.user
 })
 
-export default connect(stateToPropertyMapper, {createFollow, deleteFollow})(FollowingComponent)
+export default connect(stateToPropertyMapper, {createUserFollowing, deleteUserFollowing})(FollowingComponent)
