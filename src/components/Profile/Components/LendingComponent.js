@@ -136,10 +136,24 @@ class LendingComponent extends React.Component {
                     {
                         this.props.bookPostings.filter(book=>book.isActive).map(book =>
                             <div className="ImageCard">
-                                <ImageCard src={book.picture}/>
-                                <div className="center-text">
-                                    <Link to={`/books/${book.googleBookId}`} className="mr-1">{book.title}</Link>
-                                </div>
+                                <Link title={book.title}
+                                      to={`/books/${book.googleBookId}`}>
+                                    <ImageCard
+                                        src={book.picture? book.picture:
+                                            "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg"}
+                                        alt={book.title} />
+                                    <div className="center-text">
+                                        {
+                                            book.title.length > 15 && book.title.substring(0, 15)
+                                        }
+                                        {
+                                            book.title.length > 15 && "..."
+                                        }
+                                        {
+                                            book.title.length <= 15 && book.title
+                                        }
+                                    </div>
+                                </Link>
                                 <div className="center-text">
                                     <RiEdit2Line size={"1.5em"} onClick={() => this.editPosting(book)}/>
                                     <MdDeleteSweep size={"1.5em"} onClick={() => this.deleteBook(book)}/>
