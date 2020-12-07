@@ -34,7 +34,7 @@ const FollowingComponent = ({
                                     emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                     fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                         </span>
-                        <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow" onClick={()=>deleteUserFollowing(user._id, follow._id)}>Following</button>
+                        <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow" onClick={()=>deleteUserFollowing(user._id, follow._id)}>Unfollow</button>
                     </ListGroup.Item>)
             }
 
@@ -74,7 +74,7 @@ const FollowingComponent = ({
                         {
                             UserFollowings.find(f=>f._id===follow._id) !== undefined &&
                             <button className="pull-right btn btn-sm btn-outline-secondary" title="unfollow"
-                                    onClick={()=>deleteUserFollowing(user._id, follow._id)}>Following</button>
+                                    onClick={()=>deleteUserFollowing(user._id, follow._id)}>Unfollow</button>
 
                         }
                     </ListGroup.Item>)

@@ -55,17 +55,18 @@ class ProfileLandingPageComponent extends React.Component {
                 <div className="mb-5">
                     <h2>My activity at a glance</h2>
                     <br/>
-                    <CardDeck>
-                        <Card style={{width: '10rem'}} className="center-text" bg={"light"}>
-                            <Card.Body>
-                                <Card.Title>Active Postings</Card.Title>
 
-                            </Card.Body>
-                            <Card.Footer style={{"background": "none", "border-top": "none"}}>
-                                <br/>
-                                <Link
-                                    to={`/users/${this.props.user._id}/profile/lendings`}>{this.props.bookPostings.filter(posting => posting.isActive).length}</Link>
-                            </Card.Footer>
+                    <CardDeck>
+                        <Card className="center-text" bg={"light"} style={{width: '10rem'}}>
+                            <Link to={`/users/${this.props.user._id}/profile/lendings`}>
+                                <Card.Body>
+                                    <Card.Title>Active Postings</Card.Title>
+                                </Card.Body>
+                                <Card.Footer style={{"background": "none", "borderTop": "none"}}>
+                                    <br/>
+                                    {this.props.bookPostings.filter(posting => posting.isActive).length}
+                                </Card.Footer>
+                            </Link>
                         </Card>
                         {/*<Card style={{ width: '10rem' }} className="center-text" bg={"light"}>*/}
                         {/*    <Card.Body>*/}
@@ -76,26 +77,30 @@ class ProfileLandingPageComponent extends React.Component {
                         {/*    </Card.Body>*/}
                         {/*</Card>*/}
                         <Card style={{width: '10rem'}} className="center-text" bg={"light"}>
-                            <Card.Body>
-                                <Card.Title>Following</Card.Title>
-                            </Card.Body>
-                            <Card.Footer style={{"background": "none", "border-top": "none"}}>
-                                <br/>
-                                <Link to={`/users/${this.props.user._id}/profile/followings`}>{this.props.UserFollowings.length}</Link>
-                            </Card.Footer>
+                            <Link
+                                to={`/users/${this.props.user._id}/profile/followings`}>
+                                <Card.Body>
+                                    <Card.Title>Following</Card.Title>
+                                </Card.Body>
+                                <Card.Footer style={{"background": "none", "borderTop": "none"}}>
+                                    <br/>
+                                    {this.props.UserFollowings.length}
+                                </Card.Footer>
+                            </Link>
                         </Card>
                     </CardDeck>
                     <br/>
                     <CardDeck>
                         <Card style={{width: '10rem'}} className="center-text" bg={"light"}>
-                            <Card.Body>
-                                <Card.Title>Active Borrowings</Card.Title>
-                            </Card.Body>
-                            <Card.Footer style={{"background": "none", "border-top": "none"}}>
-                                <br/>
-                                <Link to={`/users/${this.props.user._id}/profile/borrowings`}>
-                                    {this.props.UserBorrowings.filter(borrrowing => borrrowing.status === "APPROVED").length}</Link>
-                            </Card.Footer>
+                            <Link to={`/users/${this.props.user._id}/profile/borrowings`}>
+                                <Card.Body>
+                                    <Card.Title>Active Borrowings</Card.Title>
+                                </Card.Body>
+                                <Card.Footer style={{"background": "none", "borderTop": "none"}}>
+                                    <br/>
+                                    {this.props.UserBorrowings.filter(borrrowing => borrrowing.status === "APPROVED").length}
+                                </Card.Footer>
+                            </Link>
                         </Card>
                         {/*<Card style={{ width: '10rem' }} className="center-text" bg={"light"}>*/}
                         {/*    <Card.Body>*/}
@@ -107,13 +112,16 @@ class ProfileLandingPageComponent extends React.Component {
                         {/*</Card>*/}
 
                         <Card style={{width: '10rem'}} className="center-text" bg={"light"}>
-                            <Card.Body>
-                                <Card.Title>Follower</Card.Title>
-                            </Card.Body>
-                            <Card.Footer style={{"background": "none", "border-top": "none"}}>
-                                <br/>
-                                <Link to={`/users/${this.props.user._id}/profile/followings`}>{this.props.UserFollowers.length}</Link>
-                            </Card.Footer>
+                            <Link
+                                to={`/users/${this.props.user._id}/profile/followings`}>
+                                <Card.Body>
+                                    <Card.Title>Follower</Card.Title>
+                                </Card.Body>
+                                <Card.Footer style={{"background": "none", "borderTop": "none"}}>
+                                    <br/>
+                                    {this.props.UserFollowers.length}
+                                </Card.Footer>
+                            </Link>
                         </Card>
                     </CardDeck>
                 </div>
@@ -141,7 +149,8 @@ class ProfileLandingPageComponent extends React.Component {
                                                   className="mr-1">{review.reviewer.username}</Link>
                                         </td>
                                         <td>
-                                            <Link to={`/books/${review.book.googleBookId}`} className="mr-1">{review.book.title}</Link>
+                                            <Link to={`/books/${review.book.googleBookId}`}
+                                                  className="mr-1">{review.book.title}</Link>
                                         </td>
                                         <td>
                                             <Rating initialRating={review.rating} readonly
@@ -166,20 +175,20 @@ class ProfileLandingPageComponent extends React.Component {
                 <div className="mb-3">
                     <h2>My Reading list</h2>
                     {
-                        this.props.UserReadingListBooks.length===0 &&
+                        this.props.UserReadingListBooks.length === 0 &&
                         <h5>No active reading list</h5>
                     }
                     {
-                        this.props.UserReadingListBooks.length !==0 &&
+                        this.props.UserReadingListBooks.length !== 0 &&
                         this.props.UserReadingListBooks.map((book, index) =>
                             <div key={index} className="ImageCard m-3">
                                 <Link title={book.volumeInfo.title}
                                       to={`/books/${book.id}`}
                                       className={`${classes2.imageCard}`}>
                                     <ImageCard
-                                        src={book.volumeInfo.imageLinks? book.volumeInfo.imageLinks.thumbnail:
+                                        src={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail :
                                             "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg"}
-                                        alt={book.volumeInfo.title} />
+                                        alt={book.volumeInfo.title}/>
                                     <div className="center-text pt-2">
                                         {
                                             book.volumeInfo.title.length > 15 && book.volumeInfo.title.substring(0, 15)
@@ -193,9 +202,10 @@ class ProfileLandingPageComponent extends React.Component {
                                     </div>
                                 </Link>
                                 <div className="center-text">
-                                    <button className="btn btn-outline-danger border-0 p-0" onClick={() =>{
-                                        this.deleteBook(book)}}>
-                                    <MdDeleteSweep size={"1.5em"}/>
+                                    <button className="btn btn-outline-danger border-0 p-0" onClick={() => {
+                                        this.deleteBook(book)
+                                    }}>
+                                        <MdDeleteSweep size={"1.5em"}/>
                                     </button>
                                 </div>
                             </div>
@@ -209,7 +219,7 @@ class ProfileLandingPageComponent extends React.Component {
 
 const StateToPropertyMapper = (state) => ({
     report: state.profile.report,
-    bookPostings:state.profile.bookPostings,
+    bookPostings: state.profile.bookPostings,
     UserBorrowings: state.profile.UserBorrowings,
     user: state.profile.user,
     reviewsUserReceived: state.profile.reviewsUserReceived,

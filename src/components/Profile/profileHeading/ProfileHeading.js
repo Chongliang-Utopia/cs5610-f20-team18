@@ -64,7 +64,7 @@ const ProfileHeading = ({
                 <div>
                     <ul className="nav">
                         <li className="nav-item">
-                            <Link to="#" className="nav-link"><b>{bookPostings.length}</b> posts</Link>
+                            <span className="nav-link"><b>{bookPostings.length}</b> posts</span>
                         </li>
                         <li className="nav-item">
                             <Link to="#" className="nav-link"><b>{UserFollowers.length}</b> followers</Link>
