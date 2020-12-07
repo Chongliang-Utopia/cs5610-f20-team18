@@ -181,7 +181,7 @@ class LendingComponent extends React.Component {
                                 lending=>lending.status!=="RETURNED").map(lending =>
                                 <tr>
                                     <td>
-                                        <Link to={`/users/${lending.borrower.username}/profile`}
+                                        <Link to={`/users/${lending.borrower._id}/profile`}
                                               className="mr-1">{lending.borrower.username}</Link>
                                     </td>
                                     <td>
