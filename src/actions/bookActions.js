@@ -7,7 +7,7 @@ import {
     SUBMIT_A_BORROWING_REQUEST,
     UPDATE_BOOK
 } from "./types/bookTypes";
-import BookService from "../services/bookService";
+import BookService from "../services/BookService";
 
 
 class BookActions {
@@ -24,6 +24,7 @@ class BookActions {
                         googleBook.volumeInfo.imageLinks.thumbnail
                         : "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg",
                     author: googleBook.volumeInfo.authors,
+                    publishedDate: googleBook.volumeInfo.publishedDate,
                     description: googleBook.volumeInfo.description,
                     rating: googleBook.volumeInfo.averageRating,
                     numberOfReviews: googleBook.volumeInfo.ratingsCount,
