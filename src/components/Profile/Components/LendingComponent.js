@@ -183,7 +183,7 @@ class LendingComponent extends React.Component {
                                         <span>{lending.borrower.city + ", " + lending.borrower.state}</span>
                                     </td>
                                     <td>
-                                        <Link to={`/books/${lending.book._id}`} className="mr-1">{lending.book.title}</Link>
+                                        <Link to={`/books/${lending.book.googleBookId}`} className="mr-1">{lending.book.title}</Link>
                                     </td>
                                     <td>
                                         {
@@ -249,7 +249,7 @@ class LendingComponent extends React.Component {
                                         <span>{lending.endDate.slice(0, 10)}</span>
                                     </td>
                                     <td>
-                                        <Link to={`/books/${lending.book._id}`} className="mr-1">{lending.book.title}</Link>
+                                        <Link to={`/books/${lending.book.googleBookId}`} className="mr-1">{lending.book.title}</Link>
                                     </td>
                                     <td>
                                         <OverlayTrigger
@@ -296,7 +296,7 @@ class LendingComponent extends React.Component {
                                             <span>{lending.startDate.slice(0, 10)} ~ {lending.endDate.slice(0, 10)}</span>
                                         </td>
                                         <td>
-                                            <Link to={`/books/${lending.book._id}`} className="mr-1">{lending.book.title}</Link>
+                                            <Link to={`/books/${lending.book.googleBookId}`} className="mr-1">{lending.book.title}</Link>
                                         </td>
                                         <td>
                                             <span>{lending.lenderReview == null? "": lending.lenderReview.comments}</span>
