@@ -44,588 +44,587 @@ import {LOGOUT} from "../actions/types/authTypes";
 
 const INTIAL_STATE = {
     user:  {
-        "rating": 3,
-        "numOfReviews": 0,
-        "_id": "5fc82fd8afbc1294a5503741",
-        "city": "SF",
-        "profilePicture": "url",
-        "signature": "hello",
-        "state": "CA",
-        "username": "a",
-        "email": "a@bbc.com",
-        "password": "afdsafdsffa"
+        // "rating": 3,
+        // "numOfReviews": 0,
+        // "_id": "5fc82fd8afbc1294a5503741",
+        // "city": "SF",
+        // "profilePicture": "url",
+        // "signature": "hello",
+        // "state": "CA",
+        // "username": "a",
+        // "email": "a@bbc.com",
+        // "password": "afdsafdsffa"
     },
     authenticated: true,
     section: "",
     report: false,
     selectedReview: {},
     bookPostings: [
-        {
-            "isAvailable": true,
-            "author": [
-                "Margaret Atwood"
-            ],
-            "isActive": true,
-            "_id": "5fc3f66b91b3aa84d9e9f9e7",
-            "user": "5fc82fd8afbc1294a5503741",
-            "googleBookId": "ECvxEpH7VZYC",
-            "title": "The Handmaid's Tale",
-            "picture": "http://books.google.com/books/content?id=ECvxEpH7VZYC&printsec=frontcover&img=1&zoom=1&edge=curl&imgtk=AFLRE72FajBMJYgCNCTrcL1phfb3TTAS7ZdYkroMZdZH5g9tyP_tBtIzohJOBKnUTv4SL-NEPmQlJEqZp0RUoyaf4LNnoiihNmgnp5klWAO3vnm8UUkrpFP0OiqlyX4GF-XRao_nIi1z&source=gbs_api",
-            "rating": 4,
-            "description": "<b>An instant classic and eerily prescient cultural phenomenon, from “the patron saint of feminist dystopian fiction” (<i>New York Times</i>). Now an award-winning Hulu series starring Elizabeth Moss.</b>",
-            "condition": "LIKE_NEW"
-        }
-        ,
-        {
-            "isAvailable": true,
-            "author": [
-                "J.K. Rowling"
-            ],
-            "isActive": true,
-            "_id": "5fc854687c627f07fd275260",
-            "user": "5fc82fd8afbc1294a5503741",
-            "googleBookId": "f280CwAAQBAJ",
-            "title": "Harry Potter: The Complete Collection (1-7)",
-            "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
-            "rating": 4.5,
-            "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
-            "condition": "ACCEPTABLE",
-        }
-
+        // {
+        //     "isAvailable": true,
+        //     "author": [
+        //         "Margaret Atwood"
+        //     ],
+        //     "isActive": true,
+        //     "_id": "5fc3f66b91b3aa84d9e9f9e7",
+        //     "user": "5fc82fd8afbc1294a5503741",
+        //     "googleBookId": "ECvxEpH7VZYC",
+        //     "title": "The Handmaid's Tale",
+        //     "picture": "http://books.google.com/books/content?id=ECvxEpH7VZYC&printsec=frontcover&img=1&zoom=1&edge=curl&imgtk=AFLRE72FajBMJYgCNCTrcL1phfb3TTAS7ZdYkroMZdZH5g9tyP_tBtIzohJOBKnUTv4SL-NEPmQlJEqZp0RUoyaf4LNnoiihNmgnp5klWAO3vnm8UUkrpFP0OiqlyX4GF-XRao_nIi1z&source=gbs_api",
+        //     "rating": 4,
+        //     "description": "<b>An instant classic and eerily prescient cultural phenomenon, from “the patron saint of feminist dystopian fiction” (<i>New York Times</i>). Now an award-winning Hulu series starring Elizabeth Moss.</b>",
+        //     "condition": "LIKE_NEW"
+        // }
+        // ,
+        // {
+        //     "isAvailable": true,
+        //     "author": [
+        //         "J.K. Rowling"
+        //     ],
+        //     "isActive": true,
+        //     "_id": "5fc854687c627f07fd275260",
+        //     "user": "5fc82fd8afbc1294a5503741",
+        //     "googleBookId": "f280CwAAQBAJ",
+        //     "title": "Harry Potter: The Complete Collection (1-7)",
+        //     "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+        //     "rating": 4.5,
+        //     "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+        //     "condition": "ACCEPTABLE",
+        // }
     ],
     UserBorrowings: [
-        {
-            "lenderReview": "5fc864b1fce6bf0e672cb250",
-            "borrowerReview": {
-                "rating": 4.5,
-                "_id": "5fc860aa00778d0e030fde20",
-                "reviewer": "5fc82fd8afbc1294a5503741",
-                "reviewee": "5fc2da3767a1ea31cc0850b3",
-                "book": "5fc45bebd09b89aa95f9c445",
-                "comments": "This book is great",
-                "reviewerIsLender": false,
-                "createdAt": "2020-12-03T03:51:06.895Z",
-                "updatedAt": "2020-12-03T03:51:06.895Z",
-                "__v": 0
-            },
-            "_id": "1",
-            "lender": {
-                "rating": 4.083333333333333,
-                "_id": "5fc2da3767a1ea31cc0850b3",
-                "username": "fadf",
-                "city": "fdfda",
-                "state": "Arizona"
-            },
-            "borrower": "5fc82fd8afbc1294a5503741",
-            "book": {
-                "isAvailable": true,
-                "author": [
-                    "J.K. Rowling"
-                ],
-                "isActive": true,
-                "_id": "5fc45bebd09b89aa95f9c445",
-                "user": "5fc2da3767a1ea31cc0850b3",
-                "googleBookId": "f280CwAAQBAJ",
-                "title": "Harry Potter: The Complete Collection (1-7)",
-                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
-                "rating": 4.5,
-                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
-                "condition": "ACCEPTABLE",
-                "__v": 0
-            },
-            "startDate": "2020-11-29T00:00:00.000Z",
-            "endDate": "2021-01-29T00:00:00.000Z",
-            "transactionDate": "2020-11-29T00:00:00.000Z",
-            "status": "DECLINED",
-            "__v": 0,
-            "createdAt": "2020-12-03T04:08:17.493Z",
-            "updatedAt": "2020-12-03T03:51:06.895Z",
-        },
-        {
-            "lenderReview": "5fc864b1fce6bf0e672cb250",
-            "borrowerReview": {
-                "rating": 4.5,
-                "_id": "5fc860aa00778d0e030fde20",
-                "reviewer": "5fc82fd8afbc1294a5503741",
-                "reviewee": "5fc2da3767a1ea31cc0850b3",
-                "book": "5fc45bebd09b89aa95f9c445",
-                "comments": "This book is great",
-                "reviewerIsLender": false,
-                "createdAt": "2020-12-03T03:51:06.895Z",
-                "updatedAt": "2020-12-03T03:51:06.895Z",
-                "__v": 0
-            },
-            "_id": "2",
-            "lender": {
-                "rating": 4.083333333333333,
-                "_id": "5fc2da3767a1ea31cc0850b3",
-                "username": "fadf",
-                "city": "fdfda",
-                "state": "Arizona"
-            },
-            "borrower": "5fc82fd8afbc1294a5503741",
-            "book": {
-                "isAvailable": true,
-                "author": [
-                    "J.K. Rowling"
-                ],
-                "isActive": true,
-                "_id": "5fc45bebd09b89aa95f9c445",
-                "user": "5fc2da3767a1ea31cc0850b3",
-                "googleBookId": "f280CwAAQBAJ",
-                "title": "Harry Potter: The Complete Collection (1-7)",
-                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
-                "rating": 4.5,
-                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
-                "condition": "ACCEPTABLE",
-                "__v": 0
-            },
-            "startDate": "2020-11-29T00:00:00.000Z",
-            "endDate": "2021-01-29T00:00:00.000Z",
-            "transactionDate": "2020-11-29T00:00:00.000Z",
-            "status": "PENDING",
-            "__v": 0,
-            "createdAt": "2020-12-03T04:08:17.493Z",
-            "updatedAt": "2020-12-03T03:51:06.895Z",
-        },
-        {
-            "lenderReview": "5fc864b1fce6bf0e672cb250",
-            "borrowerReview": {
-                "rating": 4.5,
-                "_id": "5fc860aa00778d0e030fde20",
-                "reviewer": "5fc82fd8afbc1294a5503741",
-                "reviewee": "5fc2da3767a1ea31cc0850b3",
-                "book": "5fc45bebd09b89aa95f9c445",
-                "comments": "This book is great",
-                "reviewerIsLender": false,
-                "createdAt": "2020-12-03T03:51:06.895Z",
-                "updatedAt": "2020-12-03T03:51:06.895Z",
-                "__v": 0
-            },
-            "_id": "3",
-            "lender": {
-                "rating": 4.083333333333333,
-                "_id": "5fc2da3767a1ea31cc0850b3",
-                "username": "fadf",
-                "city": "fdfda",
-                "state": "Arizona"
-            },
-            "borrower": "5fc82fd8afbc1294a5503741",
-            "book": {
-                "isAvailable": true,
-                "author": [
-                    "J.K. Rowling"
-                ],
-                "isActive": true,
-                "_id": "5fc45bebd09b89aa95f9c445",
-                "user": "5fc2da3767a1ea31cc0850b3",
-                "googleBookId": "f280CwAAQBAJ",
-                "title": "Harry Potter: The Complete Collection (1-7)",
-                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
-                "rating": 4.5,
-                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
-                "condition": "ACCEPTABLE",
-                "__v": 0
-            },
-            "startDate": "2020-11-29T00:00:00.000Z",
-            "endDate": "2021-01-29T00:00:00.000Z",
-            "transactionDate": "2020-11-29T00:00:00.000Z",
-            "status": "APPROVED",
-            "__v": 0,
-            "createdAt": "2020-12-03T04:08:17.493Z",
-            "updatedAt": "2020-12-03T03:51:06.895Z",
-        },
-        {
-            "lenderReview": "5fc864b1fce6bf0e672cb250",
-
-            "_id": "4",
-            "lender": {
-                "rating": 4.083333333333333,
-                "_id": "5fc2da3767a1ea31cc0850b3",
-                "username": "fadf",
-                "city": "fdfda",
-                "state": "Arizona"
-            },
-            "borrower": "5fc82fd8afbc1294a5503741",
-            "book": {
-                "isAvailable": true,
-                "author": [
-                    "J.K. Rowling"
-                ],
-                "isActive": true,
-                "_id": "5fc45bebd09b89aa95f9c445",
-                "user": "5fc2da3767a1ea31cc0850b3",
-                "googleBookId": "f280CwAAQBAJ",
-                "title": "Harry Potter: The Complete Collection (1-7)",
-                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
-                "rating": 4.5,
-                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
-                "condition": "ACCEPTABLE",
-                "__v": 0
-            },
-            "startDate": "2020-11-29T00:00:00.000Z",
-            "endDate": "2021-01-29T00:00:00.000Z",
-            "transactionDate": "2020-11-29T00:00:00.000Z",
-            "status": "RETURNED",
-            "__v": 0,
-            "createdAt": "2020-12-03T04:08:17.493Z",
-            "updatedAt": "2020-12-03T03:51:06.895Z",
-        }
+        // {
+        //     "lenderReview": "5fc864b1fce6bf0e672cb250",
+        //     "borrowerReview": {
+        //         "rating": 4.5,
+        //         "_id": "5fc860aa00778d0e030fde20",
+        //         "reviewer": "5fc82fd8afbc1294a5503741",
+        //         "reviewee": "5fc2da3767a1ea31cc0850b3",
+        //         "book": "5fc45bebd09b89aa95f9c445",
+        //         "comments": "This book is great",
+        //         "reviewerIsLender": false,
+        //         "createdAt": "2020-12-03T03:51:06.895Z",
+        //         "updatedAt": "2020-12-03T03:51:06.895Z",
+        //         "__v": 0
+        //     },
+        //     "_id": "1",
+        //     "lender": {
+        //         "rating": 4.083333333333333,
+        //         "_id": "5fc2da3767a1ea31cc0850b3",
+        //         "username": "fadf",
+        //         "city": "fdfda",
+        //         "state": "Arizona"
+        //     },
+        //     "borrower": "5fc82fd8afbc1294a5503741",
+        //     "book": {
+        //         "isAvailable": true,
+        //         "author": [
+        //             "J.K. Rowling"
+        //         ],
+        //         "isActive": true,
+        //         "_id": "5fc45bebd09b89aa95f9c445",
+        //         "user": "5fc2da3767a1ea31cc0850b3",
+        //         "googleBookId": "f280CwAAQBAJ",
+        //         "title": "Harry Potter: The Complete Collection (1-7)",
+        //         "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+        //         "rating": 4.5,
+        //         "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+        //         "condition": "ACCEPTABLE",
+        //         "__v": 0
+        //     },
+        //     "startDate": "2020-11-29T00:00:00.000Z",
+        //     "endDate": "2021-01-29T00:00:00.000Z",
+        //     "transactionDate": "2020-11-29T00:00:00.000Z",
+        //     "status": "DECLINED",
+        //     "__v": 0,
+        //     "createdAt": "2020-12-03T04:08:17.493Z",
+        //     "updatedAt": "2020-12-03T03:51:06.895Z",
+        // },
+        // {
+        //     "lenderReview": "5fc864b1fce6bf0e672cb250",
+        //     "borrowerReview": {
+        //         "rating": 4.5,
+        //         "_id": "5fc860aa00778d0e030fde20",
+        //         "reviewer": "5fc82fd8afbc1294a5503741",
+        //         "reviewee": "5fc2da3767a1ea31cc0850b3",
+        //         "book": "5fc45bebd09b89aa95f9c445",
+        //         "comments": "This book is great",
+        //         "reviewerIsLender": false,
+        //         "createdAt": "2020-12-03T03:51:06.895Z",
+        //         "updatedAt": "2020-12-03T03:51:06.895Z",
+        //         "__v": 0
+        //     },
+        //     "_id": "2",
+        //     "lender": {
+        //         "rating": 4.083333333333333,
+        //         "_id": "5fc2da3767a1ea31cc0850b3",
+        //         "username": "fadf",
+        //         "city": "fdfda",
+        //         "state": "Arizona"
+        //     },
+        //     "borrower": "5fc82fd8afbc1294a5503741",
+        //     "book": {
+        //         "isAvailable": true,
+        //         "author": [
+        //             "J.K. Rowling"
+        //         ],
+        //         "isActive": true,
+        //         "_id": "5fc45bebd09b89aa95f9c445",
+        //         "user": "5fc2da3767a1ea31cc0850b3",
+        //         "googleBookId": "f280CwAAQBAJ",
+        //         "title": "Harry Potter: The Complete Collection (1-7)",
+        //         "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+        //         "rating": 4.5,
+        //         "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+        //         "condition": "ACCEPTABLE",
+        //         "__v": 0
+        //     },
+        //     "startDate": "2020-11-29T00:00:00.000Z",
+        //     "endDate": "2021-01-29T00:00:00.000Z",
+        //     "transactionDate": "2020-11-29T00:00:00.000Z",
+        //     "status": "PENDING",
+        //     "__v": 0,
+        //     "createdAt": "2020-12-03T04:08:17.493Z",
+        //     "updatedAt": "2020-12-03T03:51:06.895Z",
+        // },
+        // {
+        //     "lenderReview": "5fc864b1fce6bf0e672cb250",
+        //     "borrowerReview": {
+        //         "rating": 4.5,
+        //         "_id": "5fc860aa00778d0e030fde20",
+        //         "reviewer": "5fc82fd8afbc1294a5503741",
+        //         "reviewee": "5fc2da3767a1ea31cc0850b3",
+        //         "book": "5fc45bebd09b89aa95f9c445",
+        //         "comments": "This book is great",
+        //         "reviewerIsLender": false,
+        //         "createdAt": "2020-12-03T03:51:06.895Z",
+        //         "updatedAt": "2020-12-03T03:51:06.895Z",
+        //         "__v": 0
+        //     },
+        //     "_id": "3",
+        //     "lender": {
+        //         "rating": 4.083333333333333,
+        //         "_id": "5fc2da3767a1ea31cc0850b3",
+        //         "username": "fadf",
+        //         "city": "fdfda",
+        //         "state": "Arizona"
+        //     },
+        //     "borrower": "5fc82fd8afbc1294a5503741",
+        //     "book": {
+        //         "isAvailable": true,
+        //         "author": [
+        //             "J.K. Rowling"
+        //         ],
+        //         "isActive": true,
+        //         "_id": "5fc45bebd09b89aa95f9c445",
+        //         "user": "5fc2da3767a1ea31cc0850b3",
+        //         "googleBookId": "f280CwAAQBAJ",
+        //         "title": "Harry Potter: The Complete Collection (1-7)",
+        //         "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+        //         "rating": 4.5,
+        //         "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+        //         "condition": "ACCEPTABLE",
+        //         "__v": 0
+        //     },
+        //     "startDate": "2020-11-29T00:00:00.000Z",
+        //     "endDate": "2021-01-29T00:00:00.000Z",
+        //     "transactionDate": "2020-11-29T00:00:00.000Z",
+        //     "status": "APPROVED",
+        //     "__v": 0,
+        //     "createdAt": "2020-12-03T04:08:17.493Z",
+        //     "updatedAt": "2020-12-03T03:51:06.895Z",
+        // },
+        // {
+        //     "lenderReview": "5fc864b1fce6bf0e672cb250",
+        //
+        //     "_id": "4",
+        //     "lender": {
+        //         "rating": 4.083333333333333,
+        //         "_id": "5fc2da3767a1ea31cc0850b3",
+        //         "username": "fadf",
+        //         "city": "fdfda",
+        //         "state": "Arizona"
+        //     },
+        //     "borrower": "5fc82fd8afbc1294a5503741",
+        //     "book": {
+        //         "isAvailable": true,
+        //         "author": [
+        //             "J.K. Rowling"
+        //         ],
+        //         "isActive": true,
+        //         "_id": "5fc45bebd09b89aa95f9c445",
+        //         "user": "5fc2da3767a1ea31cc0850b3",
+        //         "googleBookId": "f280CwAAQBAJ",
+        //         "title": "Harry Potter: The Complete Collection (1-7)",
+        //         "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+        //         "rating": 4.5,
+        //         "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+        //         "condition": "ACCEPTABLE",
+        //         "__v": 0
+        //     },
+        //     "startDate": "2020-11-29T00:00:00.000Z",
+        //     "endDate": "2021-01-29T00:00:00.000Z",
+        //     "transactionDate": "2020-11-29T00:00:00.000Z",
+        //     "status": "RETURNED",
+        //     "__v": 0,
+        //     "createdAt": "2020-12-03T04:08:17.493Z",
+        //     "updatedAt": "2020-12-03T03:51:06.895Z",
+        // }
     ],
     UserLendings:
     [
-        {
-            "lenderReview": {
-                "rating": 4,
-                "_id": "5fc864b1fce6bf0e672cb250",
-                "reviewer": "5fc82fd8afbc1294a5503741",
-                "reviewee": "5fc2c4cc67a1ea31cc0850af",
-                "book": "5fc45bebd09b89aa95f9c445",
-                "comments": "He kept my book well",
-                "reviewerIsLender": true,
-                "createdAt": "2020-12-03T04:08:17.463Z",
-                "updatedAt": "2020-12-03T04:08:17.463Z",
-                "__v": 0
-            },
-            "borrowerReview": "5fc860aa00778d0e030fde20",
-            "_id": "5",
-            "lender": "5fc82fd8afbc1294a5503741",
-            "borrower": {
-                "rating": 4.25,
-                "_id": "5fc2c4cc67a1ea31cc0850af",
-                "username": "fad",
-                "city": "",
-                "state": ""
-            },
-            "book": {
-                "isAvailable": true,
-                "author": [
-                    "J.K. Rowling"
-                ],
-                "isActive": true,
-                "_id": "5fc45bebd09b89aa95f9c445",
-                "user": "5fc2da3767a1ea31cc0850b3",
-                "googleBookId": "f280CwAAQBAJ",
-                "title": "Harry Potter: The Complete Collection (1-7)",
-                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
-                "rating": 4.5,
-                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
-                "condition": "ACCEPTABLE",
-                "__v": 0
-            },
-            "startDate": "2020-11-29T00:00:00.000Z",
-            "endDate": "2021-01-29T00:00:00.000Z",
-            "transactionDate": "2020-11-29T00:00:00.000Z",
-            "status": "DECLINED",
-            "__v": 0,
-            "createdAt": "2020-12-03T04:08:17.493Z",
-            "updatedAt": "2020-12-03T03:51:06.895Z",
-        },
-        {
-            "lenderReview": {
-                "rating": 4,
-                "_id": "5fc864b1fce6bf0e672cb250",
-                "reviewer": "5fc82fd8afbc1294a5503741",
-                "reviewee": "5fc2c4cc67a1ea31cc0850af",
-                "book": "5fc45bebd09b89aa95f9c445",
-                "comments": "He kept my book well",
-                "reviewerIsLender": true,
-                "createdAt": "2020-12-03T04:08:17.463Z",
-                "updatedAt": "2020-12-03T04:08:17.463Z",
-                "__v": 0
-            },
-            "borrowerReview": "5fc860aa00778d0e030fde20",
-            "_id": "6",
-            "lender": "5fc82fd8afbc1294a5503741",
-            "borrower": {
-                "rating": 4.25,
-                "_id": "5fc2c4cc67a1ea31cc0850af",
-                "username": "fad",
-                "city": "",
-                "state": ""
-            },
-            "book": {
-                "isAvailable": true,
-                "author": [
-                    "J.K. Rowling"
-                ],
-                "isActive": true,
-                "_id": "5fc45bebd09b89aa95f9c445",
-                "user": "5fc2da3767a1ea31cc0850b3",
-                "googleBookId": "f280CwAAQBAJ",
-                "title": "Harry Potter: The Complete Collection (1-7)",
-                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
-                "rating": 4.5,
-                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
-                "condition": "ACCEPTABLE",
-                "__v": 0
-            },
-            "startDate": "2020-11-29T00:00:00.000Z",
-            "endDate": "2021-01-29T00:00:00.000Z",
-            "transactionDate": "2020-11-29T00:00:00.000Z",
-            "status": "PENDING",
-            "__v": 0,
-            "createdAt": "2020-12-03T04:08:17.493Z",
-            "updatedAt": "2020-12-03T03:51:06.895Z",
-        },
-        {
-            "lenderReview": {
-                "rating": 4,
-                "_id": "5fc864b1fce6bf0e672cb250",
-                "reviewer": "5fc82fd8afbc1294a5503741",
-                "reviewee": "5fc2c4cc67a1ea31cc0850af",
-                "book": "5fc45bebd09b89aa95f9c445",
-                "comments": "He kept my book well",
-                "reviewerIsLender": true,
-                "createdAt": "2020-12-03T04:08:17.463Z",
-                "updatedAt": "2020-12-03T04:08:17.463Z",
-                "__v": 0
-            },
-            "borrowerReview": "5fc860aa00778d0e030fde20",
-            "_id": "7",
-            "lender": "5fc82fd8afbc1294a5503741",
-            "borrower": {
-                "rating": 4.25,
-                "_id": "5fc2c4cc67a1ea31cc0850af",
-                "username": "fad",
-                "city": "",
-                "state": ""
-            },
-            "book": {
-                "isAvailable": true,
-                "author": [
-                    "J.K. Rowling"
-                ],
-                "isActive": true,
-                "_id": "5fc45bebd09b89aa95f9c445",
-                "user": "5fc2da3767a1ea31cc0850b3",
-                "googleBookId": "f280CwAAQBAJ",
-                "title": "Harry Potter: The Complete Collection (1-7)",
-                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
-                "rating": 4.5,
-                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
-                "condition": "ACCEPTABLE",
-                "__v": 0
-            },
-            "startDate": "2020-11-29T00:00:00.000Z",
-            "endDate": "2021-01-29T00:00:00.000Z",
-            "transactionDate": "2020-11-29T00:00:00.000Z",
-            "status": "APPROVED",
-            "__v": 0,
-            "createdAt": "2020-12-03T04:08:17.493Z",
-            "updatedAt": "2020-12-03T03:51:06.895Z",
-        },
-        {
-            "lenderReview": {
-                "rating": 4,
-                "_id": "5fc864b1fce6bf0e672cb250",
-                "reviewer": "5fc82fd8afbc1294a5503741",
-                "reviewee": "5fc2c4cc67a1ea31cc0850af",
-                "book": "5fc45bebd09b89aa95f9c445",
-                "comments": "He kept my book well",
-                "reviewerIsLender": true,
-                "createdAt": "2020-12-03T04:08:17.463Z",
-                "updatedAt": "2020-12-03T04:08:17.463Z",
-                "__v": 0
-            },
-            "borrowerReview": "5fc860aa00778d0e030fde20",
-            "_id": "8",
-            "lender": "5fc82fd8afbc1294a5503741",
-            "borrower": {
-                "rating": 4.25,
-                "_id": "5fc2c4cc67a1ea31cc0850af",
-                "username": "fad",
-                "city": "",
-                "state": ""
-            },
-            "book": {
-                "isAvailable": true,
-                "author": [
-                    "J.K. Rowling"
-                ],
-                "isActive": true,
-                "_id": "5fc45bebd09b89aa95f9c445",
-                "user": "5fc2da3767a1ea31cc0850b3",
-                "googleBookId": "f280CwAAQBAJ",
-                "title": "Harry Potter: The Complete Collection (1-7)",
-                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
-                "rating": 4.5,
-                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
-                "condition": "ACCEPTABLE",
-                "__v": 0
-            },
-            "startDate": "2020-11-29T00:00:00.000Z",
-            "endDate": "2021-01-29T00:00:00.000Z",
-            "transactionDate": "2020-11-29T00:00:00.000Z",
-            "status": "RETURNED",
-            "__v": 0,
-            "createdAt": "2020-12-03T04:08:17.493Z",
-            "updatedAt": "2020-12-03T03:51:06.895Z",
-        }
+        // {
+        //     "lenderReview": {
+        //         "rating": 4,
+        //         "_id": "5fc864b1fce6bf0e672cb250",
+        //         "reviewer": "5fc82fd8afbc1294a5503741",
+        //         "reviewee": "5fc2c4cc67a1ea31cc0850af",
+        //         "book": "5fc45bebd09b89aa95f9c445",
+        //         "comments": "He kept my book well",
+        //         "reviewerIsLender": true,
+        //         "createdAt": "2020-12-03T04:08:17.463Z",
+        //         "updatedAt": "2020-12-03T04:08:17.463Z",
+        //         "__v": 0
+        //     },
+        //     "borrowerReview": "5fc860aa00778d0e030fde20",
+        //     "_id": "5",
+        //     "lender": "5fc82fd8afbc1294a5503741",
+        //     "borrower": {
+        //         "rating": 4.25,
+        //         "_id": "5fc2c4cc67a1ea31cc0850af",
+        //         "username": "fad",
+        //         "city": "",
+        //         "state": ""
+        //     },
+        //     "book": {
+        //         "isAvailable": true,
+        //         "author": [
+        //             "J.K. Rowling"
+        //         ],
+        //         "isActive": true,
+        //         "_id": "5fc45bebd09b89aa95f9c445",
+        //         "user": "5fc2da3767a1ea31cc0850b3",
+        //         "googleBookId": "f280CwAAQBAJ",
+        //         "title": "Harry Potter: The Complete Collection (1-7)",
+        //         "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+        //         "rating": 4.5,
+        //         "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+        //         "condition": "ACCEPTABLE",
+        //         "__v": 0
+        //     },
+        //     "startDate": "2020-11-29T00:00:00.000Z",
+        //     "endDate": "2021-01-29T00:00:00.000Z",
+        //     "transactionDate": "2020-11-29T00:00:00.000Z",
+        //     "status": "DECLINED",
+        //     "__v": 0,
+        //     "createdAt": "2020-12-03T04:08:17.493Z",
+        //     "updatedAt": "2020-12-03T03:51:06.895Z",
+        // },
+        // {
+        //     "lenderReview": {
+        //         "rating": 4,
+        //         "_id": "5fc864b1fce6bf0e672cb250",
+        //         "reviewer": "5fc82fd8afbc1294a5503741",
+        //         "reviewee": "5fc2c4cc67a1ea31cc0850af",
+        //         "book": "5fc45bebd09b89aa95f9c445",
+        //         "comments": "He kept my book well",
+        //         "reviewerIsLender": true,
+        //         "createdAt": "2020-12-03T04:08:17.463Z",
+        //         "updatedAt": "2020-12-03T04:08:17.463Z",
+        //         "__v": 0
+        //     },
+        //     "borrowerReview": "5fc860aa00778d0e030fde20",
+        //     "_id": "6",
+        //     "lender": "5fc82fd8afbc1294a5503741",
+        //     "borrower": {
+        //         "rating": 4.25,
+        //         "_id": "5fc2c4cc67a1ea31cc0850af",
+        //         "username": "fad",
+        //         "city": "",
+        //         "state": ""
+        //     },
+        //     "book": {
+        //         "isAvailable": true,
+        //         "author": [
+        //             "J.K. Rowling"
+        //         ],
+        //         "isActive": true,
+        //         "_id": "5fc45bebd09b89aa95f9c445",
+        //         "user": "5fc2da3767a1ea31cc0850b3",
+        //         "googleBookId": "f280CwAAQBAJ",
+        //         "title": "Harry Potter: The Complete Collection (1-7)",
+        //         "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+        //         "rating": 4.5,
+        //         "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+        //         "condition": "ACCEPTABLE",
+        //         "__v": 0
+        //     },
+        //     "startDate": "2020-11-29T00:00:00.000Z",
+        //     "endDate": "2021-01-29T00:00:00.000Z",
+        //     "transactionDate": "2020-11-29T00:00:00.000Z",
+        //     "status": "PENDING",
+        //     "__v": 0,
+        //     "createdAt": "2020-12-03T04:08:17.493Z",
+        //     "updatedAt": "2020-12-03T03:51:06.895Z",
+        // },
+        // {
+        //     "lenderReview": {
+        //         "rating": 4,
+        //         "_id": "5fc864b1fce6bf0e672cb250",
+        //         "reviewer": "5fc82fd8afbc1294a5503741",
+        //         "reviewee": "5fc2c4cc67a1ea31cc0850af",
+        //         "book": "5fc45bebd09b89aa95f9c445",
+        //         "comments": "He kept my book well",
+        //         "reviewerIsLender": true,
+        //         "createdAt": "2020-12-03T04:08:17.463Z",
+        //         "updatedAt": "2020-12-03T04:08:17.463Z",
+        //         "__v": 0
+        //     },
+        //     "borrowerReview": "5fc860aa00778d0e030fde20",
+        //     "_id": "7",
+        //     "lender": "5fc82fd8afbc1294a5503741",
+        //     "borrower": {
+        //         "rating": 4.25,
+        //         "_id": "5fc2c4cc67a1ea31cc0850af",
+        //         "username": "fad",
+        //         "city": "",
+        //         "state": ""
+        //     },
+        //     "book": {
+        //         "isAvailable": true,
+        //         "author": [
+        //             "J.K. Rowling"
+        //         ],
+        //         "isActive": true,
+        //         "_id": "5fc45bebd09b89aa95f9c445",
+        //         "user": "5fc2da3767a1ea31cc0850b3",
+        //         "googleBookId": "f280CwAAQBAJ",
+        //         "title": "Harry Potter: The Complete Collection (1-7)",
+        //         "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+        //         "rating": 4.5,
+        //         "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+        //         "condition": "ACCEPTABLE",
+        //         "__v": 0
+        //     },
+        //     "startDate": "2020-11-29T00:00:00.000Z",
+        //     "endDate": "2021-01-29T00:00:00.000Z",
+        //     "transactionDate": "2020-11-29T00:00:00.000Z",
+        //     "status": "APPROVED",
+        //     "__v": 0,
+        //     "createdAt": "2020-12-03T04:08:17.493Z",
+        //     "updatedAt": "2020-12-03T03:51:06.895Z",
+        // },
+        // {
+        //     "lenderReview": {
+        //         "rating": 4,
+        //         "_id": "5fc864b1fce6bf0e672cb250",
+        //         "reviewer": "5fc82fd8afbc1294a5503741",
+        //         "reviewee": "5fc2c4cc67a1ea31cc0850af",
+        //         "book": "5fc45bebd09b89aa95f9c445",
+        //         "comments": "He kept my book well",
+        //         "reviewerIsLender": true,
+        //         "createdAt": "2020-12-03T04:08:17.463Z",
+        //         "updatedAt": "2020-12-03T04:08:17.463Z",
+        //         "__v": 0
+        //     },
+        //     "borrowerReview": "5fc860aa00778d0e030fde20",
+        //     "_id": "8",
+        //     "lender": "5fc82fd8afbc1294a5503741",
+        //     "borrower": {
+        //         "rating": 4.25,
+        //         "_id": "5fc2c4cc67a1ea31cc0850af",
+        //         "username": "fad",
+        //         "city": "",
+        //         "state": ""
+        //     },
+        //     "book": {
+        //         "isAvailable": true,
+        //         "author": [
+        //             "J.K. Rowling"
+        //         ],
+        //         "isActive": true,
+        //         "_id": "5fc45bebd09b89aa95f9c445",
+        //         "user": "5fc2da3767a1ea31cc0850b3",
+        //         "googleBookId": "f280CwAAQBAJ",
+        //         "title": "Harry Potter: The Complete Collection (1-7)",
+        //         "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+        //         "rating": 4.5,
+        //         "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+        //         "condition": "ACCEPTABLE",
+        //         "__v": 0
+        //     },
+        //     "startDate": "2020-11-29T00:00:00.000Z",
+        //     "endDate": "2021-01-29T00:00:00.000Z",
+        //     "transactionDate": "2020-11-29T00:00:00.000Z",
+        //     "status": "RETURNED",
+        //     "__v": 0,
+        //     "createdAt": "2020-12-03T04:08:17.493Z",
+        //     "updatedAt": "2020-12-03T03:51:06.895Z",
+        // }
     ],
     reviewsUserReceived: [
-        {
-            "rating": 4.5,
-            "_id": "5fc860aa00778d0e030fde20",
-            "reviewer": {
-                "rating": 4.25,
-                "_id": "5fc2c4cc67a1ea31cc0850af",
-                "username": "fad"
-            },
-            "reviewee": "5fc82fd8afbc1294a5503741",
-            "book": {
-                "isAvailable": true,
-                "author": [
-                    "J.K. Rowling"
-                ],
-                "isActive": false,
-                "_id": "5fc45bebd09b89aa95f9c445",
-                "user": "5fc2da3767a1ea31cc0850b3",
-                "googleBookId": "f280CwAAQBAJ",
-                "title": "Harry Potter: The Complete Collection (1-7)",
-                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
-                "rating": 4.5,
-                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
-                "condition": "ACCEPTABLE",
-                "__v": 0
-            },
-            "comments": "This book is great",
-            "reviewerIsLender": false,
-            "createdAt": "2020-12-03T03:51:06.895Z",
-            "updatedAt": "2020-12-03T03:51:06.895Z",
-            "__v": 0
-        },
-        {
-            "rating": 4.5,
-            "_id": "5fc860aa00778d0e030fde20",
-            "reviewer": {
-                "rating": 4.25,
-                "_id": "5fc2c4cc67a1ea31cc0850af",
-                "username": "fad"
-            },
-            "reviewee": "5fc82fd8afbc1294a5503741",
-            "book": {
-                "isAvailable": true,
-                "author": [
-                    "J.K. Rowling"
-                ],
-                "isActive": true,
-                "_id": "5fc45bebd09b89aa95f9c445",
-                "user": "5fc2da3767a1ea31cc0850b3",
-                "googleBookId": "f280CwAAQBAJ",
-                "title": "Harry Potter: The Complete Collection (1-7)",
-                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
-                "rating": 4.5,
-                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
-                "condition": "ACCEPTABLE",
-                "__v": 0
-            },
-            "comments": "This book is great",
-            "reviewerIsLender": true,
-            "createdAt": "2020-12-03T03:51:06.895Z",
-            "updatedAt": "2020-12-03T03:51:06.895Z",
-            "__v": 0
-        },
+        // {
+        //     "rating": 4.5,
+        //     "_id": "5fc860aa00778d0e030fde20",
+        //     "reviewer": {
+        //         "rating": 4.25,
+        //         "_id": "5fc2c4cc67a1ea31cc0850af",
+        //         "username": "fad"
+        //     },
+        //     "reviewee": "5fc82fd8afbc1294a5503741",
+        //     "book": {
+        //         "isAvailable": true,
+        //         "author": [
+        //             "J.K. Rowling"
+        //         ],
+        //         "isActive": false,
+        //         "_id": "5fc45bebd09b89aa95f9c445",
+        //         "user": "5fc2da3767a1ea31cc0850b3",
+        //         "googleBookId": "f280CwAAQBAJ",
+        //         "title": "Harry Potter: The Complete Collection (1-7)",
+        //         "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+        //         "rating": 4.5,
+        //         "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+        //         "condition": "ACCEPTABLE",
+        //         "__v": 0
+        //     },
+        //     "comments": "This book is great",
+        //     "reviewerIsLender": false,
+        //     "createdAt": "2020-12-03T03:51:06.895Z",
+        //     "updatedAt": "2020-12-03T03:51:06.895Z",
+        //     "__v": 0
+        // },
+        // {
+        //     "rating": 4.5,
+        //     "_id": "5fc860aa00778d0e030fde20",
+        //     "reviewer": {
+        //         "rating": 4.25,
+        //         "_id": "5fc2c4cc67a1ea31cc0850af",
+        //         "username": "fad"
+        //     },
+        //     "reviewee": "5fc82fd8afbc1294a5503741",
+        //     "book": {
+        //         "isAvailable": true,
+        //         "author": [
+        //             "J.K. Rowling"
+        //         ],
+        //         "isActive": true,
+        //         "_id": "5fc45bebd09b89aa95f9c445",
+        //         "user": "5fc2da3767a1ea31cc0850b3",
+        //         "googleBookId": "f280CwAAQBAJ",
+        //         "title": "Harry Potter: The Complete Collection (1-7)",
+        //         "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+        //         "rating": 4.5,
+        //         "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+        //         "condition": "ACCEPTABLE",
+        //         "__v": 0
+        //     },
+        //     "comments": "This book is great",
+        //     "reviewerIsLender": true,
+        //     "createdAt": "2020-12-03T03:51:06.895Z",
+        //     "updatedAt": "2020-12-03T03:51:06.895Z",
+        //     "__v": 0
+        // },
     ],
     reviewsUserGave: [
-        {
-            "rating": 4,
-            "_id": "5fc864b1fce6bf0e672cb250",
-            "reviewer": "5fc82fd8afbc1294a5503741",
-            "reviewee": {
-                "rating": 4.25,
-                "_id": "5fc2c4cc67a1ea31cc0850af",
-                "username": "fad"
-            },
-            "book": {
-                "isAvailable": true,
-                "author": [
-                    "J.K. Rowling"
-                ],
-                "isActive": true,
-                "_id": "5fc45bebd09b89aa95f9c445",
-                "user": "5fc2da3767a1ea31cc0850b3",
-                "googleBookId": "f280CwAAQBAJ",
-                "title": "Harry Potter: The Complete Collection (1-7)",
-                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
-                "rating": 4.5,
-                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
-                "condition": "ACCEPTABLE",
-                "__v": 0
-            },
-            "comments": "He kept my book well",
-            "reviewerIsLender": true,
-            "createdAt": "2020-12-03T04:08:17.463Z",
-            "updatedAt": "2020-12-03T04:08:17.463Z",
-            "__v": 0
-        },
-
-        {
-            "rating": 4,
-            "_id": "5fc864b1fce6bf0e672cb250",
-            "reviewer": "5fc82fd8afbc1294a5503741",
-            "reviewee": {
-                "rating": 4.25,
-                "_id": "5fc2c4cc67a1ea31cc0850af",
-                "username": "fad"
-            },
-            "book": {
-                "isAvailable": true,
-                "author": [
-                    "J.K. Rowling"
-                ],
-                "isActive": true,
-                "_id": "5fc45bebd09b89aa95f9c445",
-                "user": "5fc2da3767a1ea31cc0850b3",
-                "googleBookId": "f280CwAAQBAJ",
-                "title": "Harry Potter: The Complete Collection (1-7)",
-                "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
-                "rating": 4.5,
-                "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
-                "condition": "ACCEPTABLE",
-                "__v": 0
-            },
-            "comments": "He kept my book well",
-            "reviewerIsLender": false,
-            "createdAt": "2020-12-03T04:08:17.463Z",
-            "updatedAt": "2020-12-03T04:08:17.463Z",
-            "__v": 0
-        },
+        // {
+        //     "rating": 4,
+        //     "_id": "5fc864b1fce6bf0e672cb250",
+        //     "reviewer": "5fc82fd8afbc1294a5503741",
+        //     "reviewee": {
+        //         "rating": 4.25,
+        //         "_id": "5fc2c4cc67a1ea31cc0850af",
+        //         "username": "fad"
+        //     },
+        //     "book": {
+        //         "isAvailable": true,
+        //         "author": [
+        //             "J.K. Rowling"
+        //         ],
+        //         "isActive": true,
+        //         "_id": "5fc45bebd09b89aa95f9c445",
+        //         "user": "5fc2da3767a1ea31cc0850b3",
+        //         "googleBookId": "f280CwAAQBAJ",
+        //         "title": "Harry Potter: The Complete Collection (1-7)",
+        //         "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+        //         "rating": 4.5,
+        //         "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+        //         "condition": "ACCEPTABLE",
+        //         "__v": 0
+        //     },
+        //     "comments": "He kept my book well",
+        //     "reviewerIsLender": true,
+        //     "createdAt": "2020-12-03T04:08:17.463Z",
+        //     "updatedAt": "2020-12-03T04:08:17.463Z",
+        //     "__v": 0
+        // },
+        //
+        // {
+        //     "rating": 4,
+        //     "_id": "5fc864b1fce6bf0e672cb250",
+        //     "reviewer": "5fc82fd8afbc1294a5503741",
+        //     "reviewee": {
+        //         "rating": 4.25,
+        //         "_id": "5fc2c4cc67a1ea31cc0850af",
+        //         "username": "fad"
+        //     },
+        //     "book": {
+        //         "isAvailable": true,
+        //         "author": [
+        //             "J.K. Rowling"
+        //         ],
+        //         "isActive": true,
+        //         "_id": "5fc45bebd09b89aa95f9c445",
+        //         "user": "5fc2da3767a1ea31cc0850b3",
+        //         "googleBookId": "f280CwAAQBAJ",
+        //         "title": "Harry Potter: The Complete Collection (1-7)",
+        //         "picture": "http://books.google.com/books/content?id=f280CwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71acOWBSMUg424KwYb2VMrlM28WJKS6VrJ0zk-IYm6v9Z4ru4lNMY18O200PEiAO77ieOW5jgyLgrQUgpECeXnKD655JK7ROh0UWnz-Vr9yyOO4mSJJrCuPU7tAEgxT00zJEGbz&source=gbs_api",
+        //         "rating": 4.5,
+        //         "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
+        //         "condition": "ACCEPTABLE",
+        //         "__v": 0
+        //     },
+        //     "comments": "He kept my book well",
+        //     "reviewerIsLender": false,
+        //     "createdAt": "2020-12-03T04:08:17.463Z",
+        //     "updatedAt": "2020-12-03T04:08:17.463Z",
+        //     "__v": 0
+        // },
     ],
     UserFollowings:
     [
-        {
-            "rating": 0,
-            "_id": "5fc832970dd35f96292e58ca",
-            "username": "b",
-            "city": "SF",
-            "profilePicture": "url",
-            "signature": "hello",
-            "state": "CA"
-        },
-        {
-            "rating": 0,
-            "_id": "5fc841544eaaaf974ad6284c",
-            "username": "c"
-        }
+        // {
+        //     "rating": 0,
+        //     "_id": "5fc832970dd35f96292e58ca",
+        //     "username": "b",
+        //     "city": "SF",
+        //     "profilePicture": "url",
+        //     "signature": "hello",
+        //     "state": "CA"
+        // },
+        // {
+        //     "rating": 0,
+        //     "_id": "5fc841544eaaaf974ad6284c",
+        //     "username": "c"
+        // }
     ],
     LoggedInUserFollowings: [],
     UserFollowers:
     [
-        {
-            "rating": 0,
-            "_id": "5fc832970dd35f96292e58ca",
-            "username": "b",
-            "city": "SF",
-            "profilePicture": "url",
-            "signature": "hello",
-            "state": "CA"
-        },
-        {
-            "rating": 0,
-            "_id": "5fc841544eaaaf974ad6284c",
-            "username": "c"
-        }
+        // {
+        //     "rating": 0,
+        //     "_id": "5fc832970dd35f96292e58ca",
+        //     "username": "b",
+        //     "city": "SF",
+        //     "profilePicture": "url",
+        //     "signature": "hello",
+        //     "state": "CA"
+        // },
+        // {
+        //     "rating": 0,
+        //     "_id": "5fc841544eaaaf974ad6284c",
+        //     "username": "c"
+        // }
     ],
     UserReadingList:[
         // "ECvxEpH7VZYC",
