@@ -113,7 +113,7 @@ class BorrowingComponent extends React.Component {
                                               className="mr-1">{borrowing.lender.username}</Link>
                                     </td>
                                     <td>
-                                        <span>{borrowing.borrower.email}</span>
+                                        <span>{borrowing.lender.email}</span>
                                     </td>
                                     <td>
                                         <span>{borrowing.endDate.slice(0, 10)}</span>
