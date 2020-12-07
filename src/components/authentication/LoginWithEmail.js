@@ -112,9 +112,9 @@ class LoginWithEmail extends Component {
                 {/*           onChange={(e) => this.handleChange(e)}/>*/}
                 {/*    <label htmlFor="admin" className={classes.label}>Login as Admin</label>*/}
                 {/*</div>*/}
-                <div className={classes.forgotPassword}>
-                    <Link to="/createpassword">Forgot password?</Link>
-                </div>
+                {/*<div className={classes.forgotPassword}>*/}
+                {/*    <Link to="/createpassword">Forgot password?</Link>*/}
+                {/*</div>*/}
                 <button disabled={loading}
                         className="btn btn-primary btn-block mt-5">
                     {loading && (<span className="spinner-border spinner-border-sm"></span>)}
