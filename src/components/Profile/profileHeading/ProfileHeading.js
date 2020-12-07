@@ -56,13 +56,13 @@ const ProfileHeading = ({
                 <div>
                     <ul className="nav">
                         <li className="nav-item">
-                            <Link to={`/users/${user._id}/profile/lendings`} className="nav-link"><b>{bookPostings.length}</b> posts</Link>
+                            <Link to="#" className="nav-link"><b>{bookPostings.length}</b> posts</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={`/users/${user._id}/profile/followings`} className="nav-link"><b>{UserFollowers.length}</b> followers</Link>
+                            <Link to="#" className="nav-link"><b>{UserFollowers.length}</b> followers</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={`/users/${user._id}/profile/followings`} className="nav-link"><b>{UserFollowings.length}</b> following</Link>
+                            <Link to="#" className="nav-link"><b>{UserFollowings.length}</b> following</Link>
                         </li>
                     </ul>
                 </div>
