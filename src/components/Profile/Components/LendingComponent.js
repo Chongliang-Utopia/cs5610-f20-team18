@@ -102,7 +102,7 @@ class LendingComponent extends React.Component {
             <div>
                 <div className="mb-5">
                     <h2>
-                        Your Postings
+                        My Postings
                     </h2>
                     <Modal show={this.state.deleting} modalClosed={this.cancelDelete}>
                         <DeletePosting
@@ -137,7 +137,9 @@ class LendingComponent extends React.Component {
                         this.props.bookPostings.filter(book=>book.isActive).map(book =>
                             <div className="ImageCard">
                                 <ImageCard src={book.picture}/>
-                                <div className="center-text">{book.title}</div>
+                                <div className="center-text">
+                                    <Link to={`/books/${book.googleBookId}`} className="mr-1">{book.title}</Link>
+                                </div>
                                 <div className="center-text">
                                     <RiEdit2Line size={"1.5em"} onClick={() => this.editPosting(book)}/>
                                     <MdDeleteSweep size={"1.5em"} onClick={() => this.deleteBook(book)}/>
