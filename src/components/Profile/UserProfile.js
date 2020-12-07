@@ -41,12 +41,12 @@ class UserProfile extends React.Component {
             this.props.fetchFollowings(uid)
             this.props.fetchFollowers(uid)
         } else {
-                this.props.fetchBookPostingsForUser(uid)
-                this.props.fetchReviewsUserReceived(uid)
-                this.props.fetchReviewsUserGave(uid)
-                this.props.fetchFollowings(uid)
-                this.props.fetchFollowers(uid)
-            }
+            this.props.fetchBookPostingsForUser(uid)
+            this.props.fetchReviewsUserReceived(uid)
+            this.props.fetchReviewsUserGave(uid)
+            this.props.fetchFollowings(uid)
+            this.props.fetchFollowers(uid)
+        }
         this.props.switchSection(section)
     }
 
@@ -86,13 +86,8 @@ class UserProfile extends React.Component {
     render() {
         return (
             <div className="container">
-                {
-                    this.props.authenticated && <LoggedInProfile/>
-                }
-
-                {
-                    !this.props.authenticated && <PublicProfile/>
-                }
+                {this.props.isLoggedIn && this.props.loggedInUser._id === this.props.match.params.userId?
+                <LoggedInProfile/> : <PublicProfile/>}
             </div>
         )
     }
