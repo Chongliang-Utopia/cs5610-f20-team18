@@ -36,7 +36,7 @@ import {
 } from "./types";
 import ReportService from "../services/ReportService";
 import ReviewService from "../services/ReviewService";
-import bookService from "../services/bookService";
+import bookService from "../services/BookService";
 import TransactionService from "../services/TransactionService";
 import FollowService from "../services/FollowService";
 import UserService from "../services/UserService";

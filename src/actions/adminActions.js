@@ -9,7 +9,7 @@ import {
 
 import ReportService from '../services/ReportService'
 import UserService from '../services/UserService'
-import BookService from '../services/bookService'
+import BookService from '../services/BookService'
 import ReviewService from '../services/ReviewService'
 import EmailSubscriptionService from "../services/EmailSubscriptionService";
 
