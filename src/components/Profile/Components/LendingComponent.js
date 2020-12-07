@@ -1,5 +1,5 @@
 import React from "react";
-import ImageCard from "../../UI/imageCard/ImageCard";
+import ImageCard from "../../UI/imageCardForSearch/ImageCardForSearch";
 import {RiEdit2Line} from "react-icons/ri";
 import {MdDeleteSweep} from "react-icons/md"
 import Modal from "../../UI/modal/Modal";
@@ -181,7 +181,7 @@ class LendingComponent extends React.Component {
                                 lending=>lending.status!=="RETURNED").map(lending =>
                                 <tr>
                                     <td>
-                                        <Link to={`/users/${lending.borrower.username}/profile`}
+                                        <Link to={`/users/${lending.borrower._id}/profile`}
                                               className="mr-1">{lending.borrower.username}</Link>
                                     </td>
                                     <td>

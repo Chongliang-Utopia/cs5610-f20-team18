@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./PublicProfile.module.css";
-import ImageCard from "../UI/imageCard/ImageCard";
+import ImageCard from "../UI/imageCardForSearch/ImageCardForSearch";
 import {Link} from "react-router-dom";
 import Rating from "react-rating";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";

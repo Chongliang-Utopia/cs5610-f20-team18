@@ -11,7 +11,7 @@ import ReportForm from "../ReportForm";
 import Modal from "../../UI/modal/Modal";
 import {closeReport, openReport, deleteFromReadingList} from "../../../actions/profileActions";
 import {connect} from "react-redux";
-import ImageCard from "../../UI/imageCard/ImageCard";
+import ImageCard from "../../UI/imageCardForSearch/ImageCardForSearch";
 import {MdDeleteSweep} from "react-icons/md";
 import DeleteFromReadingList from "./DeleteFromReadingList";
 import classes2 from "../../bookStore/searchBook.module.css"
@@ -39,9 +39,6 @@ class ProfileLandingPageComponent extends React.Component {
 
 
     render() {
-        console.log("readinglist")
-        console.log(this.props.UserReadingList)
-        console.log(this.props.UserReadingListBooks)
         return (
             <div>
                 <Modal show={this.props.report} modalClosed={this.props.closeReport}>
@@ -177,7 +174,8 @@ class ProfileLandingPageComponent extends React.Component {
                         this.props.UserReadingListBooks.map(book =>
                             <div className="ImageCard">
                                 <Link title={book.volumeInfo.title}
-                                      to={`/books/${book.id}`}>
+                                      to={`/books/${book.id}`}
+                                      className={`${classes2.imageCard}`}>
                                     <ImageCard
                                         src={book.volumeInfo.imageLinks? book.volumeInfo.imageLinks.thumbnail:
                                             "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg"}
