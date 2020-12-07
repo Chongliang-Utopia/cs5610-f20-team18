@@ -57,7 +57,7 @@ class LenderTable extends React.Component {
                             </td>
                             <td>
                                 {book.isAvailable ?
-                                    <button className="btn btn-warning btn-sm"
+                                    <button className="btn btn-warning btn-sm" disabled={this.props.user && book.user._id === this.props.user._id}
                                             onClick={() => {
                                                 if (!this.props.isLoggedIn) {
                                                     this.props.requestLogin(window.location.pathname)

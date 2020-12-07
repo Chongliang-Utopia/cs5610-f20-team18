@@ -4,7 +4,7 @@ import {
     FETCH_ADMINUSER, FETCH_ALLPOSTINGS, FETCH_ALLTICKETS, FETCH_ALLUSERS,
     SWITCH_SECTION,
     UPDATE_ADMININFO,
-    DELETE_REVIEW
+    DELETE_REVIEW, FIND_ALL_SUBSCRIPTIONS, UNSUBSCRIBE
 } from "../actions/types";
 
 const INTIAL_STATE = {
@@ -119,7 +119,8 @@ const INTIAL_STATE = {
             "description": "All seven eBooks in the multi-award winning, internationally bestselling Harry Potter series, available as one download with stunning cover art by Olly Moss. Enjoy the stories that have captured the imagination of millions worldwide.",
             "condition": "ACCEPTABLE",
         }
-    ]
+    ],
+    subscriptions: []
 };
 
 const adminReducer = (state = INTIAL_STATE, action) => {
@@ -162,6 +163,16 @@ const adminReducer = (state = INTIAL_STATE, action) => {
             return {
                 ...state,
                 AllBooks: state.AllBooks.map(book=>book._id===action.book._id ? updatedBook: book)
+            }
+        case FIND_ALL_SUBSCRIPTIONS:
+            return {
+                ...state,
+                subscriptions: action.subscriptions
+            }
+        case UNSUBSCRIBE:
+            return {
+                ...state,
+                subscriptions: state.subscriptions.filter(subscription => subscription._id !== action.subscriptionId)
             }
         default:
             return state;
