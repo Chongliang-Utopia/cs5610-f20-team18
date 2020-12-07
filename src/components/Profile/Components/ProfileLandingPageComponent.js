@@ -143,7 +143,7 @@ class ProfileLandingPageComponent extends React.Component {
                                                   className="mr-1">{review.reviewer.username}</Link>
                                         </td>
                                         <td>
-                                            <Link to={`/books/${review.book._id}`} className="mr-1">{review.book.title}</Link>
+                                            <Link to={`/books/${review.book.googleBookId}`} className="mr-1">{review.book.title}</Link>
                                         </td>
                                         <td>
                                             <Rating initialRating={review.rating} readonly
@@ -177,7 +177,10 @@ class ProfileLandingPageComponent extends React.Component {
                             <div className="ImageCard">
                                 <ImageCard src={book.volumeInfo.imageLinks? book.volumeInfo.imageLinks.thumbnail:
                                     "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg"}/>
-                                <div className="center-text">{book.volumeInfo.title}</div>
+                                <div className="center-text">
+                                    <Link to={`/books/${book.id}`} className="mr-1">{book.volumeInfo.title}</Link>
+                                    </div>
+
                                 <div className="center-text">
                                     <MdDeleteSweep size={"1.5em"} onClick={() =>{
                                         this.deleteBook(book)
