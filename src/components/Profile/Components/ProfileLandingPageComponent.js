@@ -5,7 +5,7 @@ import classes from "../../bookDetail/lenderTable/LenderTable.module.css";
 import {Link} from "react-router-dom";
 import Rating from "react-rating";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
-import {Row, Col, Button, Carousel} from 'react-bootstrap'
+import {Button} from 'react-bootstrap'
 import {RiErrorWarningLine} from "react-icons/ri";
 import ReportForm from "../ReportForm";
 import Modal from "../../UI/modal/Modal";
@@ -14,6 +14,7 @@ import {connect} from "react-redux";
 import ImageCard from "../../UI/imageCard/ImageCard";
 import {MdDeleteSweep} from "react-icons/md";
 import DeleteFromReadingList from "./DeleteFromReadingList";
+import classes2 from "../../bookStore/searchBook.module.css"
 
 
 class ProfileLandingPageComponent extends React.Component {
@@ -175,12 +176,24 @@ class ProfileLandingPageComponent extends React.Component {
                         this.props.UserReadingListBooks.length !==0 &&
                         this.props.UserReadingListBooks.map(book =>
                             <div className="ImageCard">
-                                <ImageCard src={book.volumeInfo.imageLinks? book.volumeInfo.imageLinks.thumbnail:
-                                    "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg"}/>
-                                <div className="center-text">
-                                    <Link to={`/books/${book.id}`} className="mr-1">{book.volumeInfo.title}</Link>
+                                <Link title={book.volumeInfo.title}
+                                      to={`/books/${book.id}`}>
+                                    <ImageCard
+                                        src={book.volumeInfo.imageLinks? book.volumeInfo.imageLinks.thumbnail:
+                                            "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg"}
+                                        alt={book.volumeInfo.title} />
+                                    <div className="center-text">
+                                        {
+                                            book.volumeInfo.title.length > 15 && book.volumeInfo.title.substring(0, 15)
+                                        }
+                                        {
+                                            book.volumeInfo.title.length > 15 && "..."
+                                        }
+                                        {
+                                            book.volumeInfo.title.length <= 15 && book.volumeInfo.title
+                                        }
                                     </div>
-
+                                </Link>
                                 <div className="center-text">
                                     <MdDeleteSweep size={"1.5em"} onClick={() =>{
                                         this.deleteBook(book)
