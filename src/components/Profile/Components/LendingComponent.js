@@ -1,5 +1,5 @@
 import React from "react";
-import ImageCard from "../../UI/imageCard/ImageCard";
+import ImageCard from "../../UI/imageCardForSearch/ImageCardForSearch";
 import {RiEdit2Line} from "react-icons/ri";
 import {MdDeleteSweep} from "react-icons/md"
 import Modal from "../../UI/modal/Modal";
