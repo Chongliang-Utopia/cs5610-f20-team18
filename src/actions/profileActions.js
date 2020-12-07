@@ -285,7 +285,6 @@ export const getReadingListForUser = (uid) => (dispatch) => {
         }})
 }
 
-
 //All FETCHES
 // list of book inventory objects
 export const fetchBookPostingsForUser = (uid) => (dispatch) => {
