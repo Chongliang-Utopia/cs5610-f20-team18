@@ -111,14 +111,14 @@ class AccountSettingComponent extends React.Component {
                            placeholder="123-456-7890" id="phoneNumber"/>
                     <Field name="signature" component={this.renderTextarea} label="Signature"
                            placeholder="Tell people more about you!" id="signature" maxLength="200"/>
-                    <div className="form-group row">
-                        <label htmlFor="change-portrait" className="col-sm-3 col-form-label">
-                            Upload Portrait
-                        </label>
-                        <div className="col-sm-9">
-                            <button className="btn btn-info btn-sm mt-2" id="change-portrait">Upload</button>
-                        </div>
-                    </div>
+                    {/*<div className="form-group row">*/}
+                    {/*    <label htmlFor="change-portrait" className="col-sm-3 col-form-label">*/}
+                    {/*        Upload Portrait*/}
+                    {/*    </label>*/}
+                    {/*    <div className="col-sm-9">*/}
+                    {/*        <button className="btn btn-info btn-sm mt-2" id="change-portrait">Upload</button>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                     <br/>
                     <h4>Address</h4>
                     <Field name="streetAddress" component={this.renderInput} label="Street" type="text"
