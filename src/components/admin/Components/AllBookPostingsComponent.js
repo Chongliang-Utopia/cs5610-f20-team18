@@ -4,7 +4,6 @@ import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
 import Rating from "react-rating";
-import {Button} from "react-bootstrap";
 import {BsTrash} from "react-icons/bs"
 import DeletePosting from "../../Profile/Components/DeletePosting";
 import {deletePosting} from "../../../actions/adminActions";
@@ -78,10 +77,10 @@ class AllBookPostings extends React.Component{
                                         {ReactHtmlParser(book.description)}
                                     </td>
                                     <td>
-                                        <Button variant="warning" size="sm" className="transparent" title="Report"
+                                        <button className="btn btn-outline-danger btn-sm border-0 float-right" title="Report"
                                                 onClick={() => this.deleteBook(book)}>
                                             <BsTrash/>
-                                        </Button>
+                                        </button>
                                     </td>
                                 </tr>
                             )}

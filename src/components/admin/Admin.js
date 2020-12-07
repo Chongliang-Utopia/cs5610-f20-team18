@@ -7,8 +7,9 @@ import UserTicketsComponent from "./Components/UserTicketsComponent";
 import classes from "./admin.module.css";
 import {BsCaretRightFill} from "react-icons/bs";
 import {connect} from "react-redux";
-import {switchSections,fetchAdminUser, fetchAllUsers, fetchUserTickets, fetchAllPostings} from "../../actions/adminActions";
+import {switchSections,fetchAdminUser, fetchAllUsers, fetchUserTickets, fetchAllPostings, findAllSubscriptions} from "../../actions/adminActions";
 import AllBookPostings from "./Components/AllBookPostingsComponent";
+import EmailSubscriberComponent from "./Components/EmailSubscriberComponent";
 
 class Admin extends React.Component{
 
@@ -32,6 +33,8 @@ class Admin extends React.Component{
 
         //TODO: fetch all books
         this.props.fetchAllPostings()
+
+        this.props.findAllSubscriptions()
 
     }
 
@@ -62,6 +65,9 @@ class Admin extends React.Component{
             if (section === "postings") {
                 // TODO: fetch all book
                 this.props.fetchAllPostings()
+            }
+            if (section === "email-subscribers") {
+                this.props.findAllSubscriptions()
             }
         }
 
@@ -118,6 +124,12 @@ class Admin extends React.Component{
                                     Book Postings
                                 </Link>
                             </li>
+                            <li className="nav-item">
+                                <Link to={`/admin/email-subscribers`} className="nav-link">
+                                    {this.props.section === 'email-subscribers' && <BsCaretRightFill className="mb-1 mr-1"/>}
+                                    Email Subscribers
+                                </Link>
+                            </li>
                         </div>
                     </div>
                     <div className={"col-md-8 col-lg-9 pr-4 " + classes.contentDiv}>
@@ -141,6 +153,10 @@ class Admin extends React.Component{
                             this.props.section === "postings" &&
                                 <AllBookPostings/>
                         }
+                        {
+                            this.props.section === "email-subscribers" &&
+                            <EmailSubscriberComponent />
+                        }
                     </div>
                 </div>
             </div>
@@ -156,4 +172,4 @@ const stateToPropertyMapper = (state) => ({
 
 export default connect (
     stateToPropertyMapper,
-    {switchSections, fetchAdminUser, fetchAllUsers, fetchUserTickets, fetchAllPostings})(Admin);
+    {switchSections, fetchAdminUser, fetchAllUsers, fetchUserTickets, fetchAllPostings, findAllSubscriptions})(Admin);
