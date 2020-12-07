@@ -33,7 +33,7 @@ const PublicProfilePosts = ({
                     bookPostings.map(book =>
                         <div className="ImageCard">
                             <ImageCard src={book.picture}/>
-                            {book.title}
+                            <div className="center-text">{book.title}</div>
                         </div>
                     )
                 }
@@ -62,7 +62,7 @@ const PublicProfilePosts = ({
                                               className="mr-1">{review.reviewer.username}</Link>
                                     </td>
                                     <td>
-                                        {review.book.title}
+                                        <Link to={`/books/${review.book.googleBookId}`} className="mr-1">{review.book.title}</Link>
                                     </td>
                                     <td>
                                         <Rating initialRating={review.rating} readonly
