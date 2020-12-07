@@ -1,15 +1,17 @@
 import React from "react";
 import classes from "../../bookDetail/lendingSummary/LendingSummary.module.css";
 import {TiHeart} from "react-icons/ti";
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {createReviewAsLender, createReviewAsBorrower, finishTransaction} from "../../../actions/profileActions";
 import {connect} from "react-redux";
+import Rating from "react-rating";
+import {AiFillStar, AiOutlineStar} from "react-icons/all";
+
 
 class ConfirmReturn extends React.Component {
     state = {
         newComment: "",
-        newRating: 0
+        newRating: 5
     }
 
     setNewComment = (comment) =>
@@ -21,15 +23,13 @@ class ConfirmReturn extends React.Component {
         ))
 
     setNewRating = (rating) =>
-        this.setState(prevState=>(
-            {
-                ...prevState,
-                newRating: rating
-            }
-        ))
+        this.setState({
+            newRating: rating
+        })
+
     render() {
-        console.log('execute');
-        console.log(this.props.transaction)
+        // console.log('execute');
+        // console.log(this.props.transaction)
 
         return (
             <div className={classes.LendingSummary}>
@@ -39,24 +39,18 @@ class ConfirmReturn extends React.Component {
                         <span className="bg-white p-2"><TiHeart color="red"/></span>
                     </div>
                     <h4>Thanks for sharing your book!</h4>
-                    <Form.Group controlId="exampleForm.ControlTextarea1">
-                        <Form.Label>Please review your experience</Form.Label>
-                        <Form.Control as="textarea" rows={3}
-                                      onChange={(event)=>this.setNewComment(event.target.value)}
-                        />
-                    </Form.Group>
-
-                    <Form.Group controlId="exampleForm.ControlSelect1">
-                        <Form.Label htmlFor="bookCondition">Please select a rating for this experience</Form.Label>
-                        <Form.Control as="select" className="form-control" id="bookCondition" onChange={e => this.setNewRating(e.target.value)}>
-                                <option>Please select a rating</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                        </Form.Control>
-                    </Form.Group>
+                    <div>
+                        <label>Please review your experience</label>
+                        <textarea className="form-control mb-3" onChange={(event)=>this.setNewComment(event.target.value)} />
+                    </div>
+                    <div>
+                        <label>Please select a rating for this experience</label>
+                        <div>
+                        <Rating initialRating={this.state.newRating} onChange={rate => this.setNewRating(rate)}
+                                emptySymbol={<AiOutlineStar color="gold" className="mb-1" size="30px"/>}
+                                fullSymbol={<AiFillStar color="gold" className="mb-1" size="30px"/>}/>
+                        </div>
+                    </div>
                     <Button variant="success" onClick={()=>{
                         // use create review as lender
                         this.props.createReviewAsLender({
@@ -74,7 +68,7 @@ class ConfirmReturn extends React.Component {
                                 reviewee: this.props.transaction.borrower._id,
                                 book: this.props.transaction.book._id,
                                 comments: this.state.newComment,
-                                rating: this.state.newRating === 0? 5: this.state.newRating
+                                rating: this.state.newRating
                             }
                         })
                         this.props.cancelConfirm()

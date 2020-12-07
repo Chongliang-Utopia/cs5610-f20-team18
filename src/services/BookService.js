@@ -32,7 +32,7 @@ const submitBorrowingRequest = (request) =>
 
 const getAllBooksForUser = (userId) =>
     axios.get(`${API_URL}/users/${userId}/books`, {headers: authHeader()})
-        .then(response=>response.data? response.data: []);
+        .then(response => response.data ? response.data : []);
 
 
 const getAllBookPostings = () =>
@@ -40,7 +40,7 @@ const getAllBookPostings = () =>
         .then(response => response.json())
 
 const getBookByGoogleId = (googleBookId) =>
-    axios.get(`${API_URL}/${googleBookId}/books`).then(response=>response.data? response.data: [])
+    axios.get(`${API_URL}/${googleBookId}/books`).then(response => response.data ? response.data : [])
 
 export default {
     searchBooks,

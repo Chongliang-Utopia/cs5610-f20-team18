@@ -106,9 +106,13 @@ class BookDetail extends React.Component {
                                 {!book.numberOfReviews ? 0 : book.numberOfReviews} ratings
                             </span>
                                 </div>
-                                <h5>Authors: </h5>
-                                {!book.author ? <span>Anonymous</span> : book.author.map((author, i) =>
-                                    <span key={i}>{author}</span>)}
+                                <div className="mb-3">
+                                    <h5>Authors: </h5>
+                                    {!book.author ? <span>Anonymous</span> : book.author.map((author, i) =>
+                                        <span key={i}>{author}</span>)}
+                                </div>
+                                <h5>Published Date: </h5>
+                                <span>{book.publishedDate}</span>
                                 <button className="btn btn-info btn-block mt-4"
                                         onClick={() => {
                                             if (!this.props.isLoggedIn) {

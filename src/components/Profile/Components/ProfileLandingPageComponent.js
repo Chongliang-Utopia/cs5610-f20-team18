@@ -171,8 +171,8 @@ class ProfileLandingPageComponent extends React.Component {
                     }
                     {
                         this.props.UserReadingListBooks.length !==0 &&
-                        this.props.UserReadingListBooks.map(book =>
-                            <div className="ImageCard">
+                        this.props.UserReadingListBooks.map((book, index) =>
+                            <div key={index} className="ImageCard m-3">
                                 <Link title={book.volumeInfo.title}
                                       to={`/books/${book.id}`}
                                       className={`${classes2.imageCard}`}>
@@ -180,7 +180,7 @@ class ProfileLandingPageComponent extends React.Component {
                                         src={book.volumeInfo.imageLinks? book.volumeInfo.imageLinks.thumbnail:
                                             "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg"}
                                         alt={book.volumeInfo.title} />
-                                    <div className="center-text">
+                                    <div className="center-text pt-2">
                                         {
                                             book.volumeInfo.title.length > 15 && book.volumeInfo.title.substring(0, 15)
                                         }
@@ -193,9 +193,10 @@ class ProfileLandingPageComponent extends React.Component {
                                     </div>
                                 </Link>
                                 <div className="center-text">
-                                    <MdDeleteSweep size={"1.5em"} onClick={() =>{
-                                        this.deleteBook(book)
-                                    }}/>
+                                    <button className="btn btn-outline-danger border-0 p-0" onClick={() =>{
+                                        this.deleteBook(book)}}>
+                                    <MdDeleteSweep size={"1.5em"}/>
+                                    </button>
                                 </div>
                             </div>
                         )
