@@ -4,13 +4,14 @@ import {
     FETCH_ADMINUSER, FETCH_ALLPOSTINGS, FETCH_ALLTICKETS, FETCH_ALLUSERS,
     SWITCH_SECTION,
     UPDATE_ADMININFO,
-    DELETE_REVIEW
+    DELETE_REVIEW, FIND_ALL_SUBSCRIPTIONS, UNSUBSCRIBE
 } from "./types";
 
 import ReportService from '../services/ReportService'
 import UserService from '../services/UserService'
 import BookService from '../services/bookService'
 import ReviewService from '../services/ReviewService'
+import EmailSubscriptionService from "../services/EmailSubscriptionService";
 
 export const switchSections = (section) => {
     return  {
@@ -109,3 +110,23 @@ export const fetchAllPostings = () => (dispatch) => {
     //          type: FETCH_ALLPOSTINGS
     //          books
     //      }
+
+export const findAllSubscriptions = () => (dispatch) => {
+    EmailSubscriptionService.findAllSubscriptions()
+        .then(subscriptions => {
+            dispatch ({
+                type: FIND_ALL_SUBSCRIPTIONS,
+                subscriptions
+            })
+        })
+}
+
+export const unsubscribe = (subscriptionId) => (dispatch) => {
+    EmailSubscriptionService.unSubscribe(subscriptionId)
+        .then(status => {
+            dispatch({
+                type: UNSUBSCRIBE,
+                subscriptionId
+            })
+        })
+}
