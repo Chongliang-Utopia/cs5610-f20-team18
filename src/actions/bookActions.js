@@ -17,18 +17,21 @@ class BookActions {
         return fetch(url)
             .then(response => response.json())
             .then(googleBook => {
-                const book = {
-                    googleBookId: bookId,
-                    title: googleBook.volumeInfo.title,
-                    picture: googleBook.volumeInfo.imageLinks ?
-                        googleBook.volumeInfo.imageLinks.thumbnail
-                        : "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg",
-                    author: googleBook.volumeInfo.authors,
-                    publishedDate: googleBook.volumeInfo.publishedDate,
-                    description: googleBook.volumeInfo.description,
-                    rating: googleBook.volumeInfo.averageRating,
-                    numberOfReviews: googleBook.volumeInfo.ratingsCount,
-                    condition: "LIKE_NEW"
+                let book = {}
+                if (googleBook && googleBook.volumeInfo) {
+                    book = {
+                        googleBookId: bookId,
+                        title: googleBook.volumeInfo.title,
+                        picture: googleBook.volumeInfo.imageLinks ?
+                            googleBook.volumeInfo.imageLinks.thumbnail
+                            : "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg",
+                        author: googleBook.volumeInfo.authors,
+                        publishedDate: googleBook.volumeInfo.publishedDate,
+                        description: googleBook.volumeInfo.description,
+                        rating: googleBook.volumeInfo.averageRating,
+                        numberOfReviews: googleBook.volumeInfo.ratingsCount,
+                        condition: "LIKE_NEW"
+                    }
                 }
                 dispatch({
                     type: FIND_BOOK,
@@ -55,7 +58,7 @@ class BookActions {
             })
     }
 
-    findAllBorrowingOptions = (dispatch, googleId) => {
+    findAllBorrowingOptions = (googleId) => (dispatch) =>{
         return BookService.findAllBorrowingOptions(googleId)
             .then(options => {
                 dispatch({

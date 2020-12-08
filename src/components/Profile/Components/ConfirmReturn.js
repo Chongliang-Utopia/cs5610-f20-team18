@@ -15,7 +15,7 @@ class ConfirmReturn extends React.Component {
     }
 
     setNewComment = (comment) =>
-        this.setState(prevState=>(
+        this.setState(prevState => (
             {
                 ...prevState,
                 newComment: comment
@@ -41,38 +41,43 @@ class ConfirmReturn extends React.Component {
                     <h4>Thanks for sharing your book!</h4>
                     <div>
                         <label>Please review your experience</label>
-                        <textarea className="form-control mb-3" onChange={(event)=>this.setNewComment(event.target.value)} />
+                        <textarea className="form-control mb-3"
+                                  onChange={(event) => this.setNewComment(event.target.value)}/>
                     </div>
                     <div>
                         <label>Please select a rating for this experience</label>
                         <div>
-                        <Rating initialRating={this.state.newRating} onChange={rate => this.setNewRating(rate)}
-                                emptySymbol={<AiOutlineStar color="gold" className="mb-1" size="30px"/>}
-                                fullSymbol={<AiFillStar color="gold" className="mb-1" size="30px"/>}/>
+                            <Rating initialRating={this.state.newRating} onChange={rate => this.setNewRating(rate)}
+                                    emptySymbol={<AiOutlineStar color="gold" className="mb-1" size="30px"/>}
+                                    fullSymbol={<AiFillStar color="gold" className="mb-1" size="30px"/>}/>
                         </div>
                     </div>
-                    <Button variant="success" onClick={()=>{
-                        // use create review as lender
-                        this.props.createReviewAsLender({
-                            reviewer: this.props.user._id,
-                            reviewee: this.props.transaction.borrower._id,
-                            book: this.props.transaction.book._id,
-                            comments: this.state.newComment,
-                            rating: this.state.newRating === 0? 5: this.state.newRating
-                        }, this.props.transaction)
-                        this.props.finishTransaction({
-                            ...this.props.transaction,
-                            status: "RETURNED",
-                            lenderReview: {
+                    <div className="mt-3">
+
+                        <Button variant="success" className="mr-2" onClick={() => {
+                            // use create review as lender
+                            this.props.createReviewAsLender({
                                 reviewer: this.props.user._id,
                                 reviewee: this.props.transaction.borrower._id,
                                 book: this.props.transaction.book._id,
                                 comments: this.state.newComment,
-                                rating: this.state.newRating
-                            }
-                        })
-                        this.props.cancelConfirm()
-                    }}>Submit</Button>
+                                rating: this.state.newRating === 0 ? 5 : this.state.newRating
+                            }, this.props.transaction)
+                            this.props.finishTransaction({
+                                ...this.props.transaction,
+                                status: "RETURNED",
+                                lenderReview: {
+                                    reviewer: this.props.user._id,
+                                    reviewee: this.props.transaction.borrower._id,
+                                    book: this.props.transaction.book._id,
+                                    comments: this.state.newComment,
+                                    rating: this.state.newRating
+                                }
+                            })
+                            this.props.cancelConfirm()
+                        }}>Submit</Button>
+                        <button className="btn btn-danger mr-2" onClick={this.props.cancelConfirm}>Cancel</button>
+                    </div>
                 </div>
             </div>
         )
@@ -85,4 +90,8 @@ const stateToPropertyMapper = (state) => ({
 })
 
 
-export default connect(stateToPropertyMapper, {createReviewAsLender, createReviewAsBorrower, finishTransaction})(ConfirmReturn)
+export default connect(stateToPropertyMapper, {
+    createReviewAsLender,
+    createReviewAsBorrower,
+    finishTransaction
+})(ConfirmReturn)

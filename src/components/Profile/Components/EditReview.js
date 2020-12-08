@@ -1,19 +1,20 @@
 import React from "react";
 import classes from "../../bookDetail/lendingSummary/LendingSummary.module.css";
 import {TiHeart} from "react-icons/ti";
-import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {connect} from "react-redux";
 import {createReviewAsBorrower, finishTransaction} from "../../../actions/profileActions";
+import Rating from "react-rating";
+import {AiFillStar, AiOutlineStar} from "react-icons/all";
 
 class EditReview extends React.Component {
     state = {
         newComment: "",
-        newRating: 0
+        newRating: 5
     }
 
     setNewComment = (comment) =>
-        this.setState(prevState=>(
+        this.setState(prevState => (
             {
                 ...prevState,
                 newComment: comment
@@ -21,12 +22,8 @@ class EditReview extends React.Component {
         ))
 
     setNewRating = (rating) =>
-        this.setState(prevState=>(
-            {
-                ...prevState,
-                newRating: rating
-            }
-        ))
+        this.setState({newRating: rating})
+
     render() {
         return (
             <div className={classes.LendingSummary}>
@@ -36,45 +33,43 @@ class EditReview extends React.Component {
                         <span className="bg-white p-2"><TiHeart color="red"/></span>
                     </div>
                     <h4>Please review your experience</h4>
-                    <Form.Group controlId="exampleForm.ControlTextarea1">
-                        <Form.Control as="textarea" rows={3}
-                                      onChange={(event)=>this.setNewComment(event.target.value)}
-                        />
-                    </Form.Group>
+                    <div>
+                        <textarea className="form-control mb-3"
+                                  onChange={(event) => this.setNewComment(event.target.value)}/>
+                    </div>
+                    <div>
+                        <label>Please select a rating for this experience</label>
+                        <div>
+                            <Rating initialRating={this.state.newRating} onChange={rate => this.setNewRating(rate)}
+                                    emptySymbol={<AiOutlineStar color="gold" className="mb-1" size="30px"/>}
+                                    fullSymbol={<AiFillStar color="gold" className="mb-1" size="30px"/>}/>
+                        </div>
+                    </div>
+                    <div className="mt-3">
 
-                    <Form.Group controlId="exampleForm.ControlSelect1">
-                        <Form.Label htmlFor="bookCondition">Please select a rating for this experience</Form.Label>
-                        <Form.Control as="select" className="form-control" id="bookCondition" onChange={e => this.setNewRating(e.target.value)}>
-                                <option>Please select a rating</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                        </Form.Control>
-                    </Form.Group>
-                    <Button variant="success" onClick={()=>{
-                        this.props.createReviewAsBorrower({
-                            reviewer: this.props.user._id,
-                            reviewee: this.props.borrowingBeingEdited.lender._id,
-                            book: this.props.borrowingBeingEdited.book._id,
-                            comments: this.state.newComment,
-                            rating: this.state.newRating === 0? 5: this.state.newRating
-                        }, this.props.borrowingBeingEdited)
-                        this.props.finishTransaction({
-                            ...this.props.borrowingBeingEdited,
-                            status: "RETURNED",
-                            borrowerReview: {
+                        <Button variant="success" className="mr-2" onClick={() => {
+                            this.props.createReviewAsBorrower({
                                 reviewer: this.props.user._id,
                                 reviewee: this.props.borrowingBeingEdited.lender._id,
                                 book: this.props.borrowingBeingEdited.book._id,
                                 comments: this.state.newComment,
-                                rating: this.state.newRating === 0? 5: this.state.newRating
-                            }
-                        })
-                        this.props.cancelReview()
-                    }}>Submit</Button>
-                    {"  "}
+                                rating: this.state.newRating === 0 ? 5 : this.state.newRating
+                            }, this.props.borrowingBeingEdited)
+                            this.props.finishTransaction({
+                                ...this.props.borrowingBeingEdited,
+                                status: "RETURNED",
+                                borrowerReview: {
+                                    reviewer: this.props.user._id,
+                                    reviewee: this.props.borrowingBeingEdited.lender._id,
+                                    book: this.props.borrowingBeingEdited.book._id,
+                                    comments: this.state.newComment,
+                                    rating: this.state.newRating === 0 ? 5 : this.state.newRating
+                                }
+                            })
+                            this.props.cancelReview()
+                        }}>Submit</Button>
+                        <button className="btn btn-danger mr-2" onClick={this.props.cancelReview}>Cancel</button>
+                    </div>
                 </div>
             </div>
         )
