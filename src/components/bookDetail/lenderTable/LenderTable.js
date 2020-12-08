@@ -10,10 +10,6 @@ import {Link} from "react-router-dom";
 
 class LenderTable extends React.Component {
 
-    componentDidMount() {
-        this.props.findAllBorrowingOptions(this.props.googleBookId)
-    }
-
     renderCondition(condtion) {
         switch (condtion) {
             case "LIKE_NEW":
@@ -49,15 +45,16 @@ class LenderTable extends React.Component {
                             <td>{book.user.city}, {book.user.state}</td>
                             <td>
                                 <Link className="nav-link" to={`/users/${book.user._id}/profile`}>
-                                <span className="mr-1">{book.user.username}</span>
-                                <Rating initialRating={book.user.rating} readonly
-                                        emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
-                                        fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
+                                    <span className="mr-1">{book.user.username}</span>
+                                    <Rating initialRating={book.user.rating} readonly
+                                            emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
+                                            fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                 </Link>
                             </td>
                             <td>
                                 {book.isAvailable ?
-                                    <button className="btn btn-warning btn-sm" disabled={this.props.user && book.user._id === this.props.user._id}
+                                    <button className="btn btn-warning btn-sm"
+                                            disabled={this.props.user && book.user._id === this.props.user._id}
                                             onClick={() => {
                                                 if (!this.props.isLoggedIn) {
                                                     this.props.requestLogin(window.location.pathname)
@@ -93,7 +90,6 @@ const stateToPropertyMapper = (state) => ({
 })
 
 const propertyToDispatchMapper = (dispatch) => ({
-    findAllBorrowingOptions: (googleId) => BookActions.findAllBorrowingOptions(dispatch, googleId),
     startABorrowingRequest: (lender) => BookActions.startABorrowingRequest(dispatch, lender),
     requestLogin: (location) => requestLogin(dispatch, location)
 })

@@ -54,7 +54,7 @@ class ConfirmReturn extends React.Component {
                     </div>
                     <div className="mt-3">
 
-                        <Button variant="success" onClick={() => {
+                        <Button variant="success" className="mr-2" onClick={() => {
                             // use create review as lender
                             this.props.createReviewAsLender({
                                 reviewer: this.props.user._id,
