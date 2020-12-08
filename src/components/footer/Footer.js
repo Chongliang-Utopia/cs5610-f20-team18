@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
-import EmailSubscriptionService from "../../services/EmailSubscriptionService";
+import {addSubscription} from "../../actions/adminActions";
 import {Alert} from "reactstrap";
+import {connect} from "react-redux";
 
 class Footer extends React.Component {
 
@@ -12,15 +13,14 @@ class Footer extends React.Component {
 
     subscribe = (e) => {
         e.preventDefault();
-        EmailSubscriptionService.addSubscription({email: this.state.email})
-            .then(() => {
-                this.setState({email: ""})
-                this.setState({alertVisible: true}, () => {
-                    window.setTimeout(() => {
-                        this.setState({alertVisible: false})
-                    }, 2000)
-                })
+        this.props.dispatch(addSubscription({email: this.state.email})).then(() => {
+            this.setState({email: ""})
+            this.setState({alertVisible: true}, () => {
+                window.setTimeout(() => {
+                    this.setState({alertVisible: false})
+                }, 2000)
             })
+        })
     }
 
     render() {
@@ -45,7 +45,8 @@ class Footer extends React.Component {
                             <Form onSubmit={this.subscribe}>
                                 <Form.Group>
                                     <Form.Control type="email" placeholder="Enter your email here"
-                                                  onChange={(e) => this.setState({email: e.target.value})} value={this.state.email}/>
+                                                  onChange={(e) => this.setState({email: e.target.value})}
+                                                  value={this.state.email}/>
                                 </Form.Group>
                                 <Alert className="alert alert-success text-center" role="alert"
                                        isOpen={this.state.alertVisible}>
@@ -63,4 +64,4 @@ class Footer extends React.Component {
     }
 }
 
-export default Footer;
+export default connect()(Footer);

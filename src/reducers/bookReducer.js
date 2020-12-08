@@ -22,7 +22,7 @@ const bookReducer = (state = initialState, action) => {
         case UPDATE_BOOK:
             return {...state, book: action.book}
         case POST_A_BOOK:
-            return {...state, book: action.book}
+            return {...state, book: action.book, borrowingOptions: [...state.borrowingOptions, action.book]}
         case FIND_ALL_BORROWING_OPTIONS:
             return {...state, borrowingOptions: action.options}
         case START_A_BORROWING_REQUEST:
