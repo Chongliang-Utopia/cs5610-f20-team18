@@ -9,7 +9,10 @@ import {RiErrorWarningLine} from "react-icons/ri";
 import ReportForm from "./ReportForm";
 import Modal from "../UI/modal/Modal";
 import {connect} from "react-redux";
-import {closeReport, openReport} from "../../actions/profileActions";
+import {closeReport, openReport, createLoggedInUserFollowings, deleteLoggedInUserFollowings} from "../../actions/profileActions";
+import ListGroup from "react-bootstrap/ListGroup";
+import Image from "react-bootstrap/Image";
+import {requestLoginWithThunk} from "../../actions/authActions";
 
 const PublicProfilePosts = ({
             user,
@@ -18,7 +21,13 @@ const PublicProfilePosts = ({
             openReport,
             closeReport,
             reviewsUserReceived,
-            isLoggedIn
+            isLoggedIn,
+            UserFollowings,
+            UserFollowers,
+            LoggedInUserFollowings,
+            LoggedInUser,
+            createLoggedInUserFollowings,
+            deleteLoggedInUserFollowings
         }) =>
         <div>
             <Modal show={report} modalClosed={closeReport}>
@@ -152,6 +161,100 @@ const PublicProfilePosts = ({
                         </table>
                     </div>
                 </div>
+
+                <div className="mb-5 mt-5">
+                    <h3>
+                        {user.username}'s followings
+                    </h3>
+                    <ListGroup variant="flush">
+                        {
+                            UserFollowings.map(follow=>
+                                <ListGroup.Item className="pl-0">
+                                    <Image width={40}
+                                           height={32}
+                                           src={follow.profilePicture === undefined ? "https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-3/177800/130-512.png" : user.profilePicture}
+                                           roundedCircle
+                                           className="hideAtSm mr-2"
+                                    />
+                                    <Link to={`/users/${follow._id}/profile`}>{follow.username}</Link>
+                                    <span className="hideAtSm">
+                                        <Rating className="add-15-padding" initialRating={follow.rating} readonly
+                                                emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
+                                                fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
+                                    </span>
+                                    {
+                                        isLoggedIn && LoggedInUser._id === follow._id && ""
+                                    }
+                                    {
+                                        !(isLoggedIn && LoggedInUser._id === follow._id) && (!isLoggedIn || LoggedInUserFollowings.find(following => following._id === follow._id) === undefined) &&
+                                        <button className="btn btn-info ml-3 pull-right"
+                                                onClick={() => {
+                                                    if (!isLoggedIn) {
+                                                        requestLoginWithThunk(window.location.pathname)
+                                                    } else {
+                                                        createLoggedInUserFollowings(follow._id, LoggedInUser._id, follow)
+                                                    }
+                                                }}>Follow</button>
+
+                                    }
+                                    {
+                                        !(isLoggedIn && LoggedInUser._id === follow._id) && isLoggedIn && LoggedInUserFollowings.find(following => following._id === follow._id) !== undefined &&
+                                        <button className="btn btn-outline-secondary ml-3 pull-right"
+                                                onClick={() => {
+                                                    deleteLoggedInUserFollowings(follow._id, LoggedInUser._id, follow)
+                                                }}>Unfollow</button>
+                                    }
+                                </ListGroup.Item>)
+                        }
+                    </ListGroup>
+                </div>
+
+                <div className="mb-5 mt-5">
+                    <h3>
+                        {user.username}'s followers
+                    </h3>
+                    <ListGroup variant="flush">
+                        {
+                            UserFollowers.map(follow=>
+                                <ListGroup.Item className="pl-0">
+                                    <Image width={40}
+                                           height={32}
+                                           src={follow.profilePicture === undefined ? "https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-3/177800/130-512.png" : user.profilePicture}
+                                           roundedCircle
+                                           className="hideAtSm mr-2"
+                                    />
+                                    <Link to={`/users/${follow._id}/profile`}>{follow.username}</Link>
+                                    <span className="hideAtSm">
+                                        <Rating className="add-15-padding" initialRating={follow.rating} readonly
+                                                emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
+                                                fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
+                                    </span>
+                                    {
+                                        isLoggedIn && LoggedInUser._id === follow._id && ""
+                                    }
+                                    {
+                                        !(isLoggedIn && LoggedInUser._id === follow._id) && (!isLoggedIn || LoggedInUserFollowings.find(following => following._id === follow._id) === undefined) &&
+                                        <button className="btn btn-info ml-3 pull-right"
+                                                onClick={() => {
+                                                    if (!isLoggedIn) {
+                                                        requestLoginWithThunk(window.location.pathname)
+                                                    } else {
+                                                        createLoggedInUserFollowings(follow._id, LoggedInUser._id, follow)
+                                                    }
+                                                }}>Follow</button>
+
+                                    }
+                                    {
+                                        !(isLoggedIn && LoggedInUser._id === follow._id) && isLoggedIn && LoggedInUserFollowings.find(following => following._id === follow._id) !== undefined &&
+                                        <button className="btn btn-outline-secondary ml-3 pull-right"
+                                                onClick={() => {
+                                                    deleteLoggedInUserFollowings(follow._id, LoggedInUser._id, follow)
+                                                }}>Unfollow</button>
+                                    }
+                                </ListGroup.Item>)
+                        }
+                    </ListGroup>
+                </div>
             </div>
         </div>
 
@@ -162,7 +265,11 @@ const StateToPropertyMapper = (state) => ({
     bookPostings: state.profile.bookPostings,
     user: state.profile.user,
     reviewsUserReceived: state.profile.reviewsUserReceived,
-    isLoggedIn: state.auth.isLoggedIn
+    isLoggedIn: state.auth.isLoggedIn,
+    UserFollowings: state.profile.UserFollowings,
+    UserFollowers: state.profile.UserFollowers,
+    LoggedInUserFollowings: state.profile.LoggedInUserFollowings,
+    LoggedInUser: state.auth.user
 });
 
-export default connect(StateToPropertyMapper, {openReport, closeReport})(PublicProfilePosts);
+export default connect(StateToPropertyMapper, {openReport, closeReport, createLoggedInUserFollowings, deleteLoggedInUserFollowings})(PublicProfilePosts);

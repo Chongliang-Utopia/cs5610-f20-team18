@@ -2,6 +2,8 @@ import React from "react";
 import classes from "../../bookDetail/lenderTable/LenderTable.module.css";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
+import {AiFillStar, AiOutlineStar} from "react-icons/all";
+import Rating from "react-rating";
 
 const UserAccountsComponent =
     ({
@@ -13,8 +15,8 @@ const UserAccountsComponent =
             <table className="table table-hover">
                 <thead>
                 <tr>
-                    <th>user</th>
-                    <th>userRatings</th>
+                    <th>User</th>
+                    <th>User Ratings</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -26,7 +28,9 @@ const UserAccountsComponent =
                                     <Link to={`/users/${user}/profile`} className="mr-1">{user.username}</Link>
                                 </td>
                                 <td>
-                                    {user.rating}
+                                    <Rating initialRating={user.rating} readonly
+                                            emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
+                                            fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                 </td>
                             </tr>
                 )}

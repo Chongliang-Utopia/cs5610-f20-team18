@@ -37,7 +37,6 @@ const FollowingComponent = ({
                         <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow" onClick={()=>deleteUserFollowing(user._id, follow._id)}>Unfollow</button>
                     </ListGroup.Item>)
             }
-
         </ListGroup>
 
 
