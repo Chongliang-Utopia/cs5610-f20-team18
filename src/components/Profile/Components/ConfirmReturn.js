@@ -42,6 +42,7 @@ class ConfirmReturn extends React.Component {
                     <div>
                         <label>Please review your experience</label>
                         <textarea className="form-control mb-3"
+                                  value={this.state.newComment}
                                   onChange={(event) => this.setNewComment(event.target.value)}/>
                     </div>
                     <div>
@@ -74,9 +75,13 @@ class ConfirmReturn extends React.Component {
                                     rating: this.state.newRating
                                 }
                             })
+                            this.setState({newComment : ""})
                             this.props.cancelConfirm()
                         }}>Submit</Button>
-                        <button className="btn btn-danger mr-2" onClick={this.props.cancelConfirm}>Cancel</button>
+                        <button className="btn btn-danger mr-2" onClick={() => {
+                            this.setState({newComment : ""})
+                            this.props.cancelConfirm()
+                        }}>Cancel</button>
                     </div>
                 </div>
             </div>
