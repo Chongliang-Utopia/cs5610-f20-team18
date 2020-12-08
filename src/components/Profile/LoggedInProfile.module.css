@@ -46,3 +46,8 @@
     text-decoration: none;
     text-transform: uppercase;
 }
+
+.LogInProfile .ratingFont{
+    font-size: 70%;
+    margin-left: 10px;
+}

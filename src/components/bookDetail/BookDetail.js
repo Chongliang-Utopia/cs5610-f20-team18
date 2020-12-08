@@ -26,12 +26,16 @@ class BookDetail extends React.Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);
-        this.props.dispatch(BookActions.findBook(this.props.match.params.bookId))
+        const googleBookId = this.props.match.params.bookId;
+        this.props.dispatch(BookActions.findBook(googleBookId))
+        this.props.dispatch(BookActions.findAllBorrowingOptions(googleBookId))
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.match.params.bookId !== prevProps.match.params.bookId) {
-            this.props.dispatch(BookActions.findBook(this.props.match.params.bookId))
+        const googleBookId = this.props.match.params.bookId;
+        if (googleBookId !== prevProps.match.params.bookId) {
+            this.props.dispatch(BookActions.findBook(googleBookId))
+            this.props.dispatch(BookActions.findAllBorrowingOptions(googleBookId))
         }
     }
 
@@ -92,63 +96,68 @@ class BookDetail extends React.Component {
                                isOpen={this.state.alertVisible}>
                             Success adding to your reading list!
                         </Alert>
-                        <div className="row mb-5">
-                            <div className="col-sm-6">
-                                <ImageCard src={book.picture}/>
-                            </div>
-                            <div className="col-sm-6">
-                                <h2>{book.title}</h2>
-                                <div className="mb-3">
-                                    <Rating initialRating={book.rating} readonly
-                                            emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
-                                            fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
-                                    <span className={classes.ratingFont}>
-                                {!book.numberOfReviews ? 0 : book.numberOfReviews} ratings
+
+                        {Object.keys(book).length === 0 && book.constructor === Object ?
+                            <h1>Book Not Found!<br/> Back to <Link to="/books"> Bookstore</Link>.</h1> :
+                            <div>
+                                <div className="row mb-5">
+                                    <div className="col-sm-6">
+                                        <ImageCard src={book.picture}/>
+                                    </div>
+                                    <div className="col-sm-6">
+                                        <h2>{book.title}</h2>
+                                        <div className="mb-3">
+                                            <Rating initialRating={book.rating} readonly
+                                                    emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
+                                                    fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
+                                            <span className={classes.ratingFont}>
+                                {!book.numberOfReviews ? "No" : book.numberOfReviews} ratings
                             </span>
+                                        </div>
+                                        <div className="mb-3">
+                                            <h5>Authors: </h5>
+                                            {!book.author ? <span>Anonymous</span> : book.author.map((author, i) =>
+                                                <span key={i}>{author}</span>)}
+                                        </div>
+                                        <h5>Published Date: </h5>
+                                        <span>{book.publishedDate}</span>
+                                        <button className="btn btn-info btn-block mt-4"
+                                                onClick={() => {
+                                                    if (!this.props.isLoggedIn) {
+                                                        this.props.dispatch(requestLoginWithThunk(window.location.pathname))
+                                                    } else {
+                                                        this.lendingHandler()
+                                                    }
+                                                }}>
+                                            <HiBadgeCheck className="float-left" size="25px"/>
+                                            I want to lend the book
+                                        </button>
+                                        <button className="btn btn-secondary btn-block"
+                                                onClick={() => {
+                                                    if (!this.props.isLoggedIn) {
+                                                        this.props.dispatch(requestLoginWithThunk(window.location.pathname))
+                                                    } else {
+                                                        this.addToReadingList()
+                                                    }
+                                                }}>
+                                            <HiHeart className="float-left" size="25px"/>
+                                            Add to My Reading List
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className="mb-3">
-                                    <h5>Authors: </h5>
-                                    {!book.author ? <span>Anonymous</span> : book.author.map((author, i) =>
-                                        <span key={i}>{author}</span>)}
+                                <hr/>
+                                <div className="row mb-5 mt-5">
+                                    <h5>Description: </h5>
+                                    <span> {book.description && ReactHtmlParser(book.description)} </span>
                                 </div>
-                                <h5>Published Date: </h5>
-                                <span>{book.publishedDate}</span>
-                                <button className="btn btn-info btn-block mt-4"
-                                        onClick={() => {
-                                            if (!this.props.isLoggedIn) {
-                                                this.props.dispatch(requestLoginWithThunk(window.location.pathname))
-                                            } else {
-                                                this.lendingHandler()
-                                            }
-                                        }}>
-                                    <HiBadgeCheck className="float-left" size="25px"/>
-                                    I want to lend the book
-                                </button>
-                                <button className="btn btn-secondary btn-block"
-                                        onClick={() => {
-                                            if (!this.props.isLoggedIn) {
-                                                this.props.dispatch(requestLoginWithThunk(window.location.pathname))
-                                            } else {
-                                                this.addToReadingList()
-                                            }
-                                        }}>
-                                    <HiHeart className="float-left" size="25px"/>
-                                    Add to My Reading List
-                                </button>
-                            </div>
-                        </div>
-                        <hr/>
-                        <div className="row mb-5 mt-5">
-                            <h5>Description: </h5>
-                            <span> {book.description && ReactHtmlParser(book.description)} </span>
-                        </div>
-                        <hr/>
-                        <div className="row mb-5 mt-5">
-                            <div className="col-12 pl-0 pb-3">
-                                <h5>Borrowing Options:</h5>
-                            </div>
-                            <LenderTable googleBookId={this.props.match.params.bookId}/>
-                        </div>
+                                <hr/>
+                                <div className="row mb-5 mt-5">
+                                    <div className="col-12 pl-0 pb-3">
+                                        <h5>Borrowing Options:</h5>
+                                    </div>
+                                    <LenderTable googleBookId={this.props.match.params.bookId}/>
+                                </div>
+                            </div>}
                     </div>
                 </div>
             </Fragment>

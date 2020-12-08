@@ -31,7 +31,7 @@ const PublicProfilePosts = ({
                 </h3>
                 {
                     bookPostings.map(book=>
-                        <div className="ImageCard">
+                        <div className="ImageCard m-3">
                             <Link title={book.title}
                                   to={`/books/${book.googleBookId}`}>
                                 <ImageCard

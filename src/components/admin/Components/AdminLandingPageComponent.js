@@ -6,48 +6,54 @@ import classes from "../admin.module.css";
 import {connect} from "react-redux";
 
 const AdminLandingPageComponent = ({
-    AllBooks,
-    users,
-    tickets
+                                       AllBooks,
+                                       users,
+                                       tickets
                                    }) => {
-        return(
-            <div>
-                <h2>Overview of site activity</h2>
-                <br/>
-                <CardDeck className={classes.cardDeck}>
-                    <Card className={classes.card} >
+    return (
+        <div>
+            <h2>Overview of site activity</h2>
+            <br/>
+            <CardDeck className={classes.cardDeck}>
+                <Card className={classes.card}>
+                    <Link to={`/admin/users`} classname="bottom">
                         <Card.Body>
                             <Card.Title>Number of members</Card.Title>
 
                         </Card.Body>
-                        <Card.Footer style={{ "background": "none", "borderTop": "none" }}>
+                        <Card.Footer style={{"background": "none", "borderTop": "none"}}>
                             <br/>
-                            <Link to={`/admin/users`} classname="bottom">{users.length}</Link>
+                            {users.length}
                         </Card.Footer>
-                    </Card>
-                    <Card className={classes.card}>
+                    </Link>
+                </Card>
+                <Card className={classes.card}>
+                    <Link to={`/admin/tickets`}>
                         <Card.Body>
                             <Card.Title>Pending User Tickets</Card.Title>
 
                         </Card.Body>
-                        <Card.Footer style={{ "background": "none", "borderTop": "none" }}>
+                        <Card.Footer style={{"background": "none", "borderTop": "none"}}>
                             <br/>
-                            <Link to={`/admin/tickets`}>{tickets.length}</Link>
+                            {tickets.length}
                         </Card.Footer>
-                    </Card>
-                    <Card className={classes.card}>
+                    </Link>
+                </Card>
+                <Card className={classes.card}>
+                    <Link to={`/admin/postings`}>
                         <Card.Body>
                             <Card.Title>Total book postings</Card.Title>
 
                         </Card.Body>
-                        <Card.Footer style={{ "background": "none", "borderTop": "none" }}>
+                        <Card.Footer style={{"background": "none", "borderTop": "none"}}>
                             <br/>
-                            <Link to={`/admin/postings`}>{AllBooks.length}</Link>
+                            {AllBooks.length}
                         </Card.Footer>
-                    </Card>
-                </CardDeck>
-            </div>
-        )
+                    </Link>
+                </Card>
+            </CardDeck>
+        </div>
+    )
 }
 
 const stateToPropertyMapper = (state) => ({
