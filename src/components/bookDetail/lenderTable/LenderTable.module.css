@@ -14,5 +14,8 @@
     height:60px;
     line-height:20px; /* Height / no. of lines to display */
     padding: 1px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
