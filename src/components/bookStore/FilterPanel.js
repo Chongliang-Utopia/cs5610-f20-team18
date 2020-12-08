@@ -16,11 +16,11 @@ class FilterPanel extends React.Component {
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item">
                         <p><b>Editor recommends:</b></p>
-                        <a href="#"
+                        <button className={`btn btn-link ${classes.filterLink}`}
                         onClick={() => this.props.getRecommended()}
                         >
                             Most Popular
-                        </a>
+                        </button>
                     </li>
                     <li className="list-group-item">
                         <p><b>Sort By:</b></p>
@@ -28,20 +28,20 @@ class FilterPanel extends React.Component {
                             <div className={`${classes.ratingBar}`}>
                                 - Rating:
                             </div>
-                            <a href="#"
+                            <button className={`btn btn-link ${classes.filterLink}`}
                                 onClick={() => this.props.sortBook()}>
                                  high -> low
-                            </a>
+                            </button>
                         </div>
                         <br/>
                         <div>
                             <div className={`${classes.ratingBar}`}>
                                 - Published Date:
                             </div>
-                            <a href="#"
+                            <button className={`btn btn-link ${classes.filterLink}`}
                                onClick={() => this.props.sortBookPublisher()}>
                                  Newest -> oldest
-                            </a>
+                            </button>
                         </div>
                     </li>
                     <li className="list-group-item">
@@ -51,7 +51,7 @@ class FilterPanel extends React.Component {
                                 - Avg. Book Rating:
                             </div>
                             <div>
-                                <a href="#"
+                                <button className={`btn btn-link ${classes.filterLink}`}
                                    onClick={() => this.props.filterBook(4)}>
                                     <span className={`${classes.rating}`}>
                                     <Rating initialRating="4" readonly
@@ -59,10 +59,10 @@ class FilterPanel extends React.Component {
                                             fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                    </span>
                                     & up
-                                </a>
+                                </button>
                             </div>
                             <div>
-                                <a href="#"
+                                <button className={`btn btn-link ${classes.filterLink}`}
                                    onClick={() => this.props.filterBook(3)}>
                                     <span className={`${classes.rating}`}>
                                     <Rating initialRating="3" readonly
@@ -70,10 +70,10 @@ class FilterPanel extends React.Component {
                                             fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                    </span>
                                     & up
-                                </a>
+                                </button>
                             </div>
                             <div>
-                                <a href="#"
+                                <button className={`btn btn-link ${classes.filterLink}`}
                                    onClick={() => this.props.filterBook(2)}>
                                     <span className={`${classes.rating}`}>
                                     <Rating initialRating="2" readonly
@@ -81,10 +81,10 @@ class FilterPanel extends React.Component {
                                             fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                    </span>
                                     & up
-                                </a>
+                                </button>
                             </div>
                             <div>
-                                <a href="#"
+                                <button className={`btn btn-link ${classes.filterLink}`}
                                    onClick={() => this.props.filterBook(1)}>
                                     <span className={`${classes.rating}`}>
                                     <Rating initialRating="1" readonly
@@ -92,12 +92,12 @@ class FilterPanel extends React.Component {
                                             fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                    </span>
                                     & up
-                                </a>
+                                </button>
                             </div>
                             <div>
-                                <a href="#"
+                                <button className={`btn btn-link ${classes.filterLink}`}
                                    onClick={() => this.props.filterBook(0)}>Show All
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </li>
