@@ -173,7 +173,7 @@ const PublicProfilePosts = ({
                                 <ListGroup.Item className="pl-0">
                                     <Image width={40}
                                            height={32}
-                                           src={follow.profilePicture === undefined ? "https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-3/177800/130-512.png" : user.profilePicture}
+                                           src={follow.profilePicture === undefined ? "https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-3/177800/130-512.png" : follow.profilePicture}
                                            roundedCircle
                                            className="hideAtSm mr-2"
                                     />
@@ -220,7 +220,7 @@ const PublicProfilePosts = ({
                                 <ListGroup.Item className="pl-0">
                                     <Image width={40}
                                            height={32}
-                                           src={follow.profilePicture === undefined ? "https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-3/177800/130-512.png" : user.profilePicture}
+                                           src={follow.profilePicture === undefined ? "https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-3/177800/130-512.png" : follow.profilePicture}
                                            roundedCircle
                                            className="hideAtSm mr-2"
                                     />
