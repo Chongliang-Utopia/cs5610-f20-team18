@@ -40,7 +40,7 @@ class AllBookPostings extends React.Component{
                         deletePosting={this.props.deletePosting}
                     />
                 </Modal>
-                <h2>All Book Postings</h2>
+                <h2>Active Book Postings</h2>
                 <div className={classes.LenderTable}>
                     <table className="table table-hover">
                         <thead>
@@ -48,7 +48,7 @@ class AllBookPostings extends React.Component{
                             <th>title</th>
                             <th>Owner</th>
                             <th>Rating</th>
-                            <th>Status</th>
+                            {/*<th>Status</th>*/}
                             <th>Description</th>
                             <th></th>
                         </tr>
@@ -58,7 +58,7 @@ class AllBookPostings extends React.Component{
                             this.props.AllBooks.map(book=>
                                 <tr>
                                     <td>
-                                        <Link to={`/books/${book._id}`} className="mr-1">{book.title}</Link>
+                                        <Link to={`/books/${book.googleBookId}`} className="mr-1">{book.title}</Link>
                                     </td>
                                     <td>
                                         <Link to={`/users/${book.user._id}/profile`} className="mr-1">{book.user.username}</Link>
@@ -68,13 +68,15 @@ class AllBookPostings extends React.Component{
                                                 emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                                 fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                     </td>
-                                    <td>
-                                        {
-                                            book.isActive? "Active": "Inactive"
-                                        }
-                                    </td>
-                                    <td>
+                                    {/*<td>*/}
+                                    {/*    {*/}
+                                    {/*        book.isActive? "Active": "Inactive"*/}
+                                    {/*    }*/}
+                                    {/*</td>*/}
+                                    <td >
+                                        <div className={classes.bookDescriptionText}>
                                         {ReactHtmlParser(book.description)}
+                                        </div>
                                     </td>
                                     <td>
                                         <button className="btn btn-outline-danger btn-sm border-0 float-right" title="Report"

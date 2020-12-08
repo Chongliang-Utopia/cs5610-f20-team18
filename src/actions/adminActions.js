@@ -100,7 +100,7 @@ export const fetchAllPostings = () => (dispatch) => {
     BookService.getAllBookPostings().then(books => {
         dispatch({
             type: FETCH_ALLPOSTINGS,
-            books
+            books: books.filter(book => book.isActive)
         })
     })
 }
