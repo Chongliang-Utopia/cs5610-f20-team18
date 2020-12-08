@@ -12,14 +12,14 @@ const DeletePosting = ({book, cancelDelete, deletePosting}) =>
             </div>
             <p>Are you sure you want to delete this posting?</p>
             <div>
-                <button className="btn btn-success mr-3" onClick={()=>{
+                <button className="btn btn-success mr-3" onClick={()=>cancelDelete()}>No - Cancel</button>
+                <button className="btn btn-danger" onClick={()=>{
                     deletePosting({
                         ...book,
                         isActive: false
                     })
                     cancelDelete()
-                }}>Confirm</button>
-                <button className="btn btn-danger" onClick={()=>cancelDelete()}>Cancel</button>
+                }}>Yes - Delete Posting</button>
             </div>
         </div>
     </div>

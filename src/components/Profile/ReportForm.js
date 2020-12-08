@@ -38,6 +38,8 @@ class ReportForm extends React.Component {
                                       onChange={(event) => this.editReportReason(event.target.value)}
                         />
                     </Form.Group>
+                    <Button variant="danger" className="mr-3"
+                            onClick={this.props.closeReport}>Cancel</Button>
                     <Button variant="success" onClick={() =>
                     {
                         this.props.createReport({
@@ -47,9 +49,8 @@ class ReportForm extends React.Component {
                         })
                         this.props.closeReport()
                     }
-                    }>Submit</Button>
-                    <Button variant="danger" className="add-left-margin"
-                            onClick={this.props.closeReport}>Cancel</Button>
+                    }>Report</Button>
+
                 </div>
             </div>
         );

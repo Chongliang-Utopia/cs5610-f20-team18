@@ -34,7 +34,7 @@ const EditPosting = ({
             <h4>{book.title}</h4>
             <div>Status: Lent</div>
             <div>Condition: {renderCondition(book.condition)}</div>
-            <label htmlFor="bookCondition" className={classes.condtionLabel}>Book Condition:</label>
+            <label htmlFor="bookCondition" className="center-text mt-3">Book Condition:</label>
             <select className="form-control" id="bookCondition" onChange={e => updateBookCondition(e.target.value)}>
                 <option disabled value="">Choose the condition of the book</option>
                 <option value="LIKE_NEW">Like New</option>
@@ -49,15 +49,16 @@ const EditPosting = ({
             {/*</div>*/}
             <br/>
             <div className>
-                <button className="btn btn-success mr-3" onClick={() => {
+                <button className="btn btn-danger mr-3" onClick={() => cancelEdit()}>Cancel</button>
+                <button className="btn btn-success" onClick={() => {
                     updatePosting({
                         ...book,
                         condition: newCondition
                     })
                     cancelEdit()
-                }}>Confirm
+                }}>Save
                 </button>
-                <button className="btn btn-danger" onClick={() => cancelEdit()}>Cancel</button>
+
             </div>
         </div>
     </div>)
