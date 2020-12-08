@@ -4,7 +4,7 @@ import {
     FETCH_ADMINUSER, FETCH_ALLPOSTINGS, FETCH_ALLTICKETS, FETCH_ALLUSERS,
     SWITCH_SECTION,
     UPDATE_ADMININFO,
-    DELETE_REVIEW, FIND_ALL_SUBSCRIPTIONS, UNSUBSCRIBE
+    DELETE_REVIEW, FIND_ALL_SUBSCRIPTIONS, UNSUBSCRIBE, ADD_SUBSCRIPTION
 } from "../actions/types";
 
 const INTIAL_STATE = {
@@ -163,6 +163,11 @@ const adminReducer = (state = INTIAL_STATE, action) => {
             return {
                 ...state,
                 AllBooks: state.AllBooks.map(book=>book._id===action.book._id ? updatedBook: book)
+            }
+        case ADD_SUBSCRIPTION:
+            return {
+                ...state,
+                subscriptions: [...state.subscriptions, action.newSubscription]
             }
         case FIND_ALL_SUBSCRIPTIONS:
             return {

@@ -7,6 +7,7 @@ class EmailSubscriptionService {
 
     addSubscription(subscriptionRequest){
         return axios.post(API_URL, subscriptionRequest)
+            .then(response => response.data);
     }
 
     findAllSubscriptions(){
