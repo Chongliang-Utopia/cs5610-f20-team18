@@ -31,6 +31,8 @@ class AllBookPostings extends React.Component{
     }
 
     render() {
+        console.log("allbooks")
+        console.log(this.props.AllBooks)
         return (
             <div>
                 <Modal show={this.state.deleting} modalClosed={this.cancelDelete}>
