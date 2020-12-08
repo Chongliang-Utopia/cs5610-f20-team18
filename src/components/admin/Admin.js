@@ -14,7 +14,7 @@ import EmailSubscriberComponent from "./Components/EmailSubscriberComponent";
 class Admin extends React.Component{
 
     componentDidMount() {
-        console.log('didmount')
+        //console.log('didmount')
         const section = this.props.match.params.section
         this.props.switchSections(section)
         //TODO: implement to update numbers
@@ -39,7 +39,7 @@ class Admin extends React.Component{
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('didupdate')
+        //console.log('didupdate')
         // authenticate user here and update state variable??
         const section = this.props.match.params.section
         if (section !== prevProps.match.params.section) {

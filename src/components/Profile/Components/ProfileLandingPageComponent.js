@@ -142,8 +142,8 @@ class ProfileLandingPageComponent extends React.Component {
                             </thead>
                             <tbody>
                             {
-                                this.props.reviewsUserReceived.map(review =>
-                                    <tr>
+                                this.props.reviewsUserReceived.map((review, index) =>
+                                    <tr key={index}>
                                         <td>
                                             <Link to={`/users/${review.reviewer._id}/profile`}
                                                   className="mr-1">{review.reviewer.username}</Link>
