@@ -47,7 +47,11 @@ class EditReview extends React.Component {
                         </div>
                     </div>
                     <div className="mt-3">
-
+                        <button className="btn btn-danger mr-2" onClick={ () => {
+                            this.setState({newComment : ""})
+                            this.props.cancelReview()
+                        }
+                        }>Cancel</button>
                         <Button variant="success" className="mr-2" onClick={() => {
                             this.props.createReviewAsBorrower({
                                 reviewer: this.props.user._id,
@@ -69,12 +73,7 @@ class EditReview extends React.Component {
                             })
                             this.setState({newComment : ""})
                             this.props.cancelReview()
-                        }}>Submit</Button>
-                        <button className="btn btn-danger mr-2" onClick={ () => {
-                            this.setState({newComment : ""})
-                            this.props.cancelReview()
-                        }
-                        }>Cancel</button>
+                        }}>Submit Review</Button>
                     </div>
                 </div>
             </div>

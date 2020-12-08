@@ -88,7 +88,7 @@ class BorrowingSummary extends Component {
                                     startDate: this.state.startDate,
                                     endDate: this.state.endDate,
                                 })}>
-                            Submit
+                            Borrow
                         </button>
                     </div>
                 </div>
