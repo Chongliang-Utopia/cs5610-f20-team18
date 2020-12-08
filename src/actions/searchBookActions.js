@@ -1,6 +1,5 @@
 import bookService from "../services/BookService";
 import bestsellerBooksList from '../assets/data/bestsellerBooksList.json'
-import {UPDATE_USER} from "./types/userTypes";
 
 export const SET_ADVANCED_SEARCH = "SET_ADVANCED_SEARCH"
 export const FETCH_BOOKS = "FETCH_BOOKS"

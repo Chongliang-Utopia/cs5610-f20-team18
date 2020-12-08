@@ -42,7 +42,7 @@ const getAllBookPostings = () =>
 const getBookByGoogleId = (googleBookId) =>
     axios.get(`${API_URL}/${googleBookId}/books`).then(response => response.data ? response.data : [])
 
-export default {
+const bookService = {
     searchBooks,
     deleteBook,
     updateBook,
@@ -54,4 +54,5 @@ export default {
     getAllBookPostings,
     getBookByGoogleId
 }
+export default bookService;
 
