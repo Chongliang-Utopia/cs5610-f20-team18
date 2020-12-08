@@ -91,7 +91,7 @@ const UserTicketsComponent =
                                 </Card.Header>
                                 <Accordion.Collapse eventKey="0">
                                     <Card.Body>
-                                        <span>This ticket has been deleted</span>
+                                        <span>This review has already been deleted</span>
                                         <Button variant="success btn-sm float-right" className="m-2"
                                                 onClick={() => deleteTicket(ticket._id)}>Delete Ticket</Button>
                                     </Card.Body>
