@@ -15,11 +15,22 @@ class LoginWithGoogle extends Component {
                 scope: "email"
             }).then(() => {
                 this.auth = window.gapi.auth2.getAuthInstance();
+            }).catch((err) => {
+                console.log(err)
             });
         });
     }
 
+    state = {
+        error: false
+    }
+
     onSignInClick = () => {
+        if (!this.auth) {
+            this.setState({error: true})
+            return;
+        }
+
         if (this.auth.isSignedIn.get()) {
             this.auth.signOut();
         }
@@ -46,10 +57,16 @@ class LoginWithGoogle extends Component {
 
     render() {
         return (
+            <div>
             <button onClick={this.onSignInClick}
                     className={classes.googleButton}>
                 <FcGoogle size="30px"/>
-            </button>)
+            </button>
+            <div hidden={!this.state.error} className="alert alert-danger mt-2">
+                Google Sign-in is currently not supported in incognito mode on Chrome on iOS.
+            </div>
+            </div>
+        )
     }
 }
 
