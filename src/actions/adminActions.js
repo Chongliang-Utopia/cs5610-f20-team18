@@ -4,7 +4,7 @@ import {
     FETCH_ADMINUSER, FETCH_ALLPOSTINGS, FETCH_ALLTICKETS, FETCH_ALLUSERS,
     SWITCH_SECTION,
     UPDATE_ADMININFO,
-    DELETE_REVIEW, FIND_ALL_SUBSCRIPTIONS, UNSUBSCRIBE
+    DELETE_REVIEW, FIND_ALL_SUBSCRIPTIONS, UNSUBSCRIBE, ADD_SUBSCRIPTION
 } from "./types";
 
 import ReportService from '../services/ReportService'
@@ -110,6 +110,18 @@ export const fetchAllPostings = () => (dispatch) => {
     //          type: FETCH_ALLPOSTINGS
     //          books
     //      }
+
+export const addSubscription = (subsriptionRequest) => (dispatch) => {
+    return EmailSubscriptionService.addSubscription(subsriptionRequest)
+        .then(subscription => {
+            if (!subscription.lastErrorObject.updatedExisting) {
+                dispatch ({
+                    type: ADD_SUBSCRIPTION,
+                    newSubscription: subscription.value
+                })
+            }
+        })
+}
 
 export const findAllSubscriptions = () => (dispatch) => {
     EmailSubscriptionService.findAllSubscriptions()

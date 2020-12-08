@@ -14,7 +14,8 @@ const findBookById = (id) =>
 
 
 const postBook = (userId, book) =>
-    axios.post(`${API_URL}/users/${userId}/books`, book, {headers: authHeader()});
+    axios.post(`${API_URL}/users/${userId}/books`, book, {headers: authHeader()})
+        .then(response => response.data)
 
 const deleteBook = (bookId) =>
     axios.delete(`${API_URL}/books/${bookId}`, {headers: authHeader()});

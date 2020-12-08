@@ -49,7 +49,7 @@ class BookActions {
 
     postBook = (dispatch, userId, book) => {
         return BookService.postBook(userId, book)
-            .then(status => {
+            .then(book => {
                 this.findAllBorrowingOptions(dispatch, book.googleBookId)
                 return dispatch({
                     type: POST_A_BOOK,
