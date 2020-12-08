@@ -39,8 +39,6 @@ const FollowingComponent = ({
                         </ListGroup.Item>)
                 }
             </ListGroup>
-
-
             <br/>
             <h2>
                 People who follow you
