@@ -27,7 +27,8 @@ const PublicProfilePosts = ({
             LoggedInUserFollowings,
             LoggedInUser,
             createLoggedInUserFollowings,
-            deleteLoggedInUserFollowings
+            deleteLoggedInUserFollowings,
+            requestLoginWithThunk
         }) =>
         <div>
             <Modal show={report} modalClosed={closeReport}>
@@ -272,4 +273,4 @@ const StateToPropertyMapper = (state) => ({
     LoggedInUser: state.auth.user
 });
 
-export default connect(StateToPropertyMapper, {openReport, closeReport, createLoggedInUserFollowings, deleteLoggedInUserFollowings})(PublicProfilePosts);
+export default connect(StateToPropertyMapper, {openReport, closeReport, createLoggedInUserFollowings, deleteLoggedInUserFollowings, requestLoginWithThunk})(PublicProfilePosts);
