@@ -26,12 +26,16 @@ class BookDetail extends React.Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);
-        this.props.dispatch(BookActions.findBook(this.props.match.params.bookId))
+        const googleBookId = this.props.match.params.bookId;
+        this.props.dispatch(BookActions.findBook(googleBookId))
+        this.props.dispatch(BookActions.findAllBorrowingOptions(googleBookId))
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.match.params.bookId !== prevProps.match.params.bookId) {
-            this.props.dispatch(BookActions.findBook(this.props.match.params.bookId))
+        const googleBookId = this.props.match.params.bookId;
+        if (googleBookId !== prevProps.match.params.bookId) {
+            this.props.dispatch(BookActions.findBook(googleBookId))
+            this.props.dispatch(BookActions.findAllBorrowingOptions(googleBookId))
         }
     }
 

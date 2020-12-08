@@ -58,7 +58,7 @@ class BookActions {
             })
     }
 
-    findAllBorrowingOptions = (dispatch, googleId) => {
+    findAllBorrowingOptions = (googleId) => (dispatch) =>{
         return BookService.findAllBorrowingOptions(googleId)
             .then(options => {
                 dispatch({

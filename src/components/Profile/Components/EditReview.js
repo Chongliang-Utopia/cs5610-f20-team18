@@ -47,7 +47,7 @@ class EditReview extends React.Component {
                     </div>
                     <div className="mt-3">
 
-                        <Button variant="success" onClick={() => {
+                        <Button variant="success" className="mr-2" onClick={() => {
                             this.props.createReviewAsBorrower({
                                 reviewer: this.props.user._id,
                                 reviewee: this.props.borrowingBeingEdited.lender._id,
