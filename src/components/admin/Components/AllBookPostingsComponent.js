@@ -58,7 +58,7 @@ class AllBookPostings extends React.Component{
                             this.props.AllBooks.map(book=>
                                 <tr>
                                     <td>
-                                        <Link to={`/books/${book._id}`} className="mr-1">{book.title}</Link>
+                                        <Link to={`/books/${book.googleBookId}`} className="mr-1">{book.title}</Link>
                                     </td>
                                     <td>
                                         <Link to={`/users/${book.user._id}/profile`} className="mr-1">{book.user.username}</Link>
@@ -74,7 +74,16 @@ class AllBookPostings extends React.Component{
                                         }
                                     </td>
                                     <td>
-                                        {ReactHtmlParser(book.description)}
+                                        {/*{ReactHtmlParser(book.description)}*/}
+                                        {
+                                            ReactHtmlParser(book.description).length > 15 && ReactHtmlParser(book.description).substring(0, 15)
+                                        }
+                                        {
+                                            ReactHtmlParser(book.description).length > 15 && "..."
+                                        }
+                                        {
+                                            ReactHtmlParser(book.description).length <= 15 && ReactHtmlParser(book.description)
+                                        }
                                     </td>
                                     <td>
                                         <button className="btn btn-outline-danger btn-sm border-0 float-right" title="Report"

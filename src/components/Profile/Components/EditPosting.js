@@ -26,11 +26,6 @@ const EditPosting = ({
                         <option value="ACCEPTABLE">Acceptable</option>
                     </select>
                     <br/>
-                    <div>
-                        <label>Upload new images</label>
-                        <button className="add-left-margin">Upload</button>
-                    </div>
-                    <br/>
                     <div className>
                         <button className="btn btn-success mr-3" onClick={()=>{
                             updatePosting({

@@ -24,7 +24,8 @@ const ProfileHeading = ({
                             LoggedInUserFollowings,
                             addToLoggedInUserFollowings,
                             deleteFromLoggedInUserFollowings,
-                            requestLoginWithThunk
+                            requestLoginWithThunk,
+                            reviewsUserReceived
                         }) => {
     return (
         <div className={"mt-5 add-15-padding row " + classes.ProfileHeading}>
@@ -56,21 +57,24 @@ const ProfileHeading = ({
                                 }}>Unfollow</button>
                     }
                 </div>
-                <div>
+                <div className={classes.profileHeading}>
                     <Rating className="add-15-padding" initialRating={user.rating} readonly
                             emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                             fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
+                    <span className={classes.ratingFont}>
+                                {reviewsUserReceived.length === 0 ? "No" : reviewsUserReceived.length} ratings
+                            </span>
                 </div>
                 <div>
                     <ul className="nav">
                         <li className="nav-item">
-                            <Link to="#" className="nav-link"><b>{bookPostings.length}</b> posts</Link>
+                            <span className="nav-link"><b>{bookPostings.length}</b> posts</span>
                         </li>
                         <li className="nav-item">
-                            <Link to="#" className="nav-link"><b>{UserFollowers.length}</b> followers</Link>
+                            <span className="nav-link"><b>{UserFollowers.length}</b> followers</span>
                         </li>
                         <li className="nav-item">
-                            <Link to="#" className="nav-link"><b>{UserFollowings.length}</b> following</Link>
+                            <span className="nav-link"><b>{UserFollowings.length}</b> following</span>
                         </li>
                     </ul>
                 </div>
@@ -88,7 +92,8 @@ const stateToPropertyMapper = (state) => ({
     UserFollowers: state.profile.UserFollowers,
     isLoggedIn: state.auth.isLoggedIn,
     LoggedInUser: state.auth.user,
-    LoggedInUserFollowings: state.profile.LoggedInUserFollowings
+    LoggedInUserFollowings: state.profile.LoggedInUserFollowings,
+    reviewsUserReceived: state.profile.reviewsUserReceived
 })
 
 export default connect(stateToPropertyMapper, {

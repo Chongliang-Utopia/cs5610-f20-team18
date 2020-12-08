@@ -24,7 +24,7 @@ const FollowingComponent = ({
                     <ListGroup.Item className="pl-0">
                         <Image width={40}
                                height={32}
-                               src={follow.profilePicture}
+                               src={follow.profilePicture === undefined ? "https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-3/177800/130-512.png" : user.profilePicture}
                                roundedCircle
                                className="hideAtSm mr-2"
                         />
@@ -34,7 +34,7 @@ const FollowingComponent = ({
                                     emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                     fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                         </span>
-                        <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow" onClick={()=>deleteUserFollowing(user._id, follow._id)}>Following</button>
+                        <button className="pull-right btn btn-sm btn-outline-secondary" title="Unfollow" onClick={()=>deleteUserFollowing(user._id, follow._id)}>Unfollow</button>
                     </ListGroup.Item>)
             }
 
@@ -51,7 +51,7 @@ const FollowingComponent = ({
                     <ListGroup.Item className="pl-0">
                         <Image width={40}
                                height={32}
-                               src={follow.profilePicture}
+                               src={follow.profilePicture === undefined ? "https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-3/177800/130-512.png" : user.profilePicture}
                                roundedCircle
                                className="hideAtSm mr-2"
                         />
@@ -74,7 +74,7 @@ const FollowingComponent = ({
                         {
                             UserFollowings.find(f=>f._id===follow._id) !== undefined &&
                             <button className="pull-right btn btn-sm btn-outline-secondary" title="unfollow"
-                                    onClick={()=>deleteUserFollowing(user._id, follow._id)}>Following</button>
+                                    onClick={()=>deleteUserFollowing(user._id, follow._id)}>Unfollow</button>
 
                         }
                     </ListGroup.Item>)
