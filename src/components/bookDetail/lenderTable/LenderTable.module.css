@@ -11,8 +11,8 @@
 .bookDescriptionText {
     overflow: hidden;
     text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 4; /* number of lines to show */
-    -webkit-box-orient: vertical;
+    height:60px;
+    line-height:20px; /* Height / no. of lines to display */
+    padding: 1px;
 }
 
