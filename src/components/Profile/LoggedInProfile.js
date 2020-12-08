@@ -13,7 +13,10 @@ import {BsCaretRightFill} from "react-icons/bs";
 import {connect} from "react-redux";
 
 
-const LoggedInProfile = ({section, user}) => {
+const LoggedInProfile = ({
+                             section,
+                             user,
+                             reviewsUserReceived}) => {
     return (
         <div className={"container " + classes.LogInProfile}>
             <div className="mt-5 add-15-padding font-size-25-italic row">
@@ -27,10 +30,13 @@ const LoggedInProfile = ({section, user}) => {
                     <span>
                         Welcome back, {user.username}!
                     </span>
-                    <div>
+                    <div className={classes.LogInProfile}>
                         <Rating initialRating={user.rating} readonly
                                 emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                 fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
+                        <span className={classes.ratingFont}>
+                                {reviewsUserReceived.length === 0 ? "No" : reviewsUserReceived.length} ratings
+                            </span>
                     </div>
                 </div>
             </div>
@@ -101,6 +107,7 @@ const LoggedInProfile = ({section, user}) => {
 const stateToPropertyMapper = (state) => ({
     user: state.profile.user,
     section: state.profile.section,
+    reviewsUserReceived: state.profile.reviewsUserReceived
 
 })
 export default connect(stateToPropertyMapper)(LoggedInProfile)

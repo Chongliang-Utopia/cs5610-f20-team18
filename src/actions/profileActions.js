@@ -236,6 +236,25 @@ export const deleteUserFollower = (uid, fid) => (dispatch) => {
         })
 }
 
+export const createLoggedInUserFollowings = (following_id, uid, following_body) => (dispatch) => {
+    return FollowService.createFollow(uid, following_id)
+        .then(status=>
+            dispatch({
+                type: ADD_TO_LOGGEDINUSERFOLLOWINGS,
+                following: following_body
+            })
+        )
+}
+
+export const deleteLoggedInUserFollowings = (following_id, uid, following_body) => (dispatch) => {
+    return FollowService.unfollow(uid, following_id)
+        .then(status=>
+            dispatch({
+                type: DELETE_FROM_LOGGEDINUSERFOLLOWINGS,
+                following: following_body
+            }))
+}
+
 export const addToLoggedInUserFollowings = (following) => (dispatch) => {
     dispatch({
         type: ADD_TO_LOGGEDINUSERFOLLOWINGS,
@@ -249,6 +268,7 @@ export const deleteFromLoggedInUserFollowings = (following) => (dispatch) => {
         following
     })
 }
+
 // Account Setting
 // export const updateUserInfo = (user) => {
 //     return {
