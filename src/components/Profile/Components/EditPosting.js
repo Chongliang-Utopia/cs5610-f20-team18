@@ -48,7 +48,7 @@ const EditPosting = ({
             {/*    <button className="add-left-margin">Upload</button>*/}
             {/*</div>*/}
             <br/>
-            <div className>
+            <div>
                 <button className="btn btn-danger mr-3" onClick={() => cancelEdit()}>Cancel</button>
                 <button className="btn btn-success" onClick={() => {
                     updatePosting({
