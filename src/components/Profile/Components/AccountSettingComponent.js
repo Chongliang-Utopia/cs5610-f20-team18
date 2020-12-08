@@ -92,7 +92,7 @@ class AccountSettingComponent extends React.Component {
                        isOpen={this.state.alertVisible}>
                     Success updating your account!
                 </Alert>
-                <h2>Edit your account info</h2>
+                <h2>Edit my account info</h2>
                 <form onSubmit={handleSubmit(this.onSubmit)}>
                     <br/>
                     <Field name="email" component={this.renderInput} label="Email*" type="email"

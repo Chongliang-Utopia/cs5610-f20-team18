@@ -17,7 +17,7 @@ const FollowingComponent = ({
     return (
         <div>
             <h2>
-                People you follow
+                People I follow
             </h2>
             <ListGroup variant="flush">
                 {
@@ -41,7 +41,7 @@ const FollowingComponent = ({
             </ListGroup>
             <br/>
             <h2>
-                People who follow you
+                People who follow me
             </h2>
             <ListGroup variant="flush">
                 {
