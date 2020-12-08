@@ -67,7 +67,7 @@ const PublicProfilePosts = ({
             <br/>
             <div className="mb-5">
                 <h3>
-                    People who lent to me says
+                    People who lent to {user.username} says
                 </h3>
                 <div className={classes.tableScroll}>
                     <table className="table table-hover">
@@ -115,7 +115,7 @@ const PublicProfilePosts = ({
                 </div>
                 <div className="mb-5 mt-5">
                     <h3>
-                        People who borrowed from me says
+                        People who borrowed from {user.username} says
                     </h3>
                     <div className={classes.tableScroll}>
                         <table className="table table-hover">
@@ -136,7 +136,7 @@ const PublicProfilePosts = ({
                                                   className="mr-1">{review.reviewer.username}</Link>
                                         </td>
                                         <td>
-                                            {review.book.title}
+                                            <Link to={`/books/${review.book.googleBookId}`} className="mr-1">{review.book.title}</Link>
                                         </td>
                                         <td>
                                             <Rating initialRating={review.rating} readonly
