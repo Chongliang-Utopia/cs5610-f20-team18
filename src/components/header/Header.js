@@ -10,7 +10,7 @@ import {logout, requestLoginWithThunk} from "../../actions/authActions";
 import history from "../../history";
 
 
-const Header = ({isLoggedIn, logout, user, requestLoginWithThunk}) => {
+const Header = ({isLoggedIn, logout, user, currentUser, requestLoginWithThunk}) => {
     const matchBookstore = useRouteMatch({path: "/books", exact: true})
 
     const renderProfile = () => {
@@ -62,8 +62,14 @@ const Header = ({isLoggedIn, logout, user, requestLoginWithThunk}) => {
                                     className="mb-1"/> Login</button> :
                                 <button
                                     onClick={() => {
-                                        if (window.location.pathname.startsWith("/admin") || window.location.pathname.startsWith("/profile")) {
+                                        if (window.location.pathname.startsWith("/admin")) {
                                             history.push("/")
+                                        }
+                                        if (currentUser._id === user._id && window.location.pathname.startsWith("/profile")) {
+                                            history.push(`/profile/${user._id}`)
+                                        }
+                                        if (currentUser._id !== user._id && window.location.pathname.startsWith("/profile")) {
+                                            history.push(`/profile/${currentUser._id}`)
                                         }
                                         logout();
                                     }}
@@ -89,7 +95,8 @@ const Header = ({isLoggedIn, logout, user, requestLoginWithThunk}) => {
 
 const StateToPropertyMapper = (state) => ({
     isLoggedIn: state.auth.isLoggedIn,
-    user: state.auth.user
+    user: state.auth.user,
+    currentUser: state.profile.user
 });
 
 
