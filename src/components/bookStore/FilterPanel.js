@@ -3,13 +3,16 @@ import classes from "./filterPanel.module.css";
 import Rating from "react-rating";
 import {connect} from "react-redux";
 import {AiFillStar, AiOutlineStar} from "react-icons/all";
-import {filterBookByRating, sortBookHighToLow, sortBookPublisherDate, getRecommendedBooks} from "../../actions/searchBookActions"
+import {filterBookByRating, sortBookHighToLow,
+    sortBookPublisherDate, getRecommendedBooks} from "../../actions/searchBookActions"
+import history from "../../history";
 
 class FilterPanel extends React.Component {
 
-    // filterBook = (number) => {
-    //     alert("clicked rating filter: " + number)
-    // }
+    setRecommended = () => {
+        history.push(`/books`)
+    }
+
     render() {
         return (
             <div className={classes.filterPanel}>
@@ -17,8 +20,9 @@ class FilterPanel extends React.Component {
                     <li className="list-group-item">
                         <p><b>Editor recommends:</b></p>
                         <button className={`btn btn-link ${classes.filterLink}`}
-                        onClick={() => this.props.getRecommended()}
-                        >
+                        onClick={() => {
+                            this.setRecommended()
+                        }}>
                             Most Popular
                         </button>
                     </li>
@@ -108,7 +112,6 @@ class FilterPanel extends React.Component {
     }
 }
 
-// export default FilterPanel
 
 const stateToPropertyMapper = (state) => ({
     books: state.searchBookReducer.books,
@@ -118,7 +121,7 @@ const propertyToDispatchMapper = (dispatch) => ({
     filterBook: (number) => filterBookByRating(dispatch, number),
     sortBook: () => sortBookHighToLow(dispatch),
     sortBookPublisher: () => sortBookPublisherDate(dispatch),
-    getRecommended: () => getRecommendedBooks(dispatch)
+    getRecommended: () => getRecommendedBooks(dispatch),
 })
 export default connect(stateToPropertyMapper, propertyToDispatchMapper)
 (FilterPanel)

@@ -9,6 +9,8 @@ export const SET_SEARCH_TITLE = "SET_SEARCH_TITLE"
 export const SET_SEARCH_ISBN = "SET_SEARCH_ISBN"
 export const SET_SEARCH_PUBLISHER = "SET_SEARCH_PUBLISHER"
 export const SET_SEARCH_SUBJECT = "SET_SEARCH_SUBJECT"
+export const SET_SEARCH_CRITERIA = "SET_SEARCH_CRITERIA"
+export const CLEAR_SEARCH_KEYWORDS = "CLEAR_SEARCH_KEYWORDS"
 
 export const FILTER_BOOK_BY_RATING = "FILTER_BOOK_BY_RATING"
 export const SORT_BOOK_BY_RATING_HIGH_TO_LOW = "SORT_BOOK_BY_RATING_HIGH_TO_LOW"
@@ -37,18 +39,29 @@ export  const setAdvancedSearch = (dispatch, showAdvancedSearch) =>
     dispatch({
         type: SET_ADVANCED_SEARCH, showAdvancedSearch: showAdvancedSearch
     })
-export const searchBook = (dispatch, default_term, author, title, isbn, publisher, subject) => {
-    let keyword = '';
-    if (default_term && default_term.length > 0) keyword += default_term;
-    if (author && author.length > 0) keyword += '+inauthor:' + author
-    if (title && title.length > 0) keyword += '+intitle:' + title
-    if (isbn && isbn.length > 0) keyword += '+isbn:' + isbn
-    if (publisher && publisher.length > 0) keyword += '+inpublisher:' + publisher
-    if (subject && subject.length > 0) keyword += '+subject:' + subject
-    if (keyword && keyword.length > 0 && keyword.charAt(0) === '+') {
-        keyword = keyword.substring(1)
-    }
-    bookService.searchBooks(keyword)
+// export const searchBook = (dispatch, default_term, author, title, isbn, publisher, subject) => {
+//     let keyword = '';
+//     if (default_term && default_term.length > 0) keyword += default_term;
+//     if (author && author.length > 0) keyword += '+inauthor:' + author
+//     if (title && title.length > 0) keyword += '+intitle:' + title
+//     if (isbn && isbn.length > 0) keyword += '+isbn:' + isbn
+//     if (publisher && publisher.length > 0) keyword += '+inpublisher:' + publisher
+//     if (subject && subject.length > 0) keyword += '+subject:' + subject
+//     if (keyword && keyword.length > 0 && keyword.charAt(0) === '+') {
+//         keyword = keyword.substring(1)
+//     }
+//     bookService.searchBooks(keyword)
+//         .then(books => dispatch({
+//             type: FETCH_BOOKS, books: books.items ? books.items : []
+//         }))
+// }
+export const setBookSearchCriteria = (dispatch, criteria) => (dispatch) => {
+    dispatch({
+        type: SET_SEARCH_CRITERIA, criteria
+    })
+}
+export const searchBookByCriteria = (dispatch, criteria) => {
+    bookService.searchBooks(criteria)
         .then(books => dispatch({
             type: FETCH_BOOKS, books: books.items ? books.items : []
         }))
@@ -109,3 +122,9 @@ export const setCurrentIndex = (index) => (dispatch) => {
         index
     })
 }
+export const clearSearchKeywords = (dispatch) => {
+    dispatch({
+        type: CLEAR_SEARCH_KEYWORDS
+    })
+}
+
