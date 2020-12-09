@@ -16,11 +16,11 @@ const DeleteFromReadingList = ({
             </div>
             <p>Are you sure you want to delete this book from your reading list?</p>
             <div>
-                <button className="btn btn-success mr-3" onClick={()=>{
+                <button className="btn btn-success mr-3" onClick={()=>cancelDelete()}>No - Cancel</button>
+                <button className="btn btn-danger" onClick={()=>{
                     deleteBookFromReadingList(user._id, book.id)
                     cancelDelete()
-                }}>Confirm</button>
-                <button className="btn btn-danger" onClick={()=>cancelDelete()}>Cancel</button>
+                }}>Yes - Delete Book</button>
             </div>
         </div>
     </div>

@@ -16,7 +16,7 @@ const AdminLandingPageComponent = ({
             <br/>
             <CardDeck className={classes.cardDeck}>
                 <Card className={classes.card}>
-                    <Link to={`/admin/users`} classname="bottom">
+                    <Link to={`/admin/users`} className="bottom">
                         <Card.Body>
                             <Card.Title>Number of members</Card.Title>
 

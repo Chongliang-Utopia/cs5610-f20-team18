@@ -22,8 +22,8 @@ const UserAccountsComponent =
                 </thead>
                 <tbody>
                 {
-                    users.map(user=>
-                            <tr>
+                    users.map((user, index)=>
+                            <tr key={index}>
                                 <td>
                                     <Link to={`/users/${user}/profile`} className="mr-1">{user.username}</Link>
                                 </td>
