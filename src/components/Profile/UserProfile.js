@@ -13,7 +13,6 @@ import {
     fetchFollowers,
     fetchFollowings,
     fetchLoggedInUserFollowings,
-    authenticate
 } from "../../actions/profileActions";
 import UserActions from "../../actions/userActions";
 
@@ -22,7 +21,6 @@ class UserProfile extends React.Component {
     componentDidMount() {
         const uid = this.props.match.params.userId
         const section = this.props.match.params.section
-        this.props.authenticate(uid, this.props.loggedInUser, this.props.isLoggedIn)
         if ((this.props.isLoggedIn && !uid) || (this.props.isLoggedIn && this.props.loggedInUser._id === uid)) {
             this.props.findUserById(this.props.loggedInUser._id)
             this.props.fetchBookPostingsForUser(this.props.loggedInUser._id)
@@ -57,7 +55,6 @@ class UserProfile extends React.Component {
         const uid = this.props.match.params.userId
         const section = this.props.match.params.section
         if (section !== prevProps.match.params.section || uid !== prevProps.match.params.userId) {
-            this.props.authenticate(uid, this.props.loggedInUser, this.props.isLoggedIn)
             if ((this.props.isLoggedIn && !uid) || (this.props.isLoggedIn && this.props.loggedInUser._id === uid)) {
                 this.props.findUserById(this.props.loggedInUser._id)
                 this.props.fetchBookPostingsForUser(this.props.loggedInUser._id)
@@ -92,15 +89,24 @@ class UserProfile extends React.Component {
     render() {
         return (
             <div className="container">
-                {this.props.isLoggedIn && this.props.loggedInUser._id === this.props.user._id ?
-                <LoggedInProfile/> : <PublicProfile/>}
+                {
+                    Object.keys(this.props.user).length === 0 && this.props.user.constructor === Object
+                    && <span>"Invalid User ID"</span>
+                }
+                {
+                    !(Object.keys(this.props.user).length === 0 && this.props.user.constructor === Object) && this.props.isLoggedIn && this.props.loggedInUser._id === this.props.user._id &&
+                        <LoggedInProfile/>
+                }
+                {
+                    !(Object.keys(this.props.user).length === 0 && this.props.user.constructor === Object)  && !(this.props.isLoggedIn && this.props.loggedInUser._id === this.props.user._id) &&
+                        <PublicProfile/>
+                }
             </div>
         )
     }
 }
 
 const stateToPropertyMapper = (state) => ({
-    authenticated: state.profile.authenticated,
     loggedInUser: state.auth.user,
     isLoggedIn: state.auth.isLoggedIn,
     user: state.profile.user
@@ -119,5 +125,4 @@ export default connect(stateToPropertyMapper,
         fetchFollowings,
         fetchLoggedInUserFollowings,
         getReadingListForUser,
-        authenticate,
     })(UserProfile)
