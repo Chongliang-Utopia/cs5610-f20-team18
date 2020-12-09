@@ -31,7 +31,7 @@ import {
     FETCH_LOGGEDINUSERFOLLOWINGS,
     ADD_TO_LOGGEDINUSERFOLLOWINGS,
     DELETE_FROM_LOGGEDINUSERFOLLOWINGS,
-    CREATE_USERFOLLOWING, DELETE_USERFOLLOWING, CREATE_USERFOLLOWER, DELETE_USERFOLLOWER
+    CREATE_USERFOLLOWING, DELETE_USERFOLLOWING, CREATE_USERFOLLOWER, DELETE_USERFOLLOWER, VALIDATE_USER
 
 } from "./types";
 import ReportService from "../services/ReportService";
@@ -41,26 +41,6 @@ import TransactionService from "../services/TransactionService";
 import FollowService from "../services/FollowService";
 import UserService from "../services/UserService";
 
-// USER
-export const authenticate = (userId, authUser, isLoggedIn) => (dispatch) => {
-    let authenticated = false;
-    if (isLoggedIn && !userId || (isLoggedIn && authUser._id === userId)) {
-        authenticated = true
-    }
-    dispatch({
-        type: AUTHENTICATE,
-        authenticated
-    })
-}
-// export const fetchUser = (uid) => (dispatch) => {
-//     UserService.findUserById(uid)
-//         .then(user => {
-//             dispatch({
-//                 type: FETCH_USER,
-//                 user
-//             })
-//         })
-// };
 
 // SECTION
 export const switchSection = (section) => {
