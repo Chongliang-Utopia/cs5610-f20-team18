@@ -62,7 +62,7 @@ const Header = ({isLoggedIn, logout, user, requestLoginWithThunk}) => {
                                     className="mb-1"/> Login</button> :
                                 <button
                                     onClick={() => {
-                                        if (window.location.pathname.startsWith("/admin")) {
+                                        if (window.location.pathname.startsWith("/admin") || window.location.pathname.startsWith("/profile")) {
                                             history.push("/")
                                         }
                                         logout();
