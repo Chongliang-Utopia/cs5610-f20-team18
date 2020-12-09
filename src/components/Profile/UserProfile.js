@@ -92,7 +92,7 @@ class UserProfile extends React.Component {
     render() {
         return (
             <div className="container">
-                {this.props.authenticated ?
+                {this.props.isLoggedIn && this.props.loggedInUser._id === this.props.user._id ?
                 <LoggedInProfile/> : <PublicProfile/>}
             </div>
         )
