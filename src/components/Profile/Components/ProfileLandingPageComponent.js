@@ -58,7 +58,7 @@ class ProfileLandingPageComponent extends React.Component {
 
                     <CardDeck>
                         <Card className="center-text" bg={"light"} style={{width: '10rem'}}>
-                            <Link to={`/users/${this.props.user._id}/profile/lendings`}>
+                            <Link to={`/profile/sections/lendings`}>
                                 <Card.Body>
                                     <Card.Title>Active Postings</Card.Title>
                                 </Card.Body>
@@ -78,7 +78,7 @@ class ProfileLandingPageComponent extends React.Component {
                         {/*</Card>*/}
                         <Card style={{width: '10rem'}} className="center-text" bg={"light"}>
                             <Link
-                                to={`/users/${this.props.user._id}/profile/followings`}>
+                                to={`/profile/sections/followings`}>
                                 <Card.Body>
                                     <Card.Title>Following</Card.Title>
                                 </Card.Body>
@@ -92,7 +92,7 @@ class ProfileLandingPageComponent extends React.Component {
                     <br/>
                     <CardDeck>
                         <Card style={{width: '10rem'}} className="center-text" bg={"light"}>
-                            <Link to={`/users/${this.props.user._id}/profile/borrowings`}>
+                            <Link to={`/profile/sections/borrowings`}>
                                 <Card.Body>
                                     <Card.Title>Active Borrowings</Card.Title>
                                 </Card.Body>
@@ -113,7 +113,7 @@ class ProfileLandingPageComponent extends React.Component {
 
                         <Card style={{width: '10rem'}} className="center-text" bg={"light"}>
                             <Link
-                                to={`/users/${this.props.user._id}/profile/followings`}>
+                                to={`/profile/sections/followings`}>
                                 <Card.Body>
                                     <Card.Title>Follower</Card.Title>
                                 </Card.Body>
@@ -145,7 +145,7 @@ class ProfileLandingPageComponent extends React.Component {
                                 this.props.reviewsUserReceived.map(review =>
                                     <tr>
                                         <td>
-                                            <Link to={`/users/${review.reviewer._id}/profile`}
+                                            <Link to={`/profile/${review.reviewer._id}`}
                                                   className="mr-1">{review.reviewer.username}</Link>
                                         </td>
                                         <td>

@@ -56,7 +56,7 @@ class BorrowingComponent extends React.Component {
                             {this.props.UserBorrowings.filter(borrowing => borrowing.status!=="RETURNED").map(borrowing =>
                                 <tr>
                                     <td>
-                                        <Link to={`/users/${borrowing.lender._id}/profile`}
+                                        <Link to={`/profile/${borrowing.lender._id}`}
                                               className="mr-1">{borrowing.lender.username}</Link>
                                     </td>
                                     <td>
@@ -109,7 +109,7 @@ class BorrowingComponent extends React.Component {
                             {this.props.UserBorrowings.filter(borrowing => borrowing.status==="APPROVED").map(borrowing =>
                                 <tr>
                                     <td>
-                                        <Link to={`/users/${borrowing.lender._id}/profile`}
+                                        <Link to={`/profile/${borrowing.lender._id}`}
                                               className="mr-1">{borrowing.lender.username}</Link>
                                     </td>
                                     <td>
@@ -149,7 +149,7 @@ class BorrowingComponent extends React.Component {
                             {this.props.UserBorrowings.filter(borrowing => borrowing.status==="RETURNED").map(borrowing =>
                                 <tr>
                                     <td>
-                                        <Link to={`/users/${borrowing.lender._id}/profile`}
+                                        <Link to={`/profile/${borrowing.lender._id}`}
                                               className="mr-1">{borrowing.lender.username}</Link>
                                     </td>
                                     <td>

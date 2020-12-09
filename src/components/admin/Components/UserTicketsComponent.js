@@ -47,11 +47,11 @@ const UserTicketsComponent =
                                                 <tbody>
                                                 <tr>
                                                     <td>
-                                                        <Link to={`/users/${ticket.review.reviewer._id}/profile`}
+                                                        <Link to={`/profile/${ticket.review.reviewer._id}`}
                                                               className="mr-1">{ticket.review.reviewer.username}</Link>
                                                     </td>
                                                     <td>
-                                                        <Link to={`/users/${ticket.review.reviewee._id}/profile`}
+                                                        <Link to={`/profile/${ticket.review.reviewee._id}`}
                                                               className="mr-1">{ticket.review.reviewee.username}</Link>
                                                     </td>
                                                     <td>

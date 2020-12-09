@@ -44,7 +44,7 @@ import UserService from "../services/UserService";
 // USER
 export const authenticate = (userId, authUser, isLoggedIn) => (dispatch) => {
     let authenticated = false;
-    if (isLoggedIn && authUser._id === userId) {
+    if (isLoggedIn && !userId || (isLoggedIn && authUser._id === userId)) {
         authenticated = true
     }
     dispatch({

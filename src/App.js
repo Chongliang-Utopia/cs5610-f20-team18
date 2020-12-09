@@ -38,8 +38,9 @@ class App extends Component {
                                     <Route exact path={["/", "/home"]} component={HomePage}/>
                                     <Route exact path="/search" component={GoogleBookClient}/>
                                     <Route exact path="/books/:bookId" component={BookDetail}/>
-                                    <Route exact path="/users/:userId/profile" component={UserProfile}/>
-                                    <Route exact path="/users/:userId/profile/:section" component={UserProfile}/>
+                                    <Route exact path="/profile" component={UserProfile}/>
+                                    <Route exact path="/profile/:userId" component={UserProfile}/>
+                                    <Route exact path="/profile/sections/:section" component={UserProfile}/>
                                     <Route exact path={["/books", "/bookstore"]} component={BookStore}/>
                                     <PrivateRouteAdmin exact path="/admin" component={Admin}/>
                                     <PrivateRouteAdmin exact path="/admin/:section" component={Admin}/>

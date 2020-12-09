@@ -45,31 +45,31 @@ const LoggedInProfile = ({
                 <div className={"col-md-4 col-lg-3 " + classes.leftSideBar}>
                     <div className="nav flex-column nav-pills">
                         <li className="nav-item">
-                            <Link to={`/users/${user._id}/profile`} className="nav-link">
+                            <Link to={`/profile/sections/home`} className="nav-link">
                                 {!section &&<BsCaretRightFill className="mb-1 mr-1"/>}
                                 Profile Home
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={`/users/${user._id}/profile/settings`} className="nav-link">
+                            <Link to={`/profile/sections/settings`} className="nav-link">
                                 {section === "settings" &&<BsCaretRightFill className="mb-1 mr-1"/>}
                                 Account Settings
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={`/users/${user._id}/profile/lendings`} className="nav-link">
+                            <Link to={`/profile/sections/lendings`} className="nav-link">
                                 {section === "lendings" &&<BsCaretRightFill className="mb-1 mr-1"/>}
                                 My Lendings
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={`/users/${user._id}/profile/borrowings`} className="nav-link">
+                            <Link to={`/profile/sections/borrowings`} className="nav-link">
                                 {section === "borrowings" &&<BsCaretRightFill className="mb-1 mr-1"/>}
                                 My borrowings
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={`/users/${user._id}/profile/followings`} className="nav-link">
+                            <Link to={`/profile/sections/followings`} className="nav-link">
                                 {section === "followings" &&<BsCaretRightFill className="mb-1 mr-1"/>}
                                 My followings
                             </Link>
@@ -79,7 +79,7 @@ const LoggedInProfile = ({
 
                 <div className={"col-md-8 col-lg-9 pr-4 " + classes.contentDiv}>
                     {
-                        typeof section === 'undefined' &&
+                        (section === undefined || section === "home") &&
                         <ProfileLandingPageComponent/>
                     }
                     {
