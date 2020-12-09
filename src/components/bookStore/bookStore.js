@@ -8,11 +8,6 @@ import {getRecommendedBooks, setBookSearchCriteria, setSearchDefaultTerm,
 
 class BookStore extends React.Component {
     componentDidMount() {
-        // if (this.props.search_default_term) {
-        //     this.props.searchBook(this.props.search_default_term)
-        // } else {
-        //     this.props.getRecommended();
-        // }
         if (this.props.match.params.criteria) {
             this.props.setSearchDefaultTerm(this.props.match.params.criteria);
             this.props.searchBookByCriteria(this.props.match.params.criteria);
@@ -57,8 +52,7 @@ const stateToPropertyMapper = (state) => ({
 })
 
 const propertyToDispatchMapper = (dispatch) => ({
-    // searchBook: (search_default_term, author, title, isbn, publisher, subject) =>
-    //     searchBook(dispatch, search_default_term, author, title, isbn, publisher, subject),
+
     getRecommended: () => getRecommendedBooks(dispatch),
     setBookSearchCriteria: (criteria) => setBookSearchCriteria(dispatch, criteria),
     searchBookByCriteria: (criteria) => searchBookByCriteria(dispatch, criteria),
@@ -68,4 +62,3 @@ const propertyToDispatchMapper = (dispatch) => ({
 export default connect(stateToPropertyMapper, propertyToDispatchMapper)
 (BookStore)
 
-// export default BookStore
