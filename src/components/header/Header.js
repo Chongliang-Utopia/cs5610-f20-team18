@@ -65,10 +65,7 @@ const Header = ({isLoggedIn, logout, user, currentUser, requestLoginWithThunk}) 
                                         if (window.location.pathname.startsWith("/admin")) {
                                             history.push("/")
                                         }
-                                        if (currentUser._id === user._id && window.location.pathname.startsWith("/profile")) {
-                                            history.push(`/profile/${user._id}`)
-                                        }
-                                        if (currentUser._id !== user._id && window.location.pathname.startsWith("/profile")) {
+                                        if (window.location.pathname.startsWith("/profile")) {
                                             history.push(`/profile/${currentUser._id}`)
                                         }
                                         logout();
