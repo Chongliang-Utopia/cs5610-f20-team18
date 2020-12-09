@@ -22,6 +22,7 @@ const UserTicketsComponent =
                 <h5>Woohoo! No pending user tickets</h5>
             }
             {
+
                 tickets.length !== 0 && tickets.map((ticket, index) =>
                     ticket.review != null ?
                     <Accordion key={index}>
@@ -47,11 +48,11 @@ const UserTicketsComponent =
                                                 <tbody>
                                                 <tr>
                                                     <td>
-                                                        <Link to={`/users/${ticket.review.reviewer._id}/profile`}
+                                                        <Link to={`/profile/${ticket.review.reviewer._id}`}
                                                               className="mr-1">{ticket.review.reviewer.username}</Link>
                                                     </td>
                                                     <td>
-                                                        <Link to={`/users/${ticket.review.reviewee._id}/profile`}
+                                                        <Link to={`/profile/${ticket.review.reviewee._id}`}
                                                               className="mr-1">{ticket.review.reviewee.username}</Link>
                                                     </td>
                                                     <td>
@@ -82,6 +83,7 @@ const UserTicketsComponent =
                                     </Card.Body>
                             </Accordion.Collapse>
                         </Card>
+
                     </Accordion> : <Accordion key={index}>
                             <Card className="mb-3">
                                 <Card.Header>

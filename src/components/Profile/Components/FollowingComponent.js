@@ -29,7 +29,7 @@ const FollowingComponent = ({
                                    roundedCircle
                                    className="hideAtSm mr-2"
                             />
-                            <Link to={`/users/${follow._id}/profile`}>{follow.username}</Link>
+                            <Link to={`/profile/${follow._id}`}>{follow.username}</Link>
                             <span className="hideAtSm">
                             <Rating className="add-15-padding" initialRating={follow.rating} readonly
                                     emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
@@ -53,7 +53,7 @@ const FollowingComponent = ({
                                    roundedCircle
                                    className="hideAtSm mr-2"
                             />
-                            <Link to={`/users/${follow._id}/profile`}>{follow.username}</Link>
+                            <Link to={`/profile/${follow._id}`}>{follow.username}</Link>
                             <span className="hideAtSm">
                             <Rating className="add-15-padding" initialRating={follow.rating} readonly
                                     emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}

@@ -84,7 +84,7 @@ const PublicProfilePosts = ({
                             {reviewsUserReceived.filter(review=>review.reviewerIsLender).map((review, index) =>
                                 <tr key={index}>
                                     <td>
-                                        <Link to={`/users/${review.reviewer._id}/profile`}
+                                        <Link to={isLoggedIn && LoggedInUser._id === review.reviewer._id ? `/profile` : `/profile/${review.reviewer._id}`}
                                               className="mr-1">{review.reviewer.username}</Link>
                                     </td>
                                     <td>
@@ -132,7 +132,7 @@ const PublicProfilePosts = ({
                                 {reviewsUserReceived.filter(review=>!review.reviewerIsLender).map((review, index) =>
                                     <tr key={index}>
                                         <td>
-                                            <Link to={`/users/${review.reviewer._id}/profile`}
+                                            <Link to={isLoggedIn &&LoggedInUser._id === review.reviewer._id ? `/profile` : `/profile/${review.reviewer._id}`}
                                                   className="mr-1">{review.reviewer.username}</Link>
                                         </td>
                                         <td>
@@ -177,7 +177,7 @@ const PublicProfilePosts = ({
                                            roundedCircle
                                            className="hideAtSm mr-2"
                                     />
-                                    <Link to={`/users/${follow._id}/profile`}>{follow.username}</Link>
+                                    <Link to={isLoggedIn &&LoggedInUser._id === follow._id ? `/profile` : `/profile/${follow._id}`}>{follow.username}</Link>
                                     <span className="hideAtSm">
                                         <Rating className="add-15-padding" initialRating={follow.rating} readonly
                                                 emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
@@ -224,7 +224,7 @@ const PublicProfilePosts = ({
                                            roundedCircle
                                            className="hideAtSm mr-2"
                                     />
-                                    <Link to={`/users/${follow._id}/profile`}>{follow.username}</Link>
+                                    <Link to={isLoggedIn && LoggedInUser._id === follow._id ? `/profile` : `/profile/${follow._id}`}>{follow.username}</Link>
                                     <span className="hideAtSm">
                                         <Rating className="add-15-padding" initialRating={follow.rating} readonly
                                                 emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}

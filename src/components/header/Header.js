@@ -18,7 +18,7 @@ const Header = ({isLoggedIn, logout, user, requestLoginWithThunk}) => {
             if (user.isAdmin) {
                 return <Link className="nav-link" to="/admin">Admin</Link>
             } else {
-                return <Link className="nav-link" to={`/users/${user._id}/profile`}>Profile</Link>
+                return <Link className="nav-link" to={"/profile"}>Profile</Link>
 
             }
         } else {
@@ -62,7 +62,7 @@ const Header = ({isLoggedIn, logout, user, requestLoginWithThunk}) => {
                                     className="mb-1"/> Login</button> :
                                 <button
                                     onClick={() => {
-                                        if (window.location.pathname.startsWith("/admin")) {
+                                        if (window.location.pathname.startsWith("/admin") || window.location.pathname.startsWith("/profile")) {
                                             history.push("/")
                                         }
                                         logout();
