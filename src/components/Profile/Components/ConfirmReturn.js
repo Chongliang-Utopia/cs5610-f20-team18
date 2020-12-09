@@ -42,6 +42,7 @@ class ConfirmReturn extends React.Component {
                     <div>
                         <label>Please review your experience</label>
                         <textarea className="form-control mb-3"
+                                  value={this.state.newComment}
                                   onChange={(event) => this.setNewComment(event.target.value)}/>
                     </div>
                     <div>
@@ -53,8 +54,11 @@ class ConfirmReturn extends React.Component {
                         </div>
                     </div>
                     <div className="mt-3">
-
-                        <Button variant="success" className="mr-2" onClick={() => {
+                        <button className="btn btn-danger mr-3" onClick={() => {
+                            this.setState({newComment : ""})
+                            this.props.cancelConfirm()
+                        }}>Cancel</button>
+                        <Button variant="success" onClick={() => {
                             // use create review as lender
                             this.props.createReviewAsLender({
                                 reviewer: this.props.user._id,
@@ -74,9 +78,9 @@ class ConfirmReturn extends React.Component {
                                     rating: this.state.newRating
                                 }
                             })
+                            this.setState({newComment : ""})
                             this.props.cancelConfirm()
-                        }}>Submit</Button>
-                        <button className="btn btn-danger mr-2" onClick={this.props.cancelConfirm}>Cancel</button>
+                        }}>Confirm Book Returned</Button>
                     </div>
                 </div>
             </div>

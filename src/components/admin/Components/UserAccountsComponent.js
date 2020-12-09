@@ -23,8 +23,8 @@ const UserAccountsComponent =
                 </thead>
                 <tbody>
                 {
-                    users.map(user=>
-                            <tr>
+                    users.map((user, index)=>
+                            <tr key={index}>
                                 <td>
                                     <Link to={user._id === loggedInUser._id? "/admin": `/profile/${user._id}`} className="mr-1">{user.username}</Link>
                                 </td>

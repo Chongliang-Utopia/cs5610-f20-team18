@@ -40,8 +40,8 @@ const PublicProfilePosts = ({
                     {user.username}'s Postings
                 </h3>
                 {
-                    bookPostings.map(book=>
-                        <div className="ImageCard m-3">
+                    bookPostings.map((book, index)=>
+                        <div className="ImageCard m-3" key={index}>
                             <Link title={book.title}
                                   to={`/books/${book.googleBookId}`}>
                                 <ImageCard
@@ -81,8 +81,8 @@ const PublicProfilePosts = ({
                         </tr>
                         </thead>
                         <tbody>
-                            {reviewsUserReceived.filter(review=>review.reviewerIsLender).map(review =>
-                                <tr>
+                            {reviewsUserReceived.filter(review=>review.reviewerIsLender).map((review, index) =>
+                                <tr key={index}>
                                     <td>
                                         <Link to={isLoggedIn && LoggedInUser._id === review.reviewer._id ? `/profile` : `/profile/${review.reviewer._id}`}
                                               className="mr-1">{review.reviewer.username}</Link>
@@ -129,8 +129,8 @@ const PublicProfilePosts = ({
                             </tr>
                             </thead>
                             <tbody>
-                                {reviewsUserReceived.filter(review=>!review.reviewerIsLender).map(review =>
-                                    <tr>
+                                {reviewsUserReceived.filter(review=>!review.reviewerIsLender).map((review, index) =>
+                                    <tr key={index}>
                                         <td>
                                             <Link to={isLoggedIn &&LoggedInUser._id === review.reviewer._id ? `/profile` : `/profile/${review.reviewer._id}`}
                                                   className="mr-1">{review.reviewer.username}</Link>
@@ -169,8 +169,8 @@ const PublicProfilePosts = ({
                     </h3>
                     <ListGroup variant="flush">
                         {
-                            UserFollowings.map(follow=>
-                                <ListGroup.Item className="pl-0">
+                            UserFollowings.map((follow, index)=>
+                                <ListGroup.Item className="pl-0" key={index}>
                                     <Image width={40}
                                            height={32}
                                            src={follow.profilePicture === undefined ? "https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-3/177800/130-512.png" : follow.profilePicture}
@@ -216,8 +216,8 @@ const PublicProfilePosts = ({
                     </h3>
                     <ListGroup variant="flush">
                         {
-                            UserFollowers.map(follow=>
-                                <ListGroup.Item className="pl-0">
+                            UserFollowers.map((follow, index)=>
+                                <ListGroup.Item className="pl-0" key={index}>
                                     <Image width={40}
                                            height={32}
                                            src={follow.profilePicture === undefined ? "https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-3/177800/130-512.png" : follow.profilePicture}

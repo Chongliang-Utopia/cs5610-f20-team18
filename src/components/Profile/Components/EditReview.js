@@ -35,6 +35,7 @@ class EditReview extends React.Component {
                     <h4>Please review your experience</h4>
                     <div>
                         <textarea className="form-control mb-3"
+                                  value={this.state.newComment}
                                   onChange={(event) => this.setNewComment(event.target.value)}/>
                     </div>
                     <div>
@@ -46,7 +47,11 @@ class EditReview extends React.Component {
                         </div>
                     </div>
                     <div className="mt-3">
-
+                        <button className="btn btn-danger mr-2" onClick={ () => {
+                            this.setState({newComment : ""})
+                            this.props.cancelReview()
+                        }
+                        }>Cancel</button>
                         <Button variant="success" className="mr-2" onClick={() => {
                             this.props.createReviewAsBorrower({
                                 reviewer: this.props.user._id,
@@ -66,9 +71,9 @@ class EditReview extends React.Component {
                                     rating: this.state.newRating === 0 ? 5 : this.state.newRating
                                 }
                             })
+                            this.setState({newComment : ""})
                             this.props.cancelReview()
-                        }}>Submit</Button>
-                        <button className="btn btn-danger mr-2" onClick={this.props.cancelReview}>Cancel</button>
+                        }}>Submit Review</Button>
                     </div>
                 </div>
             </div>

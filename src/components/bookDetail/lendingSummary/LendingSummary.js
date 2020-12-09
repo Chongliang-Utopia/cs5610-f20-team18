@@ -36,7 +36,7 @@ const LendingSummary = ({book, cancel, updateBook, postBook, user}) =>
                     <button className="btn btn-success" onClick={() => {
                         postBook(user._id, book)
                         cancel()
-                    }}>Confirm
+                    }}>Post Book
                     </button>
                 </div>
             </div>

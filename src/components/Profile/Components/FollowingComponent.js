@@ -21,8 +21,8 @@ const FollowingComponent = ({
             </h2>
             <ListGroup variant="flush">
                 {
-                    UserFollowings.map(follow=>
-                        <ListGroup.Item className="pl-0">
+                    UserFollowings.map((follow, index)=>
+                        <ListGroup.Item className="pl-0" key={index}>
                             <Image width={40}
                                    height={32}
                                    src={follow.profilePicture === undefined ? "https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-3/177800/130-512.png" : follow.profilePicture}
@@ -45,8 +45,8 @@ const FollowingComponent = ({
             </h2>
             <ListGroup variant="flush">
                 {
-                    UserFollowers.map(follow=>
-                        <ListGroup.Item className="pl-0">
+                    UserFollowers.map((follow, index)=>
+                        <ListGroup.Item className="pl-0" key={index}>
                             <Image width={40}
                                    height={32}
                                    src={follow.profilePicture === undefined ? "https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-3/177800/130-512.png" : follow.profilePicture}

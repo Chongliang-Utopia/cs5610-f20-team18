@@ -22,9 +22,10 @@ const UserTicketsComponent =
                 <h5>Woohoo! No pending user tickets</h5>
             }
             {
-                tickets.length !== 0 && tickets.map(ticket =>
+
+                tickets.length !== 0 && tickets.map((ticket, index) =>
                     ticket.review != null ?
-                    <Accordion>
+                    <Accordion key={index}>
                         <Card className="mb-3">
                             <Card.Header>
                                 <Accordion.Toggle as={Button} variant="link" eventKey="0">
@@ -82,7 +83,8 @@ const UserTicketsComponent =
                                     </Card.Body>
                             </Accordion.Collapse>
                         </Card>
-                    </Accordion> : <Accordion>
+
+                    </Accordion> : <Accordion key={index}>
                             <Card className="mb-3">
                                 <Card.Header>
                                     <Accordion.Toggle as={Button} variant="link" eventKey="0">

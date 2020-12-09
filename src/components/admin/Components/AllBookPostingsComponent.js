@@ -31,8 +31,8 @@ class AllBookPostings extends React.Component{
     }
 
     render() {
-        console.log("allbooks")
-        console.log(this.props.AllBooks)
+        //console.log("allbooks")
+        //console.log(this.props.AllBooks)
         return (
             <div>
                 <Modal show={this.state.deleting} modalClosed={this.cancelDelete}>
@@ -57,8 +57,8 @@ class AllBookPostings extends React.Component{
                         </thead>
                         <tbody>
                         {
-                            this.props.AllBooks.map(book=>
-                                <tr>
+                            this.props.AllBooks.map((book, index)=>
+                                <tr key={index}>
                                     <td>
                                         <Link to={`/books/${book.googleBookId}`} className="mr-1">{book.title}</Link>
                                     </td>

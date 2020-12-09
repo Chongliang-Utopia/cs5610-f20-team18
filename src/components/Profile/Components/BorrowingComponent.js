@@ -29,7 +29,7 @@ class BorrowingComponent extends React.Component {
         })
     }
     render(){
-        console.log(this.props.UserBorrowings)
+        //console.log(this.props.UserBorrowings)
         return (
             <div>
                 <Modal show={this.state.editReview}>
@@ -53,8 +53,8 @@ class BorrowingComponent extends React.Component {
                             </tr>
                             </thead>
                             <tbody>
-                            {this.props.UserBorrowings.filter(borrowing => borrowing.status!=="RETURNED").map(borrowing =>
-                                <tr>
+                            {this.props.UserBorrowings.filter(borrowing => borrowing.status!=="RETURNED").map((borrowing, index) =>
+                                <tr key={index}>
                                     <td>
                                         <Link to={`/profile/${borrowing.lender._id}`}
                                               className="mr-1">{borrowing.lender.username}</Link>
@@ -106,8 +106,8 @@ class BorrowingComponent extends React.Component {
                             </tr>
                             </thead>
                             <tbody>
-                            {this.props.UserBorrowings.filter(borrowing => borrowing.status==="APPROVED").map(borrowing =>
-                                <tr>
+                            {this.props.UserBorrowings.filter(borrowing => borrowing.status==="APPROVED").map((borrowing, index) =>
+                                <tr key={index}>
                                     <td>
                                         <Link to={`/profile/${borrowing.lender._id}`}
                                               className="mr-1">{borrowing.lender.username}</Link>
@@ -146,8 +146,8 @@ class BorrowingComponent extends React.Component {
                             </tr>
                             </thead>
                             <tbody>
-                            {this.props.UserBorrowings.filter(borrowing => borrowing.status==="RETURNED").map(borrowing =>
-                                <tr>
+                            {this.props.UserBorrowings.filter(borrowing => borrowing.status==="RETURNED").map((borrowing, index) =>
+                                <tr key={index}>
                                     <td>
                                         <Link to={`/profile/${borrowing.lender._id}`}
                                               className="mr-1">{borrowing.lender.username}</Link>

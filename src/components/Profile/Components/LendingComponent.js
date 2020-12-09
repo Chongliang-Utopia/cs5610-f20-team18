@@ -97,7 +97,7 @@ class LendingComponent extends React.Component {
         </Tooltip>
 
     render() {
-        console.log(this.props.UserLendings)
+        //console.log(this.props.UserLendings)
         return (
             <div>
                 <div className="mb-5">
@@ -134,8 +134,8 @@ class LendingComponent extends React.Component {
                         />
                     </Modal>
                     {
-                        this.props.bookPostings.filter(book => book.isActive).map(book =>
-                            <div className="ImageCard m-3">
+                        this.props.bookPostings.filter(book => book.isActive).map((book, index) =>
+                            <div key={index} className="ImageCard m-3">
                                 <Link title={book.title}
                                       to={`/books/${book.googleBookId}`}>
                                     <ImageCard
@@ -184,8 +184,8 @@ class LendingComponent extends React.Component {
                             </thead>
                             <tbody>
                             {this.props.UserLendings.filter(
-                                lending => lending.status !== "RETURNED").map(lending =>
-                                <tr>
+                                lending => lending.status !== "RETURNED").map((lending, index) =>
+                                <tr key={index}>
                                     <td>
                                         <Link to={`/profile/${lending.borrower._id}`}
                                               className="mr-1">{lending.borrower.username}</Link>
@@ -261,8 +261,8 @@ class LendingComponent extends React.Component {
                             </tr>
                             </thead>
                             <tbody>
-                            {this.props.UserLendings.filter(lending => lending.status === "APPROVED").map(lending =>
-                                <tr>
+                            {this.props.UserLendings.filter(lending => lending.status === "APPROVED").map((lending,index) =>
+                                <tr key={index}>
                                     <td>
                                         <Link to={`/profile/${lending.borrower._id}`}
                                               className="mr-1">{lending.borrower.username}</Link>
@@ -308,8 +308,8 @@ class LendingComponent extends React.Component {
                             </thead>
                             <tbody>
                             {
-                                this.props.UserLendings.filter(lending => lending.status === "RETURNED").map(lending =>
-                                    <tr>
+                                this.props.UserLendings.filter(lending => lending.status === "RETURNED").map((lending, index) =>
+                                    <tr key={index}>
                                         <td>
                                             <Link to={`/profile/${lending.borrower._id}`}
                                                   className="mr-1">{lending.borrower.username}</Link>
