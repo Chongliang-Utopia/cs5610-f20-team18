@@ -90,6 +90,7 @@ const BookStoreSearchBar = ({
                     <label htmlFor="Author" className="col-sm-3 pt-2 text-dark">Author</label>
                     <div className="col-sm-9">
                         <input type="text" className="form-control" id="Author"
+                               value={author}
                                onChange={(e) => setSearchAuthor(e.target.value)}/>
                     </div>
                 </div>
@@ -97,6 +98,7 @@ const BookStoreSearchBar = ({
                     <label htmlFor="Title" className="col-sm-3 pt-2 text-dark">Title</label>
                     <div className="col-sm-9">
                         <input type="text" className="form-control" id="Title"
+                               value={title}
                                onChange={(e) => setSearchTitle(e.target.value)}/>
                     </div>
                 </div>
@@ -104,6 +106,7 @@ const BookStoreSearchBar = ({
                     <label htmlFor="ISBN" className="col-sm-3 pt-2 text-dark">ISBN</label>
                     <div className="col-sm-9">
                         <input type="text" className="form-control" id="ISBN"
+                               value={isbn}
                                onChange={(e) => setSearchISBN(e.target.value)}/>
                     </div>
                 </div>
@@ -111,6 +114,7 @@ const BookStoreSearchBar = ({
                     <label htmlFor="Publisher" className="col-sm-3 pt-2 text-dark">Publisher</label>
                     <div className="col-sm-9">
                         <input type="text" className="form-control" id="Publisher"
+                               value={publisher}
                                onChange={(e) => setSearchPublisher(e.target.value)}/>
                     </div>
                 </div>
@@ -118,6 +122,7 @@ const BookStoreSearchBar = ({
                     <label htmlFor="Subject" className="col-sm-3 pt-2 text-dark">Subject</label>
                     <div className="col-sm-9">
                         <input type="text" className="form-control" id="Subject"
+                               value={subject}
                                onChange={(e) => setSearchSubject(e.target.value)}/>
                     </div>
                 </div>
