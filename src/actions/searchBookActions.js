@@ -81,10 +81,13 @@ const getRecommendedBooksAdder = (dispatch) => {
     let id;
     for (id of ids) {
         bookService.findBookById(id)
-            .then(book => dispatch({
-                type: BOOK_ADDER,
-                book
-            }))
+            .then(book => {
+                if (book) {
+                    dispatch({
+                        type: BOOK_ADDER,
+                        book})
+                }
+            })
     }
 }
 
