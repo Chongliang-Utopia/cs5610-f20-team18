@@ -22,42 +22,33 @@ class UserProfile extends React.Component {
         const uid = this.props.match.params.userId
         const section = this.props.match.params.section
         if ((this.props.isLoggedIn && !uid) || (this.props.isLoggedIn && this.props.loggedInUser._id === uid)) {
-            this.props.findUserById(this.props.loggedInUser._id).then(() => {
-                if (Object.keys(this.props.user).length === 0 && this.props.user.constructor === Object) {
-                    this.props.fetchBookPostingsForUser(this.props.loggedInUser._id)
-                    this.props.fetchUserBorrowings(this.props.loggedInUser._id)
-                    this.props.fetchUserLendings(this.props.loggedInUser._id)
-                    this.props.fetchReviewsUserReceived(this.props.loggedInUser._id)
-                    this.props.fetchReviewsUserGave(this.props.loggedInUser._id)
-                    this.props.fetchFollowings(this.props.loggedInUser._id)
-                    this.props.fetchFollowers(this.props.loggedInUser._id)
-                    this.props.getReadingListForUser(this.props.loggedInUser._id)
-                }
-            })
+            this.props.findUserById(this.props.loggedInUser._id)
+            this.props.fetchBookPostingsForUser(this.props.loggedInUser._id)
+            this.props.fetchUserBorrowings(this.props.loggedInUser._id)
+            this.props.fetchUserLendings(this.props.loggedInUser._id)
+            this.props.fetchReviewsUserReceived(this.props.loggedInUser._id)
+            this.props.fetchReviewsUserGave(this.props.loggedInUser._id)
+            this.props.fetchFollowings(this.props.loggedInUser._id)
+            this.props.fetchFollowers(this.props.loggedInUser._id)
+            this.props.getReadingListForUser(this.props.loggedInUser._id)
+
         } else if (this.props.isLoggedIn && uid) {
             this.props.findUserById(uid)
-                .then(() => {
-                    if (Object.keys(this.props.user).length === 0 && this.props.user.constructor === Object) {
-                        this.props.fetchLoggedInUserFollowings(this.props.loggedInUser._id)
-                        this.props.fetchBookPostingsForUser(uid)
-                        this.props.fetchReviewsUserReceived(uid)
-                        this.props.fetchReviewsUserGave(uid)
-                        this.props.fetchFollowings(uid)
-                        this.props.fetchFollowers(uid)
-                    }
-                })
+            this.props.fetchLoggedInUserFollowings(this.props.loggedInUser._id)
+            this.props.fetchBookPostingsForUser(uid)
+            this.props.fetchReviewsUserReceived(uid)
+            this.props.fetchReviewsUserGave(uid)
+            this.props.fetchFollowings(uid)
+            this.props.fetchFollowers(uid)
+
             // not logged in at all
         } else {
             this.props.findUserById(uid)
-                .then(() => {
-                    if (Object.keys(this.props.user).length === 0 && this.props.user.constructor === Object) {
-                        this.props.fetchBookPostingsForUser(uid)
-                        this.props.fetchReviewsUserReceived(uid)
-                        this.props.fetchReviewsUserGave(uid)
-                        this.props.fetchFollowings(uid)
-                        this.props.fetchFollowers(uid)
-                    }
-                })
+            this.props.fetchBookPostingsForUser(uid)
+            this.props.fetchReviewsUserReceived(uid)
+            this.props.fetchReviewsUserGave(uid)
+            this.props.fetchFollowings(uid)
+            this.props.fetchFollowers(uid)
         }
         this.props.switchSection(section)
     }

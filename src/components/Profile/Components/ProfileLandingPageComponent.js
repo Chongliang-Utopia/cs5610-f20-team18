@@ -149,7 +149,7 @@ class ProfileLandingPageComponent extends React.Component {
                                                   className="mr-1">{review.reviewer.username}</Link>
                                         </td>
                                         <td>
-                                            <Link to={`/books/${review.book.googleBookId}`}
+                                            <Link to={`/details/${review.book.googleBookId}`}
                                                   className="mr-1">{review.book.title}</Link>
                                         </td>
                                         <td>
@@ -183,7 +183,7 @@ class ProfileLandingPageComponent extends React.Component {
                         this.props.UserReadingListBooks.map((book, index) =>
                             <div key={index} className="ImageCard m-3">
                                 <Link title={book.volumeInfo.title}
-                                      to={`/books/${book.id}`}
+                                      to={`/details/${book.id}`}
                                       className={`${classes2.imageCard}`}>
                                     <ImageCard
                                         src={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail :

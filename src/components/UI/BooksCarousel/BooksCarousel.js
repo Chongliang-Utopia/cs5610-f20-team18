@@ -116,7 +116,7 @@ export default class BooksCarousel extends Component {
 
                     {
                         this.props.booksLists.map((book, index) =>
-                            <Link to={`/books/${book.id}`} key={index}>
+                            <Link to={`/details/${book.id}`} key={index}>
                                 <div className={classes.bookCarouselCard}>
                                     <div className={classes.bookImgDiv}>
                                         <img src={book.thumbnail}/>
