@@ -137,7 +137,7 @@ class LendingComponent extends React.Component {
                         this.props.bookPostings.filter(book => book.isActive).map((book, index) =>
                             <div key={index} className="ImageCard m-3">
                                 <Link title={book.title}
-                                      to={`/books/${book.googleBookId}`}>
+                                      to={`/details/${book.googleBookId}`}>
                                     <ImageCard
                                         src={book.picture ? book.picture :
                                             "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg"}
@@ -203,7 +203,7 @@ class LendingComponent extends React.Component {
                                         <span>{lending.borrower.city + ", " + lending.borrower.state}</span>
                                     </td>
                                     <td>
-                                        <Link to={`/books/${lending.book.googleBookId}`}
+                                        <Link to={`/details/${lending.book.googleBookId}`}
                                               className="mr-1">{lending.book.title}</Link>
                                     </td>
                                     <td>
@@ -274,7 +274,7 @@ class LendingComponent extends React.Component {
                                         <span>{lending.endDate.slice(0, 10)}</span>
                                     </td>
                                     <td>
-                                        <Link to={`/books/${lending.book.googleBookId}`}
+                                        <Link to={`/details/${lending.book.googleBookId}`}
                                               className="mr-1">{lending.book.title}</Link>
                                     </td>
                                     <td>
@@ -325,7 +325,7 @@ class LendingComponent extends React.Component {
                                             <span>{lending.startDate.slice(0, 10)} ~ {lending.endDate.slice(0, 10)}</span>
                                         </td>
                                         <td>
-                                            <Link to={`/books/${lending.book.googleBookId}`}
+                                            <Link to={`/details/${lending.book.googleBookId}`}
                                                   className="mr-1">{lending.book.title}</Link>
                                         </td>
                                         <td>

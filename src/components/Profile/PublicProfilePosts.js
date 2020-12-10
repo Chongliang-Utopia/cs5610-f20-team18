@@ -43,7 +43,7 @@ const PublicProfilePosts = ({
                     bookPostings.map((book, index)=>
                         <div className="ImageCard m-3" key={index}>
                             <Link title={book.title}
-                                  to={`/books/${book.googleBookId}`}>
+                                  to={`/details/${book.googleBookId}`}>
                                 <ImageCard
                                     src={book.picture? book.picture:
                                         "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg"}
@@ -88,7 +88,7 @@ const PublicProfilePosts = ({
                                               className="mr-1">{review.reviewer.username}</Link>
                                     </td>
                                     <td>
-                                        <Link to={`/books/${review.book.googleBookId}`} className="mr-1">{review.book.title}</Link>
+                                        <Link to={`/details/${review.book.googleBookId}`} className="mr-1">{review.book.title}</Link>
                                     </td>
                                     <td>
                                         <Rating initialRating={review.rating} readonly
@@ -136,7 +136,7 @@ const PublicProfilePosts = ({
                                                   className="mr-1">{review.reviewer.username}</Link>
                                         </td>
                                         <td>
-                                            <Link to={`/books/${review.book.googleBookId}`} className="mr-1">{review.book.title}</Link>
+                                            <Link to={`/details/${review.book.googleBookId}`} className="mr-1">{review.book.title}</Link>
                                         </td>
                                         <td>
                                             <Rating initialRating={review.rating} readonly
