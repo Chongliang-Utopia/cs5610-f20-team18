@@ -54,7 +54,7 @@ class BorrowingSummary extends Component {
                     <h5>{book.title}</h5>
                     <ul>
                         <li>
-                            <Link to={`/users/${lender._id}/profile`}>
+                            <Link to={`/profile/${lender._id}`}>
                                 Lender: {lender.username}
                             </Link>
                         </li>
