@@ -162,7 +162,7 @@ const adminReducer = (state = INTIAL_STATE, action) => {
             updatedBook.isActive = false;
             return {
                 ...state,
-                AllBooks: state.AllBooks.map(book=>book._id===action.book._id ? updatedBook: book)
+                AllBooks: state.AllBooks.filter(book=>book._id!==action.book._id)
             }
         case ADD_SUBSCRIPTION:
             return {
