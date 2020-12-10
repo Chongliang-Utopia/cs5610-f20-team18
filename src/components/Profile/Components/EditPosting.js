@@ -32,7 +32,7 @@ const EditPosting = ({
                 <span className="bg-white p-2"><TiHeart color="red"/></span>
             </div>
             <h4>{book.title}</h4>
-            <div>Status: Lent</div>
+            <div>Status: {book.isAvailable? "Available": "Lent"}</div>
             <div>Condition: {renderCondition(book.condition)}</div>
             <label htmlFor="bookCondition" className="center-text mt-3">Book Condition:</label>
             <select className="form-control" id="bookCondition" onChange={e => updateBookCondition(e.target.value)}>
