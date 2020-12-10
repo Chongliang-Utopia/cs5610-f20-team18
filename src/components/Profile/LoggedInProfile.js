@@ -46,7 +46,7 @@ const LoggedInProfile = ({
                     <div className="nav flex-column nav-pills">
                         <li className="nav-item">
                             <Link to={`/profile/sections/home`} className="nav-link">
-                                {!section &&<BsCaretRightFill className="mb-1 mr-1"/>}
+                                {(!section || section === "home") &&<BsCaretRightFill className="mb-1 mr-1"/>}
                                 Profile Home
                             </Link>
                         </li>
