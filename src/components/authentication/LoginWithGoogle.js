@@ -63,7 +63,7 @@ class LoginWithGoogle extends Component {
                 <FcGoogle size="30px"/>
             </button>
             <div hidden={!this.state.error} className="alert alert-danger mt-2">
-                Google Sign-in is currently not supported in incognito mode on Chrome on iOS.
+                Google Sign-in is currently unavailable.
             </div>
             </div>
         )
