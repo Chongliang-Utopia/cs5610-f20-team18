@@ -12,7 +12,7 @@
      background-size: cover;
      background-repeat: no-repeat;
      background-position:center;
-     background-image: url(../../assets/images/home.webp);
+     background-image: url("/src/assets/images/home.webp");
      color: white;
      font-family: 'Castoro', serif;
      font-size: 6.6rem;

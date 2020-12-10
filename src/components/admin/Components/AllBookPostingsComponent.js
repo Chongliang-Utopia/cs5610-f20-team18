@@ -63,7 +63,7 @@ class AllBookPostings extends React.Component{
                                         <Link to={`/books/${book.googleBookId}`} className="mr-1">{book.title}</Link>
                                     </td>
                                     <td>
-                                        <Link to={`/users/${book.user._id}/profile`} className="mr-1">{book.user.username}</Link>
+                                        <Link to={`/profile/${book.user._id}`} className="mr-1">{book.user.username}</Link>
                                     </td>
                                     <td>
                                         <Rating initialRating={book.user.rating} readonly
