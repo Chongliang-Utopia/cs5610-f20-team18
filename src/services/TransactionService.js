@@ -1,8 +1,8 @@
 import axios from 'axios';
 import authHeader from './AuthHeader';
 
-const API_TRANSACTION_URL = 'http://localhost:8080/api/transactions';
-const API_USER_URL = 'http://localhost:8080/api/users';
+const API_TRANSACTION_URL = 'https://secure-thicket-97069.herokuapp.com/api/transactions';
+const API_USER_URL = 'https://secure-thicket-97069.herokuapp.com/api/users';
 
 class TransactionService{
     createBorrowRequest(borrowRequest) {

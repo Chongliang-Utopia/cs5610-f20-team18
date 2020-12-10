@@ -34,7 +34,15 @@ const LendingSummary = ({book, cancel, updateBook, postBook, user}) =>
                 <div className="float-right">
                     <button className="btn btn-danger mr-3" onClick={cancel}>Cancel</button>
                     <button className="btn btn-success" onClick={() => {
-                        postBook(user._id, book)
+                        postBook(user._id, {
+                            "title": book.title,
+                            "author": book.author,
+                            "googleBookId": book.googleBookId,
+                            "picture": book.picture,
+                            "rating": book.rating,
+                            "description": book.description,
+                            "condition": book.condition
+                        })
                         cancel()
                     }}>Post Book
                     </button>
