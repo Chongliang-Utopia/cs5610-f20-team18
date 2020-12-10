@@ -2,15 +2,16 @@ import React from "react";
 import {connect} from "react-redux";
 import classes from "./BookStoreSearchBar.module.css"
 import {MdExpandMore, MdExpandLess} from "react-icons/md"
+import history from '../../../history'
 import {
     setAdvancedSearch,
-    searchBook,
     setSearchAuthor,
     setSearchTitle,
     setSearchISBN,
     setSearchPublisher,
     setSearchSubject,
-    setSearchDefaultTerm
+    setSearchDefaultTerm,
+    setBookSearchCriteria
 } from "../../../actions/searchBookActions"
 
 const BookStoreSearchBar = ({
@@ -22,8 +23,6 @@ const BookStoreSearchBar = ({
     subject,
     search_default_term,
 
-    searchBook,
-
     setAdvancedSearch,
     setSearchAuthor,
     setSearchTitle,
@@ -32,8 +31,24 @@ const BookStoreSearchBar = ({
     setSearchSubject,
     setSearchDefaultTerm,
 
-    }) =>
+    }) => {
 
+    const getCriteria = (default_term, author, title, isbn, publisher, subject) => {
+        let keyword = '';
+        if (default_term && default_term.length > 0) keyword += default_term;
+        if (author && author.length > 0) keyword += '+inauthor:' + author
+        if (title && title.length > 0) keyword += '+intitle:' + title
+        if (isbn && isbn.length > 0) keyword += '+isbn:' + isbn
+        if (publisher && publisher.length > 0) keyword += '+inpublisher:' + publisher
+        if (subject && subject.length > 0) keyword += '+subject:' + subject
+        if (keyword && keyword.length > 0 && keyword.charAt(0) === '+') {
+            keyword = keyword.substring(1)
+        }
+        setBookSearchCriteria(keyword)
+        history.push(`/books/search/${keyword}`)
+    }
+
+    return (
     <div className={classes.BookStoreSearchBar}>
         <div className = {classes.BookStoreSearchDiv}>
             <form className={classes.search}>
@@ -43,14 +58,16 @@ const BookStoreSearchBar = ({
                        onChange={(e) => setSearchDefaultTerm(e.target.value)}
                        />
                 <button type="submit" className={classes.searchButton}
-                        onClick={(e) => { e.preventDefault();
-                            searchBook(
-                            search_default_term,
-                            '',
-                            '',
-                            '',
-                            '',
-                            '')}}>
+                        onClick={(e) => {
+                            e.preventDefault();
+                            getCriteria(
+                                search_default_term,
+                                '',
+                                '',
+                                '',
+                                '',
+                                '');
+                        }}>
                     <i className="fa fa-search" />
                 </button>
             </form>
@@ -73,6 +90,7 @@ const BookStoreSearchBar = ({
                     <label htmlFor="Author" className="col-sm-3 pt-2 text-dark">Author</label>
                     <div className="col-sm-9">
                         <input type="text" className="form-control" id="Author"
+                               value={author}
                                onChange={(e) => setSearchAuthor(e.target.value)}/>
                     </div>
                 </div>
@@ -80,6 +98,7 @@ const BookStoreSearchBar = ({
                     <label htmlFor="Title" className="col-sm-3 pt-2 text-dark">Title</label>
                     <div className="col-sm-9">
                         <input type="text" className="form-control" id="Title"
+                               value={title}
                                onChange={(e) => setSearchTitle(e.target.value)}/>
                     </div>
                 </div>
@@ -87,6 +106,7 @@ const BookStoreSearchBar = ({
                     <label htmlFor="ISBN" className="col-sm-3 pt-2 text-dark">ISBN</label>
                     <div className="col-sm-9">
                         <input type="text" className="form-control" id="ISBN"
+                               value={isbn}
                                onChange={(e) => setSearchISBN(e.target.value)}/>
                     </div>
                 </div>
@@ -94,6 +114,7 @@ const BookStoreSearchBar = ({
                     <label htmlFor="Publisher" className="col-sm-3 pt-2 text-dark">Publisher</label>
                     <div className="col-sm-9">
                         <input type="text" className="form-control" id="Publisher"
+                               value={publisher}
                                onChange={(e) => setSearchPublisher(e.target.value)}/>
                     </div>
                 </div>
@@ -101,23 +122,26 @@ const BookStoreSearchBar = ({
                     <label htmlFor="Subject" className="col-sm-3 pt-2 text-dark">Subject</label>
                     <div className="col-sm-9">
                         <input type="text" className="form-control" id="Subject"
+                               value={subject}
                                onChange={(e) => setSearchSubject(e.target.value)}/>
                     </div>
                 </div>
                 <button className="btn btn-info float-right" type="submit"
                         onClick={(e) =>{ e.preventDefault();
-                            searchBook(
-                                            search_default_term,
-                                            author,
-                                            title,
-                                            isbn,
-                                            publisher,
-                                            subject)}}>
+                            getCriteria(
+                                search_default_term,
+                                author,
+                                title,
+                                isbn,
+                                publisher,
+                                subject)
+                        }}>
                     Search
                 </button>
             </form>
         }
-    </div>
+    </div>)
+}
 const stateToPropertyMapper = (state) => ({
     books: state.searchBookReducer.books,
     showAdvancedSearch: state.searchBookReducer.showAdvancedSearch,
@@ -130,8 +154,6 @@ const stateToPropertyMapper = (state) => ({
 })
 
 const propertyToDispatchMapper = (dispatch) => ({
-    searchBook: (default_term, author, title, isbn, publisher, subject) =>
-        searchBook(dispatch, default_term, author, title, isbn, publisher, subject),
     setAdvancedSearch: (showAdvancedSearch) => setAdvancedSearch(dispatch, showAdvancedSearch),
     setSearchAuthor: (author) => setSearchAuthor(dispatch, author),
     setSearchTitle: (title) => setSearchTitle(dispatch, title),
@@ -139,6 +161,7 @@ const propertyToDispatchMapper = (dispatch) => ({
     setSearchPublisher: (publisher) => setSearchPublisher(dispatch, publisher),
     setSearchSubject: (subject) => setSearchSubject(dispatch, subject),
     setSearchDefaultTerm: (term) => setSearchDefaultTerm(dispatch, term),
+    setBookSearchCriteria: (criteria) => setBookSearchCriteria(criteria)
 })
 
 export default connect(stateToPropertyMapper, propertyToDispatchMapper)

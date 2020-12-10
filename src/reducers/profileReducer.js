@@ -32,7 +32,7 @@ import {
     CREATE_USERFOLLOWING,
     DELETE_USERFOLLOWING,
     CREATE_USERFOLLOWER,
-    DELETE_USERFOLLOWER
+    DELETE_USERFOLLOWER, VALIDATE_USER
 } from "../actions/types";
 import {
     ADD_TO_READING_LIST,
@@ -55,7 +55,6 @@ const INTIAL_STATE = {
         // "email": "a@bbc.com",
         // "password": "afdsafdsffa"
     },
-    authenticated: true,
     section: "",
     report: false,
     selectedReview: {},
@@ -670,11 +669,12 @@ const profileReducer = (state = INTIAL_STATE, action) => {
         // USER
         case FIND_USER_BY_ID:
             return {...state, user: action.user}
-        case AUTHENTICATE:
-            return {
-                ...state,
-                authenticated: action.authenticated
-            }
+        // case VALIDATE_USER:
+        //     return {
+        //         ...state,
+        //         validUser:
+        //             ((action.status===500 && action.userId) || (!action.isLoggedIn && !action.userId))? false: true
+        //     }
         // REPORT
         case OPEN_REPORT:
             return {

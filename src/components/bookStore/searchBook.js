@@ -21,27 +21,27 @@ class SearchBook extends React.Component {
                             this.props.minRating === 0 ? book :
                             book.volumeInfo.averageRating >= this.props.minRating).map((book, index) =>
                         <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xm-12 mb-5" key={index}>
-                            <Link title={book.volumeInfo.title}
+                            <Link title={book.volumeInfo? book.volumeInfo.title : "No Title"}
                                 to={`/books/${book.id}`}
                                   onClick={() => this.props.dispatch(setCurrentIndex(index))}
                                 className={`${classes.imageCard}`}>
                                 <ImageCard
-                                    src={book.volumeInfo.imageLinks? book.volumeInfo.imageLinks.thumbnail:
+                                    src={book.volumeInfo && book.volumeInfo.imageLinks? book.volumeInfo.imageLinks.thumbnail:
                                     "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg"}
-                                alt={book.volumeInfo.title} />
+                                alt={book.volumeInfo? book.volumeInfo.title: "No title"} />
                                 <div className={classes.bookTitle}>
                                     {
-                                        book.volumeInfo.title.length > 15 && book.volumeInfo.title.substring(0, 15)
+                                        book.volumeInfo && book.volumeInfo.title.length > 15 && book.volumeInfo.title.substring(0, 15)
                                     }
                                     {
-                                        book.volumeInfo.title.length > 15 && "..."
+                                        book.volumeInfo && book.volumeInfo.title.length > 15 && "..."
                                     }
                                     {
-                                        book.volumeInfo.title.length <= 15 && book.volumeInfo.title
+                                        book.volumeInfo && book.volumeInfo.title.length <= 15 && book.volumeInfo.title
                                     }
                                </div>
                                 <div className={classes.bookTitle}>
-                                    <Rating initialRating={book.volumeInfo.averageRating} readonly
+                                    <Rating initialRating={book.volumeInfo? book.volumeInfo.averageRating: 0} readonly
                                             emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}
                                             fullSymbol={<AiFillStar color="gold" className="mb-1"/>}/>
                                 </div>
