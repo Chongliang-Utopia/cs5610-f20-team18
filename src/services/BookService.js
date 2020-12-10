@@ -2,7 +2,7 @@ import axios from "axios";
 import authHeader from "./AuthHeader";
 
 const url = 'https://www.googleapis.com/books/v1/volumes?q=';
-const API_URL = 'http://localhost:8080/api';
+const API_URL = 'https://secure-thicket-97069.herokuapp.com/api';
 
 const searchBooks = (keyword) =>
     fetch(url + keyword + "&maxResults=20")

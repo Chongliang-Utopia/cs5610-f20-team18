@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './AuthHeader';
 
-const API_URL = 'http://localhost:8080/api/users';
+const API_URL = 'https://secure-thicket-97069.herokuapp.com/api/users';
 
 class FollowService {
 
