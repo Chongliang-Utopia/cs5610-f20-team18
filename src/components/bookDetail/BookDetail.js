@@ -77,14 +77,14 @@ class BookDetail extends React.Component {
                             </div>
                             <div className="col-6">
                         <span className="float-right">
-                        <Link to={(books.length > 0 && index > 0) ? `/books/${books[index - 1].id}` : ""}
+                        <Link to={(books.length > 0 && index > 0) ? `/details/${books[index - 1].id}` : ""}
                               onClick={() => index > 0 && this.props.dispatch(setCurrentIndex(index - 1))}
                               className={(index === 0 || books.length === 0) ? classes.disabled : ""}>
                             <BsChevronLeft
                                 className={(index === 0 || books.length === 0) ? classes.navIconDisabled : classes.navIcon}
                             /> Prev
                         </Link> |
-                        <Link to={(books.length > 0 && index < books.length - 1) ? `/books/${books[index + 1].id}` : ""}
+                        <Link to={(books.length > 0 && index < books.length - 1) ? `/details/${books[index + 1].id}` : ""}
                               onClick={() => index < books.length - 1 && this.props.dispatch(setCurrentIndex(index + 1))}
                               className={index >= books.length - 1 ? classes.disabled : ""}> Next <BsChevronRight
                             className={index >= books.length - 1 ? classes.navIconDisabled : classes.navIcon}/>
