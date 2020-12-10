@@ -60,7 +60,7 @@ class AllBookPostings extends React.Component{
                             this.props.AllBooks.map((book, index)=>
                                 <tr key={index}>
                                     <td>
-                                        <Link to={`/books/${book.googleBookId}`} className="mr-1">{book.title}</Link>
+                                        <Link to={`/details/${book.googleBookId}`} className="mr-1">{book.title}</Link>
                                     </td>
                                     <td>
                                         <Link to={`/profile/${book.user._id}`} className="mr-1">{book.user.username}</Link>

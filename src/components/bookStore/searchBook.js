@@ -22,7 +22,7 @@ class SearchBook extends React.Component {
                             book.volumeInfo.averageRating >= this.props.minRating).map((book, index) =>
                         <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xm-12 mb-5" key={index}>
                             <Link title={book.volumeInfo? book.volumeInfo.title : "No Title"}
-                                to={`/books/${book.id}`}
+                                to={`/details/${book.id}`}
                                   onClick={() => this.props.dispatch(setCurrentIndex(index))}
                                 className={`${classes.imageCard}`}>
                                 <ImageCard

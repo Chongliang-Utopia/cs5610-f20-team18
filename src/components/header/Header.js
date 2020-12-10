@@ -8,6 +8,8 @@ import classes from "./Header.module.css"
 import SearchBar from "../UI/searchBar/SearchBar";
 import {logout, requestLoginWithThunk} from "../../actions/authActions";
 import history from "../../history";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import {Tooltip} from "react-bootstrap";
 
 
 const Header = ({isLoggedIn, logout, user, currentUser, requestLoginWithThunk}) => {
@@ -25,6 +27,11 @@ const Header = ({isLoggedIn, logout, user, currentUser, requestLoginWithThunk}) 
             return null
         }
     }
+
+    const renderLogoutTooltip = (props) =>
+        <Tooltip {...props}>
+            Click to Log Out
+        </Tooltip>
 
     return (
         <header className={classes.Header}>
@@ -60,6 +67,10 @@ const Header = ({isLoggedIn, logout, user, currentUser, requestLoginWithThunk}) 
                                       onClick={() => requestLoginWithThunk(window.location.pathname)}
                                 ><BsFillPersonFill
                                     className="mb-1"/> Login</button> :
+                                <OverlayTrigger
+                                    placement="bottom"
+                                    delay={{show: 250, hide: 400}}
+                                    overlay={renderLogoutTooltip}>
                                 <button
                                     onClick={() => {
                                         if (window.location.pathname.startsWith("/admin")) {
@@ -71,8 +82,8 @@ const Header = ({isLoggedIn, logout, user, currentUser, requestLoginWithThunk}) 
                                         logout();
                                     }}
                                     className={"nav-link " + classes.logOutButton}><BsFillPersonFill
-                                    className="mb-1"/> Log
-                                    out</button>
+                                    className="mb-1"/> Hello, {user.username? user.username: user.email}</button>
+                                </OverlayTrigger>
                             }
                         </li>
                     </ul>

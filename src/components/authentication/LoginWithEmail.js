@@ -68,7 +68,7 @@ class LoginWithEmail extends Component {
         if (this.checkBtn.context._errors.length === 0) {
             dispatch(login(this.state.email, this.state.password))
                 .then(() => {
-                    if (this.state.loginAsAdmin) {
+                    if (this.state.loginAsAdmin && this.props.user.isAdmin) {
                         history.push("/admin");
                     } else {
                         history.push(this.props.preLocation);
@@ -107,11 +107,11 @@ class LoginWithEmail extends Component {
                            value={password} validations={[required]}
                            onChange={this.handleChange}/>
                 </div>
-                {/*<div className="input-group">*/}
-                {/*    <input className="mt-1 mr-2" type="checkbox" id="admin" name="loginAsAdmin" value={true}*/}
-                {/*           onChange={(e) => this.handleChange(e)}/>*/}
-                {/*    <label htmlFor="admin" className={classes.label}>Login as Admin</label>*/}
-                {/*</div>*/}
+                <div className="input-group">
+                    <input className="mt-1 mr-2" type="checkbox" id="admin" name="loginAsAdmin" value={true}
+                           onChange={(e) => this.handleChange(e)}/>
+                    <label htmlFor="admin" className={classes.label}>Login as Admin</label>
+                </div>
                 {/*<div className={classes.forgotPassword}>*/}
                 {/*    <Link to="/createpassword">Forgot password?</Link>*/}
                 {/*</div>*/}
@@ -139,6 +139,7 @@ class LoginWithEmail extends Component {
 
 const stateToPropertyMapper = (state) => ({
     isLoggedIn: state.auth.isLoggedIn,
+    user: state.auth.user,
     message: state.message.message,
     preLocation: state.auth.preLocation
 })
