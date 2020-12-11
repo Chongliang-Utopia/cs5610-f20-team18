@@ -70,11 +70,10 @@
 
 .BookStoreSearchBar .advancedSearchDiv {
     margin-top: 10px;
-    padding: 5% 5% 8% 5%;
+    padding: 5% 5% 50px 5%;
     border: 1px solid #dfe1e5;
     border-radius: 1rem;
 }
-
 
 .BookStoreSearchBar input:focus,
 .BookStoreSearchBar button:focus{

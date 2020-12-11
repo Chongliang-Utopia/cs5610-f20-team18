@@ -58,7 +58,7 @@
 .ImageCard{
     width: 200px;
     display: inline-block;
-    margin-left: 10px;
+    margin: 2%;
 }
 
 .center-text{

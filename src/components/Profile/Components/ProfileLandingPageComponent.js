@@ -181,7 +181,7 @@ class ProfileLandingPageComponent extends React.Component {
                     {
                         this.props.UserReadingListBooks.length !== 0 &&
                         this.props.UserReadingListBooks.map((book, index) =>
-                            <div key={index} className="ImageCard m-3">
+                            <div key={index} className="ImageCard">
                                 <Link title={book.volumeInfo.title}
                                       to={`/details/${book.id}`}
                                       className={`${classes2.imageCard}`}>

@@ -135,7 +135,7 @@ class LendingComponent extends React.Component {
                     </Modal>
                     {
                         this.props.bookPostings.filter(book => book.isActive).map((book, index) =>
-                            <div key={index} className="ImageCard m-3">
+                            <div key={index} className="ImageCard">
                                 <Link title={book.title}
                                       to={`/details/${book.googleBookId}`}>
                                     <ImageCard
