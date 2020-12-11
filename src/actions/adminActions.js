@@ -4,7 +4,7 @@ import {
     FETCH_ADMINUSER, FETCH_ALLPOSTINGS, FETCH_ALLTICKETS, FETCH_ALLUSERS,
     SWITCH_SECTION,
     UPDATE_ADMININFO,
-    DELETE_REVIEW, FIND_ALL_SUBSCRIPTIONS, UNSUBSCRIBE, ADD_SUBSCRIPTION
+    DELETE_REVIEW, FIND_ALL_SUBSCRIPTIONS, UNSUBSCRIBE, ADD_SUBSCRIPTION, DEACTIVATE_BOOK_FROM_ADMIN
 } from "./types";
 
 import ReportService from '../services/ReportService'
@@ -100,7 +100,7 @@ export const fetchAllPostings = () => (dispatch) => {
     BookService.getAllBookPostings().then(books => {
         dispatch({
             type: FETCH_ALLPOSTINGS,
-            books: books.filter(book => book.isActive)
+            books
         })
     })
 }
@@ -139,6 +139,16 @@ export const unsubscribe = (subscriptionId) => (dispatch) => {
             dispatch({
                 type: UNSUBSCRIBE,
                 subscriptionId
+            })
+        })
+}
+
+export const deactivateBook = (bookId, book) => (dispatch) => {
+    BookService.updateBook(bookId, book)
+        .then(status => {
+            dispatch({
+                type: DEACTIVATE_BOOK_FROM_ADMIN,
+                book : {...book, _id: bookId}
             })
         })
 }

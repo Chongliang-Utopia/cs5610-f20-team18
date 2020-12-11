@@ -42,7 +42,7 @@ const UserTicketsComponent =
                                                     <th>Reviewee</th>
                                                     <th>Related Book</th>
                                                     <th>Review</th>
-                                                    <th>Description</th>
+                                                    <th>Report Reason</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
