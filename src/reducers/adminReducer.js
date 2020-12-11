@@ -4,7 +4,7 @@ import {
     FETCH_ADMINUSER, FETCH_ALLPOSTINGS, FETCH_ALLTICKETS, FETCH_ALLUSERS,
     SWITCH_SECTION,
     UPDATE_ADMININFO,
-    DELETE_REVIEW, FIND_ALL_SUBSCRIPTIONS, UNSUBSCRIBE, ADD_SUBSCRIPTION
+    DELETE_REVIEW, FIND_ALL_SUBSCRIPTIONS, UNSUBSCRIBE, ADD_SUBSCRIPTION, DEACTIVATE_BOOK_FROM_ADMIN
 } from "../actions/types";
 
 const INTIAL_STATE = {
@@ -120,6 +120,7 @@ const INTIAL_STATE = {
             "condition": "ACCEPTABLE",
         }
     ],
+    inActiveBooks: [],
     subscriptions: []
 };
 
@@ -155,14 +156,15 @@ const adminReducer = (state = INTIAL_STATE, action) => {
         case FETCH_ALLPOSTINGS:
             return {
                 ...state,
-                AllBooks: action.books
+                AllBooks: action.books.filter(book => book.isActive),
+                inActiveBooks: action.books.filter(book => !book.isActive),
             }
         case DELETE_POSTING_FROM_ADMIN:
             let updatedBook = action.book;
             updatedBook.isActive = false;
             return {
                 ...state,
-                AllBooks: state.AllBooks.filter(book=>book._id!==action.book._id)
+                AllBooks: state.AllBooks.filter(book => book._id !== action.book._id)
             }
         case ADD_SUBSCRIPTION:
             return {
@@ -178,6 +180,12 @@ const adminReducer = (state = INTIAL_STATE, action) => {
             return {
                 ...state,
                 subscriptions: state.subscriptions.filter(subscription => subscription._id !== action.subscriptionId)
+            }
+        case DEACTIVATE_BOOK_FROM_ADMIN:
+            return {
+                ...state,
+                AllBooks: state.AllBooks.filter(book => book._id !== action.book._id),
+                inActiveBooks: [...state.inActiveBooks, action.book]
             }
         default:
             return state;
