@@ -3,7 +3,6 @@ import classes from './App.module.css';
 import {Router, Route, Switch} from "react-router-dom";
 import Header from "./components/header/Header";
 import HomePage from "./components/HomePage/HomePage";
-import GoogleBookClient from "./components/googleBookClient";
 import BookDetail from "./components/bookDetail/BookDetail";
 import Login from "./components/authentication/Login";
 import SignUp from "./components/authentication/SignUp";
@@ -36,12 +35,11 @@ class App extends Component {
                             <Header/>
                                 <main>
                                     <Route exact path={["/", "/home"]} component={HomePage}/>
-                                    <Route exact path="/search" component={GoogleBookClient}/>
                                     <Route exact path="/details/:bookId" component={BookDetail}/>
                                     <Route exact path="/profile" component={UserProfile}/>
                                     <Route exact path="/profile/:userId" component={UserProfile}/>
                                     <Route exact path="/profile/sections/:section" component={UserProfile}/>
-                                    <Route exact path={["/books", "/bookstore", "/search/:criteria"]} component={BookStore}/>
+                                    <Route exact path={["/books", "/bookstore", "/search/:criteria", "/search"]} component={BookStore}/>
                                     <PrivateRouteAdmin exact path="/admin" component={Admin}/>
                                     <PrivateRouteAdmin exact path="/admin/:section" component={Admin}/>
                                 </main>
