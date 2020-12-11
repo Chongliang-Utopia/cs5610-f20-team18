@@ -19,7 +19,7 @@ const SearchBar = ({setSearchDefaultTerm}) => {
                     e.preventDefault()
                     setSearchDefaultTerm(value)
                     setValue("")
-                    history.push(`/books/search/${value}`)
+                    history.push(`/search/${value}`)
                 }} className={classes.searchButton}><i className="fa fa-search"/></button>
             </form>
         </div>

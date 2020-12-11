@@ -45,7 +45,7 @@ const BookStoreSearchBar = ({
             keyword = keyword.substring(1)
         }
         setBookSearchCriteria(keyword)
-        history.push(`/books/search/${keyword}`)
+        history.push(`/search/${keyword}`)
     }
 
     return (
