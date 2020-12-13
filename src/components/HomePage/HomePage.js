@@ -39,7 +39,7 @@ class HomePage extends React.Component {
                         <h1>RECOMMENDED BOOKS</h1>
                         <hr/>
                     </div>
-                    <BooksCarousel booksLists={[...userRecommendedBooksList, ...recommendedBooksList]}/>
+                    <BooksCarousel booksLists={[...userRecommendedBooksList, ...recommendedBooksList].slice(0, 12)}/>
                 </div>
                 <AboutSection/>
             </Container>

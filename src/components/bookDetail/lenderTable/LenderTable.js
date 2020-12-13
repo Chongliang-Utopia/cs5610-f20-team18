@@ -44,7 +44,7 @@ class LenderTable extends React.Component {
                             <td>{this.renderCondition(book.condition)}</td>
                             <td>{book.user.city}, {book.user.state}</td>
                             <td>
-                                <Link className="nav-link" to={(this.props.user && this.props.user._id === book.user._id)? "/profile" : `/profile/${book.user._id}`}>
+                                <Link to={(this.props.user && this.props.user._id === book.user._id)? "/profile" : `/profile/${book.user._id}`}>
                                     <span className="mr-1">{book.user.username}</span>
                                     <Rating initialRating={book.user.rating} readonly
                                             emptySymbol={<AiOutlineStar color="gold" className="mb-1"/>}

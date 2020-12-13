@@ -19,6 +19,7 @@ import UserActions from "../../actions/userActions";
 
 class UserProfile extends React.Component {
     componentDidMount() {
+        window.scrollTo(0, 0);
         const uid = this.props.match.params.userId
         const section = this.props.match.params.section
         if ((this.props.isLoggedIn && !uid) || (this.props.isLoggedIn && this.props.loggedInUser._id === uid)) {
